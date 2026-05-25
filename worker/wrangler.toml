@@ -3,10 +3,13 @@ main = "src/index.js"
 compatibility_date = "2026-05-25"
 
 # Run as a Cloudflare Worker on a custom subdomain.
-# Replace the zone_name with your CF zone if "bentenitis.com" is not it.
+# `custom_domain = true` makes wrangler create the DNS record for us on
+# deploy, so the subdomain resolves at the Cloudflare edge where the Worker
+# can intercept. (Plain `[[routes]]` with `zone_name` binds the Worker but
+# does NOT create DNS, which leaves curl unable to resolve the host.)
 [[routes]]
-pattern = "auth.bentenitis.com/*"
-zone_name = "bentenitis.com"
+pattern = "auth.bentenitis.com"
+custom_domain = true
 
 # Variables that are safe to commit (these are public).
 [vars]
