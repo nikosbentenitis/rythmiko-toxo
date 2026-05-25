@@ -1,0 +1,20 @@
+name = "rhythmiko-auth"
+main = "src/index.js"
+compatibility_date = "2026-05-25"
+
+# Run as a Cloudflare Worker on a custom subdomain.
+# Replace the zone_name with your CF zone if "bentenitis.com" is not it.
+[[routes]]
+pattern = "auth.bentenitis.com/*"
+zone_name = "bentenitis.com"
+
+# Variables that are safe to commit (these are public).
+[vars]
+# Comma-separated allowlist of origins (validator deployments).
+# Override at deploy time via `wrangler secret put ALLOWED_ORIGINS` if you
+# don't want to bake the list into the toml.
+ALLOWED_ORIGINS = "https://bentenitis.com,https://www.bentenitis.com,http://localhost:8000,http://127.0.0.1:8000"
+
+# Secrets must NOT be set here. Use:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
