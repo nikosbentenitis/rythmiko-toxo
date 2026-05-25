@@ -1,0 +1,8 @@
+sofyan:
+  display: Sofyan
+  meter: 4/8
+  variations:
+    v1:
+      rhythm: '>8.[ Α16] Δ8>[ (Α)8>]'
+    v2:
+      rhythm: '>4 H8[ H8]'

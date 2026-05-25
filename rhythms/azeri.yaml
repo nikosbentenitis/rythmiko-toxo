@@ -1,0 +1,10 @@
+azeri:
+  display: Azeri
+  meter: 3/4
+  variations:
+    v1:
+      rhythm: '>4 Δ4 Δ4>'
+    v2:
+      rhythm: '>4 Δ8[ Α8] Δ8>[ Α8]'
+    v3:
+      rhythm: '>8[ Δ16 Α16] Δ4[ >4]'

@@ -1,0 +1,13 @@
+kasik_havasi:
+  display: Kaşık Havası
+  meter: 2/4
+  variations:
+    v1:
+      rhythm: '>4 r4 | >4 Δ4>'
+      single_line: true
+    v2:
+      rhythm: '>4 Δ8>[ Α8>] | r4 Δ4>'
+      single_line: true
+    v3:
+      rhythm: '>4 Δ8>[ Α8>] | r4 Δ8>[ Α8>]'
+      single_line: true

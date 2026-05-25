@@ -1,0 +1,12 @@
+turk_aksagy:
+  display: Türk aksağı
+  meter: 5/8
+  variations:
+    v1:
+      rhythm: '>4 Δ4.>'
+    v2:
+      rhythm: '>4 Δ8>[ r8 Δ8]'
+    v3:
+      rhythm: '>8 Δ8 Δ8>[ Δ8 Δ8]'
+    v4:
+      rhythm: '>8[ Δ16 Α16] Δ8[ Δ16 Α16 r16 (Α)]'
