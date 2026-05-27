@@ -1,0 +1,10 @@
+syrtoidi:
+  display: "Συρτοειδή"
+  meter: "4/8"
+  variations:
+    v1:
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]"   # TODO: replace with the actual stroke sequence
+    v2:
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16"
+    v3:
+      rhythm: ">8.[ Α16] r16 (Α)16[ Δ16>] r16"
