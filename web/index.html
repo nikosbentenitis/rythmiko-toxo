@@ -197,6 +197,11 @@
                     -webkit-user-select:none; -webkit-touch-callout:none; }
   .palette button:active { background:#e5e7eb; }
   .palette .sep { width:1px; background:#d0d0d0; align-self:stretch; margin:4px 2px; flex:0 0 auto; }
+  /* Default: row wrappers flatten into the .palette flex so existing
+     desktop layout is unchanged (buttons remain direct flex children).
+     The iPhone media query below switches `.palette` to a column and
+     `.palette-row` to a real flex row so each group lands on its own line. */
+  .palette-row { display: contents; }
 
   /* Touch / narrow layout: stack vertically with input on top so the
      palette + editor live above the pentagram/TUBS preview. Drop the
@@ -214,7 +219,7 @@
     main { flex-direction: column; }
     #input  { flex: 0 0 auto; border-right: 0; border-bottom: 1px solid #ddd;
               max-height: 65vh; }
-    #output { flex: 1 1 0; }
+    #output { flex: 1 1 0; min-height: 240px; }
 
     /* Hide the YAML textarea — the user manipulates one variation at a
        time via the rhythm-field + palette below it. The textarea still
@@ -252,17 +257,31 @@
     #status { padding:8px 12px; font-size:13px; }
   }
 
-  /* iPhone-sized viewports: the iPad-targeted 22px palette font reads
-     too small on a 375-430px-wide phone, and horizontal scrolling hides
-     the editing-group buttons. Wrap the palette into rows — the existing
-     `.sep` between groups becomes a forced flex line-break, so the three
-     logical groups (notes / durations / editing) each get their own row. */
+  /* iPhone-sized viewports: stack the palette into three explicit rows
+     (notes / durations / editing), bump the font so glyphs read clearly
+     on a 375-430px screen, and stop the input section from crowding the
+     output off-screen. The buildPalette JS wraps each group in a
+     .palette-row div; here we promote those rows to real flex rows and
+     drop the vertical .sep dividers (visual separation comes from the
+     row gap instead). */
   @media (max-width: 480px) {
-    .palette { flex-wrap: wrap; overflow-x: visible; row-gap: 8px; }
-    .palette .sep { flex-basis: 100%; width: auto; height: 0;
-                    border: 0; background: transparent; margin: 0; }
-    .palette button { min-width: 52px; height: 56px; font-size: 26px;
-                      border-width:1.5px; }
+    .palette { flex-direction: column; align-items: stretch;
+               overflow-x: visible; padding: 6px 8px; gap: 6px; }
+    .palette .sep { display: none; }
+    .palette-row { display: flex; flex-direction: row;
+                   justify-content: center; gap: 6px; flex-wrap: nowrap; }
+    .palette button { min-width: 46px; height: 50px; font-size: 28px;
+                      border-width: 1.5px; }
+    /* Tighter input chrome so the output preview stays on the same screen
+       as the editor without scrolling. */
+    #input { max-height: none; }
+    .toolbar { padding: 6px 10px; gap: 8px; row-gap: 6px; }
+    .toolbar button, .toolbar select,
+    .toolbar .notation-toggle button { min-height: 40px; padding: 8px 12px; }
+    .variations-bar { padding: 6px 8px; gap: 8px; }
+    .variations-bar button { min-height: 48px; padding: 10px 14px;
+                             font-size: 16px; }
+    .comment-wrap input { padding: 8px 10px; }
   }
 
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
@@ -2005,10 +2024,16 @@ function buildPalette(){
     [['4','quarter'],['8','eighth'],['16','sixteenth'],['.','dotted']],
     [['[','beam start'],[']','beam end'],['|','bar'],[' ','space'], NL, BS],
   ];
+  // Wrap each group in its own .palette-row so iPhone CSS can stack rows
+  // vertically (notes / durations / editing). On desktop/iPad the row
+  // wrapper uses `display: contents`, so the buttons remain direct flex
+  // children of .palette and the layout is unchanged.
   groups.forEach((grp, i) => {
     if (i > 0){
       const s = document.createElement('div'); s.className = 'sep'; p.appendChild(s);
     }
+    const row = document.createElement('div');
+    row.className = 'palette-row';
     grp.forEach(item => {
       const [text, title, label, action] = item.length === 4 ? item : [...item, null, null];
       const b = document.createElement('button');
@@ -2019,8 +2044,9 @@ function buildPalette(){
       b.addEventListener('pointerdown', e => e.preventDefault());
       b.addEventListener('mousedown',   e => e.preventDefault());
       b.addEventListener('click', action ? action : () => insertIntoEditor(text));
-      p.appendChild(b);
+      row.appendChild(b);
     });
+    p.appendChild(row);
   });
 }
 
