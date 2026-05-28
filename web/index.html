@@ -293,6 +293,21 @@
     #out .var { display: none; }
     #out .var.active { display: block; border-top: 0;
                        margin-top: 4px; padding-top: 0; }
+
+    /* Aggressive trimming so the rendered staff lands above the fold:
+       hide the two optional comment fields and the rhythm-field label
+       (the variations bar already names the active variation), and
+       tighten the header. Comments stay editable on desktop/iPad. */
+    .comment-wrap, .comment-wrap.show { display: none !important; }
+    #rhythmFieldLabel { display: none; }
+    .rhythm-field-wrap { padding: 4px 8px; }
+    #rhythmField { font-size: 14px; padding: 6px 8px; }
+    header { padding: 0 8px; gap: 8px; flex-basis: 40px; }
+    header h1 { font-size: 13px; }
+    header .draftstatus, header .netstatus { font-size: 10px; }
+    /* Compact status + logs strip so more of #out stays visible */
+    #logs { max-height: 70px; font-size: 11px; padding: 4px 8px; }
+    #status { padding: 4px 8px; font-size: 11px; min-height: auto; }
   }
 
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
