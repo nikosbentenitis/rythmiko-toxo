@@ -119,6 +119,13 @@
   .toolbar .netstatus.offline { color:#9b1c1c; }
   .toolbar .draftstatus { font-size:11px; font-family:"SF Mono",Menlo,Consolas,monospace;
                           color:#6b7280; white-space:nowrap; }
+  /* Phone hamburger: hidden on desktop/iPad, replaces the "+ New" button
+     and the notation toggle on iPhone. The .phone-menu-items wrapper uses
+     `display: contents` outside the phone breakpoint so its children flow
+     directly into the toolbar's flex layout, unchanged. */
+  .phone-menu-btn { display: none; }
+  .phone-menu-items { display: contents; }
+
   /* Notation toggle (segmented control). Higher specificity than
      `.toolbar button` so it isn't overridden by the default blue style. */
   .toolbar .notation-toggle { display:inline-flex; border:1px solid #c8c8d0;
@@ -308,6 +315,26 @@
     /* Compact status + logs strip so more of #out stays visible */
     #logs { max-height: 70px; font-size: 11px; padding: 4px 8px; }
     #status { padding: 4px 8px; font-size: 11px; min-height: auto; }
+
+    /* Hamburger menu: collapse "+ New" and the notation toggle behind a
+       single button. The dropdown anchors to the toolbar (positioned as
+       the popover's offset parent). */
+    .toolbar { position: relative; }
+    .phone-menu-btn { display: inline-flex; align-items: center;
+                      justify-content: center; font-size: 18px;
+                      min-width: 36px; min-height: 36px; padding: 0;
+                      border: 1px solid #c8c8d0; border-radius: 6px;
+                      background: #fff; color: #444; cursor: pointer; }
+    .phone-menu-items { display: none; position: absolute;
+                        top: calc(100% + 4px); right: 8px;
+                        flex-direction: column; gap: 6px;
+                        background: #fff; border: 1px solid #c8c8d0;
+                        border-radius: 6px; padding: 8px;
+                        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+                        z-index: 20; min-width: 160px; }
+    body.phone-menu-open .phone-menu-items { display: flex; }
+    .phone-menu-items #newBtn { width: 100%; }
+    .phone-menu-items .notation-toggle { align-self: stretch; }
   }
 
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
@@ -396,10 +423,14 @@
         <select id="rhythmPicker" title="Load a rhythm from rythmiko-toxo">
           <option value="">Load rhythm…</option>
         </select>
-        <button id="newBtn" class="secondary" title="Create a new rhythm in a new file">+ New</button>
-        <div class="notation-toggle" id="notationToggle" title="Editor notation (files are always stored in Greek)">
-          <button data-notation="greek">&gt;ΔΑ</button>
-          <button data-notation="arabic">Dtk</button>
+        <button id="phoneMenuBtn" class="phone-menu-btn"
+                aria-label="More options" aria-expanded="false">☰</button>
+        <div class="phone-menu-items" id="phoneMenuItems">
+          <button id="newBtn" class="secondary" title="Create a new rhythm in a new file">+ New</button>
+          <div class="notation-toggle" id="notationToggle" title="Editor notation (files are always stored in Greek)">
+            <button data-notation="greek">&gt;ΔΑ</button>
+            <button data-notation="arabic">Dtk</button>
+          </div>
         </div>
       </div>
     </div>
@@ -711,6 +742,30 @@ document.querySelectorAll('#notationToggle button').forEach(b => {
   b.addEventListener('click', () => setNotation(b.dataset.notation));
 });
 // ─── /Notation toggle ────────────────────────────────────────────────────
+
+// ─── Phone hamburger menu ────────────────────────────────────────────────
+// On iPhone the "+ New" button and the notation toggle live behind the
+// hamburger. Toggle .phone-menu-open on <body>; CSS handles the rest.
+// Document-level click closes the menu — tapping the hamburger calls
+// stopPropagation so the same click that opens it doesn't immediately
+// close it. Items inside (e.g. +New, notation buttons) bubble, so the
+// menu closes after the user picks an option, alongside their handler.
+(() => {
+  const btn = document.getElementById('phoneMenuBtn');
+  if (!btn) return;
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = !document.body.classList.contains('phone-menu-open');
+    document.body.classList.toggle('phone-menu-open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', () => {
+    if (!document.body.classList.contains('phone-menu-open')) return;
+    document.body.classList.remove('phone-menu-open');
+    btn.setAttribute('aria-expanded', 'false');
+  });
+})();
+// ─── /Phone hamburger menu ───────────────────────────────────────────────
 
 // Initialize canonical from the seed in the page (which is Greek), then
 // render the editor in the user's preferred notation.
