@@ -291,6 +291,11 @@
     .variations-bar button { min-height: 30px; padding: 4px 10px;
                              font-size: 12px; min-width: 36px;
                              border-radius: 6px; }
+    /* +New and Delete variation use the same dimensions as v1/v2/...
+       tabs (only color differs) so the bar stays a uniform row. */
+    .variations-bar button.add,
+    .variations-bar button.del { min-height: 30px; padding: 4px 10px;
+                                  min-width: 36px; }
     .variations-bar .label { font-size: 11px; }
     .comment-wrap input { padding: 4px 8px; font-size: 12px; }
     /* Show only the active variation on phone — the variations-bar tabs
@@ -323,6 +328,12 @@
     /* Compact output toolbar (Print / Download PDF / Email PDF) */
     #output .toolbar button { min-height: 30px; padding: 4px 10px;
                               font-size: 12px; }
+
+    /* Move Print / Download PDF / Email PDF to the bottom of #output
+       on phone — column-reverse keeps DOM order (toolbar then #out)
+       intact but flips visual order so #out shows up top and the
+       action buttons sit at the bottom of the screen. */
+    #output { flex-direction: column-reverse; }
 
     /* Constrain the rendered output to the viewport width. VexFlow's
        SVG is sized in pixels by note count and would overflow the
