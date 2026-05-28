@@ -341,12 +341,17 @@
        on the SVG scales it down proportionally. TUBS uses HTML cells,
        so we shrink the cells on phone to keep the row inside the
        screen instead of horizontally scrolling. */
-    #out .staff { overflow-x: visible; }
-    #out .staff svg { max-width: 100%; height: auto; display: block; }
-    #out .tubs { overflow-x: visible; }
+    #out .staff { overflow-x: visible; text-align: left; }
+    #out .staff svg { max-width: 100%; height: auto; display: block;
+                      margin-left: 0; }
+    #out .tubs { overflow-x: visible; justify-content: flex-start;
+                 margin-left: 0; padding-left: 0; }
     #out .cell { width: 18px; height: 18px; font-size: 11px; }
     #out .row.count .cell { height: 12px; font-size: 8px; }
     #out .pct { width: 12px; height: 22px; }
+    /* The legend (TUBS rows: ..., thick line = bar end, ...) is a desktop
+       explainer — drop it on phone where every pixel matters. */
+    #out .legend { display: none; }
 
     /* Hamburger menu: collapse "+ New" and the notation toggle behind a
        single button. The dropdown anchors to the toolbar (positioned as
