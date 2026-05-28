@@ -1,7 +1,8 @@
 name: Sync validator to bentenitis
 
-# When web/index.html changes on main, open (or update) a PR in
-# nikosbentenitis/bentenitis that mirrors the file into rhythms/index.html.
+# When web/index.html changes on main, commit it straight to master in
+# nikosbentenitis/bentenitis under rhythms/index.html — no PR. The token
+# below has Contents:write on that repo, so the workflow can push directly.
 #
 # Setup (one-time):
 #   1. Create a fine-grained personal access token (https://github.com/settings/tokens?type=beta)
@@ -42,26 +43,17 @@ jobs:
           path: bentenitis
           ref: master
 
-      - name: Copy validator
+      - name: Copy validator and push to master
+        working-directory: bentenitis
         run: |
-          mkdir -p bentenitis/rhythms
-          cp rythmiko-toxo/web/index.html bentenitis/rhythms/index.html
-
-      - name: Open or update PR in bentenitis
-        uses: peter-evans/create-pull-request@v8
-        with:
-          path: bentenitis
-          token: ${{ secrets.BENTENITIS_SYNC_TOKEN }}
-          branch: sync/rhythm-validator
-          base: master
-          commit-message: |
-            rhythms: sync validator from rythmiko-toxo@${{ github.sha }}
-          title: 'rhythms: sync validator from rythmiko-toxo'
-          body: |
-            Automated sync of the rhythm validator from
-            [nikosbentenitis/rythmiko-toxo@${{ github.sha }}](https://github.com/nikosbentenitis/rythmiko-toxo/commit/${{ github.sha }}).
-
-            Source-of-truth file: [`web/index.html`](https://github.com/nikosbentenitis/rythmiko-toxo/blob/main/web/index.html)
-
-            This PR is regenerated on every push to `main` in rythmiko-toxo that touches the validator.
-          delete-branch: true
+          mkdir -p rhythms
+          cp ../rythmiko-toxo/web/index.html rhythms/index.html
+          if git diff --quiet -- rhythms/index.html; then
+            echo "validator is already in sync"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add rhythms/index.html
+          git commit -m "rhythms: sync validator from rythmiko-toxo@${GITHUB_SHA::7}"
+          git push origin master
