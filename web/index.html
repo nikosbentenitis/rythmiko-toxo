@@ -252,6 +252,19 @@
     #status { padding:8px 12px; font-size:13px; }
   }
 
+  /* iPhone-sized viewports: the iPad-targeted 22px palette font reads
+     too small on a 375-430px-wide phone, and horizontal scrolling hides
+     the editing-group buttons. Wrap the palette into rows — the existing
+     `.sep` between groups becomes a forced flex line-break, so the three
+     logical groups (notes / durations / editing) each get their own row. */
+  @media (max-width: 480px) {
+    .palette { flex-wrap: wrap; overflow-x: visible; row-gap: 8px; }
+    .palette .sep { flex-basis: 100%; width: auto; height: 0;
+                    border: 0; background: transparent; margin: 0; }
+    .palette button { min-width: 52px; height: 56px; font-size: 26px;
+                      border-width:1.5px; }
+  }
+
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
      Hide everything that isn't the editor + palette so the user keeps
      full control of the visible area iOS leaves above the keyboard. */
@@ -1975,10 +1988,11 @@ function buildPalette(){
   p.innerHTML = '';
   // Single combined button for the middle-finger kah marker, placed
   // RIGHT NEXT to the plain ka button so the two are visually paired.
-  // Notation-aware: (Α) in Greek mode, (A) in Arabic mode. Round-trips
-  // to canonical Greek (Α) regardless.
+  // Notation-aware: (Α) in Greek mode, (k) in Arabic mode — `k` is the
+  // Arabic glyph for ka, so `(k)` is the consistent middle-finger form.
+  // Round-trips to canonical Greek (Α) regardless.
   const MF = notation === 'arabic'
-    ? ['(A)', 'middle-finger kah']
+    ? ['(k)', 'middle-finger kah']
     : ['(Α)', 'middle-finger kah'];
   const heads = notation === 'arabic'
     ? [['D','dum'],['t','tek'],['k','ka'], MF, ['S','slap'],['r','rest']]
