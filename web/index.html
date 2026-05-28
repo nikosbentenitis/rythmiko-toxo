@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rhythm Validator</title>
+<style>
+  :root { --thin:#bbb; --beat:#444; --bar:#000; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         height:100vh; height:100dvh;       /* dvh adapts when iOS chrome / keyboard appear */
+         display:flex; flex-direction:column; }
+
+  /* Brand bar — title on the left, global session state on the right
+     (draft status, online/offline indicator, GitHub auth + Submit PR).
+     Per-rhythm controls (picker / + New / notation / Run) live in the
+     input toolbar below; output-only controls (Print / PDF / Email) in
+     the output toolbar. flex-wrap:nowrap + overflow-x:auto keeps the
+     bar exactly 48px tall on narrow viewports. */
+  header { padding:0 14px; background:#1b1b1f; color:#eee;
+           display:flex; align-items:center; gap:12px;
+           flex:0 0 48px; overflow-x:auto; overflow-y:hidden;
+           scrollbar-width:thin; }
+  header::-webkit-scrollbar { height:0; background:transparent; }
+  header h1 { font-size:15px; margin:0; font-weight:600; flex:0 0 auto; white-space:nowrap; }
+  header .spacer { flex:1 1 auto; }
+  header .draftstatus { font:11px/1.3 "SF Mono",Menlo,Consolas,monospace;
+                        color:#b0b3b8; white-space:nowrap; flex:0 0 auto; }
+  header .netstatus   { font:11px/1.3 "SF Mono",Menlo,Consolas,monospace;
+                        color:#9be37a; white-space:nowrap; flex:0 0 auto; }
+  header .netstatus.offline { color:#ff6b6b; }
+  header .ghbox { display:flex; align-items:center; gap:8px;
+                  font-size:12px; color:#cfd0d4; flex:0 0 auto; }
+  header .ghbox button { background:#24292f; color:#fff; border:1px solid #444;
+                         padding:6px 12px; font-size:12px; border-radius:5px;
+                         cursor:pointer; }
+  header .ghbox button#prBtn { background:#2da44e; border-color:#2da44e; }
+  header .ghbox button#prBtn:disabled { background:#3a3a3f; border-color:#444;
+                                        color:#888; cursor:default; }
+  header .ghbox .who { font-family:"SF Mono",Menlo,Consolas,monospace; color:#9be37a; }
+  header .ghbox a.signout { font:11px monospace; color:#9aa0a6; text-decoration:none; }
+  header .ghbox a.signout:hover { color:#eee; }
+  header .draftstatus { cursor:pointer; }
+  header .draftstatus:hover { color:#fff; }
+
+  /* ── Drafts management modal ──────────────────────────────────────── */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5);
+                   display:flex; align-items:center; justify-content:center;
+                   z-index:1000; padding:20px; box-sizing:border-box; }
+  .modal { background:#fff; border-radius:8px; max-width:560px; width:100%;
+           max-height:80vh; display:flex; flex-direction:column; overflow:hidden;
+           box-shadow:0 20px 50px rgba(0,0,0,0.3); }
+  .modal-head { display:flex; align-items:center; padding:14px 18px;
+                border-bottom:1px solid #e2e2e2; }
+  .modal-head h2 { margin:0; font-size:16px; flex:1 1 auto; }
+  .modal-close { background:transparent; color:#444; border:0; font-size:22px;
+                 padding:0 8px; cursor:pointer; line-height:1; }
+  .drafts-list { list-style:none; margin:0; padding:0; overflow:auto; flex:1 1 auto; }
+  .drafts-list li { display:flex; align-items:center; gap:8px;
+                    padding:12px 18px; border-bottom:1px solid #f0f0f3; }
+  .drafts-list .draft-meta { flex:1 1 auto; min-width:0; }
+  .drafts-list .draft-meta strong { font-family:"SF Mono",Menlo,Consolas,monospace; font-size:13px; }
+  .drafts-list .draft-meta em { color:#9aa0a6; font-style:normal; font-size:11px;
+                                margin-left:6px; padding:1px 5px; background:#f0f0f3; border-radius:3px; }
+  .drafts-list .draft-time { font:11px monospace; color:#6b7280; margin-top:2px; }
+  .drafts-list button { background:#fff; color:#444; border:1px solid #c8c8d0;
+                        border-radius:4px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  .drafts-list button.delete { color:#9b1c1c; border-color:#f5a8a8; }
+  .drafts-list button.delete:hover { background:#fde8e8; }
+  .drafts-empty { padding:24px 18px; color:#6b7280; text-align:center; font-size:13px; }
+
+  main { flex:1; display:flex; min-height:0; }
+  /* True 50/50 split. `flex: 1 1 0` (grow, shrink, basis 0) is the
+     bulletproof equal-columns pattern — independent of intrinsic
+     content widths. `min-width:0` lets each panel shrink below its
+     content size so wide editor lines don't inflate the column. */
+  #input, #output {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    display: flex; flex-direction: column;
+  }
+  #input  { border-right: 1px solid #ddd; }
+  #output { background: #fafafa; }
+
+  /* Toolbar locked to a fixed height (flex:0 0 52px) so it cannot grow,
+     guaranteeing both panels' toolbars are exactly the same height
+     regardless of content. Horizontal overflow scrolls; vertical
+     overflow is clipped. */
+  .toolbar {
+    flex: 0 0 52px;
+    padding: 0 12px;
+    background: #f0f0f3;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+    overflow-x: auto; overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+  .toolbar::-webkit-scrollbar { height: 0; background: transparent; }
+  .toolbar .group { display:flex; align-items:center; gap:8px; flex-wrap:nowrap; flex:0 0 auto; }
+  .toolbar .group.right { margin-left:auto; }
+  .toolbar select { background:#fff; color:#222; border:1px solid #c8c8d0; border-radius:5px;
+                    padding:6px 8px; font-size:12px; }
+  .toolbar button { background:#3b82f6; color:#fff; border:0; padding:6px 14px;
+                    border-radius:5px; font-size:12px; cursor:pointer; }
+  .toolbar button:disabled { background:#9aa0a6; cursor:default; }
+  .toolbar button.secondary { background:#6b7280; }
+  .toolbar button#emailBtn { background:#10b981; }
+  .toolbar button#emailBtn:disabled { background:#9aa0a6; }
+  .toolbar .ghbox { display:flex; align-items:center; gap:8px; font-size:12px; color:#444; }
+  .toolbar .ghbox button { background:#24292f; color:#fff; border:1px solid #24292f; padding:6px 12px; font-size:12px; }
+  .toolbar .ghbox button#prBtn { background:#2da44e; border-color:#2da44e; }
+  .toolbar .ghbox button#prBtn:disabled { background:#9aa0a6; border-color:#9aa0a6; color:#fff; cursor:default; }
+  .toolbar .ghbox .who { font-family:"SF Mono",Menlo,Consolas,monospace; color:#1d6b3a; }
+  .toolbar .ghbox a.signout { font:11px monospace; color:#6b7280; text-decoration:none; }
+  .toolbar .ghbox a.signout:hover { color:#222; }
+  .toolbar .netstatus { font-size:11px; font-family:"SF Mono",Menlo,Consolas,monospace;
+                        color:#1d6b3a; white-space:nowrap; }
+  .toolbar .netstatus.offline { color:#9b1c1c; }
+  .toolbar .draftstatus { font-size:11px; font-family:"SF Mono",Menlo,Consolas,monospace;
+                          color:#6b7280; white-space:nowrap; }
+  /* Notation toggle (segmented control). Higher specificity than
+     `.toolbar button` so it isn't overridden by the default blue style. */
+  .toolbar .notation-toggle { display:inline-flex; border:1px solid #c8c8d0;
+                              border-radius:5px; overflow:hidden; flex:0 0 auto; }
+  .toolbar .notation-toggle button { background:#fff; color:#444; border:0;
+                                     padding:6px 10px; font-size:12px; cursor:pointer;
+                                     font-family:"SF Mono",Menlo,Consolas,monospace;
+                                     border-radius:0; }
+  .toolbar .notation-toggle button.active { background:#1b1b1f; color:#9be37a; }
+  .toolbar .notation-toggle button + button { border-left:1px solid #c8c8d0; }
+
+  /* Inside #input: editor on top (takes leftover space), logs anchored
+     to the bottom with their own scroll region. flex 1 1 0 / min-height 0
+     keep the editor from being squeezed by the logs panel's content. */
+  #editor   { flex: 1 1 0; min-height: 0; width: 100%; border: 0; padding: 12px;
+              font: 13px/1.5 "SF Mono",Menlo,Consolas,monospace; resize: none;
+              outline: none; tab-size: 2; white-space: pre; overflow: auto; }
+  #logs     { flex: 0 0 auto; max-height: 40%; overflow: auto;
+              border-top: 1px solid #ddd; background: #f7f7f9; }
+  #status   { padding: 6px 12px; font: 12px/1.3 monospace; color: #555;
+              background: #f0f0f3; border-bottom: 1px solid #e2e2e2; }
+  #diag     { padding: 8px 10px; }
+  #out      { flex: 1 1 0; min-height: 0; overflow: auto; padding: 14px; }
+
+  /* ── Variations bar: list of vN tabs + add-new button ────────────── */
+  .variations-bar { display:flex; align-items:center; gap:6px;
+                    padding:8px 10px; background:#fafafa; border-bottom:1px solid #ddd;
+                    flex:0 0 auto; overflow-x:auto; scrollbar-width:thin; }
+  .variations-bar::-webkit-scrollbar { height:0; background:transparent; }
+  .variations-bar .label { font:12px monospace; color:#6b7280; flex:0 0 auto; margin-right:4px; }
+  .variations-bar button { background:#fff; color:#444; border:1px solid #c8c8d0;
+                           border-radius:6px; padding:6px 14px; min-width:42px;
+                           font:13px/1.2 monospace; cursor:pointer; flex:0 0 auto;
+                           touch-action:manipulation; user-select:none;
+                           -webkit-user-select:none; -webkit-touch-callout:none; }
+  .variations-bar button.active { background:#1b1b1f; color:#9be37a; border-color:#1b1b1f; }
+  .variations-bar button.add { color:#2da44e; border-color:#2da44e; font-weight:600; padding:6px 12px; }
+
+  /* ── Single-line rhythm field (mobile substitute for the full YAML
+        textarea: the user only sees the current variation's tokens). */
+  .rhythm-field-wrap { display:none; flex:0 0 auto; padding:8px 10px;
+                       background:#fff; border-bottom:1px solid #ddd; }
+  .rhythm-field-wrap .label { font:11px monospace; color:#6b7280; margin-bottom:4px; }
+  #rhythmField { width:100%; box-sizing:border-box;
+                 font:18px/1.4 "SF Mono",Menlo,Consolas,monospace;
+                 padding:10px 12px; border:1px solid #c8c8d0; border-radius:6px;
+                 background:#f7f7f9; color:#111; outline:none; }
+  #rhythmField:focus { border-color:#3b82f6; background:#fff; }
+
+  /* ── Comment input fields (free text, uses normal keyboard) ──────── */
+  .comment-wrap { display:none; flex:0 0 auto; padding:6px 10px;
+                  background:#fff; border-bottom:1px solid #ddd; }
+  .comment-wrap.show { display:block; }
+  .comment-wrap .label { font:11px monospace; color:#6b7280; margin-bottom:3px; }
+  .comment-wrap input { width:100%; box-sizing:border-box;
+                        font:14px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;
+                        padding:8px 10px; border:1px solid #c8c8d0; border-radius:5px;
+                        background:#fafafa; color:#111; outline:none; }
+  .comment-wrap input:focus { border-color:#3b82f6; background:#fff; }
+
+  /* Rendered comment text in the output */
+  .rhythm-comment { font:italic 13px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;
+                    color:#555; margin:0 0 10px; }
+  .var-comment    { font:italic 12px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;
+                    color:#6b7280; margin:2px 0 6px; }
+
+  /* ── Token palette: tap-friendly insertion bar above the editor ──── */
+  .palette { display:flex; gap:4px; padding:6px 8px; background:#f7f7f9;
+             border-bottom:1px solid #ddd; overflow-x:auto; flex:0 0 auto;
+             scrollbar-width:thin; }
+  .palette::-webkit-scrollbar { height:0; background:transparent; }
+  .palette button { background:#fff; color:#222; border:1px solid #c8c8d0;
+                    border-radius:4px; padding:0; min-width:36px; height:32px;
+                    font:14px/1 "SF Mono",Menlo,Consolas,monospace;
+                    cursor:pointer; flex:0 0 auto;
+                    touch-action:manipulation; user-select:none;
+                    -webkit-user-select:none; -webkit-touch-callout:none; }
+  .palette button:active { background:#e5e7eb; }
+  .palette .sep { width:1px; background:#d0d0d0; align-self:stretch; margin:4px 2px; flex:0 0 auto; }
+
+  /* Touch / narrow layout: stack vertically with input on top so the
+     palette + editor live above the pentagram/TUBS preview. Drop the
+     equal-flex split so the input section gets a fixed slice and the
+     output takes the rest.
+
+     Triggers on EITHER a narrow viewport (phones, laptops windowed
+     down) OR a touch device in portrait orientation (covers iPad mini
+     through iPad Pro portrait — all of which want the stacked feel
+     when entering rhythms by tap, with the preview right below the
+     editor). iPad in landscape keeps the side-by-side layout where
+     there's room. */
+  @media (max-width: 720px),
+         ((pointer: coarse) and (orientation: portrait)) {
+    main { flex-direction: column; }
+    #input  { flex: 0 0 auto; border-right: 0; border-bottom: 1px solid #ddd;
+              max-height: 65vh; }
+    #output { flex: 1 1 0; }
+
+    /* Hide the YAML textarea — the user manipulates one variation at a
+       time via the rhythm-field + palette below it. The textarea still
+       holds the YAML for round-tripping; it's invisible, not gone. */
+    #editor { display: none; }
+    .rhythm-field-wrap { display: block; }
+
+    /* All touch targets bumped to 60×60 px (larger than HIG minimum)
+       for darbuka-player finger comfort. */
+    .palette button { min-width:60px; height:60px; font-size:22px;
+                      border-width:1.5px; }
+    .palette { padding:10px; gap:8px; }
+    .variations-bar button { padding:14px 20px; font-size:18px;
+                             min-width:60px; min-height:60px;
+                             border-width:1.5px; border-radius:8px; }
+    .variations-bar button.add { padding:14px 18px; }
+    .variations-bar button.del { color:#9b1c1c; border-color:#f5a8a8; padding:14px 18px; }
+    .variations-bar .label { font-size:14px; }
+    .variations-bar { padding:10px; gap:10px; }
+    .comment-wrap input { font-size:16px; padding:12px 14px; }
+    .comment-wrap .label { font-size:13px; }
+
+    /* Top toolbar: wrap to multiple rows rather than overflowing right.
+       Drop the fixed flex basis (52px) and let it size to content. */
+    .toolbar { flex: 0 0 auto; min-height:auto; height:auto;
+               flex-wrap:wrap; overflow:visible;
+               padding:8px 12px; gap:10px; row-gap:8px; }
+    .toolbar select { font-size:16px; padding:10px 12px; min-height:44px; max-width:100%; }
+    .toolbar button { font-size:16px; padding:10px 18px; min-height:44px; }
+    .toolbar .notation-toggle button { font-size:16px; padding:10px 14px; min-height:44px; }
+    .toolbar .notation-toggle { min-height:44px; }
+
+    /* Logs panel: compact on mobile so the output preview gets more room */
+    #logs { max-height: 100px; font-size:12px; }
+    #status { padding:8px 12px; font-size:13px; }
+  }
+
+  /* Keyboard-up mode (set by the visualViewport listener on mobile).
+     Hide everything that isn't the editor + palette so the user keeps
+     full control of the visible area iOS leaves above the keyboard. */
+  body.kb-up #output,
+  body.kb-up #logs    { display: none !important; }
+  body.kb-up #input   { flex: 1 1 0 !important; }
+  body.kb-up main     { flex-direction: column !important; }
+
+  @media print {
+    header, #input, .legend, .rhythm h2, .rhythm .meta, #output .toolbar { display:none !important; }
+    html, body, main, #output, .rhythm, .var, .staff { display:block !important; height:auto !important; width:auto !important; overflow:visible !important; }
+    .tubs { overflow:visible !important; }
+    #output { width:100% !important; background:#fff !important; }
+    #out    { padding:0 !important; }
+    .rhythm { border:0 !important; box-shadow:none !important; margin:0 0 16px !important; padding:0 !important; }
+  }
+  .diag { margin:0 0 14px; padding:0; list-style:none; }
+  .diag li { font:12px/1.4 monospace; padding:6px 10px; border-radius:4px; margin-bottom:4px; }
+  .diag li.error { background:#fde8e8; color:#9b1c1c; border:1px solid #f5a8a8; }
+  .diag li.warn  { background:#fef3c7; color:#92400e; border:1px solid #fcd34d; }
+  .diag li.ok    { background:#e7f6ec; color:#1d6b3a; border:1px solid #9ad9b0; }
+  .rhythm { background:#fff; border:1px solid #e3e3e3; border-radius:8px; padding:14px; margin-bottom:18px; }
+  .rhythm h2 { font-size:16px; margin:0 0 2px; }
+  .rhythm .meta { font:12px monospace; color:#777; margin-bottom:10px; }
+  .var { margin-top:14px; }
+  /* Horizontal divider between variations within the same rhythm. */
+  .var + .var { border-top:1px solid #d0d0d0; margin-top:18px; padding-top:14px; }
+  /* Single-line head: label and source code share one line, separated by ':'. */
+  .var .vhead { display:flex; align-items:baseline; gap:6px; margin-bottom:6px; flex-wrap:wrap; }
+  .var .vlabel { font:12px monospace; color:#555; white-space:nowrap; }
+  .var .vsep   { color:#9aa0a6; font:12px monospace; }
+  .var .vcode  { font:12px/1.4 "SF Mono",Menlo,Consolas,monospace; color:#222;
+                 background:#f4f4f7; border:1px solid #e2e2e8; padding:2px 8px;
+                 border-radius:4px; white-space:pre-wrap; word-break:break-word; }
+  .staff { overflow-x:auto; }
+  .staff .fallback { font:12px monospace; color:#92400e; background:#fef3c7; padding:6px 8px; border-radius:4px; }
+  .tubs { display:flex; align-items:flex-start; overflow-x:auto; margin-top:6px; }
+  .tubs .bar { display:flex; flex-direction:column; }
+  .tubs .row { display:flex; }
+  .cell { width:30px; height:26px; display:flex; align-items:center; justify-content:center;
+          font:15px/1 "Times New Roman",serif; border-left:1px solid var(--thin); border-top:1px solid #000; }
+  .row.greek .cell, .row.latin .cell { border-top:1px solid #000; }
+  .row.latin .cell { border-bottom:1px solid #000; }
+  .cell.first { border-left:2px solid var(--bar); }
+  .cell.sub   { border-left:1px dashed var(--thin); }
+  .cell.beat  { border-left:2px solid var(--beat); }
+  .cell.barend{ border-right:3px solid var(--bar); }
+  .row.count .cell { height:18px; border:0; font-size:10px; color:#666; }
+  .row.count .cell.beat, .row.count .cell.first { border-left:1px solid #ccc; }
+  .circled { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px;
+             border:1.5px solid #000; border-radius:50%; font-size:11px; }
+  .repeat-cell { width:34px; height:52px; display:flex; align-items:center; justify-content:center;
+                 border-left:2px solid var(--beat); border-right:3px solid var(--bar);
+                 border-top:1px solid #000; border-bottom:1px solid #000; }
+  .pct { position:relative; width:18px; height:30px; }
+  .pct::before { content:""; position:absolute; left:50%; top:8%; width:2px; height:84%;
+                 background:#000; transform:translateX(-50%) rotate(28deg); }
+  .pct::after  { content:"●  ●"; position:absolute; inset:0; font-size:7px; color:#000;
+                 display:flex; align-items:center; justify-content:center; letter-spacing:6px; }
+  .legend { font:11px monospace; color:#888; margin-top:6px; }
+
+  /* Page-break hints — respected both by the browser when using
+     window.print() AND by html2pdf.js when it slices the rendered DOM
+     into PDF pages (via the same selectors passed to pagebreak.avoid). */
+  .rhythm, .var, .staff, .tubs { break-inside:avoid; page-break-inside:avoid; }
+  .staff svg, .tubs .bar { break-inside:avoid; page-break-inside:avoid; }
+</style>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.3/build/cjs/vexflow.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>Rhythm Validator</h1>
+  <span class="spacer"></span>
+  <span id="draftStatus" class="draftstatus" title="Local draft state"></span>
+  <span id="netStatus"   class="netstatus"   title="Network state"></span>
+  <span id="ghBox"       class="ghbox"></span>
+</header>
+<main>
+  <section id="input">
+    <div class="toolbar">
+      <div class="group left">
+        <select id="rhythmPicker" title="Load a rhythm from rythmiko-toxo">
+          <option value="">Load rhythm…</option>
+        </select>
+        <button id="newBtn" class="secondary" title="Create a new rhythm in a new file">+ New</button>
+        <div class="notation-toggle" id="notationToggle" title="Editor notation (files are always stored in Greek)">
+          <button data-notation="greek">&gt;ΔΑ</button>
+          <button data-notation="arabic">Dtk</button>
+        </div>
+      </div>
+    </div>
+    <div class="comment-wrap" id="rhythmCommentWrap">
+      <div class="label">Note about this rhythm (optional)</div>
+      <input id="rhythmCommentField" type="text"
+             placeholder="e.g. Classic 4/4 Egyptian pattern" />
+    </div>
+    <div class="variations-bar" id="variationsBar"></div>
+    <div class="rhythm-field-wrap" id="rhythmFieldWrap">
+      <div class="label" id="rhythmFieldLabel">Editing rhythm</div>
+      <input id="rhythmField" type="text"
+             autocomplete="off" autocorrect="off" autocapitalize="off"
+             spellcheck="false" inputmode="none" />
+    </div>
+    <div class="comment-wrap" id="variationCommentWrap">
+      <div class="label">Note about this variation (optional)</div>
+      <input id="variationCommentField" type="text"
+             placeholder="e.g. Basic form" />
+    </div>
+    <div class="palette" id="palette"></div>
+    <textarea id="editor" spellcheck="false"
+              autocomplete="off" autocorrect="off" autocapitalize="off"
+              inputmode="none"></textarea>
+    <div id="logs">
+      <div id="status">loading Python runtime…</div>
+      <div id="diag"></div>
+    </div>
+  </section>
+  <section id="output">
+    <div class="toolbar">
+      <div class="group left">
+        <button id="print" class="secondary">Print</button>
+        <button id="pdfBtn" disabled>Download PDF</button>
+        <button id="emailBtn" disabled>Email PDF</button>
+      </div>
+    </div>
+    <div id="out" style="color:#888;font:13px monospace">Waiting for runtime…</div>
+  </section>
+</main>
+
+<script type="text/plain" id="seed"></script>
+
+<script type="text/plain" id="pycode">
+import json, re, yaml
+from math import lcm
+
+SUBDIVISION_LABELS = {1:[""], 2:["","+"], 4:["","e","+","a"]}
+HEAD_TO_DRUM = {
+ ">":"dum","dum":"dum","D":"dum",
+ "Δ":"tek","tek":"tek",
+ "Α":"ka","A":"ka","ka":"ka",
+ "S":"slap","H":"slap","slap":"slap",
+ "r":None,
+}
+_TOKEN_RE = re.compile(
+ r"(\(Α\)|\(A\)|\(ka\)|dum|tek|slap|ka|D|S|H|>|Δ|Α|A|r)(\d+\.?)?(\^>|>)?(\[|\])?$")
+REPEAT_BAR = "%"
+
+def extract_durations(rhythm_str):
+    out=[]; prev="4"
+    for raw in rhythm_str.replace("|"," ").split():
+        m=_TOKEN_RE.match(raw)
+        if not m: continue
+        d=m.group(2)
+        if d is None: d=prev
+        prev=d
+        out.append(2*int(d[:-1]) if d.endswith(".") else int(d))
+    return set(out)
+
+def auto_bpb(node, meter):
+    md=int(meter.split("/")[1]); alld=set()
+    for v in (node.get("variations",{}) or {}).values():
+        rs=v.get("rhythm") if isinstance(v,dict) else None
+        if rs: alld.update(extract_durations(rs))
+    if not alld: return 4
+    val=1
+    for d in alld: val=lcm(val,d)
+    return max(1, val//md)
+
+def cells_for_duration(dur,bpb,md):
+    num=md*bpb
+    if dur.endswith("."):
+        base=int(dur[:-1])
+        if (3*num)%(2*base)!=0:
+            raise ValueError("dotted duration %s does not fit cleanly in %d-per-beat grid with denominator %d"%(dur,bpb,md))
+        return (3*num)//(2*base)
+    d=int(dur)
+    if num%d!=0:
+        raise ValueError("duration %s does not fit cleanly in %d-per-beat grid with denominator %d"%(dur,bpb,md))
+    return num//d
+
+def count_row(meter,bpb):
+    num=int(meter.split("/")[0])
+    if bpb not in SUBDIVISION_LABELS:
+        raise ValueError("no subdivision labels for boxes_per_beat=%d"%bpb)
+    pat=SUBDIVISION_LABELS[bpb]; out=[]
+    for beat in range(1,num+1):
+        for i,suf in enumerate(pat):
+            out.append(str(beat) if i==0 else suf)
+    return out
+
+def parse_rhythm(rhythm_str,bpb,md):
+    bars=[]; prev="4"
+    for bar_str in rhythm_str.split("|"):
+        bar_str=bar_str.strip()
+        if not bar_str: continue
+        if bar_str==REPEAT_BAR:
+            if not bars: raise ValueError("'%' repeat bar has no preceding bar")
+            bars.append((None,None)); continue
+        ev=[]; cells=[]
+        for raw in bar_str.split():
+            m=_TOKEN_RE.match(raw)
+            if not m: raise ValueError("cannot parse token %r"%raw)
+            head_raw,duration,accent,beam=m.group(1),m.group(2),m.group(3),m.group(4)
+            middle=head_raw.startswith("(") and head_raw.endswith(")")
+            head=head_raw[1:-1] if middle else head_raw
+            if middle and HEAD_TO_DRUM.get(head)!="ka":
+                raise ValueError("middle-finger marker (...) only applies to kah, got %r"%raw)
+            if duration is None: duration=prev
+            prev=duration
+            drum=HEAD_TO_DRUM[head]
+            n=cells_for_duration(duration,bpb,md)
+            if drum is None:
+                cells.extend([None]*n)
+            else:
+                cells.append({"glyph":drum,"accent":bool(accent),"middle":middle})
+                cells.extend([None]*(n-1))
+            ev.append({"drum":drum,"dur":duration,"accent":bool(accent),
+                       "middle":middle,"beam":beam})
+        bars.append((ev,cells))
+    if not bars: raise ValueError("empty rhythm")
+    return bars
+
+def _resolve(node,var):
+    meter=var.get("meter") or node.get("meter")
+    if not meter: raise ValueError("no meter (set 'meter' at the rhythm level)")
+    if var.get("boxes_per_beat") is not None: bpb=int(var["boxes_per_beat"])
+    elif node.get("boxes_per_beat") is not None: bpb=int(node["boxes_per_beat"])
+    else: bpb=auto_bpb(node,meter)
+    return meter,bpb
+
+def build(yaml_text):
+    out={"rhythms":[],"diagnostics":[]}
+    try:
+        db=yaml.safe_load(yaml_text)
+    except Exception as e:
+        out["diagnostics"].append({"severity":"error","where":"YAML","message":"YAML parse error: %s"%e})
+        return json.dumps(out)
+    if not isinstance(db,dict):
+        out["diagnostics"].append({"severity":"error","where":"YAML","message":"top level must be a mapping of rhythm slugs"})
+        return json.dumps(out)
+    for slug,node in db.items():
+        if not isinstance(node,dict):
+            out["diagnostics"].append({"severity":"error","where":slug,"message":"not a mapping"}); continue
+        robj={"slug":slug,"display":node.get("display",slug),
+              "comment":node.get("comment","") or "",
+              "variations":[]}
+        for vid,var in (node.get("variations",{}) or {}).items():
+            if not isinstance(var,dict):
+                out["diagnostics"].append({"severity":"error","where":"%s.%s"%(slug,vid),"message":"variation is not a mapping"}); continue
+            try:
+                meter,bpb=_resolve(node,var)
+            except Exception as e:
+                out["diagnostics"].append({"severity":"error","where":"%s.%s"%(slug,vid),"message":str(e)}); continue
+            vobj={"id":vid,"meter":meter,"bpb":bpb,
+                  "single_line":bool(var.get("single_line")),
+                  "rhythm":var.get("rhythm") or "",
+                  "comment":var.get("comment","") or "",
+                  "bars":[]}
+            rs=var.get("rhythm")
+            if not rs:
+                out["diagnostics"].append({"severity":"error","where":"%s.%s"%(slug,vid),"message":"no 'rhythm' string"})
+                robj["variations"].append(vobj); continue
+            try:
+                mn,mdv=(int(x) for x in meter.split("/"))
+                bars=parse_rhythm(rs,bpb,mdv)
+                counts=count_row(meter,bpb); expected=mn*bpb
+                for i,(ev,cells) in enumerate(bars):
+                    if ev is None:
+                        vobj["bars"].append({"repeat":True}); continue
+                    if len(cells)!=expected:
+                        out["diagnostics"].append({"severity":"error",
+                          "where":"%s.%s bar %d"%(slug,vid,i+1),
+                          "message":"bar %d: %d/%d cells (bar does not fill the meter)"%(i+1,len(cells),expected)})
+                    vobj["bars"].append({"repeat":False,"events":ev,"cells":cells,"counts":counts})
+                if all(b.get("repeat") or len(b.get("cells",[]))==expected
+                       for b in vobj["bars"]):
+                    out["diagnostics"].append({"severity":"ok",
+                      "where":"%s.%s"%(slug,vid),
+                      "message":"%s = %s, bpb %d, %d bar(s), all bars fill the meter"%(slug,meter,bpb,len(vobj["bars"]))})
+            except Exception as e:
+                out["diagnostics"].append({"severity":"error","where":"%s.%s"%(slug,vid),"message":str(e)})
+            robj["variations"].append(vobj)
+        out["rhythms"].append(robj)
+    return json.dumps(out)
+</script>
+
+<script>
+function getVF(){ return (window.Vex && (window.Vex.Flow || window.Vex)) || null; }
+let pyodide,
+    statusEl=document.getElementById('status'),
+    editor=document.getElementById('editor'),
+    outEl=document.getElementById('out'),
+    pdfBtn=document.getElementById('pdfBtn'),
+    emailBtn=document.getElementById('emailBtn');
+let lastData=null;
+
+// ─── Notation toggle: Greek canonical ↔ Arabic display ──────────────────
+// Files in rythmiko-toxo are always stored in Greek (>, Δ/δ, Α/α). The
+// editor can be flipped to display Arabic single-char glyphs (D, T/t, K/k)
+// for practitioners who prefer that. canonicalYaml is the source of truth
+// at all times — it is what gets parsed, validated, saved as a local
+// draft, and committed to GitHub. editor.value is purely presentation.
+let notation = localStorage.getItem("rhythmiko_notation") || "greek";
+let canonicalYaml = "";
+
+// Arabic/TUBS notation uses single lowercase glyphs for tek and ka
+// regardless of accent (accent is conveyed by the explicit `>` /  `^>`
+// suffix when needed). Greek → Arabic therefore collapses both forms of
+// each stroke onto the same letter. Arabic → Greek normalizes back to
+// the capital Greek form (what all existing files in rythmiko-toxo use).
+// Uppercase T and K in Arabic input are tolerated and also normalize.
+const GREEK_TO_ARABIC = { '>': 'D', 'Δ': 't', 'δ': 't', 'Α': 'k', 'α': 'k' };
+const ARABIC_TO_GREEK = { 'D': '>', 't': 'Δ', 'k': 'Α', 'T': 'Δ', 'K': 'Α', 'A': 'Α' };
+
+// Transform ONLY the head character of each token — that's why '>' as an
+// accent suffix at the end of a token is preserved (only '>' at the start
+// of a token becomes 'D' in Arabic mode). Word forms (dum/tek/ka/slap)
+// are left alone because they're already notation-neutral.
+function _transformTokenHead(token, map){
+  if (token.startsWith('(')){
+    const close = token.indexOf(')');
+    if (close > 1){
+      const inside = token.slice(1, close);
+      const rest = token.slice(close + 1);
+      if (inside.length === 1){
+        return '(' + (map[inside] !== undefined ? map[inside] : inside) + ')' + rest;
+      }
+    }
+    return token;
+  }
+  for (const word of ['dum', 'tek', 'slap', 'ka']){
+    if (token.startsWith(word)) return token;
+  }
+  if (!token.length) return token;
+  const head = token[0];
+  return (map[head] !== undefined ? map[head] : head) + token.slice(1);
+}
+
+function _transliterateRhythmStr(s, map){
+  return s.replace(/\S+/g, tok => _transformTokenHead(tok, map));
+}
+
+// Operate only on the value side of `rhythm: "..."` / `rhythm: '...'`
+// lines. display names, slugs, comments, meter, etc. are untouched.
+function transliterateYaml(yaml, map){
+  return yaml.replace(/^(\s*rhythm:\s*)(["'])(.*?)\2(.*)$/gm,
+    (_m, prefix, quote, content, trail) =>
+      prefix + quote + _transliterateRhythmStr(content, map) + quote + trail);
+}
+
+function _displayFromCanonical(){
+  return notation === "arabic"
+    ? transliterateYaml(canonicalYaml, GREEK_TO_ARABIC)
+    : canonicalYaml;
+}
+
+function setCanonical(yaml){
+  canonicalYaml = yaml;
+  editor.value = _displayFromCanonical();
+  // Loading a new YAML resets which variation we're editing; default to v1.
+  currentVariation = null;
+  if (typeof buildVariationsBar === 'function') buildVariationsBar();
+}
+
+function syncCanonicalFromEditor(){
+  canonicalYaml = notation === "arabic"
+    ? transliterateYaml(editor.value, ARABIC_TO_GREEK)
+    : editor.value;
+}
+
+function renderNotationToggle(){
+  const toggle = document.getElementById('notationToggle');
+  if (!toggle) return;
+  toggle.querySelectorAll('button').forEach(b => {
+    b.classList.toggle('active', b.dataset.notation === notation);
+  });
+}
+
+function setNotation(mode){
+  if (mode !== "greek" && mode !== "arabic") return;
+  if (notation === mode) return;
+  // Capture whatever the user has typed in the current notation before swap.
+  syncCanonicalFromEditor();
+  notation = mode;
+  localStorage.setItem("rhythmiko_notation", notation);
+  editor.value = _displayFromCanonical();
+  renderNotationToggle();
+  // Rebuild the token palette so its head buttons match the new notation.
+  if (typeof buildPalette === 'function') buildPalette();
+  // Refresh the rhythm field so its content matches the new notation.
+  if (typeof syncRhythmField === 'function') syncRhythmField();
+  // Canonical unchanged → re-running uses the same data but refreshes
+  // the inline code shown under each variation header.
+  if (typeof run === 'function') run();
+}
+document.querySelectorAll('#notationToggle button').forEach(b => {
+  b.addEventListener('click', () => setNotation(b.dataset.notation));
+});
+// ─── /Notation toggle ────────────────────────────────────────────────────
+
+// Initialize canonical from the seed in the page (which is Greek), then
+// render the editor in the user's preferred notation.
+canonicalYaml = document.getElementById('seed').textContent.replace(/^\n/,'');
+editor.value = _displayFromCanonical();
+renderNotationToggle();
+document.getElementById('print').addEventListener('click', () => {
+  // Inject the title element so the browser's print dialog (Save-as-PDF)
+  // gets the same heading the html2pdf path produces. Removed on afterprint.
+  const titleEl = document.createElement('h1');
+  titleEl.className = 'pdf-title';
+  titleEl.textContent = lastData ? emailSubject(lastData) : 'Rhythm';
+  titleEl.style.cssText = 'font:600 22px -apple-system,Segoe UI,Roboto,sans-serif;' +
+                          'margin:0 0 18px;color:#111;padding:0;';
+  outEl.insertBefore(titleEl, outEl.firstChild);
+  const cleanup = () => {
+    if (titleEl.parentNode) titleEl.parentNode.removeChild(titleEl);
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  window.print();
+});
+
+function pdfFilename(data){
+  const slugs=(data&&data.rhythms||[]).map(r=>r.slug).filter(Boolean);
+  return (slugs.join('-')||'rhythms')+'.pdf';
+}
+function emailSubject(data){
+  const names=(data&&data.rhythms||[]).map(r=>r.display||r.slug).filter(Boolean);
+  return names.join(', ')||'Rhythm';
+}
+function emailBody(data, editorText){
+  const lines=[
+    'Rhythm: '+emailSubject(data),
+    '',
+    'Source (YAML):',
+    editorText.trim(),
+    '',
+    'Variations:',
+  ];
+  (data&&data.rhythms||[]).forEach(r=>{
+    r.variations.forEach(v=>{
+      lines.push('  '+r.slug+'.'+v.id+'  |  '+v.meter+'  |  bpb '+v.bpb+
+                 (v.single_line?'  |  single_line':''));
+      if(v.rhythm) lines.push('    '+v.rhythm);
+    });
+  });
+  lines.push('');
+  lines.push('Notation legend:');
+  lines.push('  > = dum   Δ/δ = tek (accented/unaccented)   Α/α = kah (accented/unaccented)');
+  lines.push('  S = slap   r = rest   (Α) = circled middle-finger kah');
+  lines.push('  4 = quarter, 8 = eighth, 16 = sixteenth (sticky from previous token)');
+  lines.push('  [...] groups beamed notes');
+  lines.push('');
+  lines.push('Generated by https://bentenitis.com/rhythms');
+  return lines.join('\n');
+}
+
+async function buildPdfBlob(){
+  if(!window.html2pdf){ throw new Error('html2pdf not loaded'); }
+  // Snapshot of current rendered rhythms.
+  const target = outEl;
+  const opts = {
+    margin: [16, 10, 14, 10],  // [top, right, bottom, left] — extra top for title, extra bottom for date stamp
+    filename: pdfFilename(lastData),
+    image: { type:'jpeg', quality:0.97 },
+    html2canvas: { scale:2, useCORS:true, backgroundColor:'#ffffff' },
+    jsPDF: { unit:'mm', format:'a4', orientation:'portrait' },
+    // pagebreak.avoid: html2pdf walks the listed selectors and, if any one's
+    // bounding box would straddle a PDF page boundary, it inserts a break
+    // BEFORE that element so the whole thing lands on the next page. This
+    // is the only setting that actually prevents pentagrams from being
+    // sliced in half — break-inside:avoid in CSS alone doesn't bind the
+    // canvas-slicer.
+    pagebreak: {
+      mode: ['css', 'legacy'],
+      avoid: ['.rhythm', '.var', '.staff', '.tubs', '.staff svg'],
+    },
+  };
+
+  // Prepend an H1 with the rhythm name(s) as the document title. Stays in
+  // the DOM only for the duration of html2pdf rendering, then is removed.
+  const titleEl = document.createElement('h1');
+  titleEl.className = 'pdf-title';
+  titleEl.textContent = emailSubject(lastData);
+  titleEl.style.cssText = 'font:600 22px -apple-system,Segoe UI,Roboto,sans-serif;' +
+                          'margin:0 0 18px;color:#111;padding:0;';
+  target.insertBefore(titleEl, target.firstChild);
+
+  try {
+    // Staged chain so we can hook into the underlying jsPDF instance and
+    // stamp a date footer on every page.
+    const worker = html2pdf().from(target).set(opts);
+    await worker.toPdf();
+    const pdf = await worker.get('pdf');
+    const totalPages = pdf.internal.getNumberOfPages();
+    const today = new Date().toISOString().slice(0, 10);
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    for (let i = 1; i <= totalPages; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(9);
+      pdf.setTextColor(120);
+      pdf.text(today, pageW - 10, pageH - 6, { align: 'right' });
+    }
+    return pdf.output('blob');
+  } finally {
+    if (titleEl.parentNode) titleEl.parentNode.removeChild(titleEl);
+  }
+}
+
+async function downloadPdf(){
+  pdfBtn.disabled=true; pdfBtn.textContent='Building PDF…';
+  try{
+    const blob = await buildPdfBlob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download=pdfFilename(lastData);
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  }catch(e){
+    alert('PDF build failed: '+e);
+  }finally{
+    pdfBtn.disabled=false; pdfBtn.textContent='Download PDF';
+  }
+}
+
+async function pdfAndEmail(){
+  emailBtn.disabled=true; emailBtn.textContent='Building PDF…';
+  try{
+    const blob = await buildPdfBlob();
+    const filename = pdfFilename(lastData);
+    const subject = emailSubject(lastData);
+    // Send the canonical (Greek) YAML in the email so it matches what
+    // lives in the repo, regardless of the editor's current notation mode.
+    const body = emailBody(lastData, canonicalYaml);
+    const file = new File([blob], filename, { type:'application/pdf' });
+    // Web Share API with files — works in iOS Safari and most mobile browsers;
+    // lets the share sheet route to Mail (or Gmail/etc.) WITH the PDF attached.
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({ files:[file], title:subject, text:body });
+        return;
+      }catch(e){
+        if(e && e.name==='AbortError') return; // user cancelled
+        // fall through to mailto fallback
+      }
+    }
+    // Fallback: download the PDF, then open the mail composer with subject + body.
+    // Most desktop browsers/OSes cannot attach a file to a mailto: link, so the
+    // user has to drag the downloaded PDF onto the composed message themselves.
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+    const bodyWithHint = 'PDF downloaded as "'+filename+'" — attach it to this email before sending.\n\n'+body;
+    const mailto = 'mailto:?subject='+encodeURIComponent(subject)+
+                   '&body='+encodeURIComponent(bodyWithHint);
+    window.location.href = mailto;
+  }catch(e){
+    alert('Email step failed: '+e);
+  }finally{
+    emailBtn.disabled=false; emailBtn.textContent='PDF + Email…';
+  }
+}
+
+pdfBtn.addEventListener('click', downloadPdf);
+emailBtn.addEventListener('click', pdfAndEmail);
+
+function greekGlyph(c){ if(!c) return ""; const g=c.glyph,a=c.accent;
+  if(g==="dum")return ">"; if(g==="tek")return a?"Δ":"δ";
+  if(g==="ka")return a?"Α":"α"; if(g==="slap")return "S"; return ""; }
+function latinGlyph(c){ if(!c) return ""; const g=c.glyph,a=c.accent;
+  if(g==="dum")return "D"; if(g==="tek")return a?"T":"t";
+  if(g==="ka")return a?"K":"k"; if(g==="slap")return "S"; return ""; }
+
+function cellClasses(i,bpb,n){
+  let cl="cell";
+  if(i===0) cl+=" first";
+  else if((i)%bpb===0) cl+=" beat";
+  else cl+=" sub";
+  if(i===n-1) cl+=" barend";
+  return cl;
+}
+
+function renderTubs(bar,bpb){
+  const wrap=document.createElement('div'); wrap.className='bar';
+  if(bar.repeat){
+    const r=document.createElement('div'); r.className='repeat-cell';
+    const p=document.createElement('div'); p.className='pct'; r.appendChild(p);
+    wrap.appendChild(r); return wrap;
+  }
+  const n=bar.cells.length;
+  // Show only the row that matches the user's chosen notation.
+  const rows = notation === 'arabic' ? ['latin'] : ['greek'];
+  for(const which of rows){
+    const row=document.createElement('div'); row.className='row '+which;
+    bar.cells.forEach((c,i)=>{
+      const d=document.createElement('div'); d.className=cellClasses(i,bpb,n);
+      const t=which==='greek'?greekGlyph(c):latinGlyph(c);
+      if(c&&c.middle){ const s=document.createElement('span'); s.className='circled'; s.textContent=t; d.appendChild(s);}
+      else d.textContent=t;
+      row.appendChild(d);
+    });
+    wrap.appendChild(row);
+  }
+  const cr=document.createElement('div'); cr.className='row count';
+  bar.counts.forEach((lab,i)=>{
+    const d=document.createElement('div'); d.className=cellClasses(i,bpb,n).replace('cell','cell');
+    d.textContent=lab; cr.appendChild(d);
+  });
+  wrap.appendChild(cr);
+  return wrap;
+}
+
+const DURMAP={1:'w',2:'h',4:'q',8:'8',16:'16',32:'32',64:'64'};
+// 3-line percussion staff. VexFlow's setNumLines(3) draws the TOP three
+// lines of the treble pitch grid — in pitch terms that's f/5 (top),
+// d/5 (middle), b/4 (bottom). Map strokes to those exact pitches so each
+// stroke sits ON a line:
+//   top    line (f/5) → ka  ("high")
+//   middle line (d/5) → tek  + rests (centered)
+//   bottom line (b/4) → dum  ("low")
+//   space between tek & ka (e/5) → slap  (visually distinct from ka)
+const KEY={dum:'b/4',tek:'d/5',ka:'f/5',slap:'e/5'};
+const REST_KEY='d/5';
+function vfDur(durStr){
+  const dot=durStr.endsWith('.'); const base=parseInt(dot?durStr.slice(0,-1):durStr,10);
+  return {d:DURMAP[base]||'q',dot};
+}
+function renderStaff(container,bars){
+  try{
+    const VF=getVF();
+    if(!VF) throw new Error('VexFlow not loaded');
+    const flat=[]; bars.forEach(b=>{ if(b.repeat){flat.push({repeat:true});}
+      else b.events.forEach(e=>flat.push(e)); });
+    const width=Math.max(360, flat.length*46+90);
+    const div=document.createElement('div'); container.appendChild(div);
+    const renderer=new VF.Renderer(div,VF.Renderer.Backends.SVG);
+    renderer.resize(width,150); const ctx=renderer.getContext();
+    const stave=new VF.Stave(8,18,width-20);
+    stave.setNumLines(3);   // 3-line percussion stave: low/mid/high = D/T/K
+    stave.setContext(ctx).draw();
+    const notes=[]; const beamGroups=[]; let cur=[];
+    flat.forEach(e=>{
+      if(e.repeat){
+        const tn=new VF.TextNote({text:'％',duration:'q'})
+          .setLine(2).setJustification(VF.TextNote.Justification.CENTER);
+        notes.push(tn); return;
+      }
+      const {d,dot}=vfDur(e.dur);
+      let n;
+      if(e.drum===null){ n=new VF.StaveNote({keys:[REST_KEY],duration:d+'r'}); }
+      else {
+        n=new VF.StaveNote({keys:[KEY[e.drum]||'c/5'],duration:d});
+        if(e.drum==='slap'){ try{n.setKeyStyle(0,{});}catch(_){ } }
+        // Below-the-note annotation label respects the user's notation.
+        const labels = notation === 'arabic'
+          ? {dum:'D', tekA:'T', tekU:'t', kaA:'K', kaU:'k', slap:'S'}
+          : {dum:'>', tekA:'Δ', tekU:'δ', kaA:'Α', kaU:'α', slap:'S'};
+        const lab = ({dum:labels.dum,
+                      tek: e.accent ? labels.tekA : labels.tekU,
+                      ka:  e.accent ? labels.kaA  : labels.kaU,
+                      slap: labels.slap})[e.drum]
+                  + (e.middle ? '̥' : '');
+        n.addModifier(new VF.Annotation(lab).setVerticalJustification(
+            VF.Annotation.VerticalJustify.BOTTOM),0);
+        if(e.accent) n.addModifier(new VF.Articulation('a>').setPosition(3),0);
+      }
+      if(dot){ try{VF.Dot.buildAndAttach([n],{all:true});}catch(_){ } }
+      notes.push(n);
+      if(e.drum!==null){
+        if(e.beam==='[') cur=[n];
+        else if(e.beam===']'){ cur.push(n); if(cur.length>1)beamGroups.push(cur); cur=[]; }
+        else if(cur.length) cur.push(n);
+      }
+    });
+    const voice=new VF.Voice({num_beats:4,beat_value:4}).setStrict(false);
+    voice.addTickables(notes);
+    // Build the Beam objects BEFORE drawing: the Beam constructor tells
+    // its notes they are beamed, which suppresses their individual flags
+    // (the "tails"). Created after voice.draw() the flags are already
+    // rendered and you get both a beam and a tail.
+    //
+    // render_options.flat_beams forces the beam to stay horizontal rather
+    // than slope to follow the notes' pitches — appropriate for percussion
+    // where notes on different lines do not imply ascending/descending pitch.
+    const beams=beamGroups.map(g=>{
+      try{
+        const b=new VF.Beam(g);
+        b.render_options.flat_beams=true;
+        return b;
+      } catch(_){ return null; }
+    }).filter(Boolean);
+    new VF.Formatter().joinVoices([voice]).format([voice],width-60);
+    voice.draw(ctx,stave);
+    beams.forEach(b=>{ try{ b.setContext(ctx).draw(); }catch(_){ } });
+  }catch(err){
+    const f=document.createElement('div'); f.className='fallback';
+    f.textContent='staff render skipped: '+err; container.appendChild(f);
+  }
+}
+
+function render(json){
+  const data=JSON.parse(json); lastData=data; outEl.innerHTML='';
+  const hasRhythms = (data.rhythms||[]).some(r=>r.variations&&r.variations.some(v=>v.bars&&v.bars.length));
+  pdfBtn.disabled = !hasRhythms;
+  emailBtn.disabled = !hasRhythms;
+  const diagEl=document.getElementById('diag'); diagEl.innerHTML='';
+  const ul=document.createElement('ul'); ul.className='diag';
+  if(!data.diagnostics.length){
+    const li=document.createElement('li'); li.className='ok'; li.textContent='No diagnostics.'; ul.appendChild(li);
+  }
+  data.diagnostics.forEach(d=>{
+    const li=document.createElement('li');
+    li.className=d.severity==='error'?'error':(d.severity==='ok'?'ok':'warn');
+    li.textContent='['+d.severity.toUpperCase()+'] '+d.where+': '+d.message;
+    ul.appendChild(li);
+  });
+  diagEl.appendChild(ul);
+  data.rhythms.forEach(r=>{
+    const box=document.createElement('div'); box.className='rhythm';
+    const h=document.createElement('h2'); h.textContent=r.display+'  ('+r.slug+')'; box.appendChild(h);
+    if (r.comment){
+      const rc=document.createElement('div'); rc.className='rhythm-comment';
+      rc.textContent=r.comment; box.appendChild(rc);
+    }
+    r.variations.forEach(v=>{
+      const vd=document.createElement('div'); vd.className='var';
+      const vhead=document.createElement('div'); vhead.className='vhead';
+      const lbl=document.createElement('span'); lbl.className='vlabel';
+      lbl.textContent=v.id+' | '+v.meter+' | bpb '+v.bpb+(v.single_line?' | single_line':'');
+      vhead.appendChild(lbl);
+      if(v.rhythm){
+        const sep=document.createElement('span'); sep.className='vsep'; sep.textContent=':';
+        vhead.appendChild(sep);
+        const code=document.createElement('span'); code.className='vcode';
+        code.textContent=v.rhythm;
+        vhead.appendChild(code);
+      }
+      vd.appendChild(vhead);
+      if (v.comment){
+        const vc=document.createElement('div'); vc.className='var-comment';
+        vc.textContent=v.comment; vd.appendChild(vc);
+      }
+      const st=document.createElement('div'); st.className='staff';
+      if(v.bars && v.bars.length) renderStaff(st, v.bars);
+      vd.appendChild(st);
+      if(v.bars && v.bars.length){
+        const tb=document.createElement('div'); tb.className='tubs';
+        v.bars.forEach((b,i)=>{ const el=renderTubs(b,v.bpb);
+          if(i) el.style.marginLeft='10px'; tb.appendChild(el); });
+        vd.appendChild(tb);
+      }
+      box.appendChild(vd);
+    });
+    const lg=document.createElement('div'); lg.className='legend';
+    lg.textContent='TUBS rows: Greek / Latin / count. Thick line = bar end, medium = beat, dashed = sub-beat. Circled = middle-finger kah. Staff is VexFlow-styled (content-faithful, not LilyPond-identical).';
+    box.appendChild(lg);
+    outEl.appendChild(box);
+  });
+}
+
+// ─── GitHub PR flow ──────────────────────────────────────────────────────
+// Pure browser, no backend except a tiny token-exchange Cloudflare Worker.
+// Workflow:
+//   1. User picks a rhythm from #rhythmPicker → load YAML from rythmiko-toxo.
+//   2. User edits → diff is detected.
+//   3. User clicks "Sign in with GitHub" → OAuth Web Flow:
+//      - We bounce to github.com/login/oauth/authorize.
+//      - On callback to /rhythms?code=…, we POST {code} to the Worker, which
+//        knows the client_secret and returns an access_token.
+//   4. User clicks "Submit PR" → we fork (idempotent), branch, commit the
+//      edited YAML to the fork, then open a PR back to nikosbentenitis/rythmiko-toxo.
+const GITHUB_CLIENT_ID    = "Ov23licrV6zDycdNFr40";    // public; OAuth App on github.com/settings/developers
+const OAUTH_REDIRECT_URI  = "https://bentenitis.com/rhythms";
+const TOKEN_EXCHANGE_URL  = "https://auth.bentenitis.com/exchange";
+const REPO_OWNER          = "nikosbentenitis";
+const REPO_NAME           = "rythmiko-toxo";
+const REPO_BRANCH         = "main";
+const REPO_DIR            = "rhythms";
+
+const gh = {
+  token: sessionStorage.getItem("rhythmiko_gh_token") || null,
+  user:  null,   // { login, name }
+  // Currently-loaded-from-repo rhythm: { slug, path, sha, originalContent }
+  loaded: null,
+};
+
+const rhythmPicker = document.getElementById("rhythmPicker");
+const ghBox        = document.getElementById("ghBox");
+
+function utf8ToBase64(s){
+  return btoa(unescape(encodeURIComponent(s)));
+}
+
+async function ghFetch(method, path, body){
+  const headers = { Accept: "application/vnd.github+json" };
+  if (gh.token) headers.Authorization = `token ${gh.token}`;
+  if (body)     headers["Content-Type"] = "application/json";
+  const r = await fetch(`https://api.github.com${path}`, {
+    method, headers, body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!r.ok){
+    const text = await r.text();
+    let parsed; try { parsed = JSON.parse(text); } catch(_) {}
+    const msg = (parsed && parsed.message) ? parsed.message : text.slice(0, 200);
+    const e = new Error(`GitHub ${method} ${path} → ${r.status}: ${msg}`);
+    e.status = r.status; throw e;
+  }
+  if (r.status === 204) return null;
+  return await r.json();
+}
+
+function renderAuthUI(){
+  ghBox.innerHTML = "";
+  if (gh.token && gh.user){
+    const who = document.createElement("span"); who.className = "who";
+    who.textContent = "@" + gh.user.login; ghBox.appendChild(who);
+    const pr = document.createElement("button"); pr.id = "prBtn";
+    pr.textContent = "Submit PR"; pr.disabled = !canSubmitPR();
+    pr.addEventListener("click", submitPR); ghBox.appendChild(pr);
+    const out = document.createElement("a"); out.className = "signout"; out.href = "#";
+    out.textContent = "sign out";
+    out.addEventListener("click", e => { e.preventDefault(); signOut(); });
+    ghBox.appendChild(out);
+  } else {
+    const b = document.createElement("button");
+    b.textContent = "Sign in with GitHub";
+    b.addEventListener("click", startOAuth);
+    ghBox.appendChild(b);
+  }
+}
+
+function canSubmitPR(){
+  // Offline → can't submit yet; the draft is safe in localStorage. The
+  // dirty check compares canonical (Greek) against the original Greek
+  // pulled from the repo so the notation toggle never spuriously enables
+  // the PR button.
+  return !!(gh.token && gh.loaded && canonicalYaml !== gh.loaded.originalContent && navigator.onLine);
+}
+
+function startOAuth(){
+  if (GITHUB_CLIENT_ID === "REPLACE_ME"){
+    alert("Sign-in not configured on this deployment yet — the GitHub Client ID hasn't been baked in. See https://github.com/nikosbentenitis/rythmiko-toxo/blob/main/worker/SETUP.md");
+    return;
+  }
+  const state = crypto.randomUUID();
+  sessionStorage.setItem("rhythmiko_gh_oauth_state", state);
+  const url = "https://github.com/login/oauth/authorize?" + new URLSearchParams({
+    client_id:    GITHUB_CLIENT_ID,
+    redirect_uri: OAUTH_REDIRECT_URI,
+    scope:        "public_repo",
+    state,
+  }).toString();
+  window.location.href = url;
+}
+
+function signOut(){
+  gh.token = null; gh.user = null;
+  sessionStorage.removeItem("rhythmiko_gh_token");
+  renderAuthUI();
+}
+
+async function completeOAuthIfRedirected(){
+  const url = new URL(window.location.href);
+  const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state");
+  if (!code) return;
+  const expected = sessionStorage.getItem("rhythmiko_gh_oauth_state");
+  // Strip the code from the URL bar regardless so it can't be replayed.
+  url.searchParams.delete("code"); url.searchParams.delete("state");
+  window.history.replaceState({}, "", url.pathname + (url.search ? "?" + url.searchParams.toString() : ""));
+  if (expected && state && expected !== state){
+    alert("OAuth state mismatch — aborting sign-in for safety.");
+    return;
+  }
+  sessionStorage.removeItem("rhythmiko_gh_oauth_state");
+  try {
+    const r = await fetch(TOKEN_EXCHANGE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code, redirect_uri: OAUTH_REDIRECT_URI }),
+    });
+    const data = await r.json();
+    if (!data.access_token){
+      throw new Error(data.error_description || data.error || "no access_token in response");
+    }
+    gh.token = data.access_token;
+    sessionStorage.setItem("rhythmiko_gh_token", gh.token);
+    await refreshGhUser();
+  } catch(e){
+    alert("Sign-in failed: " + e.message);
+  }
+}
+
+async function refreshGhUser(){
+  if (!gh.token) return;
+  try {
+    const u = await ghFetch("GET", "/user");
+    gh.user = { login: u.login, name: u.name || u.login };
+  } catch(e){
+    if (e.status === 401){ signOut(); return; }
+    throw e;
+  }
+}
+
+async function fetchRhythmList(){
+  const r = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${REPO_DIR}?ref=${REPO_BRANCH}`,
+    { headers: { Accept: "application/vnd.github+json" } });
+  if (!r.ok) throw new Error(`list rhythms: ${r.status}`);
+  const items = await r.json();
+  return items.filter(i => i.type === "file" && i.name.endsWith(".yaml"))
+              .sort((a,b) => a.name.localeCompare(b.name));
+}
+
+async function populateRhythmList(){
+  // Strip any prior dynamic options (keep just the placeholder).
+  while (rhythmPicker.options.length > 1) rhythmPicker.remove(1);
+
+  // Repo rhythms — needs network. If offline, this skips.
+  if (navigator.onLine){
+    try {
+      const items = await fetchRhythmList();
+      for (const it of items){
+        const opt = document.createElement("option");
+        opt.value = it.path;
+        opt.textContent = it.name.replace(/\.yaml$/, "");
+        opt.dataset.sha = it.sha;
+        opt.dataset.name = it.name;
+        rhythmPicker.appendChild(opt);
+      }
+    } catch(e){
+      console.warn("could not list rhythms from", REPO_OWNER+"/"+REPO_NAME, e);
+    }
+  }
+
+  // Local drafts — always available, grouped under a disabled separator.
+  const drafts = loadAllDrafts();
+  const draftSlugs = Object.keys(drafts).sort();
+  if (draftSlugs.length){
+    const sep = document.createElement("option");
+    sep.disabled = true;
+    sep.textContent = "— local drafts —";
+    rhythmPicker.appendChild(sep);
+    for (const slug of draftSlugs){
+      const opt = document.createElement("option");
+      opt.value = "__draft__:" + slug;
+      opt.textContent = slug + " (draft)";
+      rhythmPicker.appendChild(opt);
+    }
+  }
+  renderDraftStatus();
+}
+
+async function loadRhythmByPath(path, sha, name){
+  const r = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${REPO_BRANCH}`,
+    { headers: { Accept: "application/vnd.github+json" } });
+  if (!r.ok) throw new Error("load file: " + r.status);
+  const data = await r.json();
+  const content = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ""))));
+  setCanonical(content);   // editor.value reflects the active notation
+  gh.loaded = {
+    slug: name.replace(/\.yaml$/, ""),
+    path: data.path,
+    sha:  data.sha,
+    originalContent: content,   // always Greek — matches canonicalYaml
+  };
+  renderAuthUI();   // updates PR-button disabled state
+  run();
+}
+
+rhythmPicker.addEventListener("change", async () => {
+  const opt = rhythmPicker.selectedOptions[0];
+  if (!opt || !opt.value) return;
+  if (opt.value.startsWith("__draft__:")){
+    loadLocalDraft(opt.value.slice("__draft__:".length));
+    return;
+  }
+  try {
+    await loadRhythmByPath(opt.value, opt.dataset.sha, opt.dataset.name);
+  } catch(e){
+    alert("Could not load rhythm: " + e.message);
+  }
+});
+
+// + New: builds a YAML skeleton for a brand-new rhythm and primes the
+// submit-PR flow to CREATE rather than update the file on the repo.
+function newRhythm(){
+  const slug = (prompt(
+    "Slug for the new rhythm.\n\n" +
+    "Lowercase letters, digits, and underscores; must start with a letter. " +
+    "This becomes the filename: rhythms/<slug>.yaml in the repo.\n\n" +
+    "Examples: duyek, kasik_havasi, turk_aksagy") || "").trim();
+  if (!slug) return;
+  if (!/^[a-z][a-z0-9_]{0,40}$/.test(slug)){
+    alert("Invalid slug. Use lowercase letters, digits, and underscores; start with a letter; max 40 chars.");
+    return;
+  }
+  // Reject if the slug already exists in the dropdown (=> file already in the repo).
+  for (const opt of rhythmPicker.options){
+    if (opt.dataset && opt.dataset.name === slug + ".yaml"){
+      alert(`A rhythm with slug "${slug}" already exists in the repo. ` +
+            `Pick it from the dropdown to edit, or choose a different slug.`);
+      return;
+    }
+  }
+  const display = (prompt(
+    `Display name for "${slug}".\n\n` +
+    `Human-readable label shown in the rendered output (Greek, Turkish, etc. all welcome).\n` +
+    `Examples: Duyek, Kaşık Havası, Εννιάσημος`, slug) || "").trim();
+  if (!display) return;
+  const meter = (prompt(
+    `Meter (numerator/denominator).\n\n` +
+    `Examples: 4/4, 9/8, 7/8, 3/4`, "4/4") || "").trim();
+  if (!/^\d+\/\d+$/.test(meter)){
+    alert(`Meter must look like N/M (e.g. 4/4). Got: ${meter}`);
+    return;
+  }
+  const [num] = meter.split("/").map(Number);
+  // Prepopulate v1 with one dum-per-beat — easiest thing to look at, immediately
+  // validates against the meter, and obvious what to edit next.
+  const placeholderBars = Array(num).fill(">4").join(" ");
+  const yamlText = [
+    `${slug}:`,
+    `  display: "${display.replace(/"/g, '\\"')}"`,
+    `  meter: "${meter}"`,
+    `  variations:`,
+    `    v1:`,
+    `      rhythm: "${placeholderBars}"`,
+    ``,
+  ].join("\n");
+  setCanonical(yamlText);   // editor.value reflects active notation
+  gh.loaded = {
+    slug,
+    path: `${REPO_DIR}/${slug}.yaml`,
+    sha:  null,           // null marks a brand-new file (no PUT-with-sha update)
+    originalContent: "",  // any canonical content counts as "dirty" → PR button lights up
+    isNew: true,
+  };
+  rhythmPicker.value = "";   // clear any prior selection in the dropdown
+  renderAuthUI();
+  run();
+}
+document.getElementById("newBtn").addEventListener("click", newRhythm);
+
+editor.addEventListener("input", () => {
+  // Re-evaluate the PR-button enabled state whenever the editor changes.
+  if (gh.token && gh.user){
+    const btn = document.getElementById("prBtn");
+    if (btn) btn.disabled = !canSubmitPR();
+  }
+});
+
+async function submitPR(){
+  if (!gh.token) return alert("Sign in first.");
+  if (!gh.loaded) return alert("Pick a rhythm from the dropdown to load it from the repo first.");
+  if (canonicalYaml === gh.loaded.originalContent) return alert("No changes to submit.");
+
+  const slug = gh.loaded.slug;
+  const path = gh.loaded.path;
+  const isNew = !gh.loaded.sha;
+  const defaultTitle = isNew ? `Add ${slug}` : `Edit ${slug}`;
+  const title = (prompt(`PR title:`, defaultTitle) || "").trim();
+  if (!title) return;
+  const ok = confirm(
+    `Open a pull request on ${REPO_OWNER}/${REPO_NAME}?\n\n` +
+    `File: ${path} ${isNew ? "(new file)" : "(update)"}\nTitle: ${title}\n\n` +
+    `This will fork the repo into your account (if not already), create a branch, ` +
+    `${isNew ? "create the new YAML file" : "commit your edited YAML"}, ` +
+    `and open the PR back to ${REPO_BRANCH}.`);
+  if (!ok) return;
+
+  const prBtn = document.getElementById("prBtn");
+  prBtn.disabled = true;
+  const setLabel = (s) => { prBtn.textContent = s; statusEl.textContent = s; };
+
+  try {
+    if (!gh.user) await refreshGhUser();
+    const user = gh.user.login;
+
+    setLabel("forking…");
+    await ghFetch("POST", `/repos/${REPO_OWNER}/${REPO_NAME}/forks`);
+
+    setLabel("waiting for fork…");
+    let forkReady = false;
+    for (let i = 0; i < 20 && !forkReady; i++){
+      try { await ghFetch("GET", `/repos/${user}/${REPO_NAME}`); forkReady = true; }
+      catch(e){ if (e.status === 404){ await new Promise(r => setTimeout(r, 1200)); } else throw e; }
+    }
+    if (!forkReady) throw new Error("fork did not appear within ~24s");
+
+    setLabel("creating branch…");
+    const mainRef = await ghFetch("GET", `/repos/${REPO_OWNER}/${REPO_NAME}/git/ref/heads/${REPO_BRANCH}`);
+    const baseSha = mainRef.object.sha;
+    const branch  = `edit-${slug}-${Date.now()}`;
+    await ghFetch("POST", `/repos/${user}/${REPO_NAME}/git/refs`, {
+      ref: `refs/heads/${branch}`,
+      sha: baseSha,
+    });
+
+    setLabel("committing…");
+    // GitHub Contents PUT uses presence/absence of `sha` to decide
+    // create-vs-update: include it for updates, omit it entirely for new
+    // files. We always commit the canonical (Greek) YAML regardless of
+    // which notation the editor is currently displaying.
+    const putBody = {
+      message: `${title}\n\nSubmitted via bentenitis.com/rhythms`,
+      content: utf8ToBase64(canonicalYaml),
+      branch,
+    };
+    if (gh.loaded.sha) putBody.sha = gh.loaded.sha;
+    await ghFetch("PUT", `/repos/${user}/${REPO_NAME}/contents/${path}`, putBody);
+
+    setLabel("opening PR…");
+    const pr = await ghFetch("POST", `/repos/${REPO_OWNER}/${REPO_NAME}/pulls`, {
+      title,
+      head:  `${user}:${branch}`,
+      base:  REPO_BRANCH,
+      body:  `Submitted via [bentenitis.com/rhythms](https://bentenitis.com/rhythms).\n\nRhythm: \`${slug}\``,
+      maintainer_can_modify: true,
+    });
+
+    setLabel("PR opened ✓");
+    // Reset "originalContent" to the just-committed canonical so the
+    // button greys out until further edits, and clear the matching local
+    // draft (it's now on the repo, no longer a "draft").
+    gh.loaded.originalContent = canonicalYaml;
+    deleteDraft(gh.loaded.slug);
+    renderAuthUI();
+    populateRhythmList();
+    if (confirm(`Pull request opened:\n${pr.html_url}\n\nOpen it in a new tab?`)){
+      window.open(pr.html_url, "_blank", "noopener");
+    }
+  } catch(e){
+    alert("Submit failed: " + e.message);
+    setLabel("submit failed");
+    const btn = document.getElementById("prBtn");
+    if (btn){ btn.disabled = !canSubmitPR(); btn.textContent = "Submit PR"; }
+  }
+}
+
+// ─── Local drafts + offline handling ────────────────────────────────────
+// Every edit is auto-saved to localStorage under the active rhythm slug.
+// Drafts survive page reloads and being offline. They appear in the
+// rhythm picker so you can resume them later. After a successful PR
+// the matching draft is cleared.
+const DRAFTS_KEY = "rhythmiko_drafts_v1";
+
+function loadAllDrafts(){
+  try { return JSON.parse(localStorage.getItem(DRAFTS_KEY) || "{}"); }
+  catch(_) { return {}; }
+}
+function saveDraft(slug, yaml, path, sha, isNew){
+  if (!slug) return;
+  const drafts = loadAllDrafts();
+  drafts[slug] = {
+    slug, yaml, path,
+    sha: sha || null,
+    isNew: !!isNew,
+    savedAt: new Date().toISOString(),
+  };
+  localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+  renderDraftStatus();
+}
+function deleteDraft(slug){
+  if (!slug) return;
+  const drafts = loadAllDrafts();
+  if (slug in drafts){
+    delete drafts[slug];
+    localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+    renderDraftStatus();
+  }
+}
+
+let _draftSaveTimer = null;
+function scheduleDraftSave(){
+  if (!gh.loaded || !gh.loaded.slug) return;
+  clearTimeout(_draftSaveTimer);
+  _draftSaveTimer = setTimeout(() => {
+    // Drafts are stored in the canonical (Greek) form so they can be
+    // resumed in any notation and submitted as-is.
+    saveDraft(gh.loaded.slug, canonicalYaml, gh.loaded.path, gh.loaded.sha, gh.loaded.isNew);
+  }, 800);
+}
+editor.addEventListener("input", scheduleDraftSave);
+
+function renderDraftStatus(){
+  const el = document.getElementById("draftStatus");
+  if (!el) return;
+  if (!gh.loaded){
+    const all = loadAllDrafts();
+    const count = Object.keys(all).length;
+    el.textContent = count ? `${count} draft${count===1?"":"s"} saved` : "";
+    el.title = count ? "Pick from the dropdown to resume a draft" : "";
+    return;
+  }
+  const drafts = loadAllDrafts();
+  const d = drafts[gh.loaded.slug];
+  if (d && d.yaml === canonicalYaml){
+    el.textContent = "✓ saved locally";
+    el.title = "Last saved: " + d.savedAt;
+  } else if (d){
+    el.textContent = "saving…";
+    el.title = "Edit not yet flushed to localStorage";
+  } else {
+    el.textContent = "";
+    el.title = "";
+  }
+}
+
+// Drafts management modal — opened by clicking the draftStatus indicator.
+function openDraftsDialog(){
+  const drafts = loadAllDrafts();
+  const slugs = Object.keys(drafts).sort();
+  // Build modal
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Local drafts</h2>
+        <button class="modal-close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  `;
+  const body = overlay.querySelector('.modal-body');
+  const close = () => overlay.remove();
+  overlay.querySelector('.modal-close').addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+  if (slugs.length === 0){
+    body.innerHTML = '<div class="drafts-empty">No local drafts. Drafts appear here automatically whenever you edit a rhythm or create a new one.</div>';
+  } else {
+    const list = document.createElement('ul');
+    list.className = 'drafts-list';
+    body.appendChild(list);
+    slugs.forEach(slug => {
+      const d = drafts[slug];
+      const li = document.createElement('li');
+      const when = new Date(d.savedAt).toLocaleString();
+      li.innerHTML = `
+        <div class="draft-meta">
+          <strong>${slug}</strong>${d.isNew ? '<em>new</em>' : ''}
+          <div class="draft-time">saved ${when}</div>
+        </div>
+        <button class="load" type="button">Load</button>
+        <button class="delete" type="button">Delete</button>
+      `;
+      li.querySelector('.load').addEventListener('click', () => {
+        loadLocalDraft(slug);
+        close();
+      });
+      li.querySelector('.delete').addEventListener('click', () => {
+        if (!confirm(`Delete the local draft for "${slug}"? This cannot be undone.`)) return;
+        deleteDraft(slug);
+        li.remove();
+        populateRhythmList();
+        // If the currently-loaded rhythm IS this draft, revert it.
+        if (gh.loaded && gh.loaded.slug === slug){
+          if (gh.loaded.isNew){
+            // No upstream version to revert to — clear the editor.
+            setCanonical('');
+            gh.loaded = null;
+          } else {
+            // Revert to the version originally fetched from the repo.
+            setCanonical(gh.loaded.originalContent);
+          }
+          renderAuthUI();
+          run();
+        }
+        if (!list.children.length) close();
+      });
+      list.appendChild(li);
+    });
+  }
+  document.body.appendChild(overlay);
+}
+
+function loadLocalDraft(slug){
+  const drafts = loadAllDrafts();
+  const d = drafts[slug];
+  if (!d) return;
+  setCanonical(d.yaml);   // drafts are always stored in Greek
+  gh.loaded = {
+    slug:  d.slug,
+    path:  d.path,
+    sha:   d.sha,                 // null if this draft was a +New rhythm
+    originalContent: "",          // any non-empty canonical counts as dirty
+    isNew: !!d.isNew,
+  };
+  renderAuthUI();
+  renderDraftStatus();
+  run();
+}
+
+// Online / offline detection — affects Submit-PR's enabled state and
+// surfaces a visible indicator in the toolbar.
+function renderNetStatus(){
+  const el = document.getElementById("netStatus");
+  if (!el) return;
+  if (navigator.onLine){
+    el.className = "netstatus";
+    el.textContent = "● online";
+    el.title = "PR submissions will go through";
+  } else {
+    el.className = "netstatus offline";
+    el.textContent = "● offline";
+    el.title = "No network — edits auto-save to localStorage; submit when reconnected";
+  }
+  // Recompute PR-button enabled state (factors navigator.onLine in).
+  const btn = document.getElementById("prBtn");
+  if (btn) btn.disabled = !canSubmitPR();
+}
+window.addEventListener("online", () => {
+  renderNetStatus();
+  // If signed in and there are drafts waiting, surface them.
+  const drafts = loadAllDrafts();
+  const slugs = Object.keys(drafts);
+  if (gh.token && slugs.length){
+    const msg = `Back online. You have ${slugs.length} local draft${slugs.length===1?"":"s"}:\n  ` +
+                slugs.join("\n  ") + "\n\nOpen the first one to review and submit?";
+    if (confirm(msg)) loadLocalDraft(slugs[0]);
+  }
+});
+window.addEventListener("offline", renderNetStatus);
+
+// ─── /Local drafts + offline handling ───────────────────────────────────
+
+// ─── /GitHub PR flow ─────────────────────────────────────────────────────
+
+async function run(){
+  // Empty canonical → show a friendly welcome instead of YAML parse errors.
+  if (!canonicalYaml.trim()){
+    outEl.innerHTML = '<div style="color:#888;font:13px monospace;padding:14px;">' +
+                      'Pick a rhythm from the dropdown or click <b>+ New</b> to start.' +
+                      '</div>';
+    statusEl.textContent = 'ready';
+    if (pdfBtn)   pdfBtn.disabled = true;
+    if (emailBtn) emailBtn.disabled = true;
+    lastData = null;
+    return;
+  }
+  statusEl.textContent='parsing…';
+  try{
+    // Pyodide always parses the canonical (Greek) YAML, regardless of
+    // which notation the editor is currently displaying.
+    const js=pyodide.runPython('build('+JSON.stringify(canonicalYaml)+')');
+    render(js); statusEl.textContent='ready';
+  }catch(e){
+    outEl.innerHTML='<pre style="color:#9b1c1c">'+String(e)+'</pre>';
+    statusEl.textContent='error';
+  }
+}
+
+// ─── Variations management ───────────────────────────────────────────────
+// On mobile, the YAML textarea is hidden. The user manipulates ONE
+// variation at a time via a single-line rhythm-field + the palette below
+// it. currentVariation is the JS-side track of which variation is in
+// focus; canonicalYaml is still the source of truth and is rewritten on
+// every edit by setRhythmFor().
+let currentVariation = null;
+
+// Find all variation slugs in the canonical YAML (always Greek).
+// Returns ['v1', 'v2', ...] in document order.
+function listVariations(){
+  const re = /^\s+(v\d+):\s*$/gm;
+  const out = [];
+  let m;
+  while ((m = re.exec(canonicalYaml)) !== null) out.push(m[1]);
+  return out;
+}
+
+// Extract the rhythm string for a given variation from the canonical YAML.
+function getRhythmFor(vname){
+  const re = new RegExp(`^(\\s+${vname}:\\s*\\n\\s+rhythm:\\s*)(["'])(.*?)\\2`, 'm');
+  const m = canonicalYaml.match(re);
+  return m ? m[3] : '';
+}
+
+// Write a new rhythm string into the canonical YAML for the named variation.
+// The original quote style is preserved.
+function setRhythmFor(vname, newRhythm){
+  const re = new RegExp(`^(\\s+${vname}:\\s*\\n\\s+rhythm:\\s*)(["'])(.*?)\\2`, 'm');
+  const replaced = canonicalYaml.replace(re,
+    (_m, prefix, quote) => prefix + quote + newRhythm + quote);
+  if (replaced === canonicalYaml) return false;
+  canonicalYaml = replaced;
+  // Mirror back to the (hidden on mobile) YAML editor so desktop and
+  // submit-PR and draft-save all see the same content.
+  editor.value = _displayFromCanonical();
+  return true;
+}
+
+// Append a new vN variation to the canonical YAML. Returns the new slug.
+// Prepopulates the new variation with the CURRENT variation's rhythm so
+// the user can tweak rather than start from scratch.
+function addNewVariation(){
+  const existing = listVariations();
+  const maxN = existing.reduce((n, v) => Math.max(n, parseInt(v.slice(1), 10)), 0);
+  const newName = 'v' + (maxN + 1);
+  // Detect indentation by sampling an existing variation line.
+  const sample = canonicalYaml.match(/^(\s+)v\d+:\s*$/m);
+  const vIndent = sample ? sample[1] : '    ';
+  const rIndent = vIndent + '  ';
+  // Use the current variation's rhythm as a template (always Greek in canonical).
+  const template = currentVariation ? getRhythmFor(currentVariation) : '';
+  const escaped = template.replace(/"/g, '\\"');
+  const block = `${vIndent}${newName}:\n${rIndent}rhythm: "${escaped}"`;
+  canonicalYaml = canonicalYaml.replace(/\s*$/, '') + '\n' + block + '\n';
+  editor.value = _displayFromCanonical();
+  return newName;
+}
+
+// Remove a variation from the canonical YAML. Refuses to delete the
+// last remaining variation in the rhythm (every rhythm must have ≥1).
+function deleteVariation(vname){
+  const vars = listVariations();
+  if (vars.length <= 1) return { ok:false, reason:'cannot-delete-last' };
+  if (!vars.includes(vname)) return { ok:false, reason:'not-found' };
+  // Match the variation block: header line + its indented properties up
+  // until the next sibling at the same indent or shallower.
+  const re = new RegExp(`^(\\s+)${vname}:\\s*\\n(?:(?:\\1\\s+\\S.*\\n)|(?:\\s*\\n))*`, 'm');
+  const newCanonical = canonicalYaml.replace(re, '');
+  if (newCanonical === canonicalYaml) return { ok:false, reason:'regex-miss' };
+  canonicalYaml = newCanonical;
+  editor.value = _displayFromCanonical();
+  return { ok:true };
+}
+
+// ─── Comment helpers (rhythm-level + per-variation) ──────────────────────
+
+function _splitLines(){ return canonicalYaml.split('\n'); }
+function _joinLines(lines){ canonicalYaml = lines.join('\n'); editor.value = _displayFromCanonical(); }
+
+// Rhythm-level comment lives at the same indent as `display:` and `meter:`.
+function getCommentForRhythm(){
+  const lines = _splitLines();
+  let inRhythm = false;
+  for (const ln of lines){
+    if (/^\S+:/.test(ln)){
+      if (inRhythm) return '';      // entered next rhythm
+      inRhythm = true; continue;
+    }
+    if (!inRhythm) continue;
+    if (/^\s+variations:/.test(ln)) return '';   // comment must be before variations
+    const m = ln.match(/^\s+comment:\s*(["'])(.*?)\1\s*$/);
+    if (m && (ln.match(/^(\s*)/)[1].length === 2)) return m[2];
+  }
+  return '';
+}
+
+function setCommentForRhythm(text){
+  const lines = _splitLines();
+  let inRhythm = false;
+  let meterIdx = -1, commentIdx = -1, variationsIdx = -1;
+  for (let i = 0; i < lines.length; i++){
+    if (/^\S+:/.test(lines[i])){
+      if (inRhythm) break;
+      inRhythm = true; continue;
+    }
+    if (!inRhythm) continue;
+    const indent = (lines[i].match(/^(\s*)/)[1] || '').length;
+    if (indent !== 2) continue;       // only rhythm-level properties
+    if (/^\s+meter:/.test(lines[i])) meterIdx = i;
+    if (/^\s+comment:/.test(lines[i]) && commentIdx < 0) commentIdx = i;
+    if (/^\s+variations:/.test(lines[i])) { variationsIdx = i; break; }
+  }
+  if (!inRhythm) return false;
+  const insertAt = (meterIdx >= 0 ? meterIdx : 0) + 1;
+  const indent = '  ';
+  if (commentIdx >= 0 && text){
+    lines[commentIdx] = `${indent}comment: ${_yamlQuote(text)}`;
+  } else if (commentIdx >= 0 && !text){
+    lines.splice(commentIdx, 1);
+  } else if (commentIdx < 0 && text){
+    lines.splice(insertAt, 0, `${indent}comment: ${_yamlQuote(text)}`);
+  } else {
+    return false;
+  }
+  _joinLines(lines);
+  return true;
+}
+
+function getCommentForVariation(vname){
+  const lines = _splitLines();
+  let inVar = false, varIndent = -1;
+  for (let i = 0; i < lines.length; i++){
+    const m = lines[i].match(/^(\s+)(\w+):/);
+    if (!m) continue;
+    const indent = m[1].length;
+    const key = m[2];
+    if (inVar && indent <= varIndent) return '';
+    if (key === vname && !inVar){ inVar = true; varIndent = indent; continue; }
+    if (inVar && key === 'comment'){
+      const cm = lines[i].match(/^\s+comment:\s*(["'])(.*?)\1\s*$/);
+      return cm ? cm[2] : '';
+    }
+  }
+  return '';
+}
+
+function setCommentForVariation(vname, text){
+  const lines = _splitLines();
+  let inVar = false, varIndent = -1;
+  let rhythmIdx = -1, commentIdx = -1, propIndent = '';
+  for (let i = 0; i < lines.length; i++){
+    const m = lines[i].match(/^(\s+)(\w+):/);
+    if (!m) continue;
+    const indent = m[1].length;
+    const key = m[2];
+    if (inVar && indent <= varIndent) break;
+    if (key === vname && !inVar){ inVar = true; varIndent = indent; continue; }
+    if (inVar){
+      if (key === 'rhythm'){ rhythmIdx = i; propIndent = m[1]; }
+      if (key === 'comment') commentIdx = i;
+    }
+  }
+  if (!inVar) return false;
+  if (commentIdx >= 0 && text){
+    lines[commentIdx] = `${propIndent}comment: ${_yamlQuote(text)}`;
+  } else if (commentIdx >= 0 && !text){
+    lines.splice(commentIdx, 1);
+  } else if (commentIdx < 0 && text){
+    if (rhythmIdx < 0) return false;
+    lines.splice(rhythmIdx + 1, 0, `${propIndent}comment: ${_yamlQuote(text)}`);
+  } else {
+    return false;
+  }
+  _joinLines(lines);
+  return true;
+}
+
+function _yamlQuote(s){
+  // Prefer double quotes; escape backslash and double-quote.
+  return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
+}
+
+// ─── /Comment helpers ───────────────────────────────────────────────────
+
+function buildVariationsBar(){
+  const bar = document.getElementById('variationsBar');
+  if (!bar) return;
+  bar.innerHTML = '';
+  const vars = listVariations();
+  // Hide entirely when no rhythm is loaded.
+  if (vars.length === 0){
+    bar.style.display = 'none';
+    const wrap = document.getElementById('rhythmFieldWrap');
+    if (wrap) wrap.style.display = 'none';
+    return;
+  }
+  bar.style.display = '';
+  const wrap = document.getElementById('rhythmFieldWrap');
+  if (wrap) wrap.style.display = '';   // CSS will further hide on desktop
+  const lbl = document.createElement('span'); lbl.className = 'label';
+  lbl.textContent = 'Variation:'; bar.appendChild(lbl);
+  if (vars.length && (currentVariation === null || !vars.includes(currentVariation))){
+    currentVariation = vars[0];
+  }
+  vars.forEach(v => {
+    const b = document.createElement('button');
+    b.textContent = v;
+    if (v === currentVariation) b.classList.add('active');
+    b.addEventListener('pointerdown', e => e.preventDefault());
+    b.addEventListener('mousedown',   e => e.preventDefault());
+    b.addEventListener('click', () => selectVariation(v));
+    bar.appendChild(b);
+  });
+  const add = document.createElement('button');
+  add.textContent = '+ New';
+  add.className = 'add';
+  add.title = 'Add a new variation (prepopulated from the current one)';
+  add.addEventListener('pointerdown', e => e.preventDefault());
+  add.addEventListener('mousedown',   e => e.preventDefault());
+  add.addEventListener('click', () => {
+    const newName = addNewVariation();
+    currentVariation = newName;
+    syncRhythmField();
+    syncCommentFields();
+    buildVariationsBar();
+    scheduleDraftSave();
+    run();
+  });
+  bar.appendChild(add);
+  // Delete button — visible only when there are 2+ variations (can't
+  // delete the last remaining one).
+  if (vars.length >= 2){
+    const del = document.createElement('button');
+    del.textContent = '✕ Delete ' + currentVariation;
+    del.className = 'del';
+    del.title = 'Delete the currently-active variation';
+    del.addEventListener('pointerdown', e => e.preventDefault());
+    del.addEventListener('mousedown',   e => e.preventDefault());
+    del.addEventListener('click', () => {
+      const vname = currentVariation;
+      if (!vname) return;
+      if (!confirm(`Delete variation ${vname}? This cannot be undone.`)) return;
+      const result = deleteVariation(vname);
+      if (!result.ok){
+        alert('Could not delete: ' + result.reason);
+        return;
+      }
+      // Switch to the first remaining variation.
+      const remaining = listVariations();
+      currentVariation = remaining[0] || null;
+      syncRhythmField();
+      syncCommentFields();
+      buildVariationsBar();
+      scheduleDraftSave();
+      run();
+    });
+    bar.appendChild(del);
+  }
+  syncRhythmField();
+  syncCommentFields();
+}
+
+function selectVariation(vname){
+  currentVariation = vname;
+  syncRhythmField();
+  buildVariationsBar();
+  // Also, in desktop YAML view, place the textarea cursor at the end of
+  // that variation's rhythm string so palette/typing edits land there.
+  const displayed = editor.value;
+  const re = new RegExp(`^(\\s+${vname}:\\s*\\n\\s+rhythm:\\s*)(["'])(.*?)\\2`, 'm');
+  const m = displayed.match(re);
+  if (m && document.activeElement === editor){
+    const end = m.index + m[1].length + m[2].length + m[3].length;
+    editor.setSelectionRange(end, end);
+  }
+}
+
+// Mirror the canonical rhythm for the current variation into the visible
+// mobile rhythm-field. Uses the user's active notation for display.
+function syncRhythmField(){
+  const field = document.getElementById('rhythmField');
+  const label = document.getElementById('rhythmFieldLabel');
+  if (!field) return;
+  if (!currentVariation){ field.value = ''; label.textContent = 'No variation selected'; return; }
+  const greekRhythm = getRhythmFor(currentVariation);
+  // Convert to displayed notation
+  const displayed = notation === 'arabic'
+    ? _transliterateRhythmStr(greekRhythm, GREEK_TO_ARABIC)
+    : greekRhythm;
+  field.value = displayed;
+  label.textContent = `Editing variation ${currentVariation}`;
+}
+
+// When the user types or palette-inserts into the rhythm field, write
+// back to the canonical YAML (after transliterating to Greek if needed).
+function onRhythmFieldInput(){
+  const field = document.getElementById('rhythmField');
+  if (!field || !currentVariation) return;
+  const value = field.value;
+  const greek = notation === 'arabic'
+    ? _transliterateRhythmStr(value, ARABIC_TO_GREEK)
+    : value;
+  if (setRhythmFor(currentVariation, greek)){
+    scheduleDraftSave();
+    clearTimeout(_rhythmRunTimer);
+    _rhythmRunTimer = setTimeout(run, 500);
+  }
+}
+let _rhythmRunTimer = null;
+
+// Comment fields: mirror canonical → input, and write input → canonical.
+function syncCommentFields(){
+  const rWrap = document.getElementById('rhythmCommentWrap');
+  const rField = document.getElementById('rhythmCommentField');
+  const vWrap = document.getElementById('variationCommentWrap');
+  const vField = document.getElementById('variationCommentField');
+  const hasRhythm = listVariations().length > 0;
+  if (rWrap && rField){
+    if (hasRhythm){ rWrap.classList.add('show'); rField.value = getCommentForRhythm(); }
+    else          { rWrap.classList.remove('show'); rField.value = ''; }
+  }
+  if (vWrap && vField){
+    if (hasRhythm && currentVariation){
+      vWrap.classList.add('show');
+      vField.value = getCommentForVariation(currentVariation);
+    } else {
+      vWrap.classList.remove('show');
+      vField.value = '';
+    }
+  }
+}
+
+function onRhythmCommentInput(){
+  const v = document.getElementById('rhythmCommentField').value;
+  if (setCommentForRhythm(v.trim())){
+    scheduleDraftSave();
+    clearTimeout(_rhythmRunTimer);
+    _rhythmRunTimer = setTimeout(run, 500);
+  }
+}
+function onVariationCommentInput(){
+  if (!currentVariation) return;
+  const v = document.getElementById('variationCommentField').value;
+  if (setCommentForVariation(currentVariation, v.trim())){
+    scheduleDraftSave();
+    clearTimeout(_rhythmRunTimer);
+    _rhythmRunTimer = setTimeout(run, 500);
+  }
+}
+
+// ─── /Variations management ──────────────────────────────────────────────
+
+// ─── Token palette ───────────────────────────────────────────────────────
+// Tap-friendly insertion of rhythm tokens — critical on iPad/iOS where
+// Greek and bracket characters are painful to type. Notation-aware: heads
+// rebuild when the user flips the >ΔΑ | Dtk toggle.
+function buildPalette(){
+  const p = document.getElementById('palette');
+  if (!p) return;
+  p.innerHTML = '';
+  // Single combined button for the middle-finger kah marker, placed
+  // RIGHT NEXT to the plain ka button so the two are visually paired.
+  // Notation-aware: (Α) in Greek mode, (A) in Arabic mode. Round-trips
+  // to canonical Greek (Α) regardless.
+  const MF = notation === 'arabic'
+    ? ['(A)', 'middle-finger kah']
+    : ['(Α)', 'middle-finger kah'];
+  const heads = notation === 'arabic'
+    ? [['D','dum'],['t','tek'],['k','ka'], MF, ['S','slap'],['r','rest']]
+    : [['>','dum'],['Δ','tek'],['Α','ka'], MF, ['S','slap'],['r','rest']];
+  // Tuples: [insertText, title]; insertText === null marks a special action.
+  const BS = [null,  'backspace',  '⌫',  () => deleteFromEditor()];
+  const NL = ['\n',  'newline',    '↵',  null];
+  const groups = [
+    heads,
+    [['4','quarter'],['8','eighth'],['16','sixteenth'],['.','dotted']],
+    [['[','beam start'],[']','beam end'],['|','bar'],[' ','space'], NL, BS],
+  ];
+  groups.forEach((grp, i) => {
+    if (i > 0){
+      const s = document.createElement('div'); s.className = 'sep'; p.appendChild(s);
+    }
+    grp.forEach(item => {
+      const [text, title, label, action] = item.length === 4 ? item : [...item, null, null];
+      const b = document.createElement('button');
+      b.textContent = label !== null ? label : (text === ' ' ? '⎵' : text === '\n' ? '↵' : text);
+      b.title = title;
+      // Prevent focus shift away from the textarea on tap — keeps cursor
+      // positioned and avoids any chance of an on-screen keyboard popping.
+      b.addEventListener('pointerdown', e => e.preventDefault());
+      b.addEventListener('mousedown',   e => e.preventDefault());
+      b.addEventListener('click', action ? action : () => insertIntoEditor(text));
+      p.appendChild(b);
+    });
+  });
+}
+
+// Where does the palette insert? Whichever editable element is currently
+// visible & focused. On mobile, that's the rhythm-field; on desktop, the
+// YAML textarea. activeInputTarget() resolves the right element.
+function activeInputTarget(){
+  const field = document.getElementById('rhythmField');
+  const fieldVisible = field && field.offsetParent !== null;
+  // Prefer whatever the user last touched; fall back to the visible one.
+  if (document.activeElement === editor) return editor;
+  if (document.activeElement === field)  return field;
+  return fieldVisible ? field : editor;
+}
+
+function insertIntoEditor(text){
+  const t = activeInputTarget();
+  const s = t.selectionStart ?? t.value.length, e = t.selectionEnd ?? t.value.length;
+  t.value = t.value.slice(0, s) + text + t.value.slice(e);
+  try { t.setSelectionRange(s + text.length, s + text.length); } catch(_) {}
+  t.focus();
+  t.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function deleteFromEditor(){
+  const t = activeInputTarget();
+  const s = t.selectionStart ?? t.value.length, e = t.selectionEnd ?? t.value.length;
+  if (s === e){
+    if (s === 0) return;
+    t.value = t.value.slice(0, s - 1) + t.value.slice(s);
+    try { t.setSelectionRange(s - 1, s - 1); } catch(_) {}
+  } else {
+    t.value = t.value.slice(0, s) + t.value.slice(e);
+    try { t.setSelectionRange(s, s); } catch(_) {}
+  }
+  t.focus();
+  t.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+// Palette is rebuilt on notation toggle by a hook inside setNotation itself
+// (see the setNotation definition near the top of this script).
+
+// ─── iOS / iPad keyboard awareness ──────────────────────────────────────
+// On iOS the on-screen keyboard covers the bottom of the layout and
+// `100vh` does not shrink. Use VisualViewport to detect keyboard, then
+// switch to a kb-up mode that gives the editor + palette the entire
+// remaining visible area.
+if (window.visualViewport){
+  const vv = window.visualViewport;
+  const updateKb = () => {
+    const kbHeight = window.innerHeight - vv.height;
+    document.documentElement.style.setProperty('--kb-height', kbHeight + 'px');
+    document.body.classList.toggle('kb-up', kbHeight > 100);
+  };
+  vv.addEventListener('resize', updateKb);
+  vv.addEventListener('scroll', updateKb);
+  updateKb();
+  // On focus, scroll editor into the visible viewport (iOS does this
+  // automatically only when the body is the scroll container, which we are
+  // on mobile via the @media rule below; the explicit call is harmless on
+  // desktop and helpful in edge cases).
+  editor.addEventListener('focus', () => {
+    setTimeout(() => editor.scrollIntoView({ block: 'center', behavior: 'smooth' }), 50);
+  });
+}
+// ─── /Token palette + iOS keyboard ──────────────────────────────────────
+
+// Wire the mobile rhythm-field's input event to the canonical YAML.
+const _rhythmFieldEl = document.getElementById('rhythmField');
+if (_rhythmFieldEl){
+  _rhythmFieldEl.addEventListener('input', onRhythmFieldInput);
+}
+const _rhythmCommentEl = document.getElementById('rhythmCommentField');
+if (_rhythmCommentEl){
+  _rhythmCommentEl.addEventListener('input', onRhythmCommentInput);
+}
+const _variationCommentEl = document.getElementById('variationCommentField');
+if (_variationCommentEl){
+  _variationCommentEl.addEventListener('input', onVariationCommentInput);
+}
+
+// Clicking the draft-status indicator in the header opens the drafts
+// management dialog (load / delete each one).
+const _draftStatusEl = document.getElementById('draftStatus');
+if (_draftStatusEl){
+  _draftStatusEl.addEventListener('click', openDraftsDialog);
+  _draftStatusEl.title = 'Click to manage drafts';
+}
+
+(async()=>{
+  // Fire these non-blocking; they enrich the UI but the validator should
+  // still work if GitHub is unreachable.
+  renderNetStatus();
+  renderDraftStatus();
+  buildPalette();
+  buildVariationsBar();
+  populateRhythmList();
+  completeOAuthIfRedirected()
+    .then(() => gh.token ? refreshGhUser() : null)
+    .then(renderAuthUI);
+  renderAuthUI();
+
+  pyodide=await loadPyodide();
+  statusEl.textContent='loading PyYAML…';
+  await pyodide.loadPackage('pyyaml');
+  pyodide.runPython(document.getElementById('pycode').textContent);
+  statusEl.textContent='ready';
+  let t; editor.addEventListener('input',()=>{
+    // Mirror edits into canonical (Greek) form before scheduling a re-render.
+    syncCanonicalFromEditor();
+    clearTimeout(t); t=setTimeout(run,500);
+  });
+  run();
+})().catch(e=>{ statusEl.textContent='runtime failed'; outEl.textContent=String(e); });
+</script>
+</body>
+</html>
