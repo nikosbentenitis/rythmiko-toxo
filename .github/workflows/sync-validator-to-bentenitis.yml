@@ -30,12 +30,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out rythmiko-toxo (source)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: rythmiko-toxo
 
       - name: Check out bentenitis (target)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: nikosbentenitis/bentenitis
           token: ${{ secrets.BENTENITIS_SYNC_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
           cp rythmiko-toxo/web/index.html bentenitis/rhythms/index.html
 
       - name: Open or update PR in bentenitis
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           path: bentenitis
           token: ${{ secrets.BENTENITIS_SYNC_TOKEN }}
