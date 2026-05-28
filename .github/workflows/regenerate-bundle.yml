@@ -1,0 +1,73 @@
+name: Regenerate full-library bundle
+
+# When any rhythm YAML or the LilyPond toolchain changes on main, re-render
+# bundles/rythmiko-toxo-full-library.{ly,pdf} and commit the result back.
+# Stops the "stale bundle" failure mode where a new rhythm was merged but
+# the bundled PDF wasn't refreshed.
+#
+# Loop protection: the workflow only triggers on changes under rhythms/ or
+# tools/lilypond/, so the bot commit (which only touches bundles/) does not
+# re-trigger it.
+#
+# Manual trigger: workflow_dispatch lets you force a regenerate from the
+# Actions tab without pushing.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rhythms/**'
+      - 'tools/lilypond/**'
+      - '.github/workflows/regenerate-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install LilyPond
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lilypond
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Regenerate bundle
+        run: |
+          SPECS=$(python3 -c "
+          import yaml, glob
+          out = []
+          for f in sorted(glob.glob('rhythms/*.yaml')):
+              d = yaml.safe_load(open(f))
+              for slug, body in d.items():
+                  for v in (body.get('variations') or {}):
+                      out.append(f'{slug}-{v}')
+          print(' '.join(out))")
+          python3 tools/lilypond/rhythm_pdf.py \
+              --title "Rythmiko Toxo — Full Library" \
+              --no-open \
+              $SPECS
+
+      - name: Commit refreshed bundle if changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet -- bundles/; then
+            echo "bundle is already up to date"
+            exit 0
+          fi
+          git add bundles/rythmiko-toxo-full-library.ly bundles/rythmiko-toxo-full-library.pdf
+          git commit -m "bundles: regenerate full-library after ${GITHUB_SHA::7}"
+          git push origin HEAD:main
