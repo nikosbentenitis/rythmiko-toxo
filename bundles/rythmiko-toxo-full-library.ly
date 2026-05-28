@@ -286,6 +286,12 @@ drumPitchNames.slap = #'slap
          }
        } #}))
 
+\book {
+  \markuplist \table-of-contents
+  \pageBreak
+\bookpart {
+  \tocItem \markup "Απτάλικο"
+
 \markup { \vspace #0.5 \bold \fontsize #3 "Απτάλικο" }
 
 \score {
@@ -322,8 +328,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Azeri"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Azeri" }
 
@@ -416,8 +423,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Duyek"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Duyek" }
 
@@ -510,8 +518,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Εννιάσημος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Εννιάσημος" }
 
@@ -658,8 +667,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Kaşık Havası"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Kaşık Havası" }
 
@@ -770,8 +780,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Μαντιλάτος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Μαντιλάτος" }
 
@@ -837,8 +848,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Semai"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Semai" }
 
@@ -931,8 +943,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
 
@@ -998,8 +1011,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Συρτοειδή"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Συρτοειδή" }
 
@@ -1092,8 +1106,9 @@ drumPitchNames.slap = #'slap
     }
   }
 }
-
-\markup { \vspace #1.5 }
+}
+\bookpart {
+  \tocItem \markup "Türk aksağı"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Türk aksağı" }
 
@@ -1212,4 +1227,6 @@ drumPitchNames.slap = #'slap
       }
     }
   }
+}
+}
 }

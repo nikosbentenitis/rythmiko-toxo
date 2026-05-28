@@ -954,7 +954,7 @@ def main() -> int:
     # the rhythm distinctly from the (possibly different) PDF title.
     show_headings = True
 
-    group_blocks = []
+    group_blocks = []   # [(display, content), ...]
     for slug, group_sections in groups:
         # Variation labels (the bold "1", "2", ...) only make sense when
         # there's more than one variation to disambiguate.
@@ -968,9 +968,9 @@ def main() -> int:
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
 
+        display = group_sections[0][2]
         heading_block = ""
         if show_headings:
-            display = group_sections[0][2]
             heading_block = (
                 f'\n\\markup {{ \\vspace #0.5 \\bold \\fontsize #3 "{display}" }}\n'
             )
@@ -989,17 +989,35 @@ def main() -> int:
         )
         # TUBS row(s) sit directly below the music staves; LilyPond will
         # break to a new page only if they don't fit.
-        group_blocks.append(heading_block + score_block + tubs_block)
+        group_blocks.append((display, heading_block + score_block + tubs_block))
 
-    # Larger vertical gap between distinct-rhythm groups.
-    between_groups = f"\n\\markup {{ \\vspace #{SECTION_VSPACE * 3} }}\n"
-    body = between_groups.join(group_blocks)
+    # One rhythm per page via \bookpart, with a clickable TOC at the top.
+    # \tocItem inside each bookpart adds an entry that links to the start
+    # of that bookpart's page in the produced PDF. \markuplist \table-of-
+    # contents renders the TOC itself; \pageBreak forces the first rhythm
+    # onto page 2.
+    book_parts = []
+    for display, content in group_blocks:
+        safe = display.replace('"', '\\"')
+        book_parts.append(
+            "\\bookpart {\n"
+            f"  \\tocItem \\markup \"{safe}\"\n"
+            f"{content}"
+            "}\n"
+        )
+    book_body = (
+        "\n\\book {\n"
+        "  \\markuplist \\table-of-contents\n"
+        "  \\pageBreak\n"
+        + "".join(book_parts)
+        + "}\n"
+    )
 
     out = (
         PREAMBLE.replace("__TITLE__", title)
                 .replace("__STAFF_SPACE__", f"{layout['staff_space']}")
         + "\n".join(cmd_blocks)
-        + body
+        + book_body
     )
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
