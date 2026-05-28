@@ -454,6 +454,12 @@ drumPitchNames.slap = #'slap
   % extra space between the PDF title and the first rhythm
   top-markup-spacing.basic-distance = #14
   top-markup-spacing.padding = #4
+  % Title should print only on the TOC (book's first page). LilyPond
+  % otherwise prints the book/score title at the top of every bookpart's
+  % first page. Blank both markups; the title is emitted explicitly as
+  % markup before the TOC in book_body (see main()).
+  bookTitleMarkup = \markup { }
+  scoreTitleMarkup = \markup { }
 }
 
 \layout {
@@ -714,6 +720,34 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> 
     >>"""
 
 
+def render_blank_staff(meter: str, bpb: int, label: str = "") -> str:
+    """Empty drum staff for the teacher PDF: one bar at the given meter
+    with all rests rendered transparent. The bar-line tick voice still
+    fires, so the staff shows the meter signature, the interior beat
+    divisions, and a thick end-of-bar — a blank canvas the teacher can
+    write on (e.g. on a Remarkable)."""
+    meter_num, meter_den = (int(x) for x in meter.split("/"))
+    tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb)
+    # meter_num invisible rests of duration meter_den, total = one bar.
+    rests = " ".join([f"r{meter_den}"] * meter_num)
+    return f"""    \\new DrumStaff \\with {{
+      \\override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "{label}"
+    }}
+    <<
+      \\drummode {{
+        \\cadenzaOn
+        \\time {meter}
+        \\stemUp
+        \\autoBeamOff
+        \\override Rest.transparent = ##t
+        {rests}
+      }}
+      {{ {tick_per_bar} }}
+    >>"""
+
+
 def render_tubs(slug: str, var_id: str, var: dict, geom: dict, show_label: bool = True) -> str:
     """Return the TUBS \\column for one variation (Greek row + Latin row +
     counts, repeated per bar)."""
@@ -866,6 +900,9 @@ def main() -> int:
                     help="layout preset: bigger pentagram and smaller boxes")
     ap.add_argument("--no-tubs", action="store_true",
                     help="omit the TUBS box rows (staff-only PDF)")
+    ap.add_argument("--blank-extras", type=int, default=0, metavar="N",
+                    help="append N blank pentagrams per rhythm (for a teacher "
+                         "PDF the student can fill in by hand)")
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -956,9 +993,11 @@ def main() -> int:
 
     group_blocks = []   # [(display, content), ...]
     for slug, group_sections in groups:
-        # Variation labels (the bold "1", "2", ...) only make sense when
-        # there's more than one variation to disambiguate.
-        show_var_label = len(group_sections) > 1
+        total_variations = len(group_sections) + args.blank_extras
+        # Variation labels (the bold "1", "2", ...) make sense as soon as
+        # we have more than one staff in the group — either real variations
+        # or teacher blanks.
+        show_var_label = total_variations > 1
         staves = []
         tubs_columns = []
         for _, var_id, display, var, bpb in group_sections:
@@ -967,6 +1006,16 @@ def main() -> int:
             tubs_columns.append(
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
+        # Append N empty pentagrams for the teacher to fill in by hand.
+        # They share the meter + bpb of the last real variation. Labels
+        # continue the numbering past the existing variations.
+        if args.blank_extras > 0:
+            last_var = group_sections[-1][3]
+            meter, bpb = last_var["meter"], last_var["boxes_per_beat"]
+            next_n = len(group_sections) + 1
+            for i in range(args.blank_extras):
+                label = str(next_n + i) if show_var_label else ""
+                staves.append(render_blank_staff(meter, bpb, label=label))
 
         display = group_sections[0][2]
         heading_block = ""
@@ -1005,8 +1054,14 @@ def main() -> int:
             f"{content}"
             "}\n"
         )
+    # Render the title once, on the TOC page, via an explicit \markup so
+    # it doesn't repeat at the top of every bookpart (bookTitleMarkup is
+    # blanked in the preamble).
+    safe_title = title.replace('"', '\\"')
     book_body = (
         "\n\\book {\n"
+        f'  \\markup {{ \\vspace #2 \\fill-line {{ \\fontsize #6 \\bold "{safe_title}" }} }}\n'
+        "  \\markup { \\vspace #1 }\n"
         "  \\markuplist \\table-of-contents\n"
         "  \\pageBreak\n"
         + "".join(book_parts)

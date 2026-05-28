@@ -44,7 +44,7 @@ jobs:
       - name: Install PyYAML
         run: pip install pyyaml
 
-      - name: Regenerate bundle
+      - name: Regenerate bundles
         run: |
           SPECS=$(python3 -c "
           import yaml, glob
@@ -55,19 +55,30 @@ jobs:
                   for v in (body.get('variations') or {}):
                       out.append(f'{slug}-{v}')
           print(' '.join(out))")
+          # Full library: staff + TUBS rows
           python3 tools/lilypond/rhythm_pdf.py \
               --title "Rythmiko Toxo — Full Library" \
               --no-open \
               $SPECS
+          # Teacher edition: staff only (no TUBS) + 5 blank pentagrams per
+          # rhythm so the teacher can write extra variations on the PDF
+          # (e.g. on a Remarkable tablet).
+          python3 tools/lilypond/rhythm_pdf.py \
+              --title "Rythmiko Toxo — Full Library (Teacher)" \
+              --no-open --no-tubs --blank-extras 5 \
+              $SPECS
 
-      - name: Commit refreshed bundle if changed
+      - name: Commit refreshed bundles if changed
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if git diff --quiet -- bundles/; then
-            echo "bundle is already up to date"
+            echo "bundles are already up to date"
             exit 0
           fi
-          git add bundles/rythmiko-toxo-full-library.ly bundles/rythmiko-toxo-full-library.pdf
+          git add bundles/rythmiko-toxo-full-library.ly \
+                  bundles/rythmiko-toxo-full-library.pdf \
+                  bundles/rythmiko-toxo-full-library-teacher.ly \
+                  bundles/rythmiko-toxo-full-library-teacher.pdf
           git commit -m "bundles: regenerate full-library after ${GITHUB_SHA::7}"
           git push origin HEAD:main
