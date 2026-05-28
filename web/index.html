@@ -278,28 +278,33 @@
     .palette .sep { display: none; }
     .palette-row { display: flex; flex-direction: row;
                    justify-content: center; gap: 6px; flex-wrap: nowrap; }
-    .palette button { min-width: 40px; height: 42px; font-size: 22px;
-                      border-width: 1.5px; }
+    .palette button { min-width: 26px; height: 28px; font-size: 15px;
+                      border-width: 1px; border-radius: 3px; padding: 0 2px; }
     /* Tighter input chrome so the output preview stays on the same screen
-       as the editor without scrolling. */
+       as the editor without scrolling. ~80% of the earlier sizing. */
     #input { max-height: none; }
-    .toolbar { padding: 4px 8px; gap: 6px; row-gap: 4px; }
+    .toolbar { padding: 3px 6px; gap: 5px; row-gap: 3px; }
     .toolbar button, .toolbar select,
-    .toolbar .notation-toggle button { min-height: 36px; padding: 6px 10px;
-                                        font-size: 14px; }
-    .variations-bar { padding: 4px 8px; gap: 6px; }
-    .variations-bar button { min-height: 36px; padding: 6px 12px;
-                             font-size: 14px; min-width: 44px; }
-    .comment-wrap input { padding: 6px 10px; font-size: 14px; }
+    .toolbar .notation-toggle button { min-height: 30px; padding: 4px 8px;
+                                        font-size: 12px; }
+    .variations-bar { padding: 3px 6px; gap: 5px; }
+    .variations-bar button { min-height: 30px; padding: 4px 10px;
+                             font-size: 12px; min-width: 36px;
+                             border-radius: 6px; }
+    .variations-bar .label { font-size: 11px; }
+    .comment-wrap input { padding: 4px 8px; font-size: 12px; }
     /* Show only the active variation on phone — the variations-bar tabs
        are the way to switch between them. Removes the divider-and-stack
        layout that pushed everything below the fold. */
-    #out { padding: 8px; }
-    #out .rhythm { padding: 8px; margin-bottom: 0; }
-    #out .rhythm h2 { font-size: 14px; }
+    #out { padding: 6px; }
+    #out .rhythm { padding: 6px; margin-bottom: 0; }
+    #out .rhythm h2 { font-size: 12px; margin: 0; }
+    #out .rhythm .meta { font-size: 10px; margin-bottom: 4px; }
     #out .var { display: none; }
     #out .var.active { display: block; border-top: 0;
-                       margin-top: 4px; padding-top: 0; }
+                       margin-top: 2px; padding-top: 0; }
+    #out .var .vhead { margin-bottom: 4px; gap: 4px; }
+    #out .var .vlabel, #out .var .vcode { font-size: 10px; }
 
     /* Aggressive trimming so the rendered staff lands above the fold:
        hide the two optional comment fields and the rhythm-field label
@@ -307,23 +312,26 @@
        tighten the header. Comments stay editable on desktop/iPad. */
     .comment-wrap, .comment-wrap.show { display: none !important; }
     #rhythmFieldLabel { display: none; }
-    .rhythm-field-wrap { padding: 4px 8px; }
-    #rhythmField { font-size: 14px; padding: 6px 8px; }
-    header { padding: 0 8px; gap: 8px; flex-basis: 40px; }
-    header h1 { font-size: 13px; }
-    header .draftstatus, header .netstatus { font-size: 10px; }
+    .rhythm-field-wrap { padding: 3px 6px; }
+    #rhythmField { font-size: 12px; padding: 4px 6px; }
+    header { padding: 0 6px; gap: 6px; flex-basis: 32px; }
+    header h1 { font-size: 11px; }
+    header .draftstatus, header .netstatus { font-size: 9px; }
     /* Compact status + logs strip so more of #out stays visible */
-    #logs { max-height: 70px; font-size: 11px; padding: 4px 8px; }
-    #status { padding: 4px 8px; font-size: 11px; min-height: auto; }
+    #logs { max-height: 50px; font-size: 9px; padding: 3px 6px; }
+    #status { padding: 3px 6px; font-size: 9px; min-height: auto; }
+    /* Compact output toolbar (Print / Download PDF / Email PDF) */
+    #output .toolbar button { min-height: 30px; padding: 4px 10px;
+                              font-size: 12px; }
 
     /* Hamburger menu: collapse "+ New" and the notation toggle behind a
        single button. The dropdown anchors to the toolbar (positioned as
        the popover's offset parent). */
     .toolbar { position: relative; }
     .phone-menu-btn { display: inline-flex; align-items: center;
-                      justify-content: center; font-size: 18px;
-                      min-width: 36px; min-height: 36px; padding: 0;
-                      border: 1px solid #c8c8d0; border-radius: 6px;
+                      justify-content: center; font-size: 16px;
+                      min-width: 30px; min-height: 30px; padding: 0;
+                      border: 1px solid #c8c8d0; border-radius: 5px;
                       background: #fff; color: #444; cursor: pointer; }
     .phone-menu-items { display: none; position: absolute;
                         top: calc(100% + 4px); right: 8px;
@@ -340,9 +348,11 @@
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
      Hide everything that isn't the editor + palette so the user keeps
      full control of the visible area iOS leaves above the keyboard. */
-  body.kb-up #output,
+  /* Keyboard-up: keep #output visible (the rendered staff) but compact
+     #logs so the editor + palette get more room. */
   body.kb-up #logs    { display: none !important; }
-  body.kb-up #input   { flex: 1 1 0 !important; }
+  body.kb-up #input   { flex: 1 1 auto !important; max-height: none !important; }
+  body.kb-up #output  { flex: 0 0 35% !important; min-height: 0 !important; }
   body.kb-up main     { flex-direction: column !important; }
 
   @media print {
@@ -2110,11 +2120,15 @@ function buildPalette(){
   // Tuples: [insertText, title]; insertText === null marks a special action.
   const BS = [null,  'backspace',  '⌫',  () => deleteFromEditor()];
   const NL = ['\n',  'newline',    '↵',  null];
-  const groups = [
-    heads,
-    [['4','quarter'],['8','eighth'],['16','sixteenth'],['.','dotted']],
-    [['[','beam start'],[']','beam end'],['|','bar'],[' ','space'], NL, BS],
-  ];
+  const durations = [['4','quarter'],['8','eighth'],['16','sixteenth'],['.','dotted']];
+  const editing   = [['[','beam start'],[']','beam end'],['|','bar'],[' ','space'], NL, BS];
+  // Two rows on phone (notes+durations / editing), three on desktop/iPad
+  // (notes / durations / editing). On desktop the .palette-row wrappers
+  // use display:contents so visually it's still one row regardless.
+  const phone = window.matchMedia && window.matchMedia('(max-width: 480px)').matches;
+  const groups = phone
+    ? [ [...heads, ...durations], editing ]
+    : [ heads, durations, editing ];
   // Wrap each group in its own .palette-row so iPhone CSS can stack rows
   // vertically (notes / durations / editing). On desktop/iPad the row
   // wrapper uses `display: contents`, so the buttons remain direct flex
@@ -2179,6 +2193,13 @@ function deleteFromEditor(){
 
 // Palette is rebuilt on notation toggle by a hook inside setNotation itself
 // (see the setNotation definition near the top of this script).
+// Also rebuild when the viewport crosses the 480px breakpoint — phone uses
+// a 2-row grouping (notes+durations / editing); desktop uses 3.
+if (window.matchMedia){
+  const mq = window.matchMedia('(max-width: 480px)');
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change')
+                       : mq.addListener.bind(mq))(buildPalette);
+}
 
 // ─── iOS / iPad keyboard awareness ──────────────────────────────────────
 // On iOS the on-screen keyboard covers the bottom of the layout and
