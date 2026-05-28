@@ -89,6 +89,19 @@ Symbol and word notations are interchangeable within a variation.
 
 You can also clone this repo and edit locally — the PR flow above is for convenience, not the only path.
 
+## Repository layout
+
+| Path | What it is |
+|---|---|
+| [`rhythms/`](rhythms/) | One YAML file per rhythm — the canonical content of this library. |
+| [`web/`](web/) | The browser-based validator (single-file HTML + CDN deps). Source of truth for the app code; see [`web/README.md`](web/README.md). |
+| [`worker/`](worker/) | Cloudflare Worker that brokers GitHub OAuth for the in-browser PR flow. |
+| [`tools/lilypond/`](tools/lilypond/) | Offline LilyPond toolchain that emits print-quality PDFs into [`bundles/`](bundles/). |
+| [`bundles/`](bundles/) | LilyPond-rendered PDFs (full-library + per-section). |
+| [`.github/workflows/`](.github/workflows/) | CI — including the auto-sync that mirrors `web/index.html` into the deploy repo. |
+
+The validator at <https://bentenitis.com/rhythms> is served from [`nikosbentenitis/bentenitis`](https://github.com/nikosbentenitis/bentenitis) (private) at `rhythms/index.html`. That file is **automatically synced** from [`web/index.html`](web/index.html) here by a GitHub Action; do not edit the bentenitis copy by hand.
+
 ## License
 
-Content here (the rhythm definitions) is offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) — no rights reserved; reuse freely. The validator code and tooling live in [nikosbentenitis/communications-agent](https://github.com/nikosbentenitis/communications-agent) (private) and [nikosbentenitis/bentenitis](https://github.com/nikosbentenitis/bentenitis) (public deployment).
+Content here (the rhythm definitions) is offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) — no rights reserved; reuse freely.
