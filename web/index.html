@@ -267,22 +267,32 @@
      row gap instead). */
   @media (max-width: 480px) {
     .palette { flex-direction: column; align-items: stretch;
-               overflow-x: visible; padding: 6px 8px; gap: 6px; }
+               overflow-x: visible; padding: 4px 6px; gap: 4px; }
     .palette .sep { display: none; }
     .palette-row { display: flex; flex-direction: row;
                    justify-content: center; gap: 6px; flex-wrap: nowrap; }
-    .palette button { min-width: 46px; height: 50px; font-size: 28px;
+    .palette button { min-width: 40px; height: 42px; font-size: 22px;
                       border-width: 1.5px; }
     /* Tighter input chrome so the output preview stays on the same screen
        as the editor without scrolling. */
     #input { max-height: none; }
-    .toolbar { padding: 6px 10px; gap: 8px; row-gap: 6px; }
+    .toolbar { padding: 4px 8px; gap: 6px; row-gap: 4px; }
     .toolbar button, .toolbar select,
-    .toolbar .notation-toggle button { min-height: 40px; padding: 8px 12px; }
-    .variations-bar { padding: 6px 8px; gap: 8px; }
-    .variations-bar button { min-height: 48px; padding: 10px 14px;
-                             font-size: 16px; }
-    .comment-wrap input { padding: 8px 10px; }
+    .toolbar .notation-toggle button { min-height: 36px; padding: 6px 10px;
+                                        font-size: 14px; }
+    .variations-bar { padding: 4px 8px; gap: 6px; }
+    .variations-bar button { min-height: 36px; padding: 6px 12px;
+                             font-size: 14px; min-width: 44px; }
+    .comment-wrap input { padding: 6px 10px; font-size: 14px; }
+    /* Show only the active variation on phone — the variations-bar tabs
+       are the way to switch between them. Removes the divider-and-stack
+       layout that pushed everything below the fold. */
+    #out { padding: 8px; }
+    #out .rhythm { padding: 8px; margin-bottom: 0; }
+    #out .rhythm h2 { font-size: 14px; }
+    #out .var { display: none; }
+    #out .var.active { display: block; border-top: 0;
+                       margin-top: 4px; padding-top: 0; }
   }
 
   /* Keyboard-up mode (set by the visualViewport listener on mobile).
@@ -1016,6 +1026,11 @@ function render(json){
     }
     r.variations.forEach(v=>{
       const vd=document.createElement('div'); vd.className='var';
+      vd.dataset.varid = v.id;
+      // On mobile we hide all but the active variation via CSS — mark it
+      // here so the initial paint matches the active tab, and so the
+      // selectVariation() handler can switch focus without re-rendering.
+      if (v.id === currentVariation) vd.classList.add('active');
       const vhead=document.createElement('div'); vhead.className='vhead';
       const lbl=document.createElement('span'); lbl.className='vlabel';
       lbl.textContent=v.id+' | '+v.meter+' | bpb '+v.bpb+(v.single_line?' | single_line':'');
@@ -1912,6 +1927,11 @@ function selectVariation(vname){
   currentVariation = vname;
   syncRhythmField();
   buildVariationsBar();
+  // Repaint .active on the rendered .var elements so the mobile
+  // single-variation view follows the tab without a full re-render.
+  document.querySelectorAll('#out .var').forEach(el => {
+    el.classList.toggle('active', el.dataset.varid === currentVariation);
+  });
   // Also, in desktop YAML view, place the textarea cursor at the end of
   // that variation's rhythm string so palette/typing edits land there.
   const displayed = editor.value;
