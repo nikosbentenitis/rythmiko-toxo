@@ -324,6 +324,19 @@
     #output .toolbar button { min-height: 30px; padding: 4px 10px;
                               font-size: 12px; }
 
+    /* Constrain the rendered output to the viewport width. VexFlow's
+       SVG is sized in pixels by note count and would overflow the
+       iPhone screen for any 8+ event rhythm — `max-width:100%; height:auto`
+       on the SVG scales it down proportionally. TUBS uses HTML cells,
+       so we shrink the cells on phone to keep the row inside the
+       screen instead of horizontally scrolling. */
+    #out .staff { overflow-x: visible; }
+    #out .staff svg { max-width: 100%; height: auto; display: block; }
+    #out .tubs { overflow-x: visible; }
+    #out .cell { width: 18px; height: 18px; font-size: 11px; }
+    #out .row.count .cell { height: 12px; font-size: 8px; }
+    #out .pct { width: 12px; height: 22px; }
+
     /* Hamburger menu: collapse "+ New" and the notation toggle behind a
        single button. The dropdown anchors to the toolbar (positioned as
        the popover's offset parent). */
