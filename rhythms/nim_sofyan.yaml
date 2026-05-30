@@ -1,0 +1,10 @@
+nim_sofyan:
+  display: "Nim Sofyan"
+  meter: "2/4"
+  variations:
+    v1:
+      rhythm: ">4 Δ8[ Α8] | >4 Δ8[ Α8]"
+    v2:
+      rhythm: ">4 Δ8[ Α8] | >4[ Δ4>]"
+    v3:
+      rhythm: ">4[ r8 Α8] | >4[ Δ4>]"
