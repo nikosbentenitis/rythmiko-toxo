@@ -107,6 +107,15 @@
   .toolbar button.secondary { background:#6b7280; }
   .toolbar button#emailBtn { background:#10b981; }
   .toolbar button#emailBtn:disabled { background:#9aa0a6; }
+  /* Library-PDF download links — pinned to the right of the output toolbar.
+     Styled to look like buttons but open in a new tab. */
+  .toolbar .library-link { display:inline-flex; align-items:center;
+                           background:#0f766e; color:#fff; text-decoration:none;
+                           padding:6px 14px; border-radius:5px; font-size:12px;
+                           white-space:nowrap; }
+  .toolbar .library-link:hover { background:#0d6660; }
+  .toolbar .library-link--teacher { background:#7c3aed; }
+  .toolbar .library-link--teacher:hover { background:#6d28d9; }
   .toolbar .ghbox { display:flex; align-items:center; gap:8px; font-size:12px; color:#444; }
   .toolbar .ghbox button { background:#24292f; color:#fff; border:1px solid #24292f; padding:6px 12px; font-size:12px; }
   .toolbar .ghbox button#prBtn { background:#2da44e; border-color:#2da44e; }
@@ -285,8 +294,9 @@
     #input { max-height: none; }
     .toolbar { padding: 3px 6px; gap: 5px; row-gap: 3px; }
     .toolbar button, .toolbar select,
-    .toolbar .notation-toggle button { min-height: 30px; padding: 4px 8px;
-                                        font-size: 12px; }
+    .toolbar .notation-toggle button,
+    .toolbar .library-link { min-height: 30px; padding: 4px 8px;
+                              font-size: 12px; }
     .variations-bar { padding: 3px 6px; gap: 5px; }
     .variations-bar button { min-height: 30px; padding: 4px 10px;
                              font-size: 12px; min-width: 36px;
@@ -504,6 +514,14 @@
         <button id="print" class="secondary">Print</button>
         <button id="pdfBtn" disabled>Download PDF</button>
         <button id="emailBtn" disabled>Email PDF</button>
+      </div>
+      <div class="group right library-links">
+        <a href="https://github.com/nikosbentenitis/rythmiko-toxo/raw/main/bundles/rythmiko-toxo-full-library.pdf"
+           target="_blank" rel="noopener" class="library-link"
+           title="Full library — every rhythm with drum staff + TUBS + count row">Full Library</a>
+        <a href="https://github.com/nikosbentenitis/rythmiko-toxo/raw/main/bundles/rythmiko-toxo-full-library-teacher.pdf"
+           target="_blank" rel="noopener" class="library-link library-link--teacher"
+           title="Teacher edition — drum staff only, with 5 blank pentagrams per rhythm">Teacher Edition</a>
       </div>
     </div>
     <div id="out" style="color:#888;font:13px monospace">Waiting for runtime…</div>
