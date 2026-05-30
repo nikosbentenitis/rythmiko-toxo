@@ -731,7 +731,10 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     interior beat divisions, and a thick end-of-bar — a blank canvas
     the teacher can write on (e.g. on a Remarkable). bars_count
     typically matches the rhythm's existing variations so the teacher
-    gets the same amount of writing space per blank line."""
+    gets the same amount of writing space per blank line. The extra
+    `staff-staff-spacing.basic-distance` opens vertical room above the
+    blank line so a hand-written tall notehead doesn't crash into the
+    staff above."""
     meter_num, meter_den = (int(x) for x in meter.split("/"))
     bar_rests = " ".join([f"r{meter_den}"] * meter_num)
     tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb)
@@ -742,6 +745,8 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
       \\override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "{label}"
+      \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \\override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }}
     <<
       \\drummode {{
@@ -753,6 +758,30 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
         {rests_body}
       }}
       {{ {tick_voice} }}
+    >>"""
+
+
+def render_blank_canvas(label: str = "") -> str:
+    """One blank drum staff with no time signature and no internal
+    bar lines — a pure writing canvas for inventing new rhythms. The
+    teacher's final-page set of 10 of these is the place to draft."""
+    return f"""    \\new DrumStaff \\with {{
+      \\override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "{label}"
+      \\override Staff.TimeSignature.transparent = ##t
+      \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \\override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }}
+    <<
+      \\drummode {{
+        \\cadenzaOn
+        \\stemUp
+        \\autoBeamOff
+        \\override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \\bar "."
+      }}
     >>"""
 
 
@@ -911,6 +940,9 @@ def main() -> int:
     ap.add_argument("--blank-extras", type=int, default=0, metavar="N",
                     help="append N blank pentagrams per rhythm (for a teacher "
                          "PDF the student can fill in by hand)")
+    ap.add_argument("--new-rhythm-blanks", type=int, default=0, metavar="N",
+                    help="append a final page with N totally blank pentagrams "
+                         "(no time signature, no bar lines) for new rhythms")
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1068,6 +1100,23 @@ def main() -> int:
             "\\bookpart {\n"
             f"  \\tocItem \\markup \"{safe}\"\n"
             f"{content}"
+            "}\n"
+        )
+
+    # Final "New Rhythms" page — totally blank pentagrams, no time signature
+    # and no internal bar lines, for the teacher to draft brand-new rhythms.
+    if args.new_rhythm_blanks > 0:
+        canvases = "\n".join(
+            render_blank_canvas(label=str(i + 1))
+            for i in range(args.new_rhythm_blanks)
+        )
+        book_parts.append(
+            "\\bookpart {\n"
+            "  \\tocItem \\markup \"New Rhythms\"\n"
+            "\n\\markup { \\vspace #0.5 \\bold \\fontsize #3 \"New Rhythms\" }\n"
+            "\n\\score {\n  <<\n"
+            f"{canvases}\n"
+            "  >>\n}\n"
             "}\n"
         )
     # Render the title once, on the TOC page, via an explicit \markup so

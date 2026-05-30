@@ -326,6 +326,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -342,6 +344,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -358,6 +362,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -374,6 +380,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -390,6 +398,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -470,6 +480,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -486,6 +498,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -502,6 +516,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -518,6 +534,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -534,6 +552,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -614,6 +634,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -630,6 +652,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -646,6 +670,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -662,6 +688,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -678,6 +706,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -794,6 +824,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -810,6 +842,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -826,6 +860,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -842,6 +878,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -858,6 +896,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -920,6 +960,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -936,6 +978,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -952,6 +996,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -968,6 +1014,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -984,6 +1032,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1064,6 +1114,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1080,6 +1132,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1096,6 +1150,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1112,6 +1168,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1128,6 +1186,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1208,6 +1268,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1224,6 +1286,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1240,6 +1304,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1256,6 +1322,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1272,6 +1340,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1370,6 +1440,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1386,6 +1458,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1402,6 +1476,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1418,6 +1494,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1434,6 +1512,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1550,6 +1630,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1566,6 +1648,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1582,6 +1666,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1598,6 +1684,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1614,6 +1702,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1694,6 +1784,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1710,6 +1802,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1726,6 +1820,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1742,6 +1838,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1758,6 +1856,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1838,6 +1938,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1854,6 +1956,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1870,6 +1974,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1886,6 +1992,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1902,6 +2010,8 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
@@ -1913,6 +2023,196 @@ drumPitchNames.slap = #'slap
         r4 r4 r4 r4
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+    >>
+  >>
+}
+}
+\bookpart {
+  \tocItem \markup "New Rhythms"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "New Rhythms" }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+      \override Staff.TimeSignature.transparent = ##t
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r1 r1 r1 r1 r1 r1
+        \bar "."
+      }
     >>
   >>
 }

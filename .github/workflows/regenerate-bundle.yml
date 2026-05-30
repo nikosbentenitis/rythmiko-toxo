@@ -52,12 +52,12 @@ jobs:
               --title "Rythmiko Toxo — Full Library" \
               --no-open \
               $SPECS
-          # Teacher edition: staff only (no TUBS) + 5 blank pentagrams per
-          # rhythm so the teacher can write extra variations on the PDF
-          # (e.g. on a Remarkable tablet).
+          # Teacher edition: staff only (no TUBS), 5 blank pentagrams per
+          # rhythm for extra variations the teacher writes by hand, and a
+          # final "New Rhythms" page with 10 unmetered blank canvases.
           python3 tools/lilypond/rhythm_pdf.py \
               --title "Rythmiko Toxo — Full Library (Teacher)" \
-              --no-open --no-tubs --blank-extras 5 \
+              --no-open --no-tubs --blank-extras 5 --new-rhythm-blanks 10 \
               $SPECS
 
       - name: Commit refreshed bundles if changed
