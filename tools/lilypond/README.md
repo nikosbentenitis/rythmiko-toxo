@@ -20,21 +20,17 @@ A pair of Python scripts that compile the YAML rhythm definitions in this repo i
 From the repo root:
 
 ```bash
-SPECS=$(python3 -c "
-import yaml, glob
-out = []
-for f in sorted(glob.glob('rhythms/*.yaml')):
-    d = yaml.safe_load(open(f))
-    for slug, body in d.items():
-        for v in (body.get('variations') or {}):
-            out.append(f'{slug}-{v}')
-print(' '.join(out))")
+SPECS=$(python3 tools/lilypond/list_specs.py)
 
 python3 tools/lilypond/rhythm_pdf.py \
     --title "Rythmiko Toxo — Full Library" \
     --no-open \
     $SPECS
 ```
+
+`list_specs.py` emits the rhythm specs in the canonical bundle order
+(alphabetical, with `sofyan`, `nim_sofyan`, `kasik_havasi` forced to the
+end).
 
 Output lands at `bundles/rythmiko-toxo-full-library.{ly,pdf}`. Re-run after adding or editing a YAML file in `rhythms/` to refresh the bundled PDF.
 

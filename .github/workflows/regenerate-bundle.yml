@@ -46,15 +46,7 @@ jobs:
 
       - name: Regenerate bundles
         run: |
-          SPECS=$(python3 -c "
-          import yaml, glob
-          out = []
-          for f in sorted(glob.glob('rhythms/*.yaml')):
-              d = yaml.safe_load(open(f))
-              for slug, body in d.items():
-                  for v in (body.get('variations') or {}):
-                      out.append(f'{slug}-{v}')
-          print(' '.join(out))")
+          SPECS=$(python3 tools/lilypond/list_specs.py)
           # Full library: staff + TUBS rows
           python3 tools/lilypond/rhythm_pdf.py \
               --title "Rythmiko Toxo — Full Library" \
