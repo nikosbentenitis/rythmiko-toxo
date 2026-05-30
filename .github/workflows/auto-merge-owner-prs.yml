@@ -1,0 +1,67 @@
+name: Auto-merge owner PRs
+
+# PRs opened by the repo owner (@nikosbentenitis) — e.g. rhythm edits
+# submitted from bentenitis.com/rhythms — are merged automatically. PRs
+# from anyone else still go through normal review.
+#
+# Workflow runs in the base-repository context, so it can use the default
+# GITHUB_TOKEN (which has Contents:write + Pull-requests:write via the
+# permissions block below) to squash-merge the PR.
+#
+# Note: merges driven by GITHUB_TOKEN do NOT re-trigger push-event
+# workflows. We dispatch the regenerate-bundle workflow explicitly after
+# the merge so the bundle PDFs stay in sync.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  auto-merge:
+    if: github.event.pull_request.user.login == 'nikosbentenitis'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Squash-merge the PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Wait briefly for GitHub to compute mergeability after the
+          # PR event (otherwise the merge API can 405 with "not mergeable").
+          for i in 1 2 3 4 5; do
+            state=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER" \
+              | python3 -c "import sys,json; print(json.load(sys.stdin).get('mergeable_state') or '')")
+            echo "attempt $i: mergeable_state=$state"
+            case "$state" in
+              clean|unstable|has_hooks) break ;;
+            esac
+            sleep 6
+          done
+          curl -sS -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER/merge" \
+            -d '{"merge_method":"squash"}' | tee /tmp/merge.json
+          merged=$(python3 -c "import json; print(json.load(open('/tmp/merge.json')).get('merged'))")
+          if [ "$merged" != "True" ]; then
+            echo "merge did not succeed" >&2
+            exit 1
+          fi
+
+      - name: Trigger bundle regeneration
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -sS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/actions/workflows/regenerate-bundle.yml/dispatches" \
+            -d '{"ref":"main"}'

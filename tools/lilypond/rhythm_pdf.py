@@ -410,7 +410,7 @@ def cell_geometry(bpb: int, layout: dict = DEFAULT_LAYOUT):
 
 # ─── LilyPond templating ──────────────────────────────────────────────────
 
-PREAMBLE = r"""\version "2.24.4"
+PREAMBLE = r"""\version "2.24.0"
 
 \header {
   title = "__TITLE__"
@@ -720,16 +720,20 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> 
     >>"""
 
 
-def render_blank_staff(meter: str, bpb: int, label: str = "") -> str:
-    """Empty drum staff for the teacher PDF: one bar at the given meter
-    with all rests rendered transparent. The bar-line tick voice still
-    fires, so the staff shows the meter signature, the interior beat
-    divisions, and a thick end-of-bar — a blank canvas the teacher can
-    write on (e.g. on a Remarkable)."""
+def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "") -> str:
+    """Empty drum staff for the teacher PDF: `bars_count` bars at the
+    given meter with all rests rendered transparent. The bar-line tick
+    voice still fires, so the staff shows the meter signature, the
+    interior beat divisions, and a thick end-of-bar — a blank canvas
+    the teacher can write on (e.g. on a Remarkable). bars_count
+    typically matches the rhythm's existing variations so the teacher
+    gets the same amount of writing space per blank line."""
     meter_num, meter_den = (int(x) for x in meter.split("/"))
+    bar_rests = " ".join([f"r{meter_den}"] * meter_num)
     tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb)
-    # meter_num invisible rests of duration meter_den, total = one bar.
-    rests = " ".join([f"r{meter_den}"] * meter_num)
+    # Repeat bar_rests + tick_per_bar bars_count times.
+    rests_body = " ".join([bar_rests] * bars_count)
+    tick_voice = " ".join([tick_per_bar] * bars_count)
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
@@ -742,9 +746,9 @@ def render_blank_staff(meter: str, bpb: int, label: str = "") -> str:
         \\stemUp
         \\autoBeamOff
         \\override Rest.transparent = ##t
-        {rests}
+        {rests_body}
       }}
-      {{ {tick_per_bar} }}
+      {{ {tick_voice} }}
     >>"""
 
 
@@ -1007,15 +1011,23 @@ def main() -> int:
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
         # Append N empty pentagrams for the teacher to fill in by hand.
-        # They share the meter + bpb of the last real variation. Labels
-        # continue the numbering past the existing variations.
+        # They share the meter + bpb + bar count of the last real
+        # variation, so a 2-bar rhythm gets 2 empty bars of writing
+        # space per blank line. Labels continue past the existing
+        # variations (e.g. v1, v2 → blanks 3, 4, 5, ...).
         if args.blank_extras > 0:
             last_var = group_sections[-1][3]
             meter, bpb = last_var["meter"], last_var["boxes_per_beat"]
+            # Bar count = parse_rhythm bars, including any `%` repeat bars.
+            last_bars = parse_rhythm(last_var["rhythm"], bpb,
+                                     int(meter.split("/")[1]))
+            bars_count = max(1, len(last_bars))
             next_n = len(group_sections) + 1
             for i in range(args.blank_extras):
                 label = str(next_n + i) if show_var_label else ""
-                staves.append(render_blank_staff(meter, bpb, label=label))
+                staves.append(render_blank_staff(meter, bpb,
+                                                  bars_count=bars_count,
+                                                  label=label))
 
         display = group_sections[0][2]
         heading_block = ""
