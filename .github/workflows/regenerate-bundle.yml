@@ -47,10 +47,13 @@ jobs:
       - name: Regenerate bundles
         run: |
           SPECS=$(python3 tools/lilypond/list_specs.py)
-          # Full library: staff + TUBS rows
+          # Full library: staff + TUBS rows. Includes the same 5 blank
+          # pentagrams per rhythm and the final 10-canvas "New Rhythms"
+          # page as the teacher edition — TUBS rows are emitted only
+          # for the real variations (blanks have no notes to map).
           python3 tools/lilypond/rhythm_pdf.py \
               --title "Rythmiko Toxo — Full Library" \
-              --no-open \
+              --no-open --blank-extras 5 --new-rhythm-blanks 10 \
               $SPECS
           # Teacher edition: staff only (no TUBS), 5 blank pentagrams per
           # rhythm for extra variations the teacher writes by hand, and a
