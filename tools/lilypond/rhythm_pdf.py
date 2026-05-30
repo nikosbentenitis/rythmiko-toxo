@@ -677,11 +677,15 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> 
         f"{{ {PERCENT_SIGN} }} }}"
     )
     pct_tick = f's{beat} \\bar "."'   # thick line ends the repeat bar too
-    single_line = bool(var.get("single_line"))
+    # Default: keep all bars of a variation on one system. A YAML may set
+    # `single_line: false` to opt into a system break per bar (useful for
+    # very long rhythms where compression would hurt readability).
+    single_line = bool(var.get("single_line", True))
 
-    # `single_line: true` keeps all bars on one system; the default breaks
-    # to a new line per real bar. Compact `%` repeats always stay glued to
-    # the bar they repeat (never a break before them).
+    # All bars share one system by default (single_line resolves to True);
+    # an opt-in `single_line: false` would emit a `\break` per real bar.
+    # Compact `%` repeats always stay glued to the bar they repeat (never
+    # a break before them).
     music_pieces, tick_pieces = [], []
     for idx, (drum, _cells) in enumerate(bars):
         is_repeat = drum == [REPEAT_BAR]
@@ -795,7 +799,7 @@ def render_tubs(slug: str, var_id: str, var: dict, geom: dict, show_label: bool 
         )
         bar_inners.append(inner)
 
-    if var.get("single_line"):
+    if var.get("single_line", True):
         # All bars share one label, laid out horizontally with a small gap.
         joined = "\n      \\hspace #1\n".join(bar_inners)
         return (
