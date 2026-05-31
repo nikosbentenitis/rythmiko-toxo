@@ -14,15 +14,16 @@
 
 % Teacher 2-line staff: dum + slap share the lower line; tek + ka share
 % the upper line. The Greek letter markup under each note still tells the
-% reader which stroke it is, so collapsing tek/ka and dum/slap to the
-% same line is a feature (compact two-line staff) not ambiguity.
-% Positions ±2 so the two lines stand visually apart when the staff
-% overrides `line-positions` to '(-2 2) — twice the default gap.
+% reader which stroke it is. Lines themselves are rendered transparent
+% in render_staff for teacher mode (StaffSymbol.transparent = ##t), so
+% only the noteheads + beams + Greek labels remain on the page.
+% Positions ±1 keep dum/slap and tek/ka close enough that beam groups
+% read as one rhythm but distinct enough to be readable.
 #(define darbuka-style-teacher '(
-  (dum default #f -2)
-  (slap cross #f -2)
-  (tek default #f 2)
-  (ka default #f 2)
+  (dum default #f -1)
+  (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
 ))
 
 drumPitchNames.dum = #'dum
