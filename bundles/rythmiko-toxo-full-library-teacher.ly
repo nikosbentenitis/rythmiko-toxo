@@ -115,6 +115,10 @@ drumPitchNames.slap = #'slap
     \override SpacingSpanner.spacing-increment = #2.1
     \override SpacingSpanner.shortest-duration-space = #2.5
     \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/8)
+    % Hide the system-start bracket at the left edge of every staff
+    % (the two thin vertical lines LilyPond draws by default) — it's
+    % redundant once the staff lines themselves are also transparent.
+    \override SystemStartBar.transparent = ##t
   }
 }
 
@@ -353,7 +357,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = ""
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -369,7 +374,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek4_Δ^> tek4_Δ^> dum4_> tek8_Δ[ ka8_Α] dum4_> tek4_Δ^> dum4_> r4
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
@@ -385,7 +390,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -401,7 +407,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek4_Δ tek4_Δ^>
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -411,7 +417,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -427,7 +434,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] tek8_Δ^>[ ka8_Α]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -437,7 +444,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -453,7 +461,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek4_Δ[ dum4_>]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -469,7 +477,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -485,7 +494,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ slap8_S] r8 slap8_S dum4_> slap4_S
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -495,7 +504,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -511,7 +521,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek8_Δ[ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum16_>[ ka16_Α tek8_Δ] dum4_>
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -521,7 +531,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -537,7 +548,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] r16 tek16_Δ[ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] r16 slap16_S[ ka16_Α slap16_S ka16_Α] dum4_>
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -553,7 +564,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -569,7 +581,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ^>[ tek8_Δ] dum4_> tek8_Δ^>[ tek8_Δ tek8_Δ]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -579,7 +591,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -595,7 +608,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ^>[ tek8_Δ] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_Α]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -605,7 +618,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -621,7 +635,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum4_> tek8_Δ^>[ tek8_Δ tek8_Δ]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -631,7 +645,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -647,7 +662,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_Α]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -657,7 +672,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -673,7 +689,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek8_Δ tek8_Δ]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -689,7 +705,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -705,7 +722,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek4_Δ tek4._Δ
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -715,7 +732,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -731,7 +749,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] tek8_Δ[ tek8_Δ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
@@ -747,7 +765,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -763,7 +782,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek4_Δ tek4_Δ^>
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -773,7 +792,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -789,7 +809,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] tek8_Δ^>[ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -799,7 +819,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -815,7 +836,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] r8 ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
@@ -831,7 +852,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -847,7 +869,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_Δ ka16_Α]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -857,7 +879,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -873,7 +896,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_Δ^>] r16
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -883,7 +906,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -899,7 +923,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8._>[ ka16_Α] r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_Δ^>] r16
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -915,7 +939,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -931,7 +956,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek4._Δ^>
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -941,7 +966,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -957,7 +983,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ^>[ r8 tek8_Δ]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -967,7 +993,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -983,7 +1010,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_> tek8_Δ tek8_Δ^>[ tek8_Δ tek8_Δ]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -993,7 +1020,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1009,7 +1037,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek8_Δ[ tek16_Δ ka16_Α r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -1025,7 +1053,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1041,7 +1070,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8._>[ ka16_Α] tek8_Δ^>[ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }^>]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -1051,7 +1080,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1067,7 +1097,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> slap8_S[ slap8_S]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -1077,7 +1107,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1093,7 +1124,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_Δ^>] r16
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -1103,7 +1134,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1119,7 +1151,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8_>[ tek16_Δ ka16_Α] tek16_Δ[ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } tek8_Δ^>]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 
@@ -1129,7 +1161,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1145,7 +1178,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum8._>[ ka16_Α] r16 ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_Δ^>] r16
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -1161,7 +1194,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1177,7 +1211,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] dum4_> tek8_Δ[ ka8_Α]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1187,7 +1221,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1203,7 +1238,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] dum4_>[ tek4_Δ^>]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1213,7 +1248,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1229,7 +1265,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_>[ r8 ka8_Α] dum4_>[ tek4_Δ^>]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
@@ -1245,7 +1281,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1261,7 +1298,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> r4 dum4_> tek4_Δ^>
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1271,7 +1308,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1287,7 +1325,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ^>[ ka8_Α^>] r4 tek4_Δ^>
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1297,7 +1335,8 @@ drumPitchNames.slap = #'slap
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
       \override TextScript.staff-padding = #2.5
       \override TextScript.outside-staff-priority = ##f
       \override TextScript.self-alignment-X = #CENTER
@@ -1313,7 +1352,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ^>[ ka8_Α^>] r4 tek8_Δ^>[ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }^>]
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
@@ -1331,7 +1370,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1354,7 +1394,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1377,7 +1418,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1400,7 +1442,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1423,7 +1466,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1446,7 +1490,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1469,7 +1514,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1492,7 +1538,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1515,7 +1562,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {
@@ -1538,7 +1586,8 @@ drumPitchNames.slap = #'slap
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
       \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.transparent = ##t
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
     }
     <<
       \drummode {

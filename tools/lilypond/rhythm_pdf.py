@@ -630,7 +630,8 @@ def _variation_label(var_id: str) -> str:
 
 
 def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
-                          no_interior_bars: bool = False) -> str:
+                          no_interior_bars: bool = False,
+                          no_end_bar: bool = False) -> str:
     """Spacer-voice pattern: one bar mark per TUBS cell.
 
     Thick bar (`\\bar "."`) ends the bar — the heaviest line, so bar
@@ -647,6 +648,10 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
     medium beat marks, leaving only the thick end-of-bar line. The
     notehead style already conveys duration, so on the teacher PDF
     every interior division is noise.
+
+    `no_end_bar`: also drop the end-of-bar mark. Use this for the
+    final bar of a variation when nothing follows it — the variation
+    just dissolves into whitespace.
     """
     cell_dur = bpb * meter_den          # LilyPond duration for one cell
     n_ticks = bpb * meter_num           # total cell boundaries per bar
@@ -654,7 +659,7 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
     for i in range(1, n_ticks + 1):
         parts.append(f"s{cell_dur}")
         if i == n_ticks:
-            bar = '\\bar "."'           # thick line ending the bar
+            bar = '' if no_end_bar else '\\bar "."'   # thick end-of-bar
         elif no_interior_bars:
             bar = ''                    # drop all interior divisions
         elif i % bpb == 0:
@@ -690,6 +695,14 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     bars = parse_rhythm(var["rhythm"], bpb, meter_den)
     tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb,
                                          no_interior_bars=no_interior_bars)
+    # Teacher mode: the very last bar of the variation drops its
+    # end-of-bar so the staff just trails off. Other bars (interior
+    # bar boundaries within multi-bar variations) keep their thick bar.
+    tick_per_last_bar = _tick_pattern_one_bar(
+        meter_den, meter_num, bpb,
+        no_interior_bars=no_interior_bars,
+        no_end_bar=teacher_staff,
+    )
     # A `%` bar renders as a compact one-beat-wide measure-repeat sign: a
     # transparent (still space-occupying) rest of one beat carrying the
     # hand-drawn percent markup, with a matching one-beat spacer + closing
@@ -714,6 +727,7 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     music_pieces, tick_pieces = [], []
     for idx, (drum, _cells) in enumerate(bars):
         is_repeat = drum == [REPEAT_BAR]
+        is_last = (idx == len(bars) - 1)
         if idx > 0:
             music_pieces.append(
                 " " if (single_line or is_repeat) else " \\break "
@@ -723,21 +737,23 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
             tick_pieces.append(pct_tick)
         else:
             music_pieces.append(" ".join(drum))
-            tick_pieces.append(tick_per_bar)
+            tick_pieces.append(tick_per_last_bar if is_last else tick_per_bar)
     drummode_body = "".join(music_pieces)
     tick_voice = " ".join(tick_pieces)
 
     var_label = _variation_label(var_id) if show_label else ""
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
-    # Teacher staff: positions ±1 keep dum/slap and tek/ka close, and
-    # StaffSymbol.transparent hides the lines themselves — only the
-    # noteheads, beams, and Greek letter labels remain. TextScript
-    # overrides park the labels at a consistent Y position below the
-    # noteheads.
+    # Teacher staff: positions ±1 keep dum/slap and tek/ka close;
+    # StaffSymbol.stencil = ##f hides the lines themselves AND removes
+    # their X extent at the start of the staff. Clef.stencil = ##f
+    # removes the percussion clef (the "II" glyph DrumStaff draws by
+    # default). TextScript overrides park the Greek letter labels at a
+    # consistent Y position below the noteheads.
     extra_overrides = "" if not teacher_staff else (
         "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
-        "\n      \\override StaffSymbol.transparent = ##t"
+        "\n      \\override StaffSymbol.stencil = ##f"
+        "\n      \\override Clef.stencil = ##f"
         "\n      \\override TextScript.staff-padding = #2.5"
         "\n      \\override TextScript.outside-staff-priority = ##f"
         "\n      \\override TextScript.self-alignment-X = #CENTER"
@@ -779,14 +795,22 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     bar_rests = " ".join([f"r{meter_den}"] * meter_num)
     tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb,
                                          no_interior_bars=no_interior_bars)
-    # Repeat bar_rests + tick_per_bar bars_count times.
+    tick_per_last_bar = _tick_pattern_one_bar(
+        meter_den, meter_num, bpb,
+        no_interior_bars=no_interior_bars,
+        no_end_bar=teacher_staff,
+    )
+    # Repeat bar_rests bars_count times, with the last bar's tick
+    # dropping its end-of-bar in teacher mode.
     rests_body = " ".join([bar_rests] * bars_count)
-    tick_voice = " ".join([tick_per_bar] * bars_count)
+    ticks_list = [tick_per_bar] * max(0, bars_count - 1) + [tick_per_last_bar]
+    tick_voice = " ".join(ticks_list)
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     extra_overrides = "" if not teacher_staff else (
         "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
-        "\n      \\override StaffSymbol.transparent = ##t"
+        "\n      \\override StaffSymbol.stencil = ##f"
+        "\n      \\override Clef.stencil = ##f"
     )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
@@ -816,7 +840,8 @@ def render_blank_canvas(label: str = "", teacher_staff: bool = False) -> str:
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     extra_overrides = "" if not teacher_staff else (
         "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
-        "\n      \\override StaffSymbol.transparent = ##t"
+        "\n      \\override StaffSymbol.stencil = ##f"
+        "\n      \\override Clef.stencil = ##f"
     )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
@@ -1258,6 +1283,10 @@ def main() -> int:
     \override SpacingSpanner.spacing-increment = #2.1
     \override SpacingSpanner.shortest-duration-space = #2.5
     \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/8)
+    % Hide the system-start bracket at the left edge of every staff
+    % (the two thin vertical lines LilyPond draws by default) — it's
+    % redundant once the staff lines themselves are also transparent.
+    \override SystemStartBar.transparent = ##t
   }
 }
 """
