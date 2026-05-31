@@ -615,7 +615,8 @@ def _variation_label(var_id: str) -> str:
     return m.group(1) if m else var_id
 
 
-def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int) -> str:
+def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
+                          no_subbeats: bool = False) -> str:
     """Spacer-voice pattern: one bar mark per TUBS cell.
 
     Thick bar (`\\bar "."`) ends the bar — the heaviest line, so bar
@@ -627,6 +628,9 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int) -> str:
     Spacers (`s<dur>`) don't render notes, so the marks fire at every
     cell boundary regardless of where the music voice's notes start or
     end.
+
+    `no_subbeats`: skip the dashed sub-beat marks. The notehead already
+    conveys duration, so on the teacher PDF the dashed lines are noise.
     """
     cell_dur = bpb * meter_den          # LilyPond duration for one cell
     n_ticks = bpb * meter_num           # total cell boundaries per bar
@@ -637,9 +641,12 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int) -> str:
             bar = '\\bar "."'           # thick line ending the bar
         elif i % bpb == 0:
             bar = '\\bar "|"'           # interior beat boundary
+        elif no_subbeats:
+            bar = ''                    # skip dashed sub-beat divisions
         else:
             bar = '\\bar "!"'           # sub-beat cell boundary
-        parts.append(bar)
+        if bar:
+            parts.append(bar)
         # Every \bar is otherwise a candidate line-break; suppress except
         # at the final bar of the user-bar (so multi-bar variations can
         # still wrap between bars).
@@ -648,7 +655,8 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int) -> str:
     return " ".join(parts)
 
 
-def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> str:
+def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
+                 no_subbeats: bool = False) -> str:
     """Return the `\\new DrumStaff` expression (not wrapped in \\score).
 
     Two parallel voices inside the DrumStaff:
@@ -664,7 +672,8 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> 
     bpb = int(var.get("boxes_per_beat", DEFAULT_BPB))
     meter_num, meter_den = (int(x) for x in meter.split("/"))
     bars = parse_rhythm(var["rhythm"], bpb, meter_den)
-    tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb)
+    tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb,
+                                         no_subbeats=no_subbeats)
     # A `%` bar renders as a compact one-beat-wide measure-repeat sign: a
     # transparent (still space-occupying) rest of one beat carrying the
     # hand-drawn percent markup, with a matching one-beat spacer + closing
@@ -724,7 +733,8 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True) -> 
     >>"""
 
 
-def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "") -> str:
+def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "",
+                       no_subbeats: bool = False) -> str:
     """Empty drum staff for the teacher PDF: `bars_count` bars at the
     given meter with all rests rendered transparent. The bar-line tick
     voice still fires, so the staff shows the meter signature, the
@@ -737,7 +747,8 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     staff above."""
     meter_num, meter_den = (int(x) for x in meter.split("/"))
     bar_rests = " ".join([f"r{meter_den}"] * meter_num)
-    tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb)
+    tick_per_bar = _tick_pattern_one_bar(meter_den, meter_num, bpb,
+                                         no_subbeats=no_subbeats)
     # Repeat bar_rests + tick_per_bar bars_count times.
     rests_body = " ".join([bar_rests] * bars_count)
     tick_voice = " ".join([tick_per_bar] * bars_count)
@@ -946,6 +957,9 @@ def main() -> int:
     ap.add_argument("--ragged", action="store_true",
                     help="ragged-right + no inter-variation note alignment — "
                          "each staff takes only as much width as it needs")
+    ap.add_argument("--no-subbeats", action="store_true",
+                    help="hide the dashed sub-beat divisions inside each beat "
+                         "(notehead style conveys duration on its own)")
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1045,7 +1059,8 @@ def main() -> int:
         tubs_columns = []
         for _, var_id, display, var, bpb in group_sections:
             geom = cell_geometry(bpb, layout)
-            staves.append(render_staff(slug, var_id, var, show_label=show_var_label))
+            staves.append(render_staff(slug, var_id, var, show_label=show_var_label,
+                                         no_subbeats=args.no_subbeats))
             tubs_columns.append(
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
@@ -1066,7 +1081,8 @@ def main() -> int:
                 label = str(next_n + i) if show_var_label else ""
                 staves.append(render_blank_staff(meter, bpb,
                                                   bars_count=bars_count,
-                                                  label=label))
+                                                  label=label,
+                                                  no_subbeats=args.no_subbeats))
 
         display = group_sections[0][2]
         heading_block = ""
