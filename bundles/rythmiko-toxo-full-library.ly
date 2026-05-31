@@ -16,11 +16,13 @@
 % the upper line. The Greek letter markup under each note still tells the
 % reader which stroke it is, so collapsing tek/ka and dum/slap to the
 % same line is a feature (compact two-line staff) not ambiguity.
+% Positions ±2 so the two lines stand visually apart when the staff
+% overrides `line-positions` to '(-2 2) — twice the default gap.
 #(define darbuka-style-teacher '(
-  (dum default #f -1)
-  (slap cross #f -1)
-  (tek default #f 1)
-  (ka default #f 1)
+  (dum default #f -2)
+  (slap cross #f -2)
+  (tek default #f 2)
+  (ka default #f 2)
 ))
 
 drumPitchNames.dum = #'dum
@@ -312,6 +314,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Απτάλικο"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Απτάλικο" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -443,6 +446,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Azeri"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Azeri" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -628,6 +632,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Duyek"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Duyek" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -813,6 +818,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Εννιάσημος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Εννιάσημος" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -1052,6 +1058,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Μαντιλάτος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Μαντιλάτος" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -1210,6 +1217,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Semai"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Semai" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -1395,6 +1403,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Συρτοειδή"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Συρτοειδή" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -1580,6 +1589,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Türk aksağı"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Türk aksağı" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -1792,6 +1802,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -2031,6 +2042,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Nim Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Nim Sofyan" }
+\markup { \vspace #3 }
 
 \score {
   <<
@@ -2234,6 +2246,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Kaşık Havası"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Kaşık Havası" }
+\markup { \vspace #3 }
 
 \score {
   <<
