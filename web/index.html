@@ -1086,11 +1086,12 @@ function renderStaff(container,bars){
         const labels = notation === 'arabic'
           ? {dum:'D', tekA:'T', tekU:'t', kaA:'K', kaU:'k', slap:'S'}
           : {dum:'>', tekA:'Δ', tekU:'Δ', kaA:'Α', kaU:'Α', slap:'S'};
-        const lab = ({dum:labels.dum,
-                      tek: e.accent ? labels.tekA : labels.tekU,
-                      ka:  e.accent ? labels.kaA  : labels.kaU,
-                      slap: labels.slap})[e.drum]
-                  + (e.middle ? '̥' : '');
+        const lab = e.drum === 'ka' && e.middle
+          ? 'Ⓐ'   // middle-finger kah: Latin A in a circle (Unicode U+24B6)
+          : ({dum:labels.dum,
+              tek: e.accent ? labels.tekA : labels.tekU,
+              ka:  e.accent ? labels.kaA  : labels.kaU,
+              slap: labels.slap})[e.drum];
         n.addModifier(new VF.Annotation(lab).setVerticalJustification(
             VF.Annotation.VerticalJustify.BOTTOM),0);
         if(e.accent) n.addModifier(new VF.Articulation('a>').setPosition(3),0);
