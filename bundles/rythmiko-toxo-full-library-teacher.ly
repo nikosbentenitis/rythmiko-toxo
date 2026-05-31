@@ -121,11 +121,13 @@ drumPitchNames.slap = #'slap
     \override SystemStartBar.transparent = ##t
     % Interior bar lines (between bars in multi-bar variations) get a
     % fixed vertical extent so the line is the same height for every
-    % rhythm. The range -2 to 2 spans 4 staff-spaces — about twice
-    % the gap between the (hidden) staff lines at ±1 — and stays
-    % centered at the staff midpoint where the Greek letter labels'
-    % baseline sits.
-    \override BarLine.bar-extent = #'(-2 . 2)
+    % rhythm. The range -4 to 4 spans 8 staff-spaces — twice the
+    % previous height — and stays centered at the staff midpoint.
+    % minimum-X-extent forces breathing room on both sides so the bar
+    % sits midway between the last note of bar 1 and the first note of
+    % bar 2 instead of crowding either one.
+    \override BarLine.bar-extent = #'(-4 . 4)
+    \override BarLine.minimum-X-extent = #'(-1.5 . 1.5)
   }
 }
 
