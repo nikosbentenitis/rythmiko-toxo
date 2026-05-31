@@ -1142,7 +1142,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] dum4_> tek8_Δ[ ka8_Α]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1169,7 +1169,7 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_> tek8_Δ[ ka8_Α] dum4_>[ tek4_Δ^>]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 
@@ -1194,9 +1194,9 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8._>[ ka16_Α] dum4_>[ tek4_Δ^>]
+        dum4._>[ ka8_Α] dum4_>[ tek4_Δ^>]
       }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \bar "." s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 }
     >>
 }
 }
