@@ -61,6 +61,7 @@ jobs:
           python3 tools/lilypond/rhythm_pdf.py \
               --title "Rythmiko Toxo — Full Library (Teacher)" \
               --no-open --no-tubs --blank-extras 5 --new-rhythm-blanks 10 \
+              --ragged \
               $SPECS
 
       - name: Commit refreshed bundles if changed

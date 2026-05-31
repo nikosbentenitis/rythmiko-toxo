@@ -74,6 +74,28 @@ drumPitchNames.slap = #'slap
   }
 }
 
+\paper {
+  ragged-right = ##t
+  ragged-last = ##t
+  indent = 8\mm
+  % Each variation is its own \score in ragged mode; tighten the gap
+  % between consecutive scores so they sit close together.
+  score-system-spacing.basic-distance = #6
+  score-system-spacing.minimum-distance = #4
+  score-system-spacing.padding = #1
+  system-system-spacing.basic-distance = #6
+  system-system-spacing.padding = #1
+}
+\layout {
+  \context {
+    \Score
+    \override SpacingSpanner.uniform-stretching = ##f
+    \override SpacingSpanner.strict-note-spacing = ##f
+    \override SpacingSpanner.spacing-increment = #1.2
+    \override SpacingSpanner.shortest-duration-space = #1.0
+  }
+}
+
 % --- TUBS markup commands for boxes_per_beat = BOne ---
 #(define-markup-command (tubsCellBOne layout props text)
   (string?)
@@ -303,8 +325,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Απτάλικο" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -322,7 +343,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -340,7 +364,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -358,7 +385,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -376,7 +406,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -394,7 +427,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -412,7 +448,6 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -421,8 +456,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Azeri" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -440,7 +474,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -458,7 +495,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -476,7 +516,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -494,7 +537,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -512,7 +558,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -530,7 +579,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -548,7 +600,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -566,7 +621,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -575,8 +629,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Duyek" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -594,7 +647,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -612,7 +668,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -630,7 +689,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -648,7 +710,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -666,7 +731,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -684,7 +752,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -702,7 +773,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -720,7 +794,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -729,8 +802,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Εννιάσημος" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -748,7 +820,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -766,7 +841,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -784,7 +862,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -802,7 +883,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -820,7 +904,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -838,7 +925,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -856,7 +946,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -874,7 +967,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
@@ -892,7 +988,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "10"
@@ -910,7 +1009,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -919,8 +1017,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Μαντιλάτος" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -938,7 +1035,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -956,7 +1056,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -974,7 +1077,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -992,7 +1098,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1010,7 +1119,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1028,7 +1140,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1046,7 +1161,6 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1055,8 +1169,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Semai" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1074,7 +1187,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1092,7 +1208,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1110,7 +1229,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1128,7 +1250,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1146,7 +1271,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1164,7 +1292,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1182,7 +1313,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -1200,7 +1334,6 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1209,8 +1342,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Συρτοειδή" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1228,7 +1360,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1246,7 +1381,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1264,7 +1402,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1282,7 +1423,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1300,7 +1444,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1318,7 +1465,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1336,7 +1486,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -1354,7 +1507,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1363,8 +1515,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Türk aksağı" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1382,7 +1533,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1400,7 +1554,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1418,7 +1575,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1436,7 +1596,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1454,7 +1617,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1472,7 +1638,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1490,7 +1659,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -1508,7 +1680,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
@@ -1526,7 +1701,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1535,8 +1709,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1554,7 +1727,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1572,7 +1748,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1590,7 +1769,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1608,7 +1790,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1626,7 +1811,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1644,7 +1832,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1662,7 +1853,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -1680,7 +1874,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
@@ -1698,7 +1895,10 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "10"
@@ -1716,7 +1916,6 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1725,8 +1924,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Nim Sofyan" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1744,7 +1942,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1762,7 +1963,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1780,7 +1984,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1798,7 +2005,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1816,7 +2026,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1834,7 +2047,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -1852,7 +2068,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -1870,7 +2089,6 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -1879,8 +2097,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "Kaşık Havası" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -1898,7 +2115,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -1916,7 +2136,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -1934,7 +2157,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -1952,7 +2178,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -1970,7 +2199,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -1988,7 +2220,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -2006,7 +2241,10 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -2024,7 +2262,6 @@ drumPitchNames.slap = #'slap
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
-  >>
 }
 }
 \bookpart {
@@ -2033,8 +2270,7 @@ drumPitchNames.slap = #'slap
 \markup { \vspace #0.5 \bold \fontsize #3 "New Rhythms" }
 
 \score {
-  <<
-    \new DrumStaff \with {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "1"
@@ -2052,7 +2288,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
@@ -2070,7 +2309,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "3"
@@ -2088,7 +2330,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "4"
@@ -2106,7 +2351,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
@@ -2124,7 +2372,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
@@ -2142,7 +2393,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
@@ -2160,7 +2414,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
@@ -2178,7 +2435,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "9"
@@ -2196,7 +2456,10 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-    \new DrumStaff \with {
+}
+
+\score {
+  \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "10"
@@ -2214,7 +2477,6 @@ drumPitchNames.slap = #'slap
         \bar "."
       }
     >>
-  >>
 }
 }
 }

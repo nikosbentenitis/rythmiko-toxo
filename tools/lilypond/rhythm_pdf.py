@@ -943,6 +943,9 @@ def main() -> int:
     ap.add_argument("--new-rhythm-blanks", type=int, default=0, metavar="N",
                     help="append a final page with N totally blank pentagrams "
                          "(no time signature, no bar lines) for new rhythms")
+    ap.add_argument("--ragged", action="store_true",
+                    help="ragged-right + no inter-variation note alignment — "
+                         "each staff takes only as much width as it needs")
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1072,13 +1075,24 @@ def main() -> int:
                 f'\n\\markup {{ \\vspace #0.5 \\bold \\fontsize #3 "{display}" }}\n'
             )
 
-        score_block = (
-            "\n\\score {\n"
-            "  <<\n"
-            + "\n".join(staves)
-            + "\n  >>\n"
-            "}\n"
-        )
+        if args.ragged:
+            # Each variation is its own \score so its width matches its
+            # own content. Parallel staves in a single \score would share
+            # the system width, defeating the "as little width as needed"
+            # goal — splitting them is the only way to get independent
+            # widths.
+            score_block = "".join(
+                "\n\\score {\n  " + s.lstrip() + "\n}\n"
+                for s in staves
+            )
+        else:
+            score_block = (
+                "\n\\score {\n"
+                "  <<\n"
+                + "\n".join(staves)
+                + "\n  >>\n"
+                "}\n"
+            )
         tubs_block = "" if args.no_tubs else (
             "\n\\markup {\n  \\column {\n"
             + tubs_inner_separator.join(tubs_columns)
@@ -1106,17 +1120,24 @@ def main() -> int:
     # Final "New Rhythms" page — totally blank pentagrams, no time signature
     # and no internal bar lines, for the teacher to draft brand-new rhythms.
     if args.new_rhythm_blanks > 0:
-        canvases = "\n".join(
-            render_blank_canvas(label=str(i + 1))
-            for i in range(args.new_rhythm_blanks)
-        )
+        canvas_staves = [render_blank_canvas(label=str(i + 1))
+                         for i in range(args.new_rhythm_blanks)]
+        if args.ragged:
+            canvas_scores = "".join(
+                "\n\\score {\n  " + s.lstrip() + "\n}\n"
+                for s in canvas_staves
+            )
+        else:
+            canvas_scores = (
+                "\n\\score {\n  <<\n"
+                + "\n".join(canvas_staves)
+                + "\n  >>\n}\n"
+            )
         book_parts.append(
             "\\bookpart {\n"
             "  \\tocItem \\markup \"New Rhythms\"\n"
             "\n\\markup { \\vspace #0.5 \\bold \\fontsize #3 \"New Rhythms\" }\n"
-            "\n\\score {\n  <<\n"
-            f"{canvases}\n"
-            "  >>\n}\n"
+            f"{canvas_scores}"
             "}\n"
         )
     # Render the title once, on the TOC page, via an explicit \markup so
@@ -1133,9 +1154,38 @@ def main() -> int:
         + "}\n"
     )
 
+    # `--ragged`: each staff system shrinks to the width its own notes
+    # need, and uniform-stretching is disabled so variations no longer
+    # pad to keep their notes column-aligned. The teacher PDF uses
+    # this — every staff floats free of the others.
+    ragged_overrides = "" if not args.ragged else r"""
+\paper {
+  ragged-right = ##t
+  ragged-last = ##t
+  indent = 8\mm
+  % Each variation is its own \score in ragged mode; tighten the gap
+  % between consecutive scores so they sit close together.
+  score-system-spacing.basic-distance = #6
+  score-system-spacing.minimum-distance = #4
+  score-system-spacing.padding = #1
+  system-system-spacing.basic-distance = #6
+  system-system-spacing.padding = #1
+}
+\layout {
+  \context {
+    \Score
+    \override SpacingSpanner.uniform-stretching = ##f
+    \override SpacingSpanner.strict-note-spacing = ##f
+    \override SpacingSpanner.spacing-increment = #1.2
+    \override SpacingSpanner.shortest-duration-space = #1.0
+  }
+}
+"""
+
     out = (
         PREAMBLE.replace("__TITLE__", title)
                 .replace("__STAFF_SPACE__", f"{layout['staff_space']}")
+        + ragged_overrides
         + "\n".join(cmd_blocks)
         + book_body
     )
