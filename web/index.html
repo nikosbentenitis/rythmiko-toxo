@@ -1253,6 +1253,12 @@ function renderAuthUI(){
     who.textContent = "@" + gh.user.login; ghBox.appendChild(who);
     const pr = document.createElement("button"); pr.id = "prBtn";
     pr.textContent = "Submit PR"; pr.disabled = !canSubmitPR();
+    // Tooltip explains why the button is greyed out when disabled.
+    const errCount = ((lastData && lastData.diagnostics) || [])
+      .filter(d => d.severity === 'error').length;
+    pr.title = errCount
+      ? `Fix ${errCount} validator error${errCount === 1 ? '' : 's'} before submitting`
+      : (canSubmitPR() ? 'Open a PR with the edited YAML' : '');
     pr.addEventListener("click", submitPR); ghBox.appendChild(pr);
     const out = document.createElement("a"); out.className = "signout"; out.href = "#";
     out.textContent = "sign out";
@@ -1270,8 +1276,14 @@ function canSubmitPR(){
   // Offline → can't submit yet; the draft is safe in localStorage. The
   // dirty check compares canonical (Greek) against the original Greek
   // pulled from the repo so the notation toggle never spuriously enables
-  // the PR button.
-  return !!(gh.token && gh.loaded && canonicalYaml !== gh.loaded.originalContent && navigator.onLine);
+  // the PR button. The diagnostics gate blocks any submission that has
+  // an outstanding validator error (e.g. a bar that doesn't fill the
+  // meter) — soft warnings still pass.
+  if (!gh.token || !gh.loaded || canonicalYaml === gh.loaded.originalContent) return false;
+  if (!navigator.onLine) return false;
+  const diags = (lastData && lastData.diagnostics) || [];
+  if (diags.some(d => d.severity === 'error')) return false;
+  return true;
 }
 
 function startOAuth(){
@@ -1492,6 +1504,17 @@ async function submitPR(){
   if (!gh.token) return alert("Sign in first.");
   if (!gh.loaded) return alert("Pick a rhythm from the dropdown to load it from the repo first.");
   if (canonicalYaml === gh.loaded.originalContent) return alert("No changes to submit.");
+  // Defence-in-depth: even if the disabled state was bypassed somehow,
+  // refuse to submit a YAML that has outstanding validator errors.
+  const diagErrors = ((lastData && lastData.diagnostics) || [])
+    .filter(d => d.severity === 'error');
+  if (diagErrors.length){
+    const detail = diagErrors.slice(0, 5)
+      .map(d => `• ${d.where ? d.where + ': ' : ''}${d.message}`)
+      .join('\n');
+    const more = diagErrors.length > 5 ? `\n…and ${diagErrors.length - 5} more` : '';
+    return alert(`Can't submit — the rhythm has validation errors:\n\n${detail}${more}\n\nFix them and Run again, then retry the PR.`);
+  }
 
   const slug = gh.loaded.slug;
   const path = gh.loaded.path;
@@ -1787,7 +1810,12 @@ async function run(){
   }catch(e){
     outEl.innerHTML='<pre style="color:#9b1c1c">'+String(e)+'</pre>';
     statusEl.textContent='error';
+    lastData = null;
   }
+  // Refresh the PR button's disabled state — canSubmitPR() now checks
+  // for validator errors in lastData, so the button locks out after a
+  // failing parse and re-enables once the user fixes things.
+  if (typeof renderAuthUI === 'function') renderAuthUI();
 }
 
 // ─── Variations management ───────────────────────────────────────────────
