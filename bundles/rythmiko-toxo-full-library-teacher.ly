@@ -471,6 +471,60 @@ drumPitchNames.slap = #'slap
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 3/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_>[ ka16_Α ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] slap8_S[ slap8_S] slap4_S
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 3/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_>[ ka16_Α ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] slap8_S[ slap8_S] slap8_S[ ka16_Α ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
 }
 \bookpart {
   \tocItem \markup "Duyek"
