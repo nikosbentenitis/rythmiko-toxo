@@ -12,6 +12,17 @@
   (slap cross #f 0)
 ))
 
+% Teacher 2-line staff: dum + slap share the lower line; tek + ka share
+% the upper line. The Greek letter markup under each note still tells the
+% reader which stroke it is, so collapsing tek/ka and dum/slap to the
+% same line is a feature (compact two-line staff) not ambiguity.
+#(define darbuka-style-teacher '(
+  (dum default #f -1)
+  (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
 drumPitchNames.dum = #'dum
 drumPitchNames.tek = #'tek
 drumPitchNames.ka = #'ka
@@ -80,11 +91,14 @@ drumPitchNames.slap = #'slap
   indent = 8\mm
   % Each variation is its own \score in ragged mode; tighten the gap
   % between consecutive scores so they sit close together.
-  score-system-spacing.basic-distance = #6
-  score-system-spacing.minimum-distance = #4
-  score-system-spacing.padding = #1
-  system-system-spacing.basic-distance = #6
-  system-system-spacing.padding = #1
+  % Roomy gap between scores so the Greek letter labels under each note
+  % don't crash into the staff of the next variation, and so variations
+  % feel like distinct lines rather than one tight column.
+  score-system-spacing.basic-distance = #14
+  score-system-spacing.minimum-distance = #10
+  score-system-spacing.padding = #3
+  system-system-spacing.basic-distance = #14
+  system-system-spacing.padding = #3
 }
 \layout {
   \context {
@@ -326,8 +340,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = ""
     }
     <<
@@ -352,8 +366,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -373,8 +387,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -394,8 +408,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -420,8 +434,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -441,8 +455,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -462,8 +476,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -488,8 +502,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -509,8 +523,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -530,8 +544,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -551,8 +565,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
     }
     <<
@@ -572,8 +586,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
     }
     <<
@@ -598,8 +612,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -619,8 +633,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -645,8 +659,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -666,8 +680,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -687,8 +701,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -713,8 +727,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -734,8 +748,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -755,8 +769,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -781,8 +795,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -802,8 +816,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -823,8 +837,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -844,8 +858,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
     }
     <<
@@ -870,8 +884,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -891,8 +905,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -912,8 +926,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -933,8 +947,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
     }
     <<
@@ -954,8 +968,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
     }
     <<
@@ -980,8 +994,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -1001,8 +1015,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -1022,8 +1036,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -1048,8 +1062,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
     }
     <<
@@ -1069,8 +1083,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
     }
     <<
@@ -1090,8 +1104,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
     }
     <<
@@ -1116,8 +1130,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1137,8 +1151,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1158,8 +1172,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1179,8 +1193,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1200,8 +1214,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1221,8 +1235,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "6"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1242,8 +1256,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "7"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1263,8 +1277,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "8"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1284,8 +1298,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "9"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -1305,8 +1319,8 @@ drumPitchNames.slap = #'slap
 
 \score {
   \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "10"
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16

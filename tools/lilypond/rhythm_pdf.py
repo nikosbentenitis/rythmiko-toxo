@@ -424,6 +424,17 @@ PREAMBLE = r"""\version "2.24.0"
   (slap cross #f 0)
 ))
 
+% Teacher 2-line staff: dum + slap share the lower line; tek + ka share
+% the upper line. The Greek letter markup under each note still tells the
+% reader which stroke it is, so collapsing tek/ka and dum/slap to the
+% same line is a feature (compact two-line staff) not ambiguity.
+#(define darbuka-style-teacher '(
+  (dum default #f -1)
+  (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
 drumPitchNames.dum = #'dum
 drumPitchNames.tek = #'tek
 drumPitchNames.ka = #'ka
@@ -658,7 +669,7 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
 
 
 def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
-                 no_interior_bars: bool = False) -> str:
+                 no_interior_bars: bool = False, teacher_staff: bool = False) -> str:
     """Return the `\\new DrumStaff` expression (not wrapped in \\score).
 
     Two parallel voices inside the DrumStaff:
@@ -714,10 +725,12 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     tick_voice = " ".join(tick_pieces)
 
     var_label = _variation_label(var_id) if show_label else ""
+    line_count = 2 if teacher_staff else 3
+    style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
 
     return f"""    \\new DrumStaff \\with {{
-      \\override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \\override StaffSymbol.line-count = #{line_count}
+      drumStyleTable = #(alist->hash-table {style_table})
       instrumentName = "{var_label}"
     }}
     <<
@@ -736,7 +749,7 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
 
 
 def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "",
-                       no_interior_bars: bool = False) -> str:
+                       no_interior_bars: bool = False, teacher_staff: bool = False) -> str:
     """Empty drum staff for the teacher PDF: `bars_count` bars at the
     given meter with all rests rendered transparent. The bar-line tick
     voice still fires, so the staff shows the meter signature, the
@@ -754,9 +767,11 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     # Repeat bar_rests + tick_per_bar bars_count times.
     rests_body = " ".join([bar_rests] * bars_count)
     tick_voice = " ".join([tick_per_bar] * bars_count)
+    line_count = 2 if teacher_staff else 3
+    style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     return f"""    \\new DrumStaff \\with {{
-      \\override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \\override StaffSymbol.line-count = #{line_count}
+      drumStyleTable = #(alist->hash-table {style_table})
       instrumentName = "{label}"
       \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
       \\override VerticalAxisGroup.staff-staff-spacing.padding = #2
@@ -774,13 +789,15 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     >>"""
 
 
-def render_blank_canvas(label: str = "") -> str:
+def render_blank_canvas(label: str = "", teacher_staff: bool = False) -> str:
     """One blank drum staff with no time signature and no internal
     bar lines — a pure writing canvas for inventing new rhythms. The
     teacher's final-page set of 10 of these is the place to draft."""
+    line_count = 2 if teacher_staff else 3
+    style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     return f"""    \\new DrumStaff \\with {{
-      \\override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \\override StaffSymbol.line-count = #{line_count}
+      drumStyleTable = #(alist->hash-table {style_table})
       instrumentName = "{label}"
       \\override Staff.TimeSignature.transparent = ##t
       \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
@@ -965,6 +982,11 @@ def main() -> int:
                          "beat and sub-beat divisions). Only the end-of-bar "
                          "thick line remains; notehead style still conveys "
                          "duration on its own.")
+    ap.add_argument("--teacher-staff", dest="teacher_staff",
+                    action="store_true",
+                    help="2-line staff: dum + slap on the lower line, "
+                         "tek + ka on the upper line. Greek letter labels "
+                         "still distinguish each stroke.")
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1065,7 +1087,8 @@ def main() -> int:
         for _, var_id, display, var, bpb in group_sections:
             geom = cell_geometry(bpb, layout)
             staves.append(render_staff(slug, var_id, var, show_label=show_var_label,
-                                         no_interior_bars=args.no_interior_bars))
+                                         no_interior_bars=args.no_interior_bars,
+                                         teacher_staff=args.teacher_staff))
             tubs_columns.append(
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
@@ -1087,7 +1110,8 @@ def main() -> int:
                 staves.append(render_blank_staff(meter, bpb,
                                                   bars_count=bars_count,
                                                   label=label,
-                                                  no_interior_bars=args.no_interior_bars))
+                                                  no_interior_bars=args.no_interior_bars,
+                                                  teacher_staff=args.teacher_staff))
 
         display = group_sections[0][2]
         heading_block = ""
@@ -1141,7 +1165,8 @@ def main() -> int:
     # Final "New Rhythms" page — totally blank pentagrams, no time signature
     # and no internal bar lines, for the teacher to draft brand-new rhythms.
     if args.new_rhythm_blanks > 0:
-        canvas_staves = [render_blank_canvas(label=str(i + 1))
+        canvas_staves = [render_blank_canvas(label=str(i + 1),
+                                              teacher_staff=args.teacher_staff)
                          for i in range(args.new_rhythm_blanks)]
         if args.ragged:
             canvas_scores = "".join(
@@ -1186,11 +1211,14 @@ def main() -> int:
   indent = 8\mm
   % Each variation is its own \score in ragged mode; tighten the gap
   % between consecutive scores so they sit close together.
-  score-system-spacing.basic-distance = #6
-  score-system-spacing.minimum-distance = #4
-  score-system-spacing.padding = #1
-  system-system-spacing.basic-distance = #6
-  system-system-spacing.padding = #1
+  % Roomy gap between scores so the Greek letter labels under each note
+  % don't crash into the staff of the next variation, and so variations
+  % feel like distinct lines rather than one tight column.
+  score-system-spacing.basic-distance = #14
+  score-system-spacing.minimum-distance = #10
+  score-system-spacing.padding = #3
+  system-system-spacing.basic-distance = #14
+  system-system-spacing.padding = #3
 }
 \layout {
   \context {
