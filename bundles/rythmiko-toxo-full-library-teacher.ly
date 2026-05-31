@@ -105,8 +105,13 @@ drumPitchNames.slap = #'slap
     \Score
     \override SpacingSpanner.uniform-stretching = ##f
     \override SpacingSpanner.strict-note-spacing = ##f
-    \override SpacingSpanner.spacing-increment = #1.2
-    \override SpacingSpanner.shortest-duration-space = #1.0
+    % Generous note-to-note spacing so the teacher edition reads as
+    % spacious instead of crammed. shortest-duration-space sets the
+    % minimum room each shortest note gets; spacing-increment scales
+    % up from there for longer durations.
+    \override SpacingSpanner.spacing-increment = #3.0
+    \override SpacingSpanner.shortest-duration-space = #3.5
+    \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/8)
   }
 }
 
