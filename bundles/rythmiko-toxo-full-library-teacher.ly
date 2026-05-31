@@ -16,11 +16,13 @@
 % the upper line. The Greek letter markup under each note still tells the
 % reader which stroke it is, so collapsing tek/ka and dum/slap to the
 % same line is a feature (compact two-line staff) not ambiguity.
+% Positions ±2 so the two lines stand visually apart when the staff
+% overrides `line-positions` to '(-2 2) — twice the default gap.
 #(define darbuka-style-teacher '(
-  (dum default #f -1)
-  (slap cross #f -1)
-  (tek default #f 1)
-  (ka default #f 1)
+  (dum default #f -2)
+  (slap cross #f -2)
+  (tek default #f 2)
+  (ka default #f 2)
 ))
 
 drumPitchNames.dum = #'dum
@@ -109,8 +111,8 @@ drumPitchNames.slap = #'slap
     % spacious instead of crammed. shortest-duration-space sets the
     % minimum room each shortest note gets; spacing-increment scales
     % up from there for longer durations.
-    \override SpacingSpanner.spacing-increment = #3.0
-    \override SpacingSpanner.shortest-duration-space = #3.5
+    \override SpacingSpanner.spacing-increment = #2.1
+    \override SpacingSpanner.shortest-duration-space = #2.5
     \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/8)
   }
 }
@@ -342,12 +344,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Απτάλικο"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Απτάλικο" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = ""
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -368,12 +375,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Azeri"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Azeri" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -395,6 +407,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -416,6 +432,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -436,12 +456,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Duyek"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Duyek" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -463,6 +488,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -484,6 +513,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -504,12 +537,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Εννιάσημος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Εννιάσημος" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -531,6 +569,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -552,6 +594,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -573,6 +619,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -594,6 +644,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -614,12 +668,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Μαντιλάτος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Μαντιλάτος" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -641,6 +700,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -661,12 +724,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Semai"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Semai" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -688,6 +756,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -709,6 +781,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -729,12 +805,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Συρτοειδή"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Συρτοειδή" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -756,6 +837,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -777,6 +862,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -797,12 +886,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Türk aksağı"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Türk aksağı" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -824,6 +918,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -845,6 +943,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -866,6 +968,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -886,12 +992,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -913,6 +1024,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -934,6 +1049,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -955,6 +1074,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -976,6 +1099,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -996,12 +1123,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Nim Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Nim Sofyan" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1023,6 +1155,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1044,6 +1180,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1064,12 +1204,17 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Kaşık Havası"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Kaşık Havası" }
+\markup { \vspace #3 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1091,6 +1236,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1112,6 +1261,10 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-2 2)
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
     }
     <<
       \drummode {
@@ -1141,6 +1294,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1162,6 +1316,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1183,6 +1338,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1204,6 +1360,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1225,6 +1382,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1246,6 +1404,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1267,6 +1426,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1288,6 +1448,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1309,6 +1470,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {
@@ -1330,6 +1492,7 @@ drumPitchNames.slap = #'slap
       \override Staff.TimeSignature.transparent = ##t
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
       \override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \override StaffSymbol.line-positions = #'(-2 2)
     }
     <<
       \drummode {

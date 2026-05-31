@@ -428,11 +428,13 @@ PREAMBLE = r"""\version "2.24.0"
 % the upper line. The Greek letter markup under each note still tells the
 % reader which stroke it is, so collapsing tek/ka and dum/slap to the
 % same line is a feature (compact two-line staff) not ambiguity.
+% Positions ±2 so the two lines stand visually apart when the staff
+% overrides `line-positions` to '(-2 2) — twice the default gap.
 #(define darbuka-style-teacher '(
-  (dum default #f -1)
-  (slap cross #f -1)
-  (tek default #f 1)
-  (ka default #f 1)
+  (dum default #f -2)
+  (slap cross #f -2)
+  (tek default #f 2)
+  (ka default #f 2)
 ))
 
 drumPitchNames.dum = #'dum
@@ -727,11 +729,21 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     var_label = _variation_label(var_id) if show_label else ""
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
+    # Teacher staff: lines at -2 and +2 (twice the default gap) so the
+    # two-line pentagram opens up. TextScript overrides park the Greek
+    # letter labels at a consistent Y position below the staff, with
+    # enough padding to clear the noteheads.
+    extra_overrides = "" if not teacher_staff else (
+        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+        "\n      \\override TextScript.staff-padding = #2.5"
+        "\n      \\override TextScript.outside-staff-priority = ##f"
+        "\n      \\override TextScript.self-alignment-X = #CENTER"
+    )
 
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
       drumStyleTable = #(alist->hash-table {style_table})
-      instrumentName = "{var_label}"
+      instrumentName = "{var_label}"{extra_overrides}
     }}
     <<
       \\drummode {{
@@ -769,12 +781,15 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     tick_voice = " ".join([tick_per_bar] * bars_count)
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
+    extra_overrides = "" if not teacher_staff else (
+        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+    )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
       drumStyleTable = #(alist->hash-table {style_table})
       instrumentName = "{label}"
       \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \\override VerticalAxisGroup.staff-staff-spacing.padding = #2
+      \\override VerticalAxisGroup.staff-staff-spacing.padding = #2{extra_overrides}
     }}
     <<
       \\drummode {{
@@ -795,13 +810,16 @@ def render_blank_canvas(label: str = "", teacher_staff: bool = False) -> str:
     teacher's final-page set of 10 of these is the place to draft."""
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
+    extra_overrides = "" if not teacher_staff else (
+        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+    )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
       drumStyleTable = #(alist->hash-table {style_table})
       instrumentName = "{label}"
       \\override Staff.TimeSignature.transparent = ##t
       \\override VerticalAxisGroup.staff-staff-spacing.basic-distance = #16
-      \\override VerticalAxisGroup.staff-staff-spacing.padding = #3
+      \\override VerticalAxisGroup.staff-staff-spacing.padding = #3{extra_overrides}
     }}
     <<
       \\drummode {{
@@ -1116,8 +1134,11 @@ def main() -> int:
         display = group_sections[0][2]
         heading_block = ""
         if show_headings:
+            # Larger trailing vspace (#3 vs #0.5) opens a visible gap
+            # between the rhythm title and its first variation.
             heading_block = (
                 f'\n\\markup {{ \\vspace #0.5 \\bold \\fontsize #3 "{display}" }}\n'
+                f'\\markup {{ \\vspace #3 }}\n'
             )
 
         if args.ragged:
@@ -1229,8 +1250,8 @@ def main() -> int:
     % spacious instead of crammed. shortest-duration-space sets the
     % minimum room each shortest note gets; spacing-increment scales
     % up from there for longer durations.
-    \override SpacingSpanner.spacing-increment = #3.0
-    \override SpacingSpanner.shortest-duration-space = #3.5
+    \override SpacingSpanner.spacing-increment = #2.1
+    \override SpacingSpanner.shortest-duration-space = #2.5
     \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/8)
   }
 }
