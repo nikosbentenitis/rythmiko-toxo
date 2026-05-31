@@ -1,8 +1,14 @@
-name: Sync validator to bentenitis
+name: Sync validator + bundles to bentenitis
 
-# When web/index.html changes on main, commit it straight to master in
-# nikosbentenitis/bentenitis under rhythms/index.html — no PR. The token
-# below has Contents:write on that repo, so the workflow can push directly.
+# When web/index.html or any bundles/*.pdf changes on main, commit those
+# files straight to master in nikosbentenitis/bentenitis under
+# rhythms/index.html and rhythms/bundles/ — no PR. The token below has
+# Contents:write on that repo, so the workflow can push directly.
+#
+# Why mirror the PDFs: GitHub's raw URLs serve PDFs with
+# Content-Disposition: attachment, forcing iOS Safari to download
+# instead of preview. Same-origin PDFs on bentenitis.com get the
+# inline preview treatment automatically.
 #
 # Setup (one-time):
 #   1. Create a fine-grained personal access token (https://github.com/settings/tokens?type=beta)
@@ -20,6 +26,7 @@ on:
     branches: [main]
     paths:
       - 'web/index.html'
+      - 'bundles/*.pdf'
       - '.github/workflows/sync-validator-to-bentenitis.yml'
   workflow_dispatch:
 
@@ -43,17 +50,18 @@ jobs:
           path: bentenitis
           ref: master
 
-      - name: Copy validator and push to master
+      - name: Copy validator + bundles, push to master
         working-directory: bentenitis
         run: |
-          mkdir -p rhythms
+          mkdir -p rhythms/bundles
           cp ../rythmiko-toxo/web/index.html rhythms/index.html
-          if git diff --quiet -- rhythms/index.html; then
-            echo "validator is already in sync"
+          cp ../rythmiko-toxo/bundles/*.pdf rhythms/bundles/
+          if git diff --quiet -- rhythms/; then
+            echo "rhythms tree is already in sync"
             exit 0
           fi
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add rhythms/index.html
-          git commit -m "rhythms: sync validator from rythmiko-toxo@${GITHUB_SHA::7}"
+          git add rhythms/index.html rhythms/bundles/
+          git commit -m "rhythms: sync validator + bundles from rythmiko-toxo@${GITHUB_SHA::7}"
           git push origin master
