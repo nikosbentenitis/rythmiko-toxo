@@ -126,8 +126,17 @@ drumPitchNames.slap = #'slap
     % minimum-X-extent forces breathing room on both sides so the bar
     % sits midway between the last note of bar 1 and the first note of
     % bar 2 instead of crowding either one.
-    \override BarLine.bar-extent = #'(-4 . 4)
-    \override BarLine.minimum-X-extent = #'(-1.5 . 1.5)
+    \override BarLine.bar-extent = #'(-8 . 8)
+    \override BarLine.minimum-X-extent = #'(-4 . 4)
+    \override BarLine.space-alist =
+      #'((time-signature extra-space . 2.0)
+         (custos minimum-space . 2.0)
+         (clef minimum-space . 2.0)
+         (key-signature extra-space . 1.0)
+         (key-cancellation extra-space . 1.0)
+         (first-note fixed-space . 4.0)
+         (next-note semi-fixed-space . 4.0)
+         (right-edge extra-space . 1.0))
   }
 }
 
