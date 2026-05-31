@@ -12,6 +12,17 @@
   (slap cross #f 0)
 ))
 
+% Teacher 2-line staff: dum + slap share the lower line; tek + ka share
+% the upper line. The Greek letter markup under each note still tells the
+% reader which stroke it is, so collapsing tek/ka and dum/slap to the
+% same line is a feature (compact two-line staff) not ambiguity.
+#(define darbuka-style-teacher '(
+  (dum default #f -1)
+  (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
 drumPitchNames.dum = #'dum
 drumPitchNames.tek = #'tek
 drumPitchNames.ka = #'ka
