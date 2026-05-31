@@ -1287,6 +1287,13 @@ def main() -> int:
     % (the two thin vertical lines LilyPond draws by default) — it's
     % redundant once the staff lines themselves are also transparent.
     \override SystemStartBar.transparent = ##t
+    % Interior bar lines (between bars in multi-bar variations) get a
+    % fixed vertical extent so the line is the same height for every
+    % rhythm. The range -2 to 2 spans 4 staff-spaces — about twice
+    % the gap between the (hidden) staff lines at ±1 — and stays
+    % centered at the staff midpoint where the Greek letter labels'
+    % baseline sits.
+    \override BarLine.bar-extent = #'(-2 . 2)
   }
 }
 """
