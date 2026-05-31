@@ -426,15 +426,16 @@ PREAMBLE = r"""\version "2.24.0"
 
 % Teacher 2-line staff: dum + slap share the lower line; tek + ka share
 % the upper line. The Greek letter markup under each note still tells the
-% reader which stroke it is, so collapsing tek/ka and dum/slap to the
-% same line is a feature (compact two-line staff) not ambiguity.
-% Positions ±2 so the two lines stand visually apart when the staff
-% overrides `line-positions` to '(-2 2) — twice the default gap.
+% reader which stroke it is. Lines themselves are rendered transparent
+% in render_staff for teacher mode (StaffSymbol.transparent = ##t), so
+% only the noteheads + beams + Greek labels remain on the page.
+% Positions ±1 keep dum/slap and tek/ka close enough that beam groups
+% read as one rhythm but distinct enough to be readable.
 #(define darbuka-style-teacher '(
-  (dum default #f -2)
-  (slap cross #f -2)
-  (tek default #f 2)
-  (ka default #f 2)
+  (dum default #f -1)
+  (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
 ))
 
 drumPitchNames.dum = #'dum
@@ -729,12 +730,14 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     var_label = _variation_label(var_id) if show_label else ""
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
-    # Teacher staff: lines at -2 and +2 (twice the default gap) so the
-    # two-line pentagram opens up. TextScript overrides park the Greek
-    # letter labels at a consistent Y position below the staff, with
-    # enough padding to clear the noteheads.
+    # Teacher staff: positions ±1 keep dum/slap and tek/ka close, and
+    # StaffSymbol.transparent hides the lines themselves — only the
+    # noteheads, beams, and Greek letter labels remain. TextScript
+    # overrides park the labels at a consistent Y position below the
+    # noteheads.
     extra_overrides = "" if not teacher_staff else (
-        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+        "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
+        "\n      \\override StaffSymbol.transparent = ##t"
         "\n      \\override TextScript.staff-padding = #2.5"
         "\n      \\override TextScript.outside-staff-priority = ##f"
         "\n      \\override TextScript.self-alignment-X = #CENTER"
@@ -782,7 +785,8 @@ def render_blank_staff(meter: str, bpb: int, bars_count: int = 1, label: str = "
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     extra_overrides = "" if not teacher_staff else (
-        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+        "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
+        "\n      \\override StaffSymbol.transparent = ##t"
     )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
@@ -811,7 +815,8 @@ def render_blank_canvas(label: str = "", teacher_staff: bool = False) -> str:
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
     extra_overrides = "" if not teacher_staff else (
-        "\n      \\override StaffSymbol.line-positions = #'(-2 2)"
+        "\n      \\override StaffSymbol.line-positions = #'(-1 1)"
+        "\n      \\override StaffSymbol.transparent = ##t"
     )
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
