@@ -1080,9 +1080,12 @@ function renderStaff(container,bars){
         n=new VF.StaveNote({keys:[KEY[e.drum]||'c/5'],duration:d});
         if(e.drum==='slap'){ try{n.setKeyStyle(0,{});}catch(_){ } }
         // Below-the-note annotation label respects the user's notation.
+        // Arabic keeps the lower/upper distinction (case = accent);
+        // Greek always uses uppercase Α/Δ — the accent mark above the
+        // notehead already conveys stress, so the label stays uniform.
         const labels = notation === 'arabic'
           ? {dum:'D', tekA:'T', tekU:'t', kaA:'K', kaU:'k', slap:'S'}
-          : {dum:'>', tekA:'Δ', tekU:'δ', kaA:'Α', kaU:'α', slap:'S'};
+          : {dum:'>', tekA:'Δ', tekU:'Δ', kaA:'Α', kaU:'Α', slap:'S'};
         const lab = ({dum:labels.dum,
                       tek: e.accent ? labels.tekA : labels.tekU,
                       ka:  e.accent ? labels.kaA  : labels.kaU,
