@@ -86,15 +86,13 @@ drumPitchNames.slap = #'slap
     % for scripts, which anchors the text at the note column's left edge.
     % Set BOTH parent and self alignment to CENTER so the text's own
     % center sits on the parent's center, i.e. on the notehead.
+    % TextScript's X-offset by default = where LilyPond decides; here we
+    % force it to use self-alignment-interface so parent-alignment-X
+    % (CENTER) and self-alignment-X (CENTER) both apply, anchoring the
+    % markup's center on the note column's center.
     \override TextScript.parent-alignment-X = #CENTER
     \override TextScript.self-alignment-X = #CENTER
     \override TextScript.X-offset = #ly:self-alignment-interface::aligned-on-x-parent
-    % NoteColumn's X-reference point sits at the LEFT edge of the
-    % notehead, not its visual center. Even with parent + self
-    % alignment both CENTER, the text ends up anchored to that left
-    % edge. Compensate with a positive extra-offset of ~half a notehead
-    % so the label visually sits under the notehead's geometric center.
-    \override TextScript.extra-offset = #'(0.6 . 0)
   }
   \context {
     \Staff
@@ -347,7 +345,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }^> tek4_\markup { \halign #CENTER "Δ" }^> dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER "Α" }] dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }^> dum4_\markup { \halign #CENTER ">" } r4
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -479,7 +477,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" } tek4._\markup { \halign #CENTER "Δ" }
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" } tek4._\markup { \center-align "Δ" }
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
@@ -497,7 +495,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
     >>
@@ -638,7 +636,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" } tek4_\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" } tek4_\markup { \center-align "Δ" }^>
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -656,7 +654,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -674,7 +672,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER "Α" }] r8 ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -824,7 +822,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -842,7 +840,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_\markup { \halign #CENTER "Δ" }^>] r16
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -860,7 +858,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8._\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" }] r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_\markup { \halign #CENTER "Δ" }^>] r16
+        dum8._\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1010,7 +1008,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8._\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }^>]
+        dum8._\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1028,7 +1026,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } slap8_\markup { \halign #CENTER "S" }[ slap8_\markup { \halign #CENTER "S" }]
+        dum4_\markup { \center-align ">" } slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1046,7 +1044,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_\markup { \halign #CENTER "Δ" }^>] r16
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1064,7 +1062,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } tek8_\markup { \halign #CENTER "Δ" }^>]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1082,7 +1080,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8._\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" }] r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }[ tek16_\markup { \halign #CENTER "Δ" }^>] r16
+        dum8._\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1250,7 +1248,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" } tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER "Α" }] dum8_\markup { \halign #CENTER ">" } tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER "Α" }]
+        dum8_\markup { \center-align ">" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1268,7 +1266,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" } tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER "Α" }] dum8_\markup { \halign #CENTER ">" }[ tek8_\markup { \halign #CENTER "Δ" }^>]
+        dum8_\markup { \center-align ">" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }^>]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1286,7 +1284,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8._\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" }] dum8_\markup { \halign #CENTER ">" }[ tek8_\markup { \halign #CENTER "Δ" }^>]
+        dum8._\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }^>]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1436,7 +1434,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } r4 dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } r4 dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^>
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -1454,7 +1452,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER "Α" }^>] r4 tek4_\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }^>] r4 tek4_\markup { \center-align "Δ" }^>
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -1472,7 +1470,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER "Α" }^>] r4 tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }^>]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }^>] r4 tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>]
       }
       { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
     >>
@@ -1640,7 +1638,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" } tek4_\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" } tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1658,7 +1656,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1676,7 +1674,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek4_\markup { \halign #CENTER "Δ" }[ dum4_\markup { \halign #CENTER ">" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }[ dum4_\markup { \center-align ">" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1694,7 +1692,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] slap8_\markup { \halign #CENTER "S" }[ slap8_\markup { \halign #CENTER "S" }] slap4_\markup { \halign #CENTER "S" }
+        dum8_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }] slap4_\markup { \center-align "S" }
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1712,7 +1710,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] slap8_\markup { \halign #CENTER "S" }[ slap8_\markup { \halign #CENTER "S" }] slap8_\markup { \halign #CENTER "S" }[ ka16_\markup { \halign #CENTER "Α" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }] slap8_\markup { \center-align "S" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1880,7 +1878,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek8_\markup { \halign #CENTER "Δ" }] r8 tek8_\markup { \halign #CENTER "Δ" } dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }] r8 tek8_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1898,7 +1896,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum16_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } tek8_\markup { \halign #CENTER "Δ" }] tek4_\markup { \halign #CENTER "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } tek8_\markup { \center-align "Δ" }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1916,7 +1914,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] r16 tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] r16 dum16_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } dum16_\markup { \halign #CENTER ">" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] tek4_\markup { \halign #CENTER "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1934,7 +1932,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek8_\markup { \halign #CENTER "Δ" }] r8 tek8_\markup { \halign #CENTER "Δ" } dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER "Α" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }] r8 tek8_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1952,7 +1950,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }[ ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum16_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } dum8_\markup { \halign #CENTER ">" }] tek4_\markup { \halign #CENTER "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum8_\markup { \center-align ">" }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1970,7 +1968,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } tek8_\markup { \halign #CENTER "Δ" }^>] dum16_\markup { \halign #CENTER ">" }[ ka16_\markup { \halign #CENTER "Α" } dum16_\markup { \halign #CENTER ">" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] tek4_\markup { \halign #CENTER "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1988,7 +1986,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek16_\markup { \halign #CENTER "Δ" }[ ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } tek8_\markup { \halign #CENTER "Δ" }^>] dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2174,7 +2172,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER "Α" }] dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2192,7 +2190,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ ka8_\markup { \halign #CENTER "Α" }] dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" } tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2210,7 +2208,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ ka16_\markup { \halign #CENTER "Α" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2228,7 +2226,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" } tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2246,7 +2244,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2264,7 +2262,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" } tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2282,7 +2280,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }^> dum4_\markup { \halign #CENTER ">" } tek4._\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2300,7 +2298,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4_\markup { \halign #CENTER "Δ" }^> dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ r8 ka8_\markup { \halign #CENTER "Α" }]
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ r8 ka8_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2495,7 +2493,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek4._\markup { \halign #CENTER "Δ" }^>
+        dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2513,7 +2511,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ r8 tek8_\markup { \halign #CENTER "Δ" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ r8 tek8_\markup { \center-align "Δ" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2531,7 +2529,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } tek8_\markup { \halign #CENTER "Δ" }]
+        dum8_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2549,7 +2547,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" } r16 ka16_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2567,7 +2565,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \halign #CENTER ">" } tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER "Α" }]
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -2585,7 +2583,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \halign #CENTER ">" }[ tek16_\markup { \halign #CENTER "Δ" } ka16_\markup { \halign #CENTER "Α" }] tek8_\markup { \halign #CENTER "Δ" }^>[ tek8_\markup { \halign #CENTER "Δ" } ka8_\markup { \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>

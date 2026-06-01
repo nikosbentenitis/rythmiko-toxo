@@ -332,30 +332,32 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
             prev_duration = duration
             drum = HEAD_TO_DRUM[head]
 
+            # Each label is wrapped in `\center-align` so the markup's
+            # X-anchor is its own center. Combined with the Score-level
+            # TextScript center alignment, the label sits centered on the
+            # note's reference point.
+            def _label_markup(text: str) -> str:
+                return f'\\markup {{ \\center-align "{text}" }}'
+
             if drum is None:    # rest
                 tok = f"r{duration}"
             elif drum == "dum":
                 # `_>` is the accent articulation shorthand (Articulation
-                # grob). Wrap as explicit markup so it becomes TextScript
-                # — and `\halign #CENTER` makes the markup itself
-                # self-centering, independent of any external override.
-                tok = f'dum{duration}_\\markup {{ \\halign #CENTER ">" }}'
+                # grob); wrap as markup so it becomes a TextScript and
+                # picks up the same alignment as the letter labels.
+                tok = f'dum{duration}_{_label_markup(">")}'
             else:
                 below = HEAD_TO_BELOW[head]
                 if middle:
                     tok = (
                         f"{drum}{duration}"
-                        f"_\\markup {{ \\halign #CENTER "
+                        f"_\\markup {{ \\center-align {{ "
                         f"\\override #'(thickness . 1.6) "
                         f"\\override #'(circle-padding . 0.35) "
-                        f"\\circle \"{below}\" }}"
+                        f"\\circle \"{below}\" }} }}"
                     )
                 else:
-                    # `\halign #CENTER` parks the markup's anchor on its
-                    # visual center, so the glyph sits under the
-                    # notehead's center regardless of the parent
-                    # alignment LilyPond picks for the TextScript.
-                    tok = f'{drum}{duration}_\\markup {{ \\halign #CENTER "{below}" }}'
+                    tok = f'{drum}{duration}_{_label_markup(below)}'
                 if accent:
                     tok += "^>"
             if beam:
@@ -507,15 +509,13 @@ drumPitchNames.slap = #'slap
     % for scripts, which anchors the text at the note column's left edge.
     % Set BOTH parent and self alignment to CENTER so the text's own
     % center sits on the parent's center, i.e. on the notehead.
+    % TextScript's X-offset by default = where LilyPond decides; here we
+    % force it to use self-alignment-interface so parent-alignment-X
+    % (CENTER) and self-alignment-X (CENTER) both apply, anchoring the
+    % markup's center on the note column's center.
     \override TextScript.parent-alignment-X = #CENTER
     \override TextScript.self-alignment-X = #CENTER
     \override TextScript.X-offset = #ly:self-alignment-interface::aligned-on-x-parent
-    % NoteColumn's X-reference point sits at the LEFT edge of the
-    % notehead, not its visual center. Even with parent + self
-    % alignment both CENTER, the text ends up anchored to that left
-    % edge. Compensate with a positive extra-offset of ~half a notehead
-    % so the label visually sits under the notehead's geometric center.
-    \override TextScript.extra-offset = #'(0.6 . 0)
   }
   \context {
     \Staff
