@@ -335,7 +335,11 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
             if drum is None:    # rest
                 tok = f"r{duration}"
             elif drum == "dum":
-                tok = f"dum{duration}_>"
+                # `_>` is the accent articulation shorthand and is rendered
+                # by an Articulation grob — wrap as explicit markup so it
+                # comes through the TextScript engraver instead, and
+                # therefore picks up `TextScript.self-alignment-X = CENTER`.
+                tok = f'dum{duration}_\\markup {{ ">" }}'
             else:
                 below = HEAD_TO_BELOW[head]
                 if middle:
@@ -346,7 +350,12 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
                         f"\\circle \"{below}\" }}"
                     )
                 else:
-                    tok = f"{drum}{duration}_{below}"
+                    # Wrap the label as explicit markup. The bare `_Δ`
+                    # form parses as a Fingering-like grob in some
+                    # LilyPond versions, which doesn't honour the
+                    # TextScript override; explicit markup guarantees a
+                    # TextScript with center self-alignment.
+                    tok = f'{drum}{duration}_\\markup {{ "{below}" }}'
                 if accent:
                     tok += "^>"
             if beam:
