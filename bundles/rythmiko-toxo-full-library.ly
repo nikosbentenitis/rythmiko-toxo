@@ -651,7 +651,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_> tek8_Δ^>[ tek8_Δ] dum4_> tek8_Δ^>[ tek8_Δ tek8_Δ]
+        dum4_> tek8_Δ^>[ ka8_Α] dum4_> tek8_Δ^>[ tek8_Δ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -669,7 +669,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_> tek8_Δ^>[ tek8_Δ] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_Α]
+        dum4_> tek8_Δ^>[ ka8_Α] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_Α]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -687,7 +687,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum4_> tek8_Δ^>[ tek8_Δ tek8_Δ]
+        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ ka16_Α ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum4_> tek8_Δ^>[ tek8_Δ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -705,7 +705,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_Α]
+        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum4_> tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -723,7 +723,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α] dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek8_Δ tek8_Δ]
+        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek8_Δ ka8_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -731,17 +731,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "6"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 9/8
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r8 r8 r8 r8 r8 r8 r8 r8 r8
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }] dum8_>[ tek16_Δ ka16_Α] tek8_Δ^>[ tek16_Δ ka16_Α tek16_Δ ka16_\markup { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -749,17 +749,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 9/8
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r8 r8 r8 r8 r8 r8 r8 r8 r8
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_> tek4_Δ^> dum4_> tek4._Δ^>
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -767,17 +767,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 9/8
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r8 r8 r8 r8 r8 r8 r8 r8 r8
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_> tek4_Δ^> dum4_> tek8_Δ^>[ r8 ka8_Α]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -817,6 +817,60 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "13"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
   >>
 }
 
@@ -825,8 +879,8 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "1" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellCircleBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellCircleBTwo "k" \tubsCellThickBTwo " " } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
@@ -834,8 +888,8 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "2" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
@@ -843,8 +897,8 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "3" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellCircleThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellCircleBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellCircleThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellCircleBTwo "k" \tubsCellThickBTwo " " } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
@@ -852,8 +906,8 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "4" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellCircleThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellCircleThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellCircleThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellCircleThickBTwo "k" } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
@@ -861,8 +915,35 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "5" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellCircleThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellCircleBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellCircleThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellCircleBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "6" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellCircleThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellCircleThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellCircleThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellCircleThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "8" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
