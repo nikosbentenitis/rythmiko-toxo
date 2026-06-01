@@ -67,11 +67,13 @@ jobs:
               $SPECS
 
       - name: Commit refreshed bundles if changed
+        id: commit
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if git diff --quiet -- bundles/; then
             echo "bundles are already up to date"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git add bundles/rythmiko-toxo-full-library.ly \
@@ -80,3 +82,19 @@ jobs:
                   bundles/rythmiko-toxo-full-library-teacher.pdf
           git commit -m "bundles: regenerate full-library after ${GITHUB_SHA::7}"
           git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger bentenitis sync
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        # GITHUB_TOKEN-driven pushes don't fire push-event workflows, so
+        # the sync workflow won't see our bundle commit on its own.
+        # Dispatch it explicitly so bentenitis.com gets the new PDFs.
+        run: |
+          curl -sS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/actions/workflows/sync-validator-to-bentenitis.yml/dispatches" \
+            -d '{"ref":"main"}'
