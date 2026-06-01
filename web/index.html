@@ -1093,9 +1093,8 @@ function renderStaff(container,bars){
               tek: e.accent ? labels.tekA : labels.tekU,
               ka:  e.accent ? labels.kaA  : labels.kaU,
               slap: labels.slap})[e.drum];
-        n.addModifier(new VF.Annotation(lab)
-            .setJustification(VF.Annotation.HorizontalJustify.CENTER)
-            .setVerticalJustification(VF.Annotation.VerticalJustify.BOTTOM), 0);
+        n.addModifier(new VF.Annotation(lab).setVerticalJustification(
+            VF.Annotation.VerticalJustify.BOTTOM),0);
         if(e.accent) n.addModifier(new VF.Articulation('a>').setPosition(3),0);
       }
       if(dot){ try{VF.Dot.buildAndAttach([n],{all:true});}catch(_){ } }

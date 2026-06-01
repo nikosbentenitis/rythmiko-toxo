@@ -81,6 +81,10 @@ drumPitchNames.slap = #'slap
     % Thin beat & half-beat bar lines
     \override BarLine.hair-thickness = #0.6
     \override BarLine.thick-thickness = #1.2
+    % Greek / Latin labels under each note are TextScript grobs (the `_X`
+    % drummode shorthand). Center them on the notehead's X axis instead
+    % of left-anchoring at the note column edge.
+    \override TextScript.self-alignment-X = #CENTER
   }
   \context {
     \Staff
