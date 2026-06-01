@@ -86,13 +86,22 @@ drumPitchNames.slap = #'slap
     % for scripts, which anchors the text at the note column's left edge.
     % Set BOTH parent and self alignment to CENTER so the text's own
     % center sits on the parent's center, i.e. on the notehead.
-    % TextScript's X-offset by default = where LilyPond decides; here we
-    % force it to use self-alignment-interface so parent-alignment-X
-    % (CENTER) and self-alignment-X (CENTER) both apply, anchoring the
-    % markup's center on the note column's center.
-    \override TextScript.parent-alignment-X = #CENTER
+    % Center TextScript labels on the actual notehead, not on the
+    % NoteColumn's left-edge reference point. The Scheme function below
+    % reads the notehead's X-extent and returns its midpoint, then we
+    % anchor the script's own center there via self-alignment-X = CENTER.
     \override TextScript.self-alignment-X = #CENTER
-    \override TextScript.X-offset = #ly:self-alignment-interface::aligned-on-x-parent
+    \override TextScript.X-offset =
+      #(lambda (grob)
+         (let* ((col (ly:grob-parent grob X))
+                (heads (and (ly:grob? col)
+                            (ly:grob-object col 'note-heads))))
+           (if (and (ly:grob-array? heads)
+                    (> (ly:grob-array-length heads) 0))
+               (let* ((head (ly:grob-array-ref heads 0))
+                      (ext  (ly:grob-extent head col X)))
+                 (interval-center ext))
+               0)))
   }
   \context {
     \Staff
