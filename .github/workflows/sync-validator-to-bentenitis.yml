@@ -28,6 +28,15 @@ on:
       - 'web/index.html'
       - 'bundles/*.pdf'
       - '.github/workflows/sync-validator-to-bentenitis.yml'
+  # When the regenerate-bundle workflow finishes (which always commits
+  # via GITHUB_TOKEN and therefore can NOT trigger push-event workflows
+  # itself), pick up the new bundles via workflow_run. The diff-quiet
+  # guard inside the sync step prevents no-op pushes when nothing
+  # actually changed.
+  workflow_run:
+    workflows: ["Regenerate full-library bundle"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
