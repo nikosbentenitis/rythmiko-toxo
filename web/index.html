@@ -1094,7 +1094,7 @@ function renderStaff(container,bars){
               ka:  e.accent ? labels.kaA  : labels.kaU,
               slap: labels.slap})[e.drum];
         n.addModifier(new VF.Annotation(lab)
-            .setJustification(VF.Annotation.Justify.CENTER)
+            .setJustification(VF.Annotation.HorizontalJustify.CENTER)
             .setVerticalJustification(VF.Annotation.VerticalJustify.BOTTOM), 0);
         if(e.accent) n.addModifier(new VF.Articulation('a>').setPosition(3),0);
       }
