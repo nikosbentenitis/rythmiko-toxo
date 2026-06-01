@@ -23,7 +23,7 @@ except ImportError:
 
 # Slugs forced to the end of the bundle, in this exact order. Any rhythm
 # not listed here is emitted first, alphabetically by slug.
-TRAILING_SLUGS = ["sofyan", "nim_sofyan", "kasik_havasi", "azeri"]
+TRAILING_SLUGS = ["duyek", "enniasimos", "turk_aksagy"]
 
 
 def main() -> int:
