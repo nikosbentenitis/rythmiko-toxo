@@ -1569,7 +1569,27 @@ async function submitPR(){
       branch,
     };
     if (gh.loaded.sha) putBody.sha = gh.loaded.sha;
-    await ghFetch("PUT", `/repos/${user}/${REPO_NAME}/contents/${path}`, putBody);
+    try {
+      await ghFetch("PUT", `/repos/${user}/${REPO_NAME}/contents/${path}`, putBody);
+    } catch (e) {
+      // 409 means the cached gh.loaded.sha is stale — usually because a
+      // prior PR for this rhythm was merged after we loaded it (e.g.
+      // owner auto-merge). Refetch the current SHA on the base branch,
+      // patch the request, and retry once.
+      if (e.status === 409 && gh.loaded.sha){
+        setLabel("rebasing onto latest…");
+        const fresh = await ghFetch(
+          "GET",
+          `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${REPO_BRANCH}`,
+        );
+        putBody.sha = fresh.sha;
+        gh.loaded.sha = fresh.sha;
+        setLabel("committing…");
+        await ghFetch("PUT", `/repos/${user}/${REPO_NAME}/contents/${path}`, putBody);
+      } else {
+        throw e;
+      }
+    }
 
     setLabel("opening PR…");
     const pr = await ghFetch("POST", `/repos/${REPO_OWNER}/${REPO_NAME}/pulls`, {
