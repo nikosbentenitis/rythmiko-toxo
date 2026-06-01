@@ -1520,15 +1520,25 @@ async function submitPR(){
   const path = gh.loaded.path;
   const isNew = !gh.loaded.sha;
   const defaultTitle = isNew ? `Add ${slug}` : `Edit ${slug}`;
-  const title = (prompt(`PR title:`, defaultTitle) || "").trim();
-  if (!title) return;
-  const ok = confirm(
-    `Open a pull request on ${REPO_OWNER}/${REPO_NAME}?\n\n` +
-    `File: ${path} ${isNew ? "(new file)" : "(update)"}\nTitle: ${title}\n\n` +
-    `This will fork the repo into your account (if not already), create a branch, ` +
-    `${isNew ? "create the new YAML file" : "commit your edited YAML"}, ` +
-    `and open the PR back to ${REPO_BRANCH}.`);
-  if (!ok) return;
+  // The repo owner's PRs are auto-merged by .github/workflows/auto-merge-
+  // owner-prs.yml, so the title/confirm prompts are just friction. Skip
+  // them when the signed-in user IS the repo owner — they go straight
+  // to a default-titled submission.
+  const isOwner = gh.user && gh.user.login === REPO_OWNER;
+  let title;
+  if (isOwner){
+    title = defaultTitle;
+  } else {
+    title = (prompt(`PR title:`, defaultTitle) || "").trim();
+    if (!title) return;
+    const ok = confirm(
+      `Open a pull request on ${REPO_OWNER}/${REPO_NAME}?\n\n` +
+      `File: ${path} ${isNew ? "(new file)" : "(update)"}\nTitle: ${title}\n\n` +
+      `This will fork the repo into your account (if not already), create a branch, ` +
+      `${isNew ? "create the new YAML file" : "commit your edited YAML"}, ` +
+      `and open the PR back to ${REPO_BRANCH}.`);
+    if (!ok) return;
+  }
 
   const prBtn = document.getElementById("prBtn");
   prBtn.disabled = true;
