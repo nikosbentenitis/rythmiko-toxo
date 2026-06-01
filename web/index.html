@@ -1125,6 +1125,19 @@ function renderStaff(container,bars){
     new VF.Formatter().joinVoices([voice]).format([voice],width-60);
     voice.draw(ctx,stave);
     beams.forEach(b=>{ try{ b.setContext(ctx).draw(); }catch(_){ } });
+    // VexFlow places annotation text on a baseline shared with the
+    // letter labels (Δ, Α, …). The `>` glyph hangs visibly lower than
+    // the letters because its drawing extends down to the baseline
+    // point. Nudge each `>` text up so its vertical center aligns with
+    // the letters' visual midline.
+    try {
+      container.querySelectorAll('text').forEach(t => {
+        if (t.textContent === '>'){
+          const y = parseFloat(t.getAttribute('y') || '0');
+          t.setAttribute('y', String(y - 4));
+        }
+      });
+    } catch(_) {}
   }catch(err){
     const f=document.createElement('div'); f.className='fallback';
     f.textContent='staff render skipped: '+err; container.appendChild(f);
