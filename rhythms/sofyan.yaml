@@ -1,6 +1,7 @@
 sofyan:
   display: Sofyan
   meter: 4/8
+  comment: "Sofyan Osul"
   variations:
     v1:
       rhythm: '>8.[ Α16] Δ8>[ (Α)8>]'
