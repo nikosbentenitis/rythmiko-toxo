@@ -1365,6 +1365,11 @@ async function refreshGhUser(){
   }
 }
 
+// Slugs we deliberately keep in the repo but hide from the public picker
+// (and from the bundled PDF). Keep in sync with HIDDEN_SLUGS in
+// tools/lilypond/rhythm_pdf.py.
+const HIDDEN_SLUGS = new Set(["azeri", "kasik_havasi"]);
+
 async function fetchRhythmList(){
   const r = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${REPO_DIR}?ref=${REPO_BRANCH}`,
@@ -1372,6 +1377,7 @@ async function fetchRhythmList(){
   if (!r.ok) throw new Error(`list rhythms: ${r.status}`);
   const items = await r.json();
   return items.filter(i => i.type === "file" && i.name.endsWith(".yaml"))
+              .filter(i => !HIDDEN_SLUGS.has(i.name.replace(/\.yaml$/, "")))
               .sort((a,b) => a.name.localeCompare(b.name));
 }
 

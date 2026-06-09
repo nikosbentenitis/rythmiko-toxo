@@ -37,13 +37,21 @@ REPO = Path(__file__).resolve().parents[2]
 RHYTHMS_DIR = REPO / "rhythms"
 OUT_DIR = REPO / "bundles"
 
+# Slugs deliberately omitted from the public surface (web dropdown +
+# bundled PDF). YAML files stay in rhythms/ for history and for the
+# `--include-hidden` override. Keep in sync with HIDDEN_SLUGS in
+# web/index.html.
+HIDDEN_SLUGS: set[str] = {"azeri", "kasik_havasi"}
 
-def load_db():
+
+def load_db(*, include_hidden: bool = False):
     """Merge every rhythms/<slug>.yaml into a single dict keyed by slug.
 
     Each file is expected to be `<slug>: { display, meter, variations: {...} }`.
     Returns the unified mapping so the rest of the toolchain can operate on
     it identically to the old monolithic rhythms.yaml.
+
+    Hidden slugs (HIDDEN_SLUGS) are dropped unless include_hidden=True.
     """
     if not RHYTHMS_DIR.is_dir():
         sys.exit(f"rhythms dir not found: {RHYTHMS_DIR}")
@@ -57,6 +65,8 @@ def load_db():
         for slug, body in loaded.items():
             if slug in db:
                 print(f"[warn] duplicate slug {slug!r} (in {path.name})", file=sys.stderr)
+            if (not include_hidden) and slug in HIDDEN_SLUGS:
+                continue
             db[slug] = body
     return db
 
@@ -1067,6 +1077,11 @@ def main() -> int:
                     help="2-line staff: dum + slap on the lower line, "
                          "tek + ka on the upper line. Greek letter labels "
                          "still distinguish each stroke.")
+    ap.add_argument("--include-hidden", action="store_true",
+                    help=("include rhythms listed in HIDDEN_SLUGS "
+                          "(azeri, kasik_havasi). Default drops them — "
+                          "used for the full-library bundle, where they "
+                          "don't belong."))
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1090,7 +1105,19 @@ def main() -> int:
     if title is None:
         sys.exit("--title is required when not using --set")
 
-    db = load_db()
+    db = load_db(include_hidden=args.include_hidden)
+
+    # Drop hidden-slug specs unless the user explicitly opts in. The
+    # README's full-library shell loop globs every YAML, so hidden rhythms
+    # appear in `specs` — this filter silently strips them so the bundle
+    # stays clean. Pass --include-hidden to PDF a hidden rhythm alone.
+    if not args.include_hidden:
+        before = len(specs)
+        specs = [s for s in specs if parse_spec(s)[0] not in HIDDEN_SLUGS]
+        dropped = before - len(specs)
+        if dropped:
+            print(f"[info] dropped {dropped} hidden-slug spec(s); "
+                  f"pass --include-hidden to keep them", file=sys.stderr)
 
     sections = []
     seen_bpb = set()
