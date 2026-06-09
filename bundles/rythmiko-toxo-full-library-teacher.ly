@@ -585,33 +585,6 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }[ dum4_\markup { \center-align ">" }]
-      }
-      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
-    >>
-}
-
-\score {
-  \new DrumStaff \with {
-      \override StaffSymbol.line-count = #2
-      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
-      instrumentName = "5"
-      \override StaffSymbol.line-positions = #'(-1 1)
-      \override StaffSymbol.stencil = ##f
-      \override Clef.stencil = ##f
-      \override TextScript.staff-padding = #2.5
-      \override TextScript.outside-staff-priority = ##f
-      \override TextScript.self-alignment-X = #CENTER
-    }
-    <<
-      \drummode {
-        \cadenzaOn   % manual bar-line control via the tick voice below
-        \time 3/4
-        \stemUp
-        \autoBeamOff
-        \override Beam.damping = #0
-        \override Beam.auto-knee-gap = #10000
-        \override Beam.positions = #'(4 . 4)
         dum8_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }] slap4_\markup { \center-align "S" }
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
@@ -622,7 +595,7 @@ drumPitchNames.slap = #'slap
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
-      instrumentName = "6"
+      instrumentName = "5"
       \override StaffSymbol.line-positions = #'(-1 1)
       \override StaffSymbol.stencil = ##f
       \override Clef.stencil = ##f
