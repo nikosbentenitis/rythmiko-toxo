@@ -1,6 +1,7 @@
 enniasimos:
   display: Εννιάσημος
   meter: 9/8
+  comment: "Aksak Osul. Καρσιλαμοειδή, Συγκαθιστός Θράκης"
   variations:
     v1:
       rhythm: '>4 Δ8>[ Α8] >4 Δ8>[ Δ8 (Α)8]'
