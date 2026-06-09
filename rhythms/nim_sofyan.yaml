@@ -1,6 +1,7 @@
 nim_sofyan:
   display: "Nim Sofyan"
   meter: "2/4"
+  comment: "Nim Sofyan Osul. Kasik Havasi sub rhythm. Χασάπικο/Χασαποσέρβικο"
   variations:
     v1:
       rhythm: ">8 Δ16[ Α16] >8 Δ16[ Α16]"
@@ -8,3 +9,12 @@ nim_sofyan:
       rhythm: ">8 Δ16[ Α16] >8[ Δ8>]"
     v3:
       rhythm: ">8.[ Α16] >8[ Δ8>]"
+    v4:
+      rhythm: '>4 r4 | >4 Δ4>'
+      single_line: true
+    v5:
+      rhythm: '>4 Δ8>[ Α8>] | r4 Δ4>'
+      single_line: true
+    v6:
+      rhythm: '>4 Δ8>[ Α8>] | r4 Δ8>[ (Α)8>]'
+      single_line: true
