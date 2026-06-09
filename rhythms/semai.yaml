@@ -1,7 +1,7 @@
 semai:
   display: Semai
   meter: 3/4
-  comment: "Semai Osul. Azeri is based on Semai Osul"
+  comment: "Semai Osul"
   variations:
     v1:
       rhythm: '>4 Δ4 Δ4>'
@@ -10,8 +10,6 @@ semai:
     v3:
       rhythm: '>4 Δ8[ Α8] r8 (Α)8'
     v4:
-      rhythm: '>8[ Δ16 Α16] Δ4[ >4]'
-    v5:
       rhythm: ">8[ Α16 (Α)16] S8[ S8] S4"
-    v6:
+    v5:
       rhythm: ">8[ Α16 (Α)16] S8[ S8] S8[ Α16 (Α)16]"
