@@ -1,6 +1,7 @@
 turk_aksagy:
   display: Türk aksağı
   meter: 5/8
+  comment: "Türk aksağı Osul. At Havasi, Θρακιώτικα, Μπαϊντούσκα"
   variations:
     v1:
       rhythm: '>4 Δ4.>'
