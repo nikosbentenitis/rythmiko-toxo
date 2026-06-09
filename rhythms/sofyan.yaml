@@ -1,15 +1,15 @@
 sofyan:
   display: Sofyan
   meter: 4/8
-  comment: "Sofyan Osul"
+  comment: "Sofyan Osul. Συρτόμπαλος, Μπάλος"
   variations:
     v1:
       rhythm: '>8.[ Α16] Δ8>[ (Α)8>]'
     v2:
-      rhythm: '>4 H8[ H8]'
+      rhythm: ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>]"
     v3:
       rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16"
+      comment: "Συρτόμπαλος (συρτορούμπα)"
     v4:
-      rhythm: ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>]"
-    v5:
       rhythm: ">8.[ Α16] r16 (Α)16[ Δ16>] r16"
+      comment: "Μπάλος"
