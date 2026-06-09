@@ -1797,9 +1797,9 @@ drumPitchNames.slap = #'slap
 }
 }
 \bookpart {
-  \tocItem \markup "Εννιάσημος"
+  \tocItem \markup "Aksak Osul"
 
-\markup { \vspace #0.5 \bold \fontsize #3 "Εννιάσημος" }
+\markup { \vspace #0.5 \bold \fontsize #3 "Aksak Osul" }
 \markup { \vspace #3 }
 
 \score {
