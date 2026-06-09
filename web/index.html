@@ -1370,6 +1370,36 @@ async function refreshGhUser(){
 // tools/lilypond/rhythm_pdf.py.
 const HIDDEN_SLUGS = new Set(["azeri", "kasik_havasi"]);
 
+// Defeat Cloudflare + iOS Safari PDF caching by appending the latest
+// commit SHA of the bundle file to each PDF link on page load. Browsers
+// see a different URL after every regenerate, so the prior cached blob
+// is never used. Falls through silently on network failure — the
+// unversioned URL still works, it just might return a stale PDF until
+// the cache TTL (4 hours) expires.
+async function refreshPdfLinks() {
+  const PDF_FILES = [
+    ["pdfFull",    "rythmiko-toxo-full-library.pdf"],
+    ["pdfTeacher", "rythmiko-toxo-full-library-teacher.pdf"],
+  ];
+  for (const [elId, name] of PDF_FILES) {
+    const link = document.getElementById(elId);
+    if (!link) continue;
+    try {
+      const r = await fetch(
+        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits` +
+        `?path=bundles/${name}&per_page=1`,
+        { headers: { Accept: "application/vnd.github+json" } });
+      if (!r.ok) continue;
+      const arr = await r.json();
+      if (!arr.length) continue;
+      const sha = arr[0].sha.slice(0, 8);
+      link.href = `bundles/${name}?v=${sha}`;
+    } catch (e) {
+      // Silent — leave the unversioned href in place
+    }
+  }
+}
+
 async function fetchRhythmList(){
   const r = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${REPO_DIR}?ref=${REPO_BRANCH}`,
@@ -2384,6 +2414,7 @@ if (_draftStatusEl){
   buildPalette();
   buildVariationsBar();
   populateRhythmList();
+  refreshPdfLinks();
   completeOAuthIfRedirected()
     .then(() => gh.token ? refreshGhUser() : null)
     .then(renderAuthUI);
