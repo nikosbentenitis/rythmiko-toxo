@@ -64,6 +64,7 @@ jobs:
               --title "Rythmiko Toxo — Full Library (Teacher)" \
               --no-open --no-tubs --new-rhythm-blanks 10 \
               --ragged --no-interior-bars --teacher-staff \
+              --show-comments \
               $SPECS
 
       - name: Commit refreshed bundles if changed

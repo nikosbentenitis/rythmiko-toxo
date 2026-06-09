@@ -207,6 +207,14 @@ def greek_glyph(cell):
     return " "
 
 
+def ly_escape(s: str) -> str:
+    """Escape a Python string for safe embedding inside a LilyPond markup
+    "..." literal. LilyPond treats `\\` as an escape and `"` as the string
+    terminator; everything else (including UTF-8 Greek) passes through.
+    """
+    return (s or "").replace("\\", "\\\\").replace('"', '\\"')
+
+
 def slugify(title: str) -> str:
     """Latin-only slug. Greek letters are transliterated; combining
     marks (accents) are stripped via NFKD; anything else non-ASCII is
@@ -1082,6 +1090,11 @@ def main() -> int:
                           "(azeri, kasik_havasi). Default drops them — "
                           "used for the full-library bundle, where they "
                           "don't belong."))
+    ap.add_argument("--show-comments", action="store_true",
+                    help=("render rhythm-level comments under the title "
+                          "and per-variation comments in a 'Variation notes' "
+                          "segment after the last variation. Used by the "
+                          "teacher edition."))
     args = ap.parse_args()
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
@@ -1152,7 +1165,15 @@ def main() -> int:
             bpb = auto_bpb(rhythm, meter)
         var = {**var, "meter": meter, "boxes_per_beat": bpb}
         seen_bpb.add(bpb)
-        sections.append((slug, var_id, rhythm.get("display", slug), var, bpb))
+        sections.append((
+            slug, var_id, rhythm.get("display", slug), var, bpb,
+            # rhythm-level comment (same on every variation of the rhythm,
+            # but kept on the section tuple so the grouping pass can read
+            # it without re-fetching the rhythm row)
+            rhythm.get("comment") or "",
+            # variation-level comment (specific to this variation only)
+            var.get("comment") or "",
+        ))
 
     # Emit markup-command definitions once per unique BPB so bundles can
     # mix different grids cleanly.
@@ -1191,7 +1212,7 @@ def main() -> int:
         show_var_label = total_variations > 1
         staves = []
         tubs_columns = []
-        for _, var_id, display, var, bpb in group_sections:
+        for _, var_id, display, var, bpb, _rcom, _vcom in group_sections:
             geom = cell_geometry(bpb, layout)
             staves.append(render_staff(slug, var_id, var, show_label=show_var_label,
                                          no_interior_bars=args.no_interior_bars,
@@ -1221,14 +1242,25 @@ def main() -> int:
                                                   teacher_staff=args.teacher_staff))
 
         display = group_sections[0][2]
+        rhythm_comment = group_sections[0][5]  # same on every section in the group
         heading_block = ""
         if show_headings:
-            # Larger trailing vspace (#3 vs #0.5) opens a visible gap
-            # between the rhythm title and its first variation.
             heading_block = (
-                f'\n\\markup {{ \\vspace #0.5 \\bold \\fontsize #3 "{display}" }}\n'
-                f'\\markup {{ \\vspace #3 }}\n'
+                f'\n\\markup {{ \\vspace #0.5 \\bold \\fontsize #3 "{ly_escape(display)}" }}\n'
             )
+            # Teacher PDF (and any caller passing --show-comments) gets the
+            # rhythm-level subtitle directly under the heading, in italics,
+            # one size smaller than the title.
+            if args.show_comments and rhythm_comment:
+                heading_block += (
+                    f'\\markup {{ \\vspace #0.7 \\italic \\fontsize #0 '
+                    f'"{ly_escape(rhythm_comment)}" }}\n'
+                )
+            # Larger trailing vspace (#3 vs #0.5) opens a visible gap
+            # between the rhythm title (+ optional comment) and its first
+            # variation. Slightly shrunk when a comment line was emitted,
+            # so the comment doesn't get orphaned far from the title.
+            heading_block += f'\\markup {{ \\vspace #{2 if rhythm_comment and args.show_comments else 3} }}\n'
 
         if args.ragged:
             # Each variation is its own \score so its width matches its
@@ -1253,9 +1285,37 @@ def main() -> int:
             + tubs_inner_separator.join(tubs_columns)
             + "\n  }\n}\n"
         )
+
+        # Variation-notes segment — listed under the last variation when
+        # --show-comments is on AND ≥1 variation in the group carries a
+        # comment. Format: "v5: Λόγιο" per line, one variation per row.
+        # Skip silently when no variation has a comment.
+        notes_block = ""
+        if args.show_comments:
+            var_notes = [
+                (vid, vcom)
+                for _slug, vid, _disp, _var, _bpb, _rcom, vcom in group_sections
+                if vcom
+            ]
+            if var_notes:
+                rows = [
+                    f'    \\line {{ \\bold "{ly_escape(vid)}:" '
+                    f'\\hspace #0.6 \\italic "{ly_escape(vcom)}" }}'
+                    for vid, vcom in var_notes
+                ]
+                notes_block = (
+                    "\n\\markup { \\vspace #1.5 }\n"
+                    '\\markup { \\bold \\fontsize #1 "Variation notes" }\n'
+                    "\\markup {\n  \\column {\n"
+                    + "\n".join(rows)
+                    + "\n  }\n}\n"
+                )
+
         # TUBS row(s) sit directly below the music staves; LilyPond will
-        # break to a new page only if they don't fit.
-        group_blocks.append((display, heading_block + score_block + tubs_block))
+        # break to a new page only if they don't fit. Variation notes
+        # then trail below TUBS (or directly below staves on the
+        # --no-tubs teacher edition).
+        group_blocks.append((display, heading_block + score_block + tubs_block + notes_block))
 
     # One rhythm per page via \bookpart, with a clickable TOC at the top.
     # \tocItem inside each bookpart adds an entry that links to the start
