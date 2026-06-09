@@ -10,11 +10,8 @@ nim_sofyan:
     v3:
       rhythm: ">8.[ Α16] >8[ Δ8>]"
     v4:
-      rhythm: '>4 r4 | >4 Δ4>'
-      single_line: true
+      rhythm: '>4 >8[ Δ8>]'
     v5:
-      rhythm: '>4 Δ8>[ Α8>] | r4 Δ4>'
-      single_line: true
+      rhythm: '>8[ Δ16> Α16>] r8 Δ8>'
     v6:
-      rhythm: '>4 Δ8>[ Α8>] | r4 Δ8>[ (Α)8>]'
-      single_line: true
+      rhythm: '>8[ Δ16> Α16>] r8 Δ16>[ (Α)16>]'
