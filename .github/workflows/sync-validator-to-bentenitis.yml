@@ -2,7 +2,7 @@ name: Sync validator + bundles to bentenitis
 
 # When web/index.html or any bundles/*.pdf changes on main, commit those
 # files straight to master in nikosbentenitis/bentenitis under
-# rhythms/index.html and rhythms/bundles/ — no PR. The token below has
+# rhythms/index.html.bak and rhythms/bundles/ — no PR. The token below has
 # Contents:write on that repo, so the workflow can push directly.
 #
 # Why mirror the PDFs: GitHub's raw URLs serve PDFs with
@@ -63,7 +63,10 @@ jobs:
         working-directory: bentenitis
         run: |
           mkdir -p rhythms/bundles
-          cp ../rythmiko-toxo/web/index.html rhythms/index.html
+          # rhythms/index.html is the public rhythm index (built by
+          # rhythm-scan/build_index.py); the validator lives beside it
+          # as index.html.bak so this sync never overwrites the index.
+          cp ../rythmiko-toxo/web/index.html rhythms/index.html.bak
           cp ../rythmiko-toxo/bundles/*.pdf rhythms/bundles/
           if git diff --quiet -- rhythms/; then
             echo "rhythms tree is already in sync"
@@ -71,6 +74,6 @@ jobs:
           fi
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add rhythms/index.html rhythms/bundles/
+          git add rhythms/index.html.bak rhythms/bundles/
           git commit -m "rhythms: sync validator + bundles from rythmiko-toxo@${GITHUB_SHA::7}"
           git push origin master

@@ -1,0 +1,14 @@
+wahda:
+  display: Wahda
+  meter: 4/4
+  tempo: 75
+  comment: "Wahda (وحدة). Transcribed from the whiteboard, 14 Oct 2026."
+  variations:
+    v1:
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ4>"
+    v2:
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 {3 Α8:[ Α8 (Α)8] }"
+      comment: "Beat 4: triplet — τρίλια leading into ring-finger kah, then middle-finger kah"
+    v3:
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 {3 Α8:[ Α8 (Α)8] } Δ8>[ Δ16 Α16]"
+      comment: "Beat 3: same triplet with τρίλια"

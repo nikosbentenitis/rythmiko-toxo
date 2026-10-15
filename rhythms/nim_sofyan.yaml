@@ -1,7 +1,7 @@
 nim_sofyan:
   display: "Nim Sofyan"
   meter: "2/4"
-  comment: "Nim Sofyan Osul. Kaşık Havası. Χασάπικο/Χασαποσέρβικο"
+  comment: "Nim Sofyan Osul. Kaşık Havası. Χασάπικο/Χασαποσέρβικο (γρήγορο). Τραγούδι: «Δίχως την καρδούλα σου»"
   variations:
     v1:
       rhythm: ">8[ Δ16 Α16] >8[ Δ16 Α16]"
@@ -9,9 +9,13 @@ nim_sofyan:
       rhythm: ">8[ Δ16 Α16] >8[ Δ8>]"
     v3:
       rhythm: ">8.[ Α16] >8[ Δ8>]"
+      comment: "ή Χασάπικο (circled on the teacher's printout)"
     v4:
       rhythm: '>4 >8[ Δ8>]'
     v5:
       rhythm: '>8[ Δ16> Α16>] r8 Δ8>'
     v6:
       rhythm: '>8[ Δ16> Α16>] r8 Δ16>[ (Α)16>]'
+    v7:
+      rhythm: ">8[ Α16: (Α)16] >8[ Δ8>]"
+      comment: "Handwritten under the printout (rt3.pdf p. 10): τρίλια on the ring-finger kah, then middle-finger kah; reading uncertain"

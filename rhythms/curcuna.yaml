@@ -1,0 +1,16 @@
+curcuna:
+  display: Αρμένικο (Curcuna)
+  meter: 10/8
+  tempo: 100
+  comment: "Αρμένικο — Curcuna (Τζούρτζουνα), 10/8 as 3+2+2+3. Mnemonic on the page: «καπτάνα μίρζα | μίρζα καπτάνα». Song: «Μέσα ψυχή μου» (Αρβανίτικα). Transcribed from the teacher's hand-written New Rhythms page (rt3.pdf p. 13), 15 Oct 2026."
+  variations:
+    v1:
+      rhythm: ">4. Δ4 >4 Δ4."
+    v2:
+      rhythm: ">8[ r8 Α8] Δ4> >4 Δ4."
+    v3:
+      rhythm: ">8[ r8 Α8] Δ4> >4 Δ8>[ r8 Α8]"
+    v4:
+      rhythm: ">8[ r8 Α8] Δ4> >4 Δ8>[ Δ8 Α8]"
+    v5:
+      rhythm: ">8[ Α8 (Α)8] Δ8>[ Α8] >4 Δ8>[ Δ8 Α8]"

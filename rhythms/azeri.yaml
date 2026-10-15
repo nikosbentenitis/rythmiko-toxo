@@ -1,6 +1,7 @@
 azeri:
   display: Azeri
   meter: 3/4
+  comment: "Azeri (Semai)"
   variations:
     v1:
       rhythm: '>4 Δ4 Δ4>'
