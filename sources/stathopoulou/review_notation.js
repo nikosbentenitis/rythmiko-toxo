@@ -50,7 +50,7 @@ function renderStaff(container,bars,beats,maxWidth){
     const stave=new VF.Stave(4,18,width-10); stave.setNumLines(3); stave.setContext(ctx).draw();
     const notes=[], beamGroups=[], tupGroups={}; let cur=[];
     flat.forEach(e=>{
-      if(e.repeat){ notes.push(new VF.TextNote({text:'％',duration:'q'}).setLine(2).setJustification(VF.TextNote.Justification.CENTER)); return; }
+      if(e.repeat){ { const tn=new VF.TextNote({text:'％',duration:'q'}).setLine(2).setJustification(VF.TextNote.Justification.CENTER); tn.setContext(ctx); tn.setStave(stave); notes.push(tn); } return; }   // a TextNote measures its text while formatting, so it needs the context first
       const {d,dot}=vfDur(e.dur); let n;
       if(e.drum===null){ n=new VF.StaveNote({keys:[REST_KEY],duration:d+'r'}); }
       else {

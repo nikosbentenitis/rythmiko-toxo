@@ -21,6 +21,8 @@ EDITOR = Path.home() / "git/rythmiko-toxo-editor/tools/editor"
 # The 22 the first pass found identical to a library variation, plus the 12 whose only
 # difference is an accent the library writes and her notes leave out (or the reverse,
 # where she herself wrote it both ways). Reasons are shown on the page.
+# Her rolls (⊞ before Α) are written as wahda v2 writes them: the box, Α and the next
+# stroke as a triplet of the same value, {3 Α8:[ Α8 (Α)8] } (19 Oct 2026).
 SAME = "ίδιο με"
 EXCLUDE = {
     "palios-aptalikos": "ίδιο με aptaliko v1",
@@ -56,6 +58,7 @@ EXCLUDE = {
     "baintouska-5": "turk_aksagy v2 χωρίς τον τονισμό",
     "elate-edo": "azeri v1 και semai v1 χωρίς τον τονισμό στο τελευταίο tek",
     "eptasimos-p-teke-teke": "eptasimos v6 με τονισμό στο 3ο tek· στις 05/03/2025 το γράφει κι εκείνη χωρίς τονισμό",
+    "wahda-trilia": "ίδιο με wahda v2 (η τρίλια ως τρίηχο ⊞-Α-(Α), όπως το έγραψε ο Νίκος)",
     "vasi-oriental": "duyek v1 («Βάση (oriental)») με τονισμό στο τελευταίο tek",
 }
 
@@ -84,7 +87,7 @@ GROUPS = [
     ("mikrasiatikos", "Αργός μικρασιάτικος (Sofian στα περσικά)", "4/4",
      ["sofian-persiko", "argos-mikrasiatikos-a", "argos-mikrasiatikos-b"]),
     ("wahda", None, None,
-     ["wahda-proseggisi", "wahda-teke", "wahda-trilia", "wahda-slap-trilia", "wahda-s-trilia", "wahda-k-16",
+     ["wahda-proseggisi", "wahda-teke", "wahda-slap-trilia", "wahda-s-trilia", "wahda-k-16",
       "wahda-k", "wahda-k-teke", "wahda-mia", "wahda-4s-trilia", "wahda-dyo-trilies"]),
     ("aksak_semai", "Aksak semai", "10/4", ["aksak-semai"]),
     ("yuruk_semai", "Yürük semai", "6/4", ["yuruk-semai"]),
