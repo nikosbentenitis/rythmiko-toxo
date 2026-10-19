@@ -152,8 +152,42 @@ SUBDIVISION_LABELS = {
 # middle-finger kah variant; the TUBS letter renders inside a circle.
 _TOKEN_RE = re.compile(
     r"(\(Α\)|\(A\)|\(ka\)|dum|tek|slap|ka|D|S|H|>|Δ|Α|A|r)"
-    r"(\d+\.?)?(\^>|>)?(\[|\])?$"
+    r"(\d+\.?)?(\^>|>)?(:\d*)?(\[|\])?$"
 )
+
+# Trill / roll (τρίλια): a trailing `:` after the duration (and accent),
+# e.g. `Α8:` — the stroke is rolled for its whole written length, a rapid
+# left-hand finger roll (ring–middle–index) on the rim. Renders as
+# tremolo slashes on the stem (`ka8:32` in LilyPond, the unpitched-
+# percussion roll sign); `:16` / `:64` pick a different slash count.
+# The TUBS cell shows the glyph with a tilde (`α~`, `k~`).
+TRILL_DEFAULT = 32
+
+# Tuplet group: `{3 r8 Α8 (Α)8 }` plays N written notes in the time of K.
+# K defaults to the largest power of two below N (3→2, 5→4, 6→4, 7→4);
+# `{N:K` sets it explicitly. The closing `}` is its own token. Inner
+# tokens use their WRITTEN duration (a triplet of eighths is `8`), beams
+# `[` `]` work as usual. The staff emits `\tuplet N/K { ... }`; the TUBS
+# row squeezes the group's cells to N equal boxes of span K·c/N cells
+# each; the count row labels a triplet `1 la li`.
+_TUPLET_OPEN_RE = re.compile(r"^\{(\d+)(?::(\d+))?$")
+_TUPLET_CLOSE = "}"
+
+TUPLET_SYLLABLES = {3: ["", "la", "li"]}
+
+
+def _tuplet_ratio(n: int, k: int | None) -> tuple[int, int]:
+    if k is None:
+        k = 1
+        while k * 2 < n:
+            k *= 2
+    return n, k
+
+
+def cell_span(cell) -> float:
+    """Width of a TUBS cell in grid cells. Plain cells are 1; a tuplet
+    cell carries a fractional `span` (e.g. 4/3 for a triplet beat)."""
+    return cell.get("span", 1.0) if isinstance(cell, dict) else 1.0
 
 # LilyPond identifiers can only contain letters, so digit-bearing suffixes
 # (B4, B16, …) get spelled out: B -> "BFour", "BOneSix", …
@@ -185,26 +219,32 @@ GREEK_TO_LATIN = {
 
 # ─── glyph rendering ──────────────────────────────────────────────────────
 
+def _trill_mark(cell, glyph: str) -> str:
+    return glyph + "~" if cell.get("trill") and glyph.strip() else glyph
+
+
 def latin_glyph(cell):
-    if cell is None:
+    if cell is None or cell.get("glyph") is None:
         return " "
     g, a = cell["glyph"], cell["accent"]
-    if g == "dum": return "D"
-    if g == "tek": return "T" if a else "t"
-    if g == "ka":  return "K" if a else "k"
-    if g == "slap": return "S"
-    return " "
+    if g == "dum": out = "D"
+    elif g == "tek": out = "T" if a else "t"
+    elif g == "ka":  out = "K" if a else "k"
+    elif g == "slap": out = "S"
+    else: out = " "
+    return _trill_mark(cell, out)
 
 
 def greek_glyph(cell):
-    if cell is None:
+    if cell is None or cell.get("glyph") is None:
         return " "
     g, a = cell["glyph"], cell["accent"]
-    if g == "dum": return ">"
-    if g == "tek": return "Δ" if a else "δ"
-    if g == "ka":  return "Α" if a else "α"
-    if g == "slap": return "S"
-    return " "
+    if g == "dum": out = ">"
+    elif g == "tek": out = "Δ" if a else "δ"
+    elif g == "ka":  out = "Α" if a else "α"
+    elif g == "slap": out = "S"
+    else: out = " "
+    return _trill_mark(cell, out)
 
 
 def ly_escape(s: str) -> str:
@@ -334,11 +374,33 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
             continue
         drummode = []
         cells = []
+        tuplet = None   # (n, k, drummode start idx, cells start idx, group id)
+        tuplet_groups = 0
         for raw in bar_str.split():
+            tm = _TUPLET_OPEN_RE.match(raw)
+            if tm:
+                if tuplet is not None:
+                    raise ValueError(f"nested tuplet at {raw!r}")
+                n, k = _tuplet_ratio(int(tm.group(1)),
+                                     int(tm.group(2)) if tm.group(2) else None)
+                tuplet_groups += 1
+                tuplet = (n, k, len(drummode), len(cells), tuplet_groups)
+                continue
+            if raw == _TUPLET_CLOSE:
+                if tuplet is None:
+                    raise ValueError("'}' without an opening '{N'")
+                n, k, d0, c0, _gid = tuplet
+                inner = drummode[d0:]
+                del drummode[d0:]
+                drummode.append(f"\\tuplet {n}/{k} {{ {' '.join(inner)} }}")
+                tuplet = None
+                continue
             m = _TOKEN_RE.match(raw)
             if not m:
                 raise ValueError(f"cannot parse token {raw!r}")
-            head_raw, duration, accent, beam = m.group(1), m.group(2), m.group(3), m.group(4)
+            head_raw, duration, accent, trill, beam = m.groups()
+            if trill is not None:
+                trill = int(trill[1:]) if len(trill) > 1 else TRILL_DEFAULT
             middle = head_raw.startswith("(") and head_raw.endswith(")")
             head = head_raw[1:-1] if middle else head_raw
             if middle and HEAD_TO_DRUM.get(head) != "ka":
@@ -378,16 +440,34 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
                     tok = f'{drum}{duration}_{_label_markup(below)}'
                 if accent:
                     tok += "^>"
+            if trill:
+                if drum is None:
+                    raise ValueError(f"trill ':' on a rest: {raw!r}")
+                # LilyPond wants the tremolo right after the duration.
+                tok = re.sub(r"^([a-z]+\d+\.?)", rf"\g<1>:{trill}", tok, count=1)
             if beam:
                 tok += beam   # LilyPond manual-beam markers: `[` open, `]` close
             drummode.append(tok)
 
             n = cells_for_duration(duration, bpb, meter_den)
-            if drum is None:
+            if tuplet is not None:
+                # One squeezed cell per written note (rests included), so
+                # the TUBS row shows N equal boxes for the group.
+                tn, tk, _d0, _c0, gid = tuplet
+                cells.append({
+                    "glyph": drum, "accent": bool(accent), "middle": middle,
+                    "trill": bool(trill),
+                    "span": n * tk / tn, "written": n,
+                    "tuplet": (tn, tk), "group": gid,
+                })
+            elif drum is None:
                 cells.extend([None] * n)
             else:
-                cells.append({"glyph": drum, "accent": bool(accent), "middle": middle})
+                cells.append({"glyph": drum, "accent": bool(accent),
+                              "middle": middle, "trill": bool(trill)})
                 cells.extend([None] * (n - 1))
+        if tuplet is not None:
+            raise ValueError("tuplet '{N' never closed with '}'")
         bars.append((drummode, cells))
     if not bars:
         raise ValueError("empty rhythm")
@@ -404,6 +484,44 @@ def count_row(meter: str, bpb: int):
         for i, suffix in enumerate(pattern):
             labels.append(str(beat) if i == 0 else suffix)
     return labels
+
+
+def count_row_from_cells(cells, bpb: int):
+    """Count labels aligned to the bar's actual cells: `[(label, span)]`.
+
+    Plain cells get the uniform `1 e + a` labels; a tuplet cell gets the
+    beat number when it starts a beat, else its tuplet syllable (`la`,
+    `li` for triplets) — or nothing for tuplets without a syllable set.
+    Without tuplets this is count_row() zipped with span 1.
+    """
+    if bpb not in SUBDIVISION_LABELS:
+        raise ValueError(f"no subdivision labels for boxes_per_beat={bpb}")
+    pattern = SUBDIVISION_LABELS[bpb]
+    out = []
+    pos = 0.0
+    idx_in_group = 0
+    prev_group = None
+    for c in cells:
+        span = cell_span(c)
+        beat_start = abs(pos - round(pos)) < 1e-6 and round(pos) % bpb == 0
+        beat_no = int(round(pos)) // bpb + 1
+        if isinstance(c, dict) and "tuplet" in c:
+            if c["group"] != prev_group:
+                idx_in_group = 0
+                prev_group = c["group"]
+            syll = TUPLET_SYLLABLES.get(c["tuplet"][0], [])
+            if beat_start:
+                label = str(beat_no)
+            else:
+                label = syll[idx_in_group] if idx_in_group < len(syll) else ""
+            idx_in_group += 1
+        else:
+            prev_group = None
+            sub = int(round(pos)) % bpb
+            label = str(beat_no) if sub == 0 else pattern[sub]
+        out.append((label, span))
+        pos += span
+    return out
 
 
 # ─── geometry ─────────────────────────────────────────────────────────────
@@ -645,6 +763,55 @@ def cell_command_block(bpb: int, geom: dict) -> str:
              \draw-line #'(0 . __COUNT_CELL_H__)
          }
        } #}))
+
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellS__BPB__ layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale __CELL_SIZE__))
+         (hw (/ w 2))
+         (thickness (if thick __DIVIDER_THICK__ __DIVIDER__)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(__NEG_HALF__ . __POS_HALF__)
+                 \translate #'(0 . __TUBS_TEXT_Y__)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #__TUBS_FONT__ #text
+               \translate #(cons hw __NEG_HALF__)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . __CELL_SIZE__)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(__NEG_HALF__ . __POS_HALF__)
+                 \translate #'(0 . __TUBS_TEXT_Y__)
+                 \halign #CENTER \fontsize #__TUBS_FONT__ #text
+               \translate #(cons hw __NEG_HALF__)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . __CELL_SIZE__)
+             }
+           } #}))))
+
+#(define-markup-command (countCellS__BPB__ layout props scale label)
+  (number? string?)
+  (let* ((w (* scale __CELL_SIZE__))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(__COUNT_NEG_Y__ . __COUNT_POS_Y__)
+               \translate #'(0 . __COUNT_TEXT_Y__)
+               \halign #CENTER \fontsize #__COUNT_FONT__ #label
+             \translate #(cons hw __COUNT_NEG_Y__)
+               \transparent
+               \override #'(thickness . __DIVIDER__)
+               \draw-line #'(0 . __COUNT_CELL_H__)
+           }
+         } #})))
 """
     out = tpl
     for k, v in g.items():
@@ -652,16 +819,28 @@ def cell_command_block(bpb: int, geom: dict) -> str:
     return out
 
 
+def _at_beat_boundary(pos: float, bpb: int) -> bool:
+    return abs(pos - round(pos)) < 1e-6 and round(pos) % bpb == 0
+
+
 def render_tubs_row(cells, glyph_func, bpb, cmd_suffix):
     parts = []
-    for i, c in enumerate(cells):
+    pos = 0.0
+    for c in cells:
         glyph = glyph_func(c)
-        is_beat_end = (i + 1) % bpb == 0
-        circled = bool(c and c.get("middle"))
+        span = cell_span(c)
+        pos += span
         # The final cell of the bar is always a beat end (bar length is a
         # multiple of bpb): give it the thick divider too so the bar-end
         # line is the heaviest, matching the staff's thick \bar ".".
-        thick = is_beat_end
+        thick = _at_beat_boundary(pos, bpb)
+        circled = bool(c and c.get("middle"))
+        if isinstance(c, dict) and "span" in c:
+            parts.append(
+                f'\\tubsCellS{cmd_suffix} #{span:.5f} '
+                f'#{"#t" if thick else "#f"} #{"#t" if circled else "#f"} "{glyph}"'
+            )
+            continue
         if circled:
             base = "tubsCellCircleThick" if thick else "tubsCellCircle"
         else:
@@ -671,7 +850,19 @@ def render_tubs_row(cells, glyph_func, bpb, cmd_suffix):
 
 
 def render_count_row(labels, cmd_suffix):
-    return " ".join(f'\\countCell{cmd_suffix} "{c}"' for c in labels)
+    """`labels` is a list of strings (uniform cells) or (label, span)
+    pairs from count_row_from_cells()."""
+    parts = []
+    for item in labels:
+        if isinstance(item, tuple):
+            label, span = item
+            if abs(span - 1.0) > 1e-6:
+                parts.append(f'\\countCellS{cmd_suffix} #{span:.5f} "{label}"')
+                continue
+        else:
+            label = item
+        parts.append(f'\\countCell{cmd_suffix} "{label}"')
+    return " ".join(parts)
 
 
 def _variation_label(var_id: str) -> str:
@@ -726,6 +917,61 @@ def _tick_pattern_one_bar(meter_den: int, meter_num: int, bpb: int,
     return " ".join(parts)
 
 
+def _tick_from_cells(cells, meter_den: int, bpb: int,
+                     no_interior_bars: bool = False,
+                     no_end_bar: bool = False) -> str:
+    """Tick voice for one bar, following its actual cells (see
+    _tick_pattern_one_bar for the bar-mark semantics). Tuplet cells are
+    wrapped in a matching `\\tuplet N/K { s... }` so the dashed sub-beat
+    marks land under the tuplet notes instead of the grid's sixteenths.
+    """
+    cell_dur = bpb * meter_den
+    total = sum(cell_span(c) for c in cells)
+    parts = []
+    pos = 0.0
+    open_group = None
+
+    def bar_mark(p: float) -> str:
+        if abs(p - total) < 1e-6:
+            return '' if no_end_bar else '\\bar "."'
+        if no_interior_bars:
+            return ''
+        if _at_beat_boundary(p, bpb):
+            return '\\bar "|"'
+        return '\\bar "!"'
+
+    for c in cells:
+        group = c.get("group") if isinstance(c, dict) and "tuplet" in c else None
+        if open_group is not None and group != open_group:
+            parts.append("}")
+            open_group = None
+        if group is not None and open_group is None:
+            n, k = c["tuplet"]
+            parts.append(f"\\tuplet {n}/{k} {{")
+            open_group = group
+        if group is not None:
+            w = c["written"]
+            # written cells -> one spacer when it is a plain or dotted
+            # power-of-two length, else w unit spacers without marks
+            if w & (w - 1) == 0:
+                parts.append(f"s{cell_dur // w}")
+            elif w % 3 == 0 and (w // 3) & (w // 3 - 1) == 0:
+                parts.append(f"s{cell_dur // (w // 3 * 2)}.")
+            else:
+                parts.append(" ".join([f"s{cell_dur}"] * w))
+        else:
+            parts.append(f"s{cell_dur}")
+        pos += cell_span(c)
+        mark = bar_mark(pos)
+        if mark:
+            parts.append(mark)
+        if abs(pos - total) > 1e-6:
+            parts.append("\\noBreak")
+    if open_group is not None:
+        parts.append("}")
+    return " ".join(parts)
+
+
 def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
                  no_interior_bars: bool = False, teacher_staff: bool = False) -> str:
     """Return the `\\new DrumStaff` expression (not wrapped in \\score).
@@ -775,7 +1021,7 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     # Compact `%` repeats always stay glued to the bar they repeat (never
     # a break before them).
     music_pieces, tick_pieces = [], []
-    for idx, (drum, _cells) in enumerate(bars):
+    for idx, (drum, cells) in enumerate(bars):
         is_repeat = drum == [REPEAT_BAR]
         is_last = (idx == len(bars) - 1)
         if idx > 0:
@@ -787,7 +1033,14 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
             tick_pieces.append(pct_tick)
         else:
             music_pieces.append(" ".join(drum))
-            tick_pieces.append(tick_per_last_bar if is_last else tick_per_bar)
+            has_tuplet = any(isinstance(c, dict) and "tuplet" in c for c in cells)
+            if has_tuplet:
+                tick_pieces.append(_tick_from_cells(
+                    cells, meter_den, bpb,
+                    no_interior_bars=no_interior_bars,
+                    no_end_bar=teacher_staff and is_last))
+            else:
+                tick_pieces.append(tick_per_last_bar if is_last else tick_per_bar)
     drummode_body = "".join(music_pieces)
     tick_voice = " ".join(tick_pieces)
 
@@ -920,7 +1173,6 @@ def render_tubs(slug: str, var_id: str, var: dict, geom: dict, show_label: bool 
     bpb = int(var.get("boxes_per_beat", DEFAULT_BPB))
     meter_num, meter_den = (int(x) for x in meter.split("/"))
     bars = parse_rhythm(var["rhythm"], bpb, meter_den)
-    counts = count_row(meter, bpb)
     expected_cells = meter_num * bpb
     cmd_suffix = bpb_suffix(bpb)
     var_label = _variation_label(var_id) if show_label else ""
@@ -940,11 +1192,13 @@ def render_tubs(slug: str, var_id: str, var: dict, geom: dict, show_label: bool 
                 "      }"
             )
             continue
-        if len(cells) != expected_cells:
+        total_span = sum(cell_span(c) for c in cells)
+        if abs(total_span - expected_cells) > 1e-6:
             sys.stderr.write(
-                f"warning: {slug}-{var_id} bar {i+1}: cells {len(cells)} "
+                f"warning: {slug}-{var_id} bar {i+1}: cells {total_span:g} "
                 f"!= expected {expected_cells}\n"
             )
+        counts = count_row_from_cells(cells, bpb)
         inner = (
             "      \\center-column {\n"
             f"        {{ \\override #'(box-padding . 0) \\override #'(thickness . {geom['outer']:.3f})"
