@@ -1,0 +1,7418 @@
+[
+ {
+  "id": "semai-base",
+  "name": "Semai, βάση (dum tek ka)",
+  "meter": "3/4",
+  "rhythm": ">4 Δ4 Α4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Πρώτο μάθημα: πόσα παίζω (πλήθος) / είδος. Στις 11/05/2026 το ονομάζει «Semai (σαν βαλς) = κύκλος στα αρχαία περσικά».",
+  "date": "02/10/2024",
+  "page": 1,
+  "page_label": "Έτος 1, σ. 1",
+  "occurrences": [
+   {
+    "line": "L001",
+    "page": 1,
+    "page_label": "Έτος 1, σ. 1",
+    "date": "02/10/2024"
+   },
+   {
+    "line": "L003",
+    "page": 2,
+    "page_label": "Έτος 1, σ. 2",
+    "date": "09/10/2024"
+   },
+   {
+    "line": "L228",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Μοιάζει με semai v1 και azeri v1 (> Δ Δ>)· εκείνη γράφει Δ Α χωρίς τονισμό.",
+  "crop": {
+   "line": "L001",
+   "page": 1,
+   "box_110dpi": [
+    215,
+    300,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "semai-eighths",
+  "name": "Semai με όγδοα (dum teke teke)",
+  "meter": "3/4",
+  "rhythm": ">4 Δ8[ Α8] Δ8[ Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "«1/4 ή 2/8». Το Dum γράφεται λίγο πιο κάτω (σημειογραφία Οθωμανών και Περσών).",
+  "date": "02/10/2024",
+  "page": 1,
+  "page_label": "Έτος 1, σ. 1",
+  "occurrences": [
+   {
+    "line": "L002",
+    "page": 1,
+    "page_label": "Έτος 1, σ. 1",
+    "date": "02/10/2024"
+   },
+   {
+    "line": "L004",
+    "page": 2,
+    "page_label": "Έτος 1, σ. 2",
+    "date": "09/10/2024"
+   },
+   {
+    "line": "L228",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": {
+   "slug": "azeri",
+   "display": "Azeri",
+   "vid": "v2",
+   "meter": "3/4",
+   "rhythm": ">4 Δ8[ Α8] Δ8>[ Α8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L002",
+   "page": 1,
+   "box_110dpi": [
+    305,
+    390,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "rythmos-4-4",
+  "name": "Ρυθμός σε 4/4",
+  "meter": "4/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Το > πάνω από νότα = τονισμός (στο tek).",
+  "date": "09/10/2024",
+  "page": 2,
+  "page_label": "Έτος 1, σ. 2",
+  "occurrences": [
+   {
+    "line": "L005",
+    "page": 2,
+    "page_label": "Έτος 1, σ. 2",
+    "date": "09/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L005",
+   "page": 2,
+   "box_110dpi": [
+    400,
+    505,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "palio-zeibekiko",
+  "name": "Παλιό ζεϊμπέκικο (Agir Zeybek, βαρύ ζεϊμπέκικο)",
+  "meter": "9/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8] >4 Δ4> Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Ρυθμοί Αν. Αιγαίου και Ανατολίας. 16/10/2024: «αργός ρυθμός».",
+  "date": "09/10/2024",
+  "page": 2,
+  "page_label": "Έτος 1, σ. 2",
+  "occurrences": [
+   {
+    "line": "L006",
+    "page": 2,
+    "page_label": "Έτος 1, σ. 2",
+    "date": "09/10/2024"
+   },
+   {
+    "line": "L007",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "16/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L006",
+   "page": 2,
+   "box_110dpi": [
+    565,
+    650,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "palios-karsilamas-9-4",
+  "name": "Παλιός (ή βαρύς) καρσιλαμάς ή καμηλιέρικο",
+  "meter": "9/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Παραδοσιακό καμηλιέρικο (θρακιώτικα).",
+  "date": "16/10/2024",
+  "page": 3,
+  "page_label": "Έτος 1, σ. 3",
+  "occurrences": [
+   {
+    "line": "L008",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "16/10/2024"
+   },
+   {
+    "line": "L011",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "23/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L008",
+   "page": 3,
+   "box_110dpi": [
+    215,
+    330,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "zeibekiko-9-4-b",
+  "name": "9/4, ίδιο σε αξία με το παλιό ζεϊμπέκικο",
+  "meter": "9/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Τα 9/4 είναι ρυθμός του Αιγαίου, εμφανίζεται στη Δυτική Τουρκία ή την Ανατολική Ελλάδα.",
+  "date": "23/10/2024",
+  "page": 3,
+  "page_label": "Έτος 1, σ. 3",
+  "occurrences": [
+   {
+    "line": "L009",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "23/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L009",
+   "page": 3,
+   "box_110dpi": [
+    365,
+    475,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kamilierikos",
+  "name": "Καμηλιέρικος ή Παλιός Καρσιλαμάς",
+  "meter": "9/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ4> Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "23/10/2024",
+  "page": 3,
+  "page_label": "Έτος 1, σ. 3",
+  "occurrences": [
+   {
+    "line": "L010",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "23/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L010",
+   "page": 3,
+   "box_110dpi": [
+    640,
+    725,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kamilierikos-trilia",
+  "name": "Παλιός καρσιλαμάς με τρίλια",
+  "meter": "9/4",
+  "rhythm": ">4 Α8:[ Α8] >4 Α8:[ Α8] >4 Α8:[ Α8] >4 Δ4 Δ4",
+  "confidence": "medium",
+  "confidence_reason": "Το τετράγωνο με γραμμές πριν το πρώτο Α διαβάστηκε ως τρίλια στο πρώτο όγδοο, όπως εξηγεί στις 06/11/2024 (το ΔΑ γίνεται ⊞ΑΑ). Δεν έχει τονισμούς στα δύο τελευταία tek.",
+  "remarks": "Παραλλαγή με τρίλια. 06/11/2024: «το δεξί παίζει την τρίλια αντί για το tek και η τρίλια τελειώνει με ka με το αριστερό, κι μετά το 2ο ka».",
+  "date": "23/10/2024",
+  "page": 3,
+  "page_label": "Έτος 1, σ. 3",
+  "occurrences": [
+   {
+    "line": "L012",
+    "page": 3,
+    "page_label": "Έτος 1, σ. 3",
+    "date": "23/10/2024"
+   },
+   {
+    "line": "L017",
+    "page": 6,
+    "page_label": "Έτος 1, σ. 6",
+    "date": "06/11/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L012",
+   "page": 3,
+   "box_110dpi": [
+    815,
+    905,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "palio-aptaliko",
+  "name": "Παλιό απτάλικο",
+  "meter": "9/4",
+  "rhythm": ">4 Δ4 Α4 >4 Δ8[ Α8] >4 Δ4> >4 r4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Απτάλ χαβασί στα τούρκικα = χορός του μεθυσμένου. Απτάλ = ζαλισμένος (κυρίως από ποτό), χαβάς = δρόμος, ρυθμός (από το αραβικό, αέρας).",
+  "date": "23/10/2024",
+  "page": 4,
+  "page_label": "Έτος 1, σ. 4",
+  "occurrences": [
+   {
+    "line": "L013",
+    "page": 4,
+    "page_label": "Έτος 1, σ. 4",
+    "date": "23/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "Μοιάζει με aptaliko v1· εκείνη γράφει Δ Α χωρίς τονισμούς στους χρόνους 2 και 3.",
+  "crop": {
+   "line": "L013",
+   "page": 4,
+   "box_110dpi": [
+    730,
+    835,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "palios-aptalikos",
+  "name": "Παλιός απτάλικος",
+  "meter": "9/4",
+  "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Ό,τι είναι ισχυρό (τονισμένο) παίζεται συνήθως με το δεξί (με tek).",
+  "date": "30/10/2024",
+  "page": 5,
+  "page_label": "Έτος 1, σ. 5",
+  "occurrences": [
+   {
+    "line": "L014",
+    "page": 5,
+    "page_label": "Έτος 1, σ. 5",
+    "date": "30/10/2024"
+   },
+   {
+    "line": "L056",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   },
+   {
+    "line": "L059",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "aptaliko",
+   "display": "Απτάλικο",
+   "vid": "v1",
+   "meter": "9/4",
+   "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L014",
+   "page": 5,
+   "box_110dpi": [
+    130,
+    235,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aptaliko-parallagi",
+  "name": "Παλιό απτάλικο, παραλλαγή",
+  "meter": "9/4",
+  "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Αντικατέστησα την παύση στο τέλος με 2/8. Παίζεται σε πιο βαριά κινηματικά· σε πιο ζωηρά βάζουν τα όγδοα.",
+  "date": "30/10/2024",
+  "page": 5,
+  "page_label": "Έτος 1, σ. 5",
+  "occurrences": [
+   {
+    "line": "L015",
+    "page": 5,
+    "page_label": "Έτος 1, σ. 5",
+    "date": "30/10/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "Το aptaliko v1 με ΔΑ στη θέση της παύσης.",
+  "crop": {
+   "line": "L015",
+   "page": 5,
+   "box_110dpi": [
+    350,
+    470,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aptaliko-trilia",
+  "name": "Παλιό απτάλικο με τρίλια",
+  "meter": "9/4",
+  "rhythm": ">4 Δ4 Δ4 >4 Α8:[ Α8] >4 Δ4 >4 r4",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια όπως στον παλιό καρσιλαμά. Εδώ δεν σημειώνει τονισμούς στα tek.",
+  "remarks": "",
+  "date": "06/11/2024",
+  "page": 6,
+  "page_label": "Έτος 1, σ. 6",
+  "occurrences": [
+   {
+    "line": "L016",
+    "page": 6,
+    "page_label": "Έτος 1, σ. 6",
+    "date": "06/11/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L016",
+   "page": 6,
+   "box_110dpi": [
+    115,
+    210,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "neo-zeibekiko",
+  "name": "Νέο ζεϊμπέκικο (άσκηση)",
+  "meter": "9/4",
+  "rhythm": ">8[ Α8] r8 Α8 >4 Δ4> >8[ Α8] r8 Α8 >4 Δ4> Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Όχι παραδοσιακός ρυθμός (από τον ερμηνευτή που τον παρέδωσε). Μετράει 1 έως 9, ένα τέταρτο το καθένα.",
+  "date": "20/11/2024",
+  "page": 7,
+  "page_label": "Έτος 1, σ. 7",
+  "occurrences": [
+   {
+    "line": "L018",
+    "page": 7,
+    "page_label": "Έτος 1, σ. 7",
+    "date": "20/11/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L018",
+   "page": 7,
+   "box_110dpi": [
+    820,
+    930,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "neo-aptaliko",
+  "name": "Νέο απτάλικο",
+  "meter": "9/4",
+  "rhythm": ">4 Δ4 Δ4 >8[ Α8] r8 Α8 >4 Δ4> >8[ Α8] r8 Α8",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "«Τελευταίος ρυθμός 9/4 για φέτος» (27/11/2024).",
+  "date": "27/11/2024",
+  "page": 8,
+  "page_label": "Έτος 1, σ. 8",
+  "occurrences": [
+   {
+    "line": "L019",
+    "page": 8,
+    "page_label": "Έτος 1, σ. 8",
+    "date": "27/11/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L019",
+   "page": 8,
+   "box_110dpi": [
+    400,
+    520,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "enniasimos-vasi",
+  "name": "Εννιάσημος (9/8), βάση",
+  "meter": "9/8",
+  "rhythm": ">4 Δ4 >4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Δομή 2+2+2+3. Οι βάσεις είναι συνήθως μπάσο-ψιλό-μπάσο-ψιλό. Για νταούλι: «Dum-tek-dum-te-e». Ανάλογα το ρυθμό του τραγουδιού ταιριάζει και διαφορετική παραλλαγή.",
+  "date": "04/12/2024",
+  "page": 8,
+  "page_label": "Έτος 1, σ. 8",
+  "occurrences": [
+   {
+    "line": "L020",
+    "page": 8,
+    "page_label": "Έτος 1, σ. 8",
+    "date": "04/12/2024"
+   },
+   {
+    "line": "L021",
+    "page": 9,
+    "page_label": "Έτος 1, σ. 9",
+    "date": "04/12/2024"
+   },
+   {
+    "line": "L027",
+    "page": 11,
+    "page_label": "Έτος 1, σ. 11",
+    "date": "08/01/2025"
+   },
+   {
+    "line": "L029",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   },
+   {
+    "line": "L067",
+    "page": 22,
+    "page_label": "Έτος 1, σ. 22",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "enniasimos",
+   "display": "Aksak Osul",
+   "vid": "v1",
+   "meter": "9/8",
+   "rhythm": ">4 Δ4> >4 Δ4.>",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L020",
+   "page": 8,
+   "box_110dpi": [
+    860,
+    950,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas",
+  "name": "Καρσιλαμάς (αντικρυστός)",
+  "meter": "9/8",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Δ8 Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Δύσκολο να πεις στο μάθημα το ρυθμό. Η παράδοση είναι σχεδόν πάντα στο tek, δηλ. στο ψιλό, σπάνια στο dum.",
+  "date": "04/12/2024",
+  "page": 9,
+  "page_label": "Έτος 1, σ. 9",
+  "occurrences": [
+   {
+    "line": "L022",
+    "page": 9,
+    "page_label": "Έτος 1, σ. 9",
+    "date": "04/12/2024"
+   },
+   {
+    "line": "L062",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v1",
+   "meter": "9/8",
+   "rhythm": ">4 Δ8[ Α8] >4 Δ8>[ Δ8 Α8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L022",
+   "page": 9,
+   "box_110dpi": [
+    285,
+    400,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aksak",
+  "name": "Aksak (= κουτσός), ο ρυθμός του καρσιλαμά",
+  "meter": "9/8",
+  "rhythm": ">4 Δ4 >4 Δ8[ r8 Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "dum-tek-dum-te-e-ke. Η βάση του Aksak αν παίζεται αργά δίνει καρσιλαμά, ενώ αν παίζεται γρήγορα δίνει συγκαθιστό Θράκης.",
+  "date": "04/12/2024",
+  "page": 9,
+  "page_label": "Έτος 1, σ. 9",
+  "occurrences": [
+   {
+    "line": "L023",
+    "page": 9,
+    "page_label": "Έτος 1, σ. 9",
+    "date": "04/12/2024"
+   },
+   {
+    "line": "L034",
+    "page": 14,
+    "page_label": "Έτος 1, σ. 14",
+    "date": "22/01/2025"
+   }
+  ],
+  "library": {
+   "slug": "enniasimos",
+   "display": "Aksak Osul",
+   "vid": "v2",
+   "meter": "9/8",
+   "rhythm": ">4 Δ4> >4 Δ8>[ r8 Α8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L023",
+   "page": 9,
+   "box_110dpi": [
+    470,
+    560,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-trilia",
+  "name": "Καρσιλαμάς, παραλλαγή με τρίλια",
+  "meter": "9/8",
+  "rhythm": ">4 Α8:[ Α8] >4 Δ8[ Δ8 Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Γράφει το βασικό μέτρο πρώτα και την παραλλαγή μετά· εδώ είναι μόνο το 2ο μέτρο. Το γράμμα κάτω από την τρίλια μοιάζει με Α.",
+  "remarks": "",
+  "date": "18/12/2024",
+  "page": 10,
+  "page_label": "Έτος 1, σ. 10",
+  "occurrences": [
+   {
+    "line": "L024",
+    "page": 10,
+    "page_label": "Έτος 1, σ. 10",
+    "date": "18/12/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L024",
+   "page": 10,
+   "box_110dpi": [
+    520,
+    650,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16a",
+  "name": "Καρσιλαμάς με 16κτα (παραλλαγή)",
+  "meter": "9/8",
+  "rhythm": ">4 Δ16[ Α16 Δ16 Α16] >4 Δ8[ Δ8 Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Το 1ο μέτρο στις σημειώσεις είναι ο βασικός καρσιλαμάς.",
+  "date": "18/12/2024",
+  "page": 10,
+  "page_label": "Έτος 1, σ. 10",
+  "occurrences": [
+   {
+    "line": "L025",
+    "page": 10,
+    "page_label": "Έτος 1, σ. 10",
+    "date": "18/12/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L025",
+   "page": 10,
+   "box_110dpi": [
+    645,
+    740,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16b",
+  "name": "Καρσιλαμάς με 16κτα (παραλλαγή 2)",
+  "meter": "9/8",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α16 Α16 Δ16 Α16]",
+  "confidence": "low",
+  "confidence_reason": "Τα γράμματα κάτω από τα τέσσερα 16κτα είναι δυσανάγνωστα (Α Α Δ Α ή Δ Α Δ Α). Σημειώνει «1/8» και «4/16».",
+  "remarks": "",
+  "date": "18/12/2024",
+  "page": 10,
+  "page_label": "Έτος 1, σ. 10",
+  "occurrences": [
+   {
+    "line": "L026",
+    "page": 10,
+    "page_label": "Έτος 1, σ. 10",
+    "date": "18/12/2024"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L026",
+   "page": 10,
+   "box_110dpi": [
+    735,
+    815,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aksak-slap",
+  "name": "Aksak με hek/slap",
+  "meter": "9/8",
+  "rhythm": ">4 S4 >4 S8[ r8 S8]",
+  "confidence": "medium",
+  "confidence_reason": "Γράφει Δ/Α και από κάτω H (hek) και S (slap). Μεταγράφηκε ως slap.",
+  "remarks": "Αντί για tek, παίζω με τα 4 ακροδάχτυλα στη μέση του οργάνου (πιο μέσα από το Dum) και αφήνω πάνω τα δάχτυλα.",
+  "date": "08/01/2025",
+  "page": 11,
+  "page_label": "Έτος 1, σ. 11",
+  "occurrences": [
+   {
+    "line": "L028",
+    "page": 11,
+    "page_label": "Έτος 1, σ. 11",
+    "date": "08/01/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Το enniasimos v2 με slap.",
+  "crop": {
+   "line": "L028",
+   "page": 11,
+   "box_110dpi": [
+    770,
+    900,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-syrtos-ntaouli",
+  "name": "Επτάσημος τύπου συρτός βορειοελλαδίτικος ή παλιός καλαματιανός (νταούλι)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Δ8] >4 Δ4> | >8[ r8 Δ8] >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Μάθημα νταουλιού (22/01/2025). Μακεδονικός συρτός ή παλιός καλαματιανός από Πελοπόννησο (έχουν χαθεί πια). Για πιο δυνατό χτύπημα στο νταούλι, απομακρύνω τη βίτσα πιο πολύ.",
+  "date": "22/01/2025",
+  "page": 13,
+  "page_label": "Έτος 1, σ. 13",
+  "occurrences": [
+   {
+    "line": "L030",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   },
+   {
+    "line": "L031",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   },
+   {
+    "line": "L040",
+    "page": 15,
+    "page_label": "Έτος 1, σ. 15",
+    "date": "05/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v2",
+   "meter": "7/8",
+   "rhythm": ">8 r8 Δ8 >4 Δ4>",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "Το 1ο μέτρο είναι το eptasimos v1 με Δ Δ αντί για Δ Α.",
+  "crop": {
+   "line": "L030",
+   "page": 13,
+   "box_110dpi": [
+    345,
+    450,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 2
+  }
+ },
+ {
+  "id": "eptasimos-ntaouli-dipli",
+  "name": "Επτάσημος για νταούλι, με δεύτερο dum",
+  "meter": "7/8",
+  "rhythm": ">8[ >8 Δ8] >4 Δ4> | >8[ r8 Δ8] >4 Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Γράφει μόνο τα dum· τα tek συμπεραίνονται από το ύψος των νοτών.",
+  "remarks": "",
+  "date": "22/01/2025",
+  "page": 13,
+  "page_label": "Έτος 1, σ. 13",
+  "occurrences": [
+   {
+    "line": "L032",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v2",
+   "meter": "7/8",
+   "rhythm": ">8 r8 Δ8 >4 Δ4>",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L032",
+   "page": 13,
+   "box_110dpi": [
+    650,
+    740,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 2
+  }
+ },
+ {
+  "id": "raiko-1",
+  "name": "Ρυθμός Ράικο",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Δ8] Δ4> Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Χωρίς γράμματα· dum και tek συμπεραίνονται από το ύψος των νοτών.",
+  "remarks": "Παραλλαγές για να παίζω πιο γρήγορα, γιατί δεν με βολεύουν οι τριπλέτες πολύ γρήγορα. «Απόψε στην τριανταφυλλιά» με το ρυθμό του ράικου.",
+  "date": "22/01/2025",
+  "page": 13,
+  "page_label": "Έτος 1, σ. 13",
+  "occurrences": [
+   {
+    "line": "L033",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L033",
+   "page": 13,
+   "box_110dpi": [
+    780,
+    980,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "raiko-2",
+  "name": "Ράικο (ή)",
+  "meter": "7/8",
+  "rhythm": ">8[ r8 Δ8] Δ4> Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Χωρίς γράμματα· επιβεβαιώνεται όμως από τις σημειώσεις της 06/04/2026 (Ράικο, 3-2-2).",
+  "remarks": "",
+  "date": "22/01/2025",
+  "page": 13,
+  "page_label": "Έτος 1, σ. 13",
+  "occurrences": [
+   {
+    "line": "L033",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Το eptasimos v2 με tek στη θέση του δεύτερου dum.",
+  "crop": {
+   "line": "L033",
+   "page": 13,
+   "box_110dpi": [
+    780,
+    980,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "raiko-3",
+  "name": "Ράικο (ή)",
+  "meter": "7/8",
+  "rhythm": ">4. Δ4> Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Χωρίς γράμματα· επιβεβαιώνεται από τη βάση 3-2-2 της 06/04/2026.",
+  "remarks": "",
+  "date": "22/01/2025",
+  "page": 13,
+  "page_label": "Έτος 1, σ. 13",
+  "occurrences": [
+   {
+    "line": "L033",
+    "page": 13,
+    "page_label": "Έτος 1, σ. 13",
+    "date": "22/01/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L033",
+   "page": 13,
+   "box_110dpi": [
+    780,
+    980,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-vasi",
+  "name": "Επτάσημος, βάση (3+2+2)",
+  "meter": "7/8",
+  "rhythm": ">4. >4 Δ4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Επτάσημος ρυθμός σε όλες τις περιοχές της Ελλάδας (συρτός στη Β. Ελλάδα, καλαματιανός στη Ν. Ελλάδα).",
+  "date": "05/02/2025",
+  "page": 14,
+  "page_label": "Έτος 1, σ. 14",
+  "occurrences": [
+   {
+    "line": "L035",
+    "page": 14,
+    "page_label": "Έτος 1, σ. 14",
+    "date": "05/02/2025"
+   },
+   {
+    "line": "L043",
+    "page": 17,
+    "page_label": "Έτος 1, σ. 17",
+    "date": "19/02/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L035",
+   "page": 14,
+   "box_110dpi": [
+    545,
+    650,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos",
+  "name": "Επτάσημος ρυθμός (ο αργός)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Ονόματα στις σημειώσεις: Μπεράτι(;), Παραμύθι χωρίς τέλος, Λεντιώ (συρτός Δράμας), Ζωναράδικο(;) (αργός συρτός), Αρβανίτικος καλαματιανός. Πάντα γράφει στο 1ο μέτρο το βασικό ρυθμό κι μετά την παραλλαγή.",
+  "date": "05/02/2025",
+  "page": 14,
+  "page_label": "Έτος 1, σ. 14",
+  "occurrences": [
+   {
+    "line": "L036",
+    "page": 14,
+    "page_label": "Έτος 1, σ. 14",
+    "date": "05/02/2025"
+   },
+   {
+    "line": "L042",
+    "page": 17,
+    "page_label": "Έτος 1, σ. 17",
+    "date": "19/02/2025"
+   },
+   {
+    "line": "L044",
+    "page": 18,
+    "page_label": "Έτος 1, σ. 18",
+    "date": "19/02/2025"
+   },
+   {
+    "line": "L100",
+    "page": 34,
+    "page_label": "Έτος 2, σ. 1",
+    "date": "06/10/2025"
+   },
+   {
+    "line": "L104",
+    "page": 34,
+    "page_label": "Έτος 2, σ. 1",
+    "date": "13/10/2025"
+   },
+   {
+    "line": "L144",
+    "page": 41,
+    "page_label": "Έτος 2, σ. 8",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v1",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >4 Δ4>",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L036",
+   "page": 14,
+   "box_110dpi": [
+    680,
+    760,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-trilia",
+  "name": "Επτάσημος, παραλλαγή με τρίλια",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 Α8:[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια στο πρώτο όγδοο του τελευταίου ζεύγους.",
+  "remarks": "",
+  "date": "05/02/2025",
+  "page": 14,
+  "page_label": "Έτος 1, σ. 14",
+  "occurrences": [
+   {
+    "line": "L037",
+    "page": 14,
+    "page_label": "Έτος 1, σ. 14",
+    "date": "05/02/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L037",
+   "page": 14,
+   "box_110dpi": [
+    765,
+    850,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-slap",
+  "name": "Επτάσημος, παραλλαγή με slap",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "05/02/2025",
+  "page": 14,
+  "page_label": "Έτος 1, σ. 14",
+  "occurrences": [
+   {
+    "line": "L038",
+    "page": 14,
+    "page_label": "Έτος 1, σ. 14",
+    "date": "05/02/2025"
+   },
+   {
+    "line": "L052",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v7",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >4 S4",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L038",
+   "page": 14,
+   "box_110dpi": [
+    855,
+    935,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-ntaouli",
+  "name": "Επτάσημος απλοποιημένος για νταούλι",
+  "meter": "7/8",
+  "rhythm": ">8[ r8 Δ8] >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Είναι ο ίδιος ρυθμός, απλά τον απλοποιούμε για το νταούλι.",
+  "date": "05/02/2025",
+  "page": 15,
+  "page_label": "Έτος 1, σ. 15",
+  "occurrences": [
+   {
+    "line": "L039",
+    "page": 15,
+    "page_label": "Έτος 1, σ. 15",
+    "date": "05/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v2",
+   "meter": "7/8",
+   "rhythm": ">8 r8 Δ8 >4 Δ4>",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L039",
+   "page": 15,
+   "box_110dpi": [
+    100,
+    200,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-ntaouli-plousios-1",
+  "name": "Επτάσημος για νταούλι, πιο πολλά κτυπήματα (1)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Δ8] >8[ >8] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Παραλλαγές με πιο πολλά κτυπήματα για το νταούλι.",
+  "date": "05/02/2025",
+  "page": 15,
+  "page_label": "Έτος 1, σ. 15",
+  "occurrences": [
+   {
+    "line": "L041",
+    "page": 15,
+    "page_label": "Έτος 1, σ. 15",
+    "date": "05/02/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L041",
+   "page": 15,
+   "box_110dpi": [
+    285,
+    450,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-ntaouli-plousios-2",
+  "name": "Επτάσημος για νταούλι, πιο πολλά κτυπήματα (2)",
+  "meter": "7/8",
+  "rhythm": ">8[ >8 Δ8] >8[ >8] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "05/02/2025",
+  "page": 15,
+  "page_label": "Έτος 1, σ. 15",
+  "occurrences": [
+   {
+    "line": "L041",
+    "page": 15,
+    "page_label": "Έτος 1, σ. 15",
+    "date": "05/02/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L041",
+   "page": 15,
+   "box_110dpi": [
+    285,
+    450,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-teke-ka",
+  "name": "Επτάσημος, παραλλαγή (te-ke στο 2ο)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8[ Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "19/02/2025",
+  "page": 18,
+  "page_label": "Έτος 1, σ. 18",
+  "occurrences": [
+   {
+    "line": "L045",
+    "page": 18,
+    "page_label": "Έτος 1, σ. 18",
+    "date": "19/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v4",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8 Α8",
+   "level": "exact",
+   "scope": "whole",
+   "also": [
+    "eptasimos v5"
+   ]
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L045",
+   "page": 18,
+   "box_110dpi": [
+    570,
+    680,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-teke-teke",
+  "name": "Επτάσημος, παραλλαγή (teke-teke)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "26/02/2025: «αυτό ταιριάζει και στα γρήγορα». Στις 05/03/2025 χωρίς τονισμό.",
+  "date": "19/02/2025",
+  "page": 18,
+  "page_label": "Έτος 1, σ. 18",
+  "occurrences": [
+   {
+    "line": "L046",
+    "page": 18,
+    "page_label": "Έτος 1, σ. 18",
+    "date": "19/02/2025"
+   },
+   {
+    "line": "L048",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   },
+   {
+    "line": "L054",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v6",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8[ Δ16 Α16]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L046",
+   "page": 18,
+   "box_110dpi": [
+    680,
+    775,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-argos",
+  "name": "Επτάσημος, παραλλαγή για αργούς επτάσημους",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8>[ Α8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Είναι καλό για αργούς επτάσημους.",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L047",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v4",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8 Α8",
+   "level": "accents",
+   "scope": "whole",
+   "also": [
+    "eptasimos v5"
+   ]
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L047",
+   "page": 19,
+   "box_110dpi": [
+    300,
+    430,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-teke",
+  "name": "Επτάσημος, παραλλαγή με 16κτα",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L049",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   },
+   {
+    "line": "L055",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v9",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L049",
+   "page": 19,
+   "box_110dpi": [
+    680,
+    770,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-trilia",
+  "name": "Επτάσημος, παραλλαγή με 16κτα και τρίλια",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Α8:[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια στο πρώτο όγδοο του τελευταίου ζεύγους.",
+  "remarks": "",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L050",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L050",
+   "page": 19,
+   "box_110dpi": [
+    805,
+    885,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-teke-ka",
+  "name": "Επτάσημος, παραλλαγή με 16κτα (2ο μέτρο)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Υπάρχει ένα σημάδι πάνω από το τελευταίο ζεύγος που μπορεί να είναι τονισμός.",
+  "remarks": "",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L050",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v10",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8>[ Α8>]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L050",
+   "page": 19,
+   "box_110dpi": [
+    805,
+    885,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-teletaio",
+  "name": "Επτάσημος, παραλλαγή με 16κτα στο τέλος",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L051",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v3",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L051",
+   "page": 19,
+   "box_110dpi": [
+    880,
+    950,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-slap",
+  "name": "Επτάσημος, παραλλαγή με 16κτα και slap",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "26/02/2025",
+  "page": 19,
+  "page_label": "Έτος 1, σ. 19",
+  "occurrences": [
+   {
+    "line": "L052",
+    "page": 19,
+    "page_label": "Έτος 1, σ. 19",
+    "date": "26/02/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v8",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 S4",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L052",
+   "page": 19,
+   "box_110dpi": [
+    955,
+    1045,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-p-16-tonismena",
+  "name": "Επτάσημος, παραλλαγή με 16κτα και δύο τονισμένα",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8>[ Α8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "05/03/2025",
+  "page": 20,
+  "page_label": "Έτος 1, σ. 20",
+  "occurrences": [
+   {
+    "line": "L053",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v10",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8>[ Α8>]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L053",
+   "page": 20,
+   "box_110dpi": [
+    155,
+    255,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aptaliko-16",
+  "name": "Απτάλικο με 16κτα",
+  "meter": "9/4",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Dum / tekete / tekete / Dum / teke / Dum / tek / Dum / παύση.",
+  "date": "05/03/2025",
+  "page": 20,
+  "page_label": "Έτος 1, σ. 20",
+  "occurrences": [
+   {
+    "line": "L057",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   },
+   {
+    "line": "L060",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "aptaliko",
+   "display": "Απτάλικο",
+   "vid": "v2",
+   "meter": "9/4",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L057",
+   "page": 20,
+   "box_110dpi": [
+    625,
+    725,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aptaliko-16-trilia",
+  "name": "Απτάλικο με 16κτα, slap και τρίλια",
+  "meter": "9/4",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] S4> >4 Α8:[ Α8] >4 Δ4> >4 r4",
+  "confidence": "low",
+  "confidence_reason": "Όπως είναι γραμμένο το μέτρο βγάζει 8 τέταρτα· λείπει ένα dum. Προστέθηκε το dum στο 4ο τέταρτο, όπως στο απτάλικο με 16κτα.",
+  "remarks": "",
+  "date": "12/03/2025",
+  "page": 21,
+  "page_label": "Έτος 1, σ. 21",
+  "occurrences": [
+   {
+    "line": "L061",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L061",
+   "page": 21,
+   "box_110dpi": [
+    560,
+    650,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16-v3",
+  "name": "Καρσιλαμάς με 16κτα (Εννιάσημος παραλλαγές)",
+  "meter": "9/8",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8[ Δ8 Α8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "05/03/2025",
+  "page": 20,
+  "page_label": "Έτος 1, σ. 20",
+  "occurrences": [
+   {
+    "line": "L058",
+    "page": 20,
+    "page_label": "Έτος 1, σ. 20",
+    "date": "05/03/2025"
+   },
+   {
+    "line": "L063",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v3",
+   "meter": "9/8",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ8 Α8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L058",
+   "page": 20,
+   "box_110dpi": [
+    760,
+    865,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16-v5",
+  "name": "Καρσιλαμάς με 16κτα (τρίτη παραλλαγή)",
+  "meter": "9/8",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8[ Δ8 Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Η τελευταία ομάδα μοιάζει με τρία όγδοα· τα γράμματα είναι μικρά.",
+  "remarks": "",
+  "date": "12/03/2025",
+  "page": 21,
+  "page_label": "Έτος 1, σ. 21",
+  "occurrences": [
+   {
+    "line": "L064",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v5",
+   "meter": "9/8",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ8 Α8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L064",
+   "page": 21,
+   "box_110dpi": [
+    855,
+    945,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16-v2",
+  "name": "Καρσιλαμάς με 16κτα στο τέλος",
+  "meter": "9/8",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Σημείωση στο περιθώριο για εναλλακτική στο τούρκικο (μερικώς δυσανάγνωστη).",
+  "date": "12/03/2025",
+  "page": 21,
+  "page_label": "Έτος 1, σ. 21",
+  "occurrences": [
+   {
+    "line": "L065",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v2",
+   "meter": "9/8",
+   "rhythm": ">4 Δ8[ Α8] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L065",
+   "page": 21,
+   "box_110dpi": [
+    945,
+    1020,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16-v4",
+  "name": "Καρσιλαμάς με 16κτα στην αρχή και στο τέλος",
+  "meter": "9/8",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "12/03/2025",
+  "page": 21,
+  "page_label": "Έτος 1, σ. 21",
+  "occurrences": [
+   {
+    "line": "L066",
+    "page": 21,
+    "page_label": "Έτος 1, σ. 21",
+    "date": "12/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v4",
+   "meter": "9/8",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L066",
+   "page": 21,
+   "box_110dpi": [
+    1015,
+    1090,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "karsilamas-16-v6",
+  "name": "Καρσιλαμάς με 16κτα (για αργά)",
+  "meter": "9/8",
+  "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16 Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Αυτό δεν μπορεί να ενσωματωθεί σε πολύ γρήγορα κομμάτια, είναι για αργά.",
+  "date": "19/03/2025",
+  "page": 22,
+  "page_label": "Έτος 1, σ. 22",
+  "occurrences": [
+   {
+    "line": "L068",
+    "page": 22,
+    "page_label": "Έτος 1, σ. 22",
+    "date": "19/03/2025"
+   }
+  ],
+  "library": {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "vid": "v6",
+   "meter": "9/8",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L068",
+   "page": 22,
+   "box_110dpi": [
+    870,
+    995,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-rythmou",
+  "name": "Φόρμα ρυθμού (4/4)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 Δ16 Α16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Δεν είναι κανονικός ρυθμός, είναι φόρμα ρυθμού. Θέλω να είναι μαλακά όλα εκτός των τονισμένων.",
+  "date": "16/04/2025",
+  "page": 24,
+  "page_label": "Έτος 1, σ. 24",
+  "occurrences": [
+   {
+    "line": "L070",
+    "page": 24,
+    "page_label": "Έτος 1, σ. 24",
+    "date": "16/04/2025"
+   },
+   {
+    "line": "L105",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   },
+   {
+    "line": "L088",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "16/06/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L070",
+   "page": 24,
+   "box_110dpi": [
+    350,
+    480,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-mesos",
+  "name": "Επτάσημος με (Α)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 (Α)16] >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "(Α) = κα με μέσο δάχτυλο.",
+  "date": "16/04/2025",
+  "page": 24,
+  "page_label": "Έτος 1, σ. 24",
+  "occurrences": [
+   {
+    "line": "L071",
+    "page": 24,
+    "page_label": "Έτος 1, σ. 24",
+    "date": "16/04/2025"
+   },
+   {
+    "line": "L101",
+    "page": 34,
+    "page_label": "Έτος 2, σ. 1",
+    "date": "06/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L071",
+   "page": 24,
+   "box_110dpi": [
+    700,
+    810,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-mesos",
+  "name": "4/4 με (Α)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 Δ16 (Α)16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Παράδειγμα της φόρμας ρυθμού με μέσο δάχτυλο.",
+  "date": "16/04/2025",
+  "page": 25,
+  "page_label": "Έτος 1, σ. 25",
+  "occurrences": [
+   {
+    "line": "L072",
+    "page": 25,
+    "page_label": "Έτος 1, σ. 25",
+    "date": "16/04/2025"
+   },
+   {
+    "line": "L073",
+    "page": 25,
+    "page_label": "Έτος 1, σ. 25",
+    "date": "30/04/2025"
+   },
+   {
+    "line": "L080",
+    "page": 26,
+    "page_label": "Έτος 1, σ. 26",
+    "date": "07/05/2025"
+   },
+   {
+    "line": "L112",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   },
+   {
+    "line": "L119",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "03/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Οι δύο πρώτοι χρόνοι είναι ίδιοι με duyek v4.",
+  "crop": {
+   "line": "L072",
+   "page": 25,
+   "box_110dpi": [
+    95,
+    205,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-mesos-teke",
+  "name": "4/4 με (Α), τέλος te-ke",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 Δ16 (Α)16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "30/04/2025",
+  "page": 25,
+  "page_label": "Έτος 1, σ. 25",
+  "occurrences": [
+   {
+    "line": "L074",
+    "page": 25,
+    "page_label": "Έτος 1, σ. 25",
+    "date": "30/04/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L074",
+   "page": 25,
+   "box_110dpi": [
+    410,
+    500,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kamilierikos-mesos",
+  "name": "Καμηλιέρικος με (Α)",
+  "meter": "9/4",
+  "rhythm": ">4 Δ8[ Α8] >4 Δ8[ (Α)8] >4 Δ8[ Α8] >4 Δ4 Δ4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "30/04/2025",
+  "page": 25,
+  "page_label": "Έτος 1, σ. 25",
+  "occurrences": [
+   {
+    "line": "L075",
+    "page": 25,
+    "page_label": "Έτος 1, σ. 25",
+    "date": "30/04/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L075",
+   "page": 25,
+   "box_110dpi": [
+    760,
+    855,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kamilierikos-mesos-trilia",
+  "name": "Καμηλιέρικος με τρίλια και (Α)",
+  "meter": "9/4",
+  "rhythm": ">4 Α8:[ (Α)8] >4 Α8:[ (Α)8] >4 Α8:[ (Α)8] >4 Δ4 Δ4",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια στο πρώτο όγδοο, που τελειώνει σε Α, και μετά (Α).",
+  "remarks": "Την τρίλια την παίζουμε πάντα με μέσο κα = (Α).",
+  "date": "30/04/2025",
+  "page": 25,
+  "page_label": "Έτος 1, σ. 25",
+  "occurrences": [
+   {
+    "line": "L076",
+    "page": 25,
+    "page_label": "Έτος 1, σ. 25",
+    "date": "30/04/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L076",
+   "page": 25,
+   "box_110dpi": [
+    860,
+    955,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kalamatianos-mesos",
+  "name": "Καλαματιανός με (Α)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 (Α)16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Όλο αυτό είναι σαν μια συλλαβή, οπότε με ενδιαφέρει να βάζω τη διαφορά μόνο στο τέλος.",
+  "date": "30/04/2025",
+  "page": 26,
+  "page_label": "Έτος 1, σ. 26",
+  "occurrences": [
+   {
+    "line": "L077",
+    "page": 26,
+    "page_label": "Έτος 1, σ. 26",
+    "date": "30/04/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v3",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 Α16]",
+   "level": "fingering",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L077",
+   "page": 26,
+   "box_110dpi": [
+    170,
+    290,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-vasi-slap",
+  "name": "4/4 βασισμένο πάνω στο ρυθμό wahda (= ένα, πρώτο)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 Δ16 Α16] S4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "07/05/2025",
+  "page": 26,
+  "page_label": "Έτος 1, σ. 26",
+  "occurrences": [
+   {
+    "line": "L078",
+    "page": 26,
+    "page_label": "Έτος 1, σ. 26",
+    "date": "07/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L078",
+   "page": 26,
+   "box_110dpi": [
+    490,
+    610,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-vasi-slap-2",
+  "name": "4/4, και μετά από αυτό",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 S8>] Δ16[ Α16 Δ16 Α16] S4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Παίζω μια κανονική + μια πάνω στο Dum... slap slap για να κρατάω τους χρόνους.",
+  "date": "07/05/2025",
+  "page": 26,
+  "page_label": "Έτος 1, σ. 26",
+  "occurrences": [
+   {
+    "line": "L079",
+    "page": 26,
+    "page_label": "Έτος 1, σ. 26",
+    "date": "07/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L079",
+   "page": 26,
+   "box_110dpi": [
+    605,
+    715,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-vasi-slap-mesos",
+  "name": "4/4 με (Α) και slap",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 S8>] Δ16[ Α16 Δ16 (Α)16] S4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "07/05/2025",
+  "page": 26,
+  "page_label": "Έτος 1, σ. 26",
+  "occurrences": [
+   {
+    "line": "L081",
+    "page": 26,
+    "page_label": "Έτος 1, σ. 26",
+    "date": "07/05/2025"
+   },
+   {
+    "line": "L082",
+    "page": 27,
+    "page_label": "Έτος 1, σ. 27",
+    "date": "14/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L081",
+   "page": 26,
+   "box_110dpi": [
+    935,
+    1015,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": true,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-pafsi-16",
+  "name": "4/4 βασισμένο στο wahda, με παύση 1/16",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 r16 Α16] Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Τα γράμματα του 2ου χρόνου είναι μισοσβησμένα (Δ(Α)Δ).",
+  "remarks": "Βάζω παύση 1/16.",
+  "date": "14/05/2025",
+  "page": 27,
+  "page_label": "Έτος 1, σ. 27",
+  "occurrences": [
+   {
+    "line": "L083",
+    "page": 27,
+    "page_label": "Έτος 1, σ. 27",
+    "date": "14/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L083",
+   "page": 27,
+   "box_110dpi": [
+    285,
+    400,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofian-persiko",
+  "name": "Ρυθμός Sofian στα περσικά",
+  "meter": "4/4",
+  "rhythm": ">4 r8 Α8 Δ4 Α4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Αντίστοιχο στα δικά μας αργά μικρασιάτικα (π.χ. Λιβισιανή του Πέρδικα). Λιβίσι (Καγιάκιοϊ).",
+  "date": "21/05/2025",
+  "page": 28,
+  "page_label": "Έτος 1, σ. 28",
+  "occurrences": [
+   {
+    "line": "L084",
+    "page": 28,
+    "page_label": "Έτος 1, σ. 28",
+    "date": "21/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L084",
+   "page": 28,
+   "box_110dpi": [
+    160,
+    250,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "argos-mikrasiatikos-a",
+  "name": "Αργός μικρασιάτικος (Α)",
+  "meter": "4/4",
+  "rhythm": ">4 r8 Α8 Δ4 (Α)4 | % | % | >8[ Α8] >8[ (Α)8] Δ4> r4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Θα ενσωματώσουμε τους οδηγούς (Α) και (Β) στη «Λιβισιανή του πέρδικα». Εισαγωγή A+B, couplé 3A+B, refrain A+B.",
+  "date": "28/05/2025",
+  "page": 28,
+  "page_label": "Έτος 1, σ. 28",
+  "occurrences": [
+   {
+    "line": "L085",
+    "page": 28,
+    "page_label": "Έτος 1, σ. 28",
+    "date": "28/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L085",
+   "page": 28,
+   "box_110dpi": [
+    445,
+    535,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 4
+  }
+ },
+ {
+  "id": "argos-mikrasiatikos-b",
+  "name": "Αργός μικρασιάτικος (Β)",
+  "meter": "4/4",
+  "rhythm": ">4 r8 Α8 Δ4 (Α)4 | % | % | >8[ Δ16 Α16] Δ8[ (Α)8] Δ4> r4",
+  "confidence": "low",
+  "confidence_reason": "Το 4ο μέτρο όπως είναι γραμμένο βγάζει 3 χρόνους· προστέθηκε παύση τετάρτου στο τέλος, όπως στο (Α).",
+  "remarks": "02/06/2025: στο τελευταίο μέτρο της (Β) μόνο το tek είναι τονισμένο.",
+  "date": "28/05/2025",
+  "page": 28,
+  "page_label": "Έτος 1, σ. 28",
+  "occurrences": [
+   {
+    "line": "L086",
+    "page": 28,
+    "page_label": "Έτος 1, σ. 28",
+    "date": "28/05/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L086",
+   "page": 28,
+   "box_110dpi": [
+    595,
+    685,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 4
+  }
+ },
+ {
+  "id": "livisiani-b-telos",
+  "name": "Λιβισιανή (Β), το τελευταίο μέτρο",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 r16 (Α)16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Στο κλείσιμο του κομματιού παίζουμε το τελευταίο μέτρο αργά ή μόνο το Dum και σταματάμε.",
+  "date": "02/06/2025",
+  "page": 29,
+  "page_label": "Έτος 1, σ. 29",
+  "occurrences": [
+   {
+    "line": "L087",
+    "page": 29,
+    "page_label": "Έτος 1, σ. 29",
+    "date": "02/06/2025"
+   },
+   {
+    "line": "L113",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L087",
+   "page": 29,
+   "box_110dpi": [
+    690,
+    900,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-proseggisi",
+  "name": "Wahda, προσέγγιση",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] Δ16[ (Α)16 r16 Α16] Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Γραμμένο λίγο πριν το «Αυτό είναι το wahda!»· η σειρά των γραμμάτων στον 3ο χρόνο είναι Δ(Α) 7 Α.",
+  "remarks": "",
+  "date": "16/06/2025",
+  "page": 31,
+  "page_label": "Έτος 1, σ. 31",
+  "occurrences": [
+   {
+    "line": "L089",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "16/06/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Παραλλαγή του wahda v1 (Α στη θέση της παύσης).",
+  "crop": {
+   "line": "L089",
+   "page": 31,
+   "box_110dpi": [
+    300,
+    395,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda",
+  "name": "Wahda",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "«Αυτό είναι το wahda!». Το 16κτο με την παύση γίνεται όγδοο. dum-te-ke-e-ke-tek te-ke-e-ke-tek.",
+  "date": "16/06/2025",
+  "page": 31,
+  "page_label": "Έτος 1, σ. 31",
+  "occurrences": [
+   {
+    "line": "L090",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "16/06/2025"
+   },
+   {
+    "line": "L091",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "23/06/2025"
+   },
+   {
+    "line": "L114",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": {
+   "slug": "wahda",
+   "display": "Wahda",
+   "vid": "v1",
+   "meter": "4/4",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ4>",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L090",
+   "page": 31,
+   "box_110dpi": [
+    395,
+    560,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-teke",
+  "name": "Wahda, παραλλαγή (τέλος te-ke)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "dum-te-ke-e-ke-tek te-ke-e-ke-te-teke, και γυρίζει στο dum.",
+  "date": "23/06/2025",
+  "page": 31,
+  "page_label": "Έτος 1, σ. 31",
+  "occurrences": [
+   {
+    "line": "L092",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "23/06/2025"
+   },
+   {
+    "line": "L120",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "03/11/2025"
+   },
+   {
+    "line": "L123",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L132",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Το wahda v1 με το τέλος του wahda v3 (Δ8> Δ16 Α16).",
+  "crop": {
+   "line": "L092",
+   "page": 31,
+   "box_110dpi": [
+    760,
+    870,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-trilia",
+  "name": "Wahda, παραλλαγή με τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Η τρίλια γραμμένη ως δύο όγδοα (⊞Α, (Α)), όχι ως τρίηχο.",
+  "remarks": "Από δω και κάτω παραλλαγές.",
+  "date": "23/06/2025",
+  "page": 31,
+  "page_label": "Έτος 1, σ. 31",
+  "occurrences": [
+   {
+    "line": "L093",
+    "page": 31,
+    "page_label": "Έτος 1, σ. 31",
+    "date": "23/06/2025"
+   },
+   {
+    "line": "L116",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Μοιάζει με wahda v2, όπου η τρίλια είναι τρίηχο {3 Α8: Α8 (Α)8}.",
+  "crop": {
+   "line": "L093",
+   "page": 31,
+   "box_110dpi": [
+    900,
+    985,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-slap-trilia",
+  "name": "Wahda, παραλλαγή με slap και τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 S4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Η τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "23/06/2025",
+  "page": 32,
+  "page_label": "Έτος 1, σ. 32",
+  "occurrences": [
+   {
+    "line": "L094",
+    "page": 32,
+    "page_label": "Έτος 1, σ. 32",
+    "date": "23/06/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L094",
+   "page": 32,
+   "box_110dpi": [
+    100,
+    200,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": true,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-s-trilia",
+  "name": "Wahda, παραλλαγή με S στο 2ο χρόνο και τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 r4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Η τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "23/06/2025",
+  "page": 32,
+  "page_label": "Έτος 1, σ. 32",
+  "occurrences": [
+   {
+    "line": "L095",
+    "page": 32,
+    "page_label": "Έτος 1, σ. 32",
+    "date": "23/06/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L095",
+   "page": 32,
+   "box_110dpi": [
+    230,
+    320,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": true,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "syrtobalos",
+  "name": "Συρτομπάλος (το 1ο κομμάτι του wahda)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "23/06/2025: «ένας τύπου συρτός είναι το 1ο κομμάτι του wahda». 16/02/2026: ο συρτός είναι λίγο πιο αργός συνήθως. Π.χ. «Μια σωτοβολίδα»(;).",
+  "date": "16/02/2026",
+  "page": 49,
+  "page_label": "Έτος 2, σ. 16",
+  "occurrences": [
+   {
+    "line": "L181",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   },
+   {
+    "line": "L195",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L096",
+    "page": 32,
+    "page_label": "Έτος 1, σ. 32",
+    "date": "23/06/2025"
+   },
+   {
+    "line": "L219",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v3",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16",
+   "level": "exact",
+   "scope": "whole",
+   "also": [
+    "syrtoidi v2"
+   ]
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L181",
+   "page": 49,
+   "box_110dpi": [
+    275,
+    350,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "aksak-semai",
+  "name": "Aksak semai",
+  "meter": "10/4",
+  "rhythm": ">4 Δ8[ Α8] Δ4> Α4> Δ8[ Α8] >8[ Α8] >4 Δ4> r4 Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Τα δύο τονισμένα τέταρτα έχουν από κάτω «ΔΑ»· διαβάστηκαν ως Δ και Α.",
+  "remarks": "Aksak = κουτσός, semai = κύκλος. Φόρμα κλασικής αραβικής μουσικής, δεν χορεύεται, είναι διαδοχική και αργή. Στην αρχή παίζουν αργά τα 10/4.",
+  "date": "03/07/2025",
+  "page": 32,
+  "page_label": "Έτος 1, σ. 32",
+  "occurrences": [
+   {
+    "line": "L097",
+    "page": 32,
+    "page_label": "Έτος 1, σ. 32",
+    "date": "03/07/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L097",
+   "page": 32,
+   "box_110dpi": [
+    820,
+    925,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 4,
+   "bars": 1
+  }
+ },
+ {
+  "id": "yuruk-semai",
+  "name": "Yürük semai",
+  "meter": "6/4",
+  "rhythm": ">4 Δ4 Α4 >4 Δ4> r4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Σαν να είναι 2 x 3/4.",
+  "date": "03/07/2025",
+  "page": 33,
+  "page_label": "Έτος 1, σ. 33",
+  "occurrences": [
+   {
+    "line": "L098",
+    "page": 33,
+    "page_label": "Έτος 1, σ. 33",
+    "date": "03/07/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L098",
+   "page": 33,
+   "box_110dpi": [
+    140,
+    240,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "tsifteteli-enniari",
+  "name": "Τσιφτετελοειδές εννιάρι από Αν. Θράκη",
+  "meter": "9/8",
+  "rhythm": ">4 >4 Δ4 Δ8[ Α8] r8",
+  "confidence": "medium",
+  "confidence_reason": "Το τελευταίο σημάδι διαβάστηκε ως παύση ογδόου.",
+  "remarks": "Παίζεται κυρίως με νταούλι.",
+  "date": "03/07/2025",
+  "page": 33,
+  "page_label": "Έτος 1, σ. 33",
+  "occurrences": [
+   {
+    "line": "L099",
+    "page": 33,
+    "page_label": "Έτος 1, σ. 33",
+    "date": "03/07/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L099",
+   "page": 33,
+   "box_110dpi": [
+    320,
+    405,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-trilia-mesos",
+  "name": "Επτάσημος με τρίλια και (Α)",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ8 Α8] >4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια στο πρώτο όγδοο του τελευταίου ζεύγους.",
+  "remarks": "",
+  "date": "06/10/2025",
+  "page": 34,
+  "page_label": "Έτος 2, σ. 1",
+  "occurrences": [
+   {
+    "line": "L102",
+    "page": 34,
+    "page_label": "Έτος 2, σ. 1",
+    "date": "06/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L102",
+   "page": 34,
+   "box_110dpi": [
+    360,
+    455,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "eptasimos-16-mesos-slap",
+  "name": "Επτάσημος με 16κτα, (Α) και slap",
+  "meter": "7/8",
+  "rhythm": ">8[ Δ16 Α16 Δ16 (Α)16] >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "06/10/2025",
+  "page": 34,
+  "page_label": "Έτος 2, σ. 1",
+  "occurrences": [
+   {
+    "line": "L103",
+    "page": 34,
+    "page_label": "Έτος 2, σ. 1",
+    "date": "06/10/2025"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v8",
+   "meter": "7/8",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 S4",
+   "level": "fingering",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L103",
+   "page": 34,
+   "box_110dpi": [
+    475,
+    550,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-pafsi",
+  "name": "4/4 με παύσεις (16κτα)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 r16 Α16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "13/10/2025: παίζω 16κτα με παύσεις.",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L106",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L106",
+   "page": 35,
+   "box_110dpi": [
+    200,
+    300,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-pafsi-2",
+  "name": "4/4 με παύσεις (2)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] r16 Α16[ Δ16 Α16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L107",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L107",
+   "page": 35,
+   "box_110dpi": [
+    300,
+    385,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "forma-pafsi-3",
+  "name": "4/4 με παύσεις (e-ke e-ke)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] r16 Α16 r16 Α16 Δ4>",
+  "confidence": "medium",
+  "confidence_reason": "Ο 3ος χρόνος είναι γραμμένος ως «7♩ 7♩»· για να βγει το μέτρο πρέπει να είναι 16κτα.",
+  "remarks": "",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L108",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L108",
+   "page": 35,
+   "box_110dpi": [
+    385,
+    470,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-k-16",
+  "name": "Wahda με Α και 16κτα",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 Δ16 Α16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Το 16κτο με την παύση, 2/16, και το όγδοο, 1/8.",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L109",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L109",
+   "page": 35,
+   "box_110dpi": [
+    495,
+    590,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-k",
+  "name": "Wahda με Α",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 r16 Α16] Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Dum te-ke e-ke-te-e te-ke-e-ke tek.",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L110",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": {
+   "slug": "wahda",
+   "display": "Wahda",
+   "vid": "v1",
+   "meter": "4/4",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ4>",
+   "level": "fingering",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L110",
+   "page": 35,
+   "box_110dpi": [
+    690,
+    810,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-k-teke",
+  "name": "Wahda με Α, τέλος te-ke",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 r16 Α16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "13/10/2025",
+  "page": 35,
+  "page_label": "Έτος 2, σ. 2",
+  "occurrences": [
+   {
+    "line": "L111",
+    "page": 35,
+    "page_label": "Έτος 2, σ. 2",
+    "date": "13/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L111",
+   "page": 35,
+   "box_110dpi": [
+    835,
+    930,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-mia",
+  "name": "Wahda (= μία, πρώτη, μονάδα)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ (Α)16 r16 Α16] Δ8>[ Δ16 Α16]",
+  "confidence": "medium",
+  "confidence_reason": "Τα γράμματα του 3ου χρόνου είναι κομμένα στη σάρωση· διαβάστηκαν Δ(Α) 7 Α.",
+  "remarks": "",
+  "date": "27/10/2025",
+  "page": 36,
+  "page_label": "Έτος 2, σ. 3",
+  "occurrences": [
+   {
+    "line": "L115",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L115",
+   "page": 36,
+   "box_110dpi": [
+    460,
+    565,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-4s-trilia",
+  "name": "Wahda, 4ος χρόνος με τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 Α16:[ (Α)16 Δ8>]",
+  "confidence": "medium",
+  "confidence_reason": "Η τρίλια σε 16κτο που οδηγεί σε (Α) και τονισμένο tek.",
+  "remarks": "Παίζω τα 4-S, 4-S κτλ.",
+  "date": "27/10/2025",
+  "page": 36,
+  "page_label": "Έτος 2, σ. 3",
+  "occurrences": [
+   {
+    "line": "L117",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L117",
+   "page": 36,
+   "box_110dpi": [
+    770,
+    880,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-dyo-trilies",
+  "name": "Wahda με δύο τρίλιες",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Α16:[ (Α)16 Δ8>] Α16:[ (Α)16 Δ8>]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλιες σε 16κτο.",
+  "remarks": "",
+  "date": "27/10/2025",
+  "page": 36,
+  "page_label": "Έτος 2, σ. 3",
+  "occurrences": [
+   {
+    "line": "L118",
+    "page": 36,
+    "page_label": "Έτος 2, σ. 3",
+    "date": "27/10/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L118",
+   "page": 36,
+   "box_110dpi": [
+    880,
+    985,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-forma-trilia",
+  "name": "4/4 με (Α) και τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] r4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "03/11/2025",
+  "page": 37,
+  "page_label": "Έτος 2, σ. 4",
+  "occurrences": [
+   {
+    "line": "L121",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "03/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L121",
+   "page": 37,
+   "box_110dpi": [
+    335,
+    425,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "wahda-forma-slap-trilia",
+  "name": "4/4 με (Α), slap και τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 S8>] r4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "03/11/2025",
+  "page": 37,
+  "page_label": "Έτος 2, σ. 4",
+  "occurrences": [
+   {
+    "line": "L122",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "03/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L122",
+   "page": 37,
+   "box_110dpi": [
+    430,
+    525,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": true,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk",
+  "name": "Arabesk",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >8[ Δ16 Α16] Δ8>[ Δ16 (Α)16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Στην Ελλάδα θα βρούμε το Arabesk μέσα σε πολλά τραγούδια που ονομάζουμε «τσιφτετέλια». Το Δ του 2ου χρόνου και του 4ου μπορεί να είναι S (Δ/S).",
+  "date": "10/11/2025",
+  "page": 37,
+  "page_label": "Έτος 2, σ. 4",
+  "occurrences": [
+   {
+    "line": "L124",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L128",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L133",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   },
+   {
+    "line": "L138",
+    "page": 40,
+    "page_label": "Έτος 2, σ. 7",
+    "date": "08/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L124",
+   "page": 37,
+   "box_110dpi": [
+    760,
+    850,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "vasi-oriental",
+  "name": "Βάση Oriental",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ8] r8 Δ8 >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Το tek μπορεί να είναι και slap (Δ/S). «Μπρατσέρα»(;) στην ορθία θέση.",
+  "date": "10/11/2025",
+  "page": 37,
+  "page_label": "Έτος 2, σ. 4",
+  "occurrences": [
+   {
+    "line": "L125",
+    "page": 37,
+    "page_label": "Έτος 2, σ. 4",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L223",
+    "page": 59,
+    "page_label": "Έτος 2, σ. 26",
+    "date": "04/05/2026"
+   }
+  ],
+  "library": {
+   "slug": "duyek",
+   "display": "Duyek",
+   "vid": "v1",
+   "meter": "4/4",
+   "rhythm": ">8[ Δ8] r8 Δ8 >4 Δ4",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L125",
+   "page": 37,
+   "box_110dpi": [
+    950,
+    1035,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "vasi-oriental-s",
+  "name": "Βάση Oriental με S / Duyek",
+  "meter": "4/4",
+  "rhythm": ">8[ S8] r8 S8 >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Φεύγω / Ορφέας Περίδης: ξεκινάει με βάση Oriental με S κι γυρνάει σε Arabesk. 11/05/2026: «DUYEK» με H.",
+  "date": "10/11/2025",
+  "page": 38,
+  "page_label": "Έτος 2, σ. 5",
+  "occurrences": [
+   {
+    "line": "L126",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L137",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   },
+   {
+    "line": "L230",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Το duyek v1 με slap αντί για tek.",
+  "crop": {
+   "line": "L126",
+   "page": 38,
+   "box_110dpi": [
+    260,
+    335,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "oriental-arabesk",
+  "name": "Oriental προς Arabesk (*)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Το τελευταίο tek μπορεί να είναι S (Δ/S).",
+  "date": "10/11/2025",
+  "page": 38,
+  "page_label": "Έτος 2, σ. 5",
+  "occurrences": [
+   {
+    "line": "L127",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L127",
+   "page": 38,
+   "box_110dpi": [
+    365,
+    455,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-p-16",
+  "name": "Arabesk παραλλαγή (16κτα στο τέλος)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ16[ Α16 Δ16 (Α)16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "10/11/2025",
+  "page": 38,
+  "page_label": "Έτος 2, σ. 5",
+  "occurrences": [
+   {
+    "line": "L129",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L129",
+   "page": 38,
+   "box_110dpi": [
+    605,
+    700,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-p-pafsi",
+  "name": "Arabesk παραλλαγή (παύση στο τέλος)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ16[ Α16 r16 (Α)16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "10/11/2025",
+  "page": 38,
+  "page_label": "Έτος 2, σ. 5",
+  "occurrences": [
+   {
+    "line": "L130",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L130",
+   "page": 38,
+   "box_110dpi": [
+    735,
+    825,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-p1-trilia",
+  "name": "Arabesk παραλλαγή 1 (τρίλια)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "10/11/2025",
+  "page": 38,
+  "page_label": "Έτος 2, σ. 5",
+  "occurrences": [
+   {
+    "line": "L131",
+    "page": 38,
+    "page_label": "Έτος 2, σ. 5",
+    "date": "10/11/2025"
+   },
+   {
+    "line": "L134",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   },
+   {
+    "line": "L139",
+    "page": 40,
+    "page_label": "Έτος 2, σ. 7",
+    "date": "08/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L131",
+   "page": 38,
+   "box_110dpi": [
+    840,
+    920,
+    860,
+    1578
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-s-trilia",
+  "name": "Arabesk με S και τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 >4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "",
+  "date": "24/11/2025",
+  "page": 39,
+  "page_label": "Έτος 2, σ. 6",
+  "occurrences": [
+   {
+    "line": "L135",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L135",
+   "page": 39,
+   "box_110dpi": [
+    505,
+    595,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": true,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-s",
+  "name": "Arabesk με S",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 >8[ Δ16 Α16] S4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "24/11/2025",
+  "page": 39,
+  "page_label": "Έτος 2, σ. 6",
+  "occurrences": [
+   {
+    "line": "L136",
+    "page": 39,
+    "page_label": "Έτος 2, σ. 6",
+    "date": "24/11/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L136",
+   "page": 39,
+   "box_110dpi": [
+    615,
+    705,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": true,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-ii",
+  "name": "Arabesk II",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >16[ Α16 r16 (Α)16] Δ8>[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Σαν το wahda αλλά με Dum αντί tek στο 3ο κομμάτι. 12/01/2026: θα κόψουμε τους ρυθμούς στη μέση και θα κάνουμε ελληνικούς «συρτοειδείς» ρυθμούς.",
+  "date": "08/12/2025",
+  "page": 40,
+  "page_label": "Έτος 2, σ. 7",
+  "occurrences": [
+   {
+    "line": "L140",
+    "page": 40,
+    "page_label": "Έτος 2, σ. 7",
+    "date": "08/12/2025"
+   },
+   {
+    "line": "L153",
+    "page": 43,
+    "page_label": "Έτος 2, σ. 10",
+    "date": "12/01/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L140",
+   "page": 40,
+   "box_110dpi": [
+    400,
+    500,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-ii-trilia",
+  "name": "Arabesk II με τρίλια",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >16[ Α16 r16 (Α)16] Δ8>[ Α16: (Α)16]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια σε 16κτο μετά το τονισμένο tek.",
+  "remarks": "",
+  "date": "08/12/2025",
+  "page": 40,
+  "page_label": "Έτος 2, σ. 7",
+  "occurrences": [
+   {
+    "line": "L141",
+    "page": 40,
+    "page_label": "Έτος 2, σ. 7",
+    "date": "08/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L141",
+   "page": 40,
+   "box_110dpi": [
+    530,
+    630,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "arabesk-k",
+  "name": "Arabesk (Α στο τέλος)",
+  "meter": "4/4",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+  "confidence": "medium",
+  "confidence_reason": "Τα γράμματα της γραμμής είναι κομμένα στη σάρωση· διαβάστηκαν από το ύψος των νοτών.",
+  "remarks": "",
+  "date": "12/01/2026",
+  "page": 43,
+  "page_label": "Έτος 2, σ. 10",
+  "occurrences": [
+   {
+    "line": "L152",
+    "page": 43,
+    "page_label": "Έτος 2, σ. 10",
+    "date": "12/01/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L152",
+   "page": 43,
+   "box_110dpi": [
+    565,
+    655,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "elate-edo",
+  "name": "«Ελάτ' εδώ γειτόνισσες» (βαλσάκι)",
+  "meter": "3/4",
+  "rhythm": ">4 Δ4 Δ4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Είναι ο ρυθμός, με slap!",
+  "date": "15/12/2025",
+  "page": 41,
+  "page_label": "Έτος 2, σ. 8",
+  "occurrences": [
+   {
+    "line": "L142",
+    "page": 41,
+    "page_label": "Έτος 2, σ. 8",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": {
+   "slug": "azeri",
+   "display": "Azeri",
+   "vid": "v1",
+   "meter": "3/4",
+   "rhythm": ">4 Δ4 Δ4>",
+   "level": "accents",
+   "scope": "whole",
+   "also": [
+    "semai v1"
+   ]
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L142",
+   "page": 41,
+   "box_110dpi": [
+    220,
+    330,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "elate-edo-bendir",
+  "name": "«Ελάτ' εδώ γειτόνισσες» για bendir",
+  "meter": "3/4",
+  "rhythm": ">4 S4 S4>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Για bendir θα το παίζουμε με S, το δεύτερο πιο τονισμένο.",
+  "date": "15/12/2025",
+  "page": 41,
+  "page_label": "Έτος 2, σ. 8",
+  "occurrences": [
+   {
+    "line": "L143",
+    "page": 41,
+    "page_label": "Έτος 2, σ. 8",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "Το semai v1 με slap.",
+  "crop": {
+   "line": "L143",
+   "page": 41,
+   "box_110dpi": [
+    370,
+    450,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "thrakis-bendir",
+  "name": "Θράκης, επτάσημο για bendir",
+  "meter": "7/8",
+  "rhythm": ">4. >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Επτάσημο συρτός Μακεδονίας ή Καλαματιανό. Το τουμπελέκι παίζει τον επτάσημο.",
+  "date": "15/12/2025",
+  "page": 41,
+  "page_label": "Έτος 2, σ. 8",
+  "occurrences": [
+   {
+    "line": "L145",
+    "page": 41,
+    "page_label": "Έτος 2, σ. 8",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L145",
+   "page": 41,
+   "box_110dpi": [
+    675,
+    760,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "moraitika-toumbeleki",
+  "name": "Μωραΐτικα, τουμπελέκι",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] >8[ Δ8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "15/12/2025",
+  "page": 42,
+  "page_label": "Έτος 2, σ. 9",
+  "occurrences": [
+   {
+    "line": "L146",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": {
+   "slug": "nim_sofyan",
+   "display": "Nim Sofyan",
+   "vid": "v2",
+   "meter": "2/4",
+   "rhythm": ">8[ Δ16 Α16] >8[ Δ8>]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L146",
+   "page": 42,
+   "box_110dpi": [
+    170,
+    330,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "bendir-4-8",
+  "name": "Μωραΐτικα, Ικαρίας, Χίου: bendir",
+  "meter": "4/8",
+  "rhythm": ">4 >8[ S8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "S/Σ: είναι για κουφό χτύπημα, χτυπάει σαν tek με όλα τα δάχτυλα στο στεφάνι.",
+  "date": "15/12/2025",
+  "page": 42,
+  "page_label": "Έτος 2, σ. 9",
+  "occurrences": [
+   {
+    "line": "L146",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   },
+   {
+    "line": "L148",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   },
+   {
+    "line": "L151",
+    "page": 43,
+    "page_label": "Έτος 2, σ. 10",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L146",
+   "page": 42,
+   "box_110dpi": [
+    170,
+    330,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "ikarias",
+  "name": "Ικαρίας, τουμπελέκι",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] >8[ Α8] | >8[ Δ16 Α16] >8[ Δ8>] | >8[ Α8] >8[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρία μέτρα όπως είναι γραμμένα· η πρώτη διαστολή είναι λίγο ασαφής.",
+  "remarks": "",
+  "date": "15/12/2025",
+  "page": 42,
+  "page_label": "Έτος 2, σ. 9",
+  "occurrences": [
+   {
+    "line": "L147",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": {
+   "slug": "nim_sofyan",
+   "display": "Nim Sofyan",
+   "vid": "v2",
+   "meter": "2/4",
+   "rhythm": ">8[ Δ16 Α16] >8[ Δ8>]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L147",
+   "page": 42,
+   "box_110dpi": [
+    410,
+    530,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 3
+  }
+ },
+ {
+  "id": "kritis",
+  "name": "Κρήτης, τουμπελέκι",
+  "meter": "10/4",
+  "rhythm": ">4 Δ8[ Α8] Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8] >4",
+  "confidence": "low",
+  "confidence_reason": "Χωρίς ένδειξη μέτρου· τα μέτρα είναι 3+3+4 τέταρτα. Ενώθηκαν σε ένα 10/4 για να αποδοθούν.",
+  "remarks": "",
+  "date": "15/12/2025",
+  "page": 42,
+  "page_label": "Έτος 2, σ. 9",
+  "occurrences": [
+   {
+    "line": "L149",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L149",
+   "page": 42,
+   "box_110dpi": [
+    750,
+    835,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kritis-bendir",
+  "name": "Κρήτης, bendir",
+  "meter": "10/4",
+  "rhythm": ">4 S4 S4 >4 S4 S4 >4 S4 S4 >4",
+  "confidence": "low",
+  "confidence_reason": "Όπως το τουμπελέκι, 3+3+4 τέταρτα ενωμένα σε 10/4.",
+  "remarks": "",
+  "date": "15/12/2025",
+  "page": 42,
+  "page_label": "Έτος 2, σ. 9",
+  "occurrences": [
+   {
+    "line": "L150",
+    "page": 42,
+    "page_label": "Έτος 2, σ. 9",
+    "date": "15/12/2025"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L150",
+   "page": 42,
+   "box_110dpi": [
+    855,
+    935,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "syrtos",
+  "name": "Συρτός (νησιώτικος)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Βάση «νησιώτικου» συρτού (όχι ο 7σημος της Μακεδονίας). dum-teke-eke-teke.",
+  "date": "12/01/2026",
+  "page": 43,
+  "page_label": "Έτος 2, σ. 10",
+  "occurrences": [
+   {
+    "line": "L154",
+    "page": 43,
+    "page_label": "Έτος 2, σ. 10",
+    "date": "12/01/2026"
+   },
+   {
+    "line": "L155",
+    "page": 44,
+    "page_label": "Έτος 2, σ. 11",
+    "date": "12/01/2026"
+   },
+   {
+    "line": "L159",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   },
+   {
+    "line": "L165",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   },
+   {
+    "line": "L180",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   },
+   {
+    "line": "L194",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L227",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L154",
+   "page": 43,
+   "box_110dpi": [
+    810,
+    905,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "syrtos-tonismenos",
+  "name": "Συρτός, 2ο μέτρο με τονισμούς",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16> Α16] r16 (Α)16[ Δ16> Α16>]",
+  "confidence": "medium",
+  "confidence_reason": "Πάνω από το 1ο μέτρο σημειώνει «δεν τονίζω / τονίζω»· οι τονισμοί του 2ου μέτρου διαβάστηκαν από τα σημάδια >.",
+  "remarks": "",
+  "date": "12/01/2026",
+  "page": 44,
+  "page_label": "Έτος 2, σ. 11",
+  "occurrences": [
+   {
+    "line": "L155",
+    "page": 44,
+    "page_label": "Έτος 2, σ. 11",
+    "date": "12/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L155",
+   "page": 44,
+   "box_110dpi": [
+    90,
+    205,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 1
+  }
+ },
+ {
+  "id": "syrtos-4metro-klisimo",
+  "name": "Συρτός, τετράμετρο με κλείσιμο",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >8[ Δ8] r8 Δ8",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Συνήθως είναι τετράμετρα και θα μπορούσαμε στο τελευταίο μέτρο να κάνουμε κλείσιμο (π.χ. slap ή τρίλια ή 3 tek) αλλά συνήθως είναι πολύ απλά και minimal. Το tek του κλεισίματος μπορεί να είναι S (Δ/S).",
+  "date": "12/01/2026",
+  "page": 44,
+  "page_label": "Έτος 2, σ. 11",
+  "occurrences": [
+   {
+    "line": "L156",
+    "page": 44,
+    "page_label": "Έτος 2, σ. 11",
+    "date": "12/01/2026"
+   },
+   {
+    "line": "L165",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L156",
+   "page": 44,
+   "box_110dpi": [
+    370,
+    470,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-trilia-2o",
+  "name": "Συρτός, τρίλια στο 2ο μέτρο",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α8:[ (Α)8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ8] r8 Δ8",
+  "confidence": "medium",
+  "confidence_reason": "Τα «-||-» διαβάστηκαν ως επανάληψη του βασικού μέτρου· στο 4ο σημειώνει «χωρίς S».",
+  "remarks": "Αν μου ζητηθεί να δώσω ρυθμό σε ομάδα, δίνω όλο το 4μετρο.",
+  "date": "12/01/2026",
+  "page": 44,
+  "page_label": "Έτος 2, σ. 11",
+  "occurrences": [
+   {
+    "line": "L157",
+    "page": 44,
+    "page_label": "Έτος 2, σ. 11",
+    "date": "12/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L157",
+   "page": 44,
+   "box_110dpi": [
+    515,
+    615,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-trilia-16",
+  "name": "Συρτός, τρίλια σε 16κτο στο 2ο μέτρο",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α16: Α16] Δ8[ Α8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ8] r8 Δ8",
+  "confidence": "low",
+  "confidence_reason": "Το 2ο μέτρο είναι πυκνό: dum, τρίλια με Α Α και ΔΑ· η διάρκεια των νοτών είναι αβέβαιη.",
+  "remarks": "",
+  "date": "12/01/2026",
+  "page": 44,
+  "page_label": "Έτος 2, σ. 11",
+  "occurrences": [
+   {
+    "line": "L158",
+    "page": 44,
+    "page_label": "Έτος 2, σ. 11",
+    "date": "12/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L158",
+   "page": 44,
+   "box_110dpi": [
+    635,
+    735,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-nisia-trilia",
+  "name": "Συρτός (νησιά), 4ο μέτρο με τρίλια",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "x3 κι 4ο μέτρο.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L159",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L159",
+   "page": 45,
+   "box_110dpi": [
+    255,
+    335,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "sofyan",
+  "name": "Sofyan (παλιός μπάλος)",
+  "meter": "4/8",
+  "rhythm": ">8.[ Α16] Δ8>[ (Α)8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Η βάση των συρτών είναι ο αργός τετράσημος. SOFYAN λέγεται στην ανατολική μουσική. Η βάση για καθιστό. Το «Ταλβρί» της Λέρου έχει ίδια μελωδία αλλά σε Sofyan.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L160",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   },
+   {
+    "line": "L179",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   },
+   {
+    "line": "L185",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   },
+   {
+    "line": "L196",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L216",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "20/04/2026"
+   },
+   {
+    "line": "L222",
+    "page": 59,
+    "page_label": "Έτος 2, σ. 26",
+    "date": "04/05/2026"
+   },
+   {
+    "line": "L226",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8.[ Α16] Δ8>[ (Α)8>]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L160",
+   "page": 45,
+   "box_110dpi": [
+    420,
+    505,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofyan-trilia",
+  "name": "Sofyan, 4ο μέτρο με τρίλια",
+  "meter": "4/8",
+  "rhythm": ">8.[ Α16] Δ8[ (Α)8] | % | % | >4 Α8:[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα.",
+  "remarks": "1-2-3 μέτρα και μετά το κλείσιμο.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L161",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8.[ Α16] Δ8>[ (Α)8>]",
+   "level": "accents",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L161",
+   "page": 45,
+   "box_110dpi": [
+    535,
+    610,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-klisimo-tete",
+  "name": "Συρτός, κλείσιμο με δύο tek (π.χ. Νάξου)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Δ8[ Δ8]",
+  "confidence": "medium",
+  "confidence_reason": "Τα δύο tek μπορεί να είναι και S S.",
+  "remarks": "Π.χ. παλιά πουλιά(;) Νάξου.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L162",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L162",
+   "page": 45,
+   "box_110dpi": [
+    615,
+    700,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-klisimo-k",
+  "name": "Συρτός, κλείσιμο με κλειστό K (K)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Α8[ (Α)8]",
+  "confidence": "low",
+  "confidence_reason": "Το K (κλειστή χειροθεσία) δεν υπάρχει στη γραμματική της βιβλιοθήκης· γράφτηκε ως Α και (Α).",
+  "remarks": "K = κλειστό, (K) = κλειστό με μέσο.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L163",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   },
+   {
+    "line": "L182",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L163",
+   "page": 45,
+   "box_110dpi": [
+    755,
+    845,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-klisimo-kkk",
+  "name": "Συρτός, κλείσιμο > K (K) K",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >8[ Α8] (Α)8[ Α8]",
+  "confidence": "low",
+  "confidence_reason": "Το K (κλειστό) γράφτηκε ως Α· δεν υπάρχει σύμβολο για κλειστή χειροθεσία.",
+  "remarks": "Π.χ. «Τα σμυρνέικα τραγούδια» στο γρήγορο.",
+  "date": "19/01/2026",
+  "page": 45,
+  "page_label": "Έτος 2, σ. 12",
+  "occurrences": [
+   {
+    "line": "L164",
+    "page": 45,
+    "page_label": "Έτος 2, σ. 12",
+    "date": "19/01/2026"
+   },
+   {
+    "line": "L166",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   },
+   {
+    "line": "L184",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L164",
+   "page": 45,
+   "box_110dpi": [
+    870,
+    975,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-4metro-trilia-k",
+  "name": "Συρτός, τετράμετρο με τρίλια και κλειστά",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α8:[ Α8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α8] (Α)8[ Α8]",
+  "confidence": "low",
+  "confidence_reason": "Κλειστά K γραμμένα ως Α.",
+  "remarks": "Αυτό είναι πιο πολύ για τουμπελέκι· το μπεντίρ παίζει το δεύτερο.",
+  "date": "26/01/2026",
+  "page": 46,
+  "page_label": "Έτος 2, σ. 13",
+  "occurrences": [
+   {
+    "line": "L167",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L167",
+   "page": 46,
+   "box_110dpi": [
+    430,
+    505,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-trilia-tek",
+  "name": "Συρτός, 2ο μέτρο τρίλια (Α)Δ",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α16:[ (Α)16 Δ8>] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+  "confidence": "medium",
+  "confidence_reason": "Σημειώνει ότι το τονισμένο tek γράφεται όγδοο για απλότητα αλλά είναι 16κτο και παύση.",
+  "remarks": "Οπότε παίζεται γρήγορα, δεν αφήνω κενό πριν το tek.",
+  "date": "26/01/2026",
+  "page": 46,
+  "page_label": "Έτος 2, σ. 13",
+  "occurrences": [
+   {
+    "line": "L168",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L168",
+   "page": 46,
+   "box_110dpi": [
+    530,
+    630,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 4
+  }
+ },
+ {
+  "id": "syrtos-2o-ekeke",
+  "name": "Συρτός, 2ο μέτρο (παύση ογδόου)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r8 Α16[ (Α)16]",
+  "confidence": "medium",
+  "confidence_reason": "Το πρώτο γράμμα της 2ης ομάδας μοιάζει με Α· στη γραμμή των κουταλιών είναι Δ.",
+  "remarks": "",
+  "date": "26/01/2026",
+  "page": 46,
+  "page_label": "Έτος 2, σ. 13",
+  "occurrences": [
+   {
+    "line": "L169",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L169",
+   "page": 46,
+   "box_110dpi": [
+    640,
+    725,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "koutalia",
+  "name": "Χορός των κουταλιών (π.χ. η Βράκα)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16> Α16>] r8 Δ16>[ (Α)16>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "dum-té-ké-e-té-ké, όλα τονισμένα. Τα tek μπορεί να είναι S.",
+  "date": "26/01/2026",
+  "page": 47,
+  "page_label": "Έτος 2, σ. 14",
+  "occurrences": [
+   {
+    "line": "L172",
+    "page": 47,
+    "page_label": "Έτος 2, σ. 14",
+    "date": "26/01/2026"
+   },
+   {
+    "line": "L170",
+    "page": 46,
+    "page_label": "Έτος 2, σ. 13",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "nim_sofyan",
+   "display": "Nim Sofyan",
+   "vid": "v6",
+   "meter": "2/4",
+   "rhythm": ">8[ Δ16> Α16>] r8 Δ16>[ (Α)16>]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L172",
+   "page": 47,
+   "box_110dpi": [
+    90,
+    185,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 4,
+   "bars": 1
+  }
+ },
+ {
+  "id": "syrtos-trilia-16-aldaa",
+  "name": "Συρτός, τρίλια σε 16κτα (αρ.-δεξί-αρ.-αρ.)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α16:[ Δ16 Α16 (Α)16] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α8] (Α)8[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Το 4ο μέτρο έχει κλειστά K, γραμμένα ως Α.",
+  "remarks": "Αριστερό-δεξί-αριστερό-αριστερό.",
+  "date": "26/01/2026",
+  "page": 47,
+  "page_label": "Έτος 2, σ. 14",
+  "occurrences": [
+   {
+    "line": "L173",
+    "page": 47,
+    "page_label": "Έτος 2, σ. 14",
+    "date": "26/01/2026"
+   }
+  ],
+  "library": {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L173",
+   "page": 47,
+   "box_110dpi": [
+    290,
+    400,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "mantilatos-vasi",
+  "name": "Θρακιώτικος ρυθμός, βάση Μαντηλάτου / Δενδρίτσι",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "2-2-3. Τα tek μπορεί να είναι S. Π.χ. «Περπερούνα» (επίκληση βροχής). Devri Turan (αναδημιουργία, ανατολίτικη ονομασία).",
+  "date": "09/02/2026",
+  "page": 48,
+  "page_label": "Έτος 2, σ. 15",
+  "occurrences": [
+   {
+    "line": "L174",
+    "page": 48,
+    "page_label": "Έτος 2, σ. 15",
+    "date": "09/02/2026"
+   },
+   {
+    "line": "L206",
+    "page": 54,
+    "page_label": "Έτος 2, σ. 21",
+    "date": "23/03/2026"
+   },
+   {
+    "line": "L188",
+    "page": 50,
+    "page_label": "Έτος 2, σ. 17",
+    "date": "02/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "vid": "v1",
+   "meter": "7/8",
+   "rhythm": ">4 Δ4 Δ4.",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L174",
+   "page": 48,
+   "box_110dpi": [
+    150,
+    245,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "thrakiotikos-ka",
+  "name": "Θρακιώτικος ρυθμός (ΔΑ ΔΑ(Α))",
+  "meter": "7/8",
+  "rhythm": ">4 Δ8[ Α8] Δ8[ Α8 (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Γράφει ΔΑ(Α) στην ομάδα των τριών, ενώ στις 23/03/2026 γράφει ΔΔ(Α).",
+  "remarks": "",
+  "date": "09/02/2026",
+  "page": 48,
+  "page_label": "Έτος 2, σ. 15",
+  "occurrences": [
+   {
+    "line": "L175",
+    "page": 48,
+    "page_label": "Έτος 2, σ. 15",
+    "date": "09/02/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Μοιάζει με mandilatos v2 (εκεί Δ Δ (Α) στο τέλος).",
+  "crop": {
+   "line": "L175",
+   "page": 48,
+   "box_110dpi": [
+    310,
+    375,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "perperouna",
+  "name": "Θρακιώτικος ρυθμός (Περπερούνα)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ8[ r8 Δ8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "dum-tek-tek-e-tek, γρήγορα στο dum. 02/03/2026: Περπερούνα Β. Ελλάδας (και αυτό είναι αρχαίο).",
+  "date": "09/02/2026",
+  "page": 48,
+  "page_label": "Έτος 2, σ. 15",
+  "occurrences": [
+   {
+    "line": "L176",
+    "page": 48,
+    "page_label": "Έτος 2, σ. 15",
+    "date": "09/02/2026"
+   },
+   {
+    "line": "L188",
+    "page": 50,
+    "page_label": "Έτος 2, σ. 17",
+    "date": "02/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L176",
+   "page": 48,
+   "box_110dpi": [
+    375,
+    445,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "beria-5",
+  "name": "«Μπέρια» 5σημη (έθιμο από Εύβοια)",
+  "meter": "5/8",
+  "rhythm": ">4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "09/02/2026",
+  "page": 48,
+  "page_label": "Έτος 2, σ. 15",
+  "occurrences": [
+   {
+    "line": "L177",
+    "page": 48,
+    "page_label": "Έτος 2, σ. 15",
+    "date": "09/02/2026"
+   }
+  ],
+  "library": {
+   "slug": "turk_aksagy",
+   "display": "Türk aksağı",
+   "vid": "v1",
+   "meter": "5/8",
+   "rhythm": ">4 Δ4.>",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L177",
+   "page": 48,
+   "box_110dpi": [
+    580,
+    660,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "baintouska-5",
+  "name": "5/8, βάση της Μπαϊντούσκας",
+  "meter": "5/8",
+  "rhythm": ">4 Δ8[ r8 Δ8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Στο πολύ γρήγορο. Τα ζάρια(;) (τα «βαλκάνια») είναι οι πιο «χαρούμενοι» ρυθμοί. Τα 5σημα είναι χαρούμενοι ρυθμοί κι οι περισσότεροι είναι αρχαίοι. Το tek με 3 ακροδάχτυλα ή H στο bendir.",
+  "date": "09/02/2026",
+  "page": 48,
+  "page_label": "Έτος 2, σ. 15",
+  "occurrences": [
+   {
+    "line": "L178",
+    "page": 48,
+    "page_label": "Έτος 2, σ. 15",
+    "date": "09/02/2026"
+   },
+   {
+    "line": "L187",
+    "page": 50,
+    "page_label": "Έτος 2, σ. 17",
+    "date": "02/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "turk_aksagy",
+   "display": "Türk aksağı",
+   "vid": "v2",
+   "meter": "5/8",
+   "rhythm": ">4 Δ8>[ r8 Δ8]",
+   "level": "accents",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L178",
+   "page": 48,
+   "box_110dpi": [
+    750,
+    830,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "neos-balos",
+  "name": "Νέος μπάλος",
+  "meter": "4/8",
+  "rhythm": ">8.[ Α16] r16 (Α)16[ Δ16>] r16",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Θέλει και στα 2 τις προσποιήσεις για να βγει καλό dum-e-ke-e-ke-tek. Τα παίζαμε σε 4 μέτρα, με τρίλια στο 2ο και κλείσιμο με Hek στο 4ο.",
+  "date": "16/02/2026",
+  "page": 49,
+  "page_label": "Έτος 2, σ. 16",
+  "occurrences": [
+   {
+    "line": "L185",
+    "page": 49,
+    "page_label": "Έτος 2, σ. 16",
+    "date": "16/02/2026"
+   },
+   {
+    "line": "L196",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L204",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v4",
+   "meter": "4/8",
+   "rhythm": ">8.[ Α16] r16 (Α)16[ Δ16>] r16",
+   "level": "exact",
+   "scope": "whole",
+   "also": [
+    "syrtoidi v3"
+   ]
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L185",
+   "page": 49,
+   "box_110dpi": [
+    840,
+    950,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "beria-4",
+  "name": "Μπεριά 4σημο (Κάτω Στενή) / Νησιώτικο Γ",
+  "meter": "4/8",
+  "rhythm": ">8.[ >16] >8[ Δ8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "t = tek με 3 ακροδάχτυλα, δυνατό χτύπημα, ή H (slap) στο bendir. «Μπεριά» λέγεται το έθιμο (dodole στα βαλκάνια). Στο όρθιο.",
+  "date": "02/03/2026",
+  "page": 50,
+  "page_label": "Έτος 2, σ. 17",
+  "occurrences": [
+   {
+    "line": "L186",
+    "page": 50,
+    "page_label": "Έτος 2, σ. 17",
+    "date": "02/03/2026"
+   },
+   {
+    "line": "L191",
+    "page": 51,
+    "page_label": "Έτος 2, σ. 18",
+    "date": "02/03/2026"
+   },
+   {
+    "line": "L199",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L220",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L186",
+   "page": 50,
+   "box_110dpi": [
+    330,
+    425,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "nisiotiko-a",
+  "name": "Τετράσημος για νησιώτικα (Α) / για όρθιο",
+  "meter": "4/8",
+  "rhythm": ">8.[ Δ16] Δ8[ Δ8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Νησιά Αιγαίου. t = tek με 3 ακροδάχτυλα.",
+  "date": "02/03/2026",
+  "page": 51,
+  "page_label": "Έτος 2, σ. 18",
+  "occurrences": [
+   {
+    "line": "L189",
+    "page": 51,
+    "page_label": "Έτος 2, σ. 18",
+    "date": "02/03/2026"
+   },
+   {
+    "line": "L198",
+    "page": 52,
+    "page_label": "Έτος 2, σ. 19",
+    "date": "09/03/2026"
+   },
+   {
+    "line": "L217",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "20/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L189",
+   "page": 51,
+   "box_110dpi": [
+    545,
+    615,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "nisiotiko-b",
+  "name": "Τετράσημος για νησιώτικα (Β)",
+  "meter": "4/8",
+  "rhythm": ">8.[ Δ16] >8[ >8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "02/03/2026",
+  "page": 51,
+  "page_label": "Έτος 2, σ. 18",
+  "occurrences": [
+   {
+    "line": "L190",
+    "page": 51,
+    "page_label": "Έτος 2, σ. 18",
+    "date": "02/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L190",
+   "page": 51,
+   "box_110dpi": [
+    625,
+    700,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "nisiotiko-d",
+  "name": "Τετράσημος για νησιώτικα (Δ) / στο όρθιο",
+  "meter": "4/8",
+  "rhythm": ">8.[ Δ16] r16 Δ16[ >16] r16",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "t ή H. Βάζω πιο πολλά μπάσα για να γεμίσω, αφού παίζω με 1 χέρι.",
+  "date": "02/03/2026",
+  "page": 51,
+  "page_label": "Έτος 2, σ. 18",
+  "occurrences": [
+   {
+    "line": "L192",
+    "page": 51,
+    "page_label": "Έτος 2, σ. 18",
+    "date": "02/03/2026"
+   },
+   {
+    "line": "L205",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L192",
+   "page": 51,
+   "box_110dpi": [
+    805,
+    885,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "nisiotiko-e",
+  "name": "Τετράσημος για νησιώτικα (Ε)",
+  "meter": "4/8",
+  "rhythm": ">8. Δ8. Δ8>",
+  "confidence": "medium",
+  "confidence_reason": "Ο τονισμός στο τελευταίο tek υπάρχει μόνο στις 27/04/2026.",
+  "remarks": "",
+  "date": "02/03/2026",
+  "page": 51,
+  "page_label": "Έτος 2, σ. 18",
+  "occurrences": [
+   {
+    "line": "L193",
+    "page": 51,
+    "page_label": "Έτος 2, σ. 18",
+    "date": "02/03/2026"
+   },
+   {
+    "line": "L220",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L193",
+   "page": 51,
+   "box_110dpi": [
+    900,
+    975,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "samothraki",
+  "name": "Σαμοθρακίτικος συρτός",
+  "meter": "4/8",
+  "rhythm": ">8.[ Δ16] Δ8[ >8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Στο Σαμοθρακίτικο συρτό παίζαμε και αυτό.",
+  "date": "20/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L218",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "20/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L218",
+   "page": 57,
+   "box_110dpi": [
+    500,
+    600,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sympethera",
+  "name": "«Συμπεθέρα», 2/4",
+  "meter": "2/4",
+  "rhythm": ">8.[ Α16] Δ8[ (Α)8] | % | % | >4 Α8:[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια γραμμένη ως δύο όγδοα. Ο τίτλος διαβάζεται «Συμπεθέρα».",
+  "remarks": "x3 και στο 4ο. Τα ίδια μπορώ να παίξω και για μπάλο.",
+  "date": "16/03/2026",
+  "page": 53,
+  "page_label": "Έτος 2, σ. 20",
+  "occurrences": [
+   {
+    "line": "L200",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v1",
+   "meter": "4/8",
+   "rhythm": ">8.[ Α16] Δ8>[ (Α)8>]",
+   "level": "accents",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L200",
+   "page": 53,
+   "box_110dpi": [
+    140,
+    235,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "sympethera-klisimo-2",
+  "name": "«Συμπεθέρα», κλείσιμο (ή)",
+  "meter": "2/4",
+  "rhythm": ">8[ Δ16 Α16] Δ8[ (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "16/03/2026",
+  "page": 53,
+  "page_label": "Έτος 2, σ. 20",
+  "occurrences": [
+   {
+    "line": "L201",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L201",
+   "page": 53,
+   "box_110dpi": [
+    270,
+    335,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sympethera-klisimo-3",
+  "name": "«Συμπεθέρα», κλείσιμο με τρίλια (ή)",
+  "meter": "2/4",
+  "rhythm": ">8[ Α16: (Α)16] Δ8[ Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Τρίλια σε 16κτο.",
+  "remarks": "",
+  "date": "16/03/2026",
+  "page": 53,
+  "page_label": "Έτος 2, σ. 20",
+  "occurrences": [
+   {
+    "line": "L202",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L202",
+   "page": 53,
+   "box_110dpi": [
+    360,
+    445,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": true,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sympethera-klisimo-s",
+  "name": "«Συμπεθέρα», κλείσιμο με S (ή)",
+  "meter": "2/4",
+  "rhythm": ">4 S8[ S8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "16/03/2026",
+  "page": 53,
+  "page_label": "Έτος 2, σ. 20",
+  "occurrences": [
+   {
+    "line": "L203",
+    "page": 53,
+    "page_label": "Έτος 2, σ. 20",
+    "date": "16/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "vid": "v5",
+   "meter": "4/8",
+   "rhythm": ">4 S8[ S8]",
+   "level": "exact",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L203",
+   "page": 53,
+   "box_110dpi": [
+    475,
+    535,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "mantilatos-fraseis",
+  "name": "Μαντηλάτος / Δενδρίτσι, τετράμετρη «μελωδική φράση» (καθιστή θέση)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ8[ Α8] Δ8[ Δ8 (Α)8] | % | % | >4 >4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Όλο το 4μετρο είναι μια «μελωδική φράση». Αυτό το μοτίβο στην Ελλάδα υπάρχει μόνο στη Θράκη κι λίγο στον Πόντο με τον Λάζικο χορό. Το τελευταίο tek μπορεί να είναι S. Devri turan: ο ρυθμός για ορχήστρα είναι 2-2-3.",
+  "date": "23/03/2026",
+  "page": 54,
+  "page_label": "Έτος 2, σ. 21",
+  "occurrences": [
+   {
+    "line": "L207",
+    "page": 54,
+    "page_label": "Έτος 2, σ. 21",
+    "date": "23/03/2026"
+   },
+   {
+    "line": "L211",
+    "page": 55,
+    "page_label": "Έτος 2, σ. 22",
+    "date": "30/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "vid": "v2",
+   "meter": "7/8",
+   "rhythm": ">4 Δ8[ A8] Δ8[ Δ8 (Α)8]",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L207",
+   "page": 54,
+   "box_110dpi": [
+    430,
+    525,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "orthia-1",
+  "name": "Επτάσημος, ορθία θέση (1)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ4. | >4 >4 Δ4. | >4 Δ4 Δ4. | >4 >4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "30/03/2026",
+  "page": 55,
+  "page_label": "Έτος 2, σ. 22",
+  "occurrences": [
+   {
+    "line": "L208",
+    "page": 55,
+    "page_label": "Έτος 2, σ. 22",
+    "date": "30/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "vid": "v1",
+   "meter": "7/8",
+   "rhythm": ">4 Δ4 Δ4.",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L208",
+   "page": 55,
+   "box_110dpi": [
+    130,
+    235,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "orthia-2",
+  "name": "Επτάσημος, ορθία θέση (2)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ4. | >4 Δ4 Δ8[ r8 Δ8>] | % | %",
+  "confidence": "low",
+  "confidence_reason": "Το 1ο μέτρο είναι «-||-» και τα 3ο, 4ο είναι εισαγωγικά· η επανάληψη είναι ερμηνεία.",
+  "remarks": "",
+  "date": "30/03/2026",
+  "page": 55,
+  "page_label": "Έτος 2, σ. 22",
+  "occurrences": [
+   {
+    "line": "L209",
+    "page": 55,
+    "page_label": "Έτος 2, σ. 22",
+    "date": "30/03/2026"
+   }
+  ],
+  "library": {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "vid": "v1",
+   "meter": "7/8",
+   "rhythm": ">4 Δ4 Δ4.",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L209",
+   "page": 55,
+   "box_110dpi": [
+    245,
+    335,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 4
+  }
+ },
+ {
+  "id": "orthia-3",
+  "name": "Επτάσημος, ορθία θέση (3)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ8[ r8 Δ8>] | % | % | >4 >4 Δ4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Μπορώ να το παίζω για π.χ. έναν αργό Μαντηλάτο. Επίσης βαλκανικός χορός Ρετσένιτσα. Το τελευταίο tek μπορεί να είναι S.",
+  "date": "30/03/2026",
+  "page": 55,
+  "page_label": "Έτος 2, σ. 22",
+  "occurrences": [
+   {
+    "line": "L210",
+    "page": 55,
+    "page_label": "Έτος 2, σ. 22",
+    "date": "30/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L210",
+   "page": 55,
+   "box_110dpi": [
+    355,
+    445,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 3,
+   "bars": 4
+  }
+ },
+ {
+  "id": "kathisti-2",
+  "name": "Επτάσημος, καθιστή θέση (2)",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Α8[ r8 Α8] | % | % | >4 >4 Δ4.",
+  "confidence": "medium",
+  "confidence_reason": "Τα γράμματα των μέτρων 2-3 είναι κομμένα στη σάρωση.",
+  "remarks": "",
+  "date": "30/03/2026",
+  "page": 55,
+  "page_label": "Έτος 2, σ. 22",
+  "occurrences": [
+   {
+    "line": "L212",
+    "page": 55,
+    "page_label": "Έτος 2, σ. 22",
+    "date": "30/03/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L212",
+   "page": 55,
+   "box_110dpi": [
+    785,
+    875,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 4
+  }
+ },
+ {
+  "id": "mantilatos-devri-turan",
+  "name": "Μαντηλάτος (βασικός ρυθμός), Devri Turan",
+  "meter": "7/8",
+  "rhythm": ">4 Δ4 Δ4. | >4 Δ4 Δ8[ r8 (Α)8]",
+  "confidence": "medium",
+  "confidence_reason": "Γράφει «Δ(Α)» κάτω από την τελευταία νότα· διαβάστηκε ως (Α).",
+  "remarks": "",
+  "date": "06/04/2026",
+  "page": 56,
+  "page_label": "Έτος 2, σ. 23",
+  "occurrences": [
+   {
+    "line": "L213",
+    "page": 56,
+    "page_label": "Έτος 2, σ. 23",
+    "date": "06/04/2026"
+   }
+  ],
+  "library": {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "vid": "v1",
+   "meter": "7/8",
+   "rhythm": ">4 Δ4 Δ4.",
+   "level": "exact",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L213",
+   "page": 56,
+   "box_110dpi": [
+    140,
+    245,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 2
+  }
+ },
+ {
+  "id": "syrtos-makedonias",
+  "name": "Συρτός Μακεδονίας (Καλαματιανός), Devri Hindi",
+  "meter": "7/8",
+  "rhythm": ">4. >4 Δ4 | >8[ r8 Δ8] >4 Δ4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Βασικός ρυθμός. Στο 2ο μέτρο γράφει «Δ(Α)», δηλ. Δ ή (Α).",
+  "date": "06/04/2026",
+  "page": 56,
+  "page_label": "Έτος 2, σ. 23",
+  "occurrences": [
+   {
+    "line": "L214",
+    "page": 56,
+    "page_label": "Έτος 2, σ. 23",
+    "date": "06/04/2026"
+   }
+  ],
+  "library": {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "vid": "v2",
+   "meter": "7/8",
+   "rhythm": ">8 r8 Δ8 >4 Δ4>",
+   "level": "accents",
+   "scope": "bar",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L214",
+   "page": 56,
+   "box_110dpi": [
+    315,
+    415,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 2
+  }
+ },
+ {
+  "id": "raiko-3-2-2",
+  "name": "Ράικο (3-2-2 για πολύ γρήγορους ρυθμούς της Μακεδονίας)",
+  "meter": "7/8",
+  "rhythm": ">4. Δ4 Δ4 | >8[ r8 Δ8] Δ4 Δ4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Π.χ. Ράικο («Απόψε στην τριανταφυλλιά»).",
+  "date": "06/04/2026",
+  "page": 56,
+  "page_label": "Έτος 2, σ. 23",
+  "occurrences": [
+   {
+    "line": "L215",
+    "page": 56,
+    "page_label": "Έτος 2, σ. 23",
+    "date": "06/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L215",
+   "page": 56,
+   "box_110dpi": [
+    435,
+    535,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 2
+  }
+ },
+ {
+  "id": "sofyan-p-sss",
+  "name": "Παραλλαγές Sofyan (1)",
+  "meter": "4/8",
+  "rhythm": ">8.[ S16] S8[ S8]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "27/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L219",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L219",
+   "page": 57,
+   "box_110dpi": [
+    820,
+    905,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofyan-p-ss",
+  "name": "Παραλλαγές Sofyan (2)",
+  "meter": "4/8",
+  "rhythm": ">8[ S16 S16] r8 S8",
+  "confidence": "medium",
+  "confidence_reason": "Η διάρκεια των δύο S στον 1ο χρόνο είναι αβέβαιη.",
+  "remarks": "",
+  "date": "27/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L219",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L219",
+   "page": 57,
+   "box_110dpi": [
+    820,
+    905,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofyan-p-dum",
+  "name": "Παραλλαγές Sofyan (4)",
+  "meter": "4/8",
+  "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ >16] r16",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "27/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L219",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L219",
+   "page": 57,
+   "box_110dpi": [
+    820,
+    905,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": true,
+   "rests": true,
+   "slap": false,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofyan-p-s-dum",
+  "name": "Παραλλαγές Sofyan (5)",
+  "meter": "4/8",
+  "rhythm": ">8.[ S16] r16 S16[ >16] r16",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "27/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L220",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L220",
+   "page": 57,
+   "box_110dpi": [
+    905,
+    1010,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "sofyan-p-dumdum",
+  "name": "Παραλλαγές Sofyan (8)",
+  "meter": "4/8",
+  "rhythm": ">8. >8. Δ8>",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "27/04/2026",
+  "page": 57,
+  "page_label": "Έτος 2, σ. 24",
+  "occurrences": [
+   {
+    "line": "L220",
+    "page": 57,
+    "page_label": "Έτος 2, σ. 24",
+    "date": "27/04/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L220",
+   "page": 57,
+   "box_110dpi": [
+    905,
+    1010,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 1,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kasik-havasi",
+  "name": "Kaşık havası (= κουτάλια)",
+  "meter": "2/4",
+  "rhythm": ">4 Δ8>[ Α8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Ο ρυθμός των κουταλιών. Αυτόν τον ρυθμό τον έχουμε και στην Ελλάδα (π.χ. η «Βράκα» της Κύπρου).",
+  "date": "04/05/2026",
+  "page": 58,
+  "page_label": "Έτος 2, σ. 25",
+  "occurrences": [
+   {
+    "line": "L221",
+    "page": 58,
+    "page_label": "Έτος 2, σ. 25",
+    "date": "04/05/2026"
+   },
+   {
+    "line": "L224",
+    "page": 59,
+    "page_label": "Έτος 2, σ. 26",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Είναι το πρώτο μέτρο του kasik_havasi v2 και v3.",
+  "crop": {
+   "line": "L221",
+   "page": 58,
+   "box_110dpi": [
+    590,
+    685,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": false,
+   "accents": 2,
+   "bars": 1
+  }
+ },
+ {
+  "id": "kasik-havasi-kofto",
+  "name": "Kaşık havası, κοφτό δίμετρο",
+  "meter": "2/4",
+  "rhythm": ">4 Δ8>[ Α8>] | r4 Δ8>[ Α8>]",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "",
+  "date": "04/05/2026",
+  "page": 58,
+  "page_label": "Έτος 2, σ. 25",
+  "occurrences": [
+   {
+    "line": "L221",
+    "page": 58,
+    "page_label": "Έτος 2, σ. 25",
+    "date": "04/05/2026"
+   },
+   {
+    "line": "L225",
+    "page": 59,
+    "page_label": "Έτος 2, σ. 26",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": {
+   "slug": "kasik_havasi",
+   "display": "Kaşık Havası",
+   "vid": "v3",
+   "meter": "2/4",
+   "rhythm": ">4 Δ8>[ Α8>] | r4 Δ8>[ (Α)8>]",
+   "level": "fingering",
+   "scope": "whole",
+   "also": []
+  },
+  "library_note": "",
+  "crop": {
+   "line": "L221",
+   "page": 58,
+   "box_110dpi": [
+    590,
+    685,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": false,
+   "accents": 4,
+   "bars": 2
+  }
+ },
+ {
+  "id": "semai-bendir",
+  "name": "Semai για bendir («Μανώλια»)",
+  "meter": "3/4",
+  "rhythm": ">4 S4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Αυτό θα παίζουμε στο bendir.",
+  "date": "11/05/2026",
+  "page": 60,
+  "page_label": "Έτος 2, σ. 27",
+  "occurrences": [
+   {
+    "line": "L229",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Το semai v1 με slap.",
+  "crop": {
+   "line": "L229",
+   "page": 60,
+   "box_110dpi": [
+    470,
+    545,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "enniasimos-hek",
+  "name": "Εννιάσημος με H (σαν καρσιλαμάς)",
+  "meter": "9/8",
+  "rhythm": ">4 S4 >4 S4.",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "Είναι η βάση (σαν καρσιλαμάς).",
+  "date": "11/05/2026",
+  "page": 60,
+  "page_label": "Έτος 2, σ. 27",
+  "occurrences": [
+   {
+    "line": "L231",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "Το enniasimos v1 με slap.",
+  "crop": {
+   "line": "L231",
+   "page": 60,
+   "box_110dpi": [
+    770,
+    835,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "argilamas",
+  "name": "Αργιλαμάς (2+3+2+2)",
+  "meter": "9/8",
+  "rhythm": ">4 >4. >4 S4",
+  "confidence": "high",
+  "confidence_reason": "",
+  "remarks": "03/04/2025: Αργιλαμάς 9/8 με 2-3-2-2.",
+  "date": "11/05/2026",
+  "page": 60,
+  "page_label": "Έτος 2, σ. 27",
+  "occurrences": [
+   {
+    "line": "L232",
+    "page": 60,
+    "page_label": "Έτος 2, σ. 27",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L232",
+   "page": 60,
+   "box_110dpi": [
+    850,
+    945,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": false,
+   "slap": true,
+   "accents": 0,
+   "bars": 1
+  }
+ },
+ {
+  "id": "pentasimo-hek",
+  "name": "5/8 με H",
+  "meter": "5/8",
+  "rhythm": ">4 S4. | >4 S8[ r8 Α8]",
+  "confidence": "medium",
+  "confidence_reason": "Το τελευταίο γράμμα μοιάζει με Α.",
+  "remarks": "",
+  "date": "11/05/2026",
+  "page": 61,
+  "page_label": "Έτος 2, σ. 28",
+  "occurrences": [
+   {
+    "line": "L233",
+    "page": 61,
+    "page_label": "Έτος 2, σ. 28",
+    "date": "11/05/2026"
+   }
+  ],
+  "library": null,
+  "library_note": "",
+  "crop": {
+   "line": "L233",
+   "page": 61,
+   "box_110dpi": [
+    120,
+    210,
+    90,
+    790
+   ]
+  },
+  "features": {
+   "trill": false,
+   "middle_finger": false,
+   "rests": true,
+   "slap": true,
+   "accents": 0,
+   "bars": 2
+  }
+ }
+]
