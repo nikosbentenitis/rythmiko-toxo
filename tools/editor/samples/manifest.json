@@ -1,0 +1,63 @@
+{
+  "strokes": {
+    "dum": [
+      "dum1",
+      "dum2"
+    ],
+    "tek": [
+      "tek1",
+      "tek2"
+    ],
+    "ka": [
+      "ka1"
+    ],
+    "kam": [
+      "ka2"
+    ],
+    "slap": [
+      "slap1"
+    ],
+    "trill": [
+      "tek2",
+      "tek1",
+      "tek2"
+    ]
+  },
+  "gain": {
+    "dum": 1.0,
+    "tek": 0.55,
+    "ka": 0.45,
+    "kam": 0.4,
+    "slap": 0.9,
+    "trill": 0.45
+  },
+  "sources": [
+    {
+      "files": [
+        "dum1",
+        "dum2",
+        "tek1",
+        "tek2",
+        "flick"
+      ],
+      "title": "Doumbek / darbuka / goblet drum",
+      "author": "hollandm",
+      "url": "https://freesound.org/people/hollandm/packs/38695/",
+      "license": "CC0 1.0"
+    },
+    {
+      "files": [
+        "ka1",
+        "ka2",
+        "slap1"
+      ],
+      "title": "Doumbek",
+      "author": "pjcohen",
+      "url": "https://freesound.org/people/pjcohen/packs/23315/",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "accent_gain": 2.0,
+  "trill_strokes": 3,
+  "trill_last": 0.8
+}

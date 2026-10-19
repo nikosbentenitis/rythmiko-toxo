@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Rhythms">
+<title>Rhythm Editor</title>
+<!--
+  Local rhythm editor (tools/editor). Pick a rhythm, edit a variation with the
+  stroke pad (or the YAML), hear it, save. Saving writes the YAML on hermes,
+  keeps the previous version in .history/ and renders the LilyPond score.
+  Notation: the web validator's VexFlow staff + TUBS (static/notation.js).
+  Sound: the rhythm-scan player's darbuka samples (static/player.js).
+  No GitHub here: nothing is committed or pushed.
+-->
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f4f4f1; --card: #ffffff; --ink: #16181c; --ink-soft: #3f444c; --muted: #71767f;
+  --line: #e3e3de; --line-strong: #cfcfc8; --soft: #f1f1ed;
+  --accent: #9a5b13; --accent-ink: #ffffff; --accent-soft: #f6ecdf;
+  --ok: #1a7f52; --ok-bg: #e6f4ec; --warn: #b45309; --warn-bg: #fdf1d6;
+  --danger: #c92a2a; --danger-bg: #fbe4e4; --live: #d9480f;
+  --paper: #ffffff; --paper-line: #e3e3de;
+  --radius: 14px; --radius-sm: 10px;
+  --tap: 52px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1114; --card: #181b20; --ink: #e9ebee; --ink-soft: #c3c8d0; --muted: #8d939d;
+    --line: #272b32; --line-strong: #383e47; --soft: #20242a;
+    --accent: #e0a24c; --accent-ink: #16181c; --accent-soft: #2c2416;
+    --ok: #3fbf87; --ok-bg: #12301f; --warn: #e0a54c; --warn-bg: #33260d;
+    --danger: #ef6f6f; --danger-bg: #3a1a1a; --live: #ff7a45; --paper-line: #383e47;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1114; --card: #181b20; --ink: #e9ebee; --ink-soft: #c3c8d0; --muted: #8d939d;
+  --line: #272b32; --line-strong: #383e47; --soft: #20242a;
+  --accent: #e0a24c; --accent-ink: #16181c; --accent-soft: #2c2416;
+  --ok: #3fbf87; --ok-bg: #12301f; --warn: #e0a54c; --warn-bg: #33260d;
+  --danger: #ef6f6f; --danger-bg: #3a1a1a; --live: #ff7a45; --paper-line: #383e47;
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.4 var(--font);
+       padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 max(12px, env(safe-area-inset-left)) 0 max(12px, env(safe-area-inset-right)); }
+
+/* top bar */
+header.top { position: sticky; top: 0; z-index: 20; background: var(--bg);
+             border-top: 3px solid var(--accent); border-bottom: 1px solid var(--line);
+             padding-top: env(safe-area-inset-top); }
+header.top .wrap { display: flex; align-items: center; gap: 10px; min-height: 60px; }
+.brand { font-weight: 650; font-size: 17px; white-space: nowrap; }
+.brand small { display: block; font-weight: 400; font-size: 11px; color: var(--muted); }
+#picker { flex: 1 1 auto; min-width: 0; height: 44px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
+          background: var(--card); padding: 0 10px; font-size: 16px; }
+.iconbtn { flex: 0 0 auto; width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1px solid var(--line);
+           background: var(--card); font-size: 18px; display: inline-grid; place-items: center; }
+
+/* layout: one column on the phone, editor | preview from 980px */
+main.wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 12px; }
+#editCol, #previewCol { min-width: 0; }
+@media (min-width: 980px) { main.wrap { grid-template-columns: minmax(420px, 1fr) minmax(0, 1.25fr); align-items: start; }
+  #previewCol { position: sticky; top: 76px; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; min-width: 0; }
+.card + .card { margin-top: 14px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+.meta { color: var(--muted); font-size: 13px; }
+.meta b { color: var(--ink); font-weight: 600; }
+.title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.title-row h1 { margin: 0; font-size: 24px; font-weight: 650; letter-spacing: -.01em; }
+.badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--soft); color: var(--ink-soft); border: 1px solid var(--line); }
+.badge.edited { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+/* variation tabs */
+.vtabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.vtabs::-webkit-scrollbar { display: none; }
+.vtabs button { flex: 0 0 auto; min-width: var(--tap); height: 48px; padding: 0 14px; border-radius: var(--radius-sm);
+                border: 1px solid var(--line-strong); background: var(--card); font: 600 16px var(--mono); }
+.vtabs button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.vtabs button.bad { border-color: var(--danger); color: var(--danger); }
+.vtabs button.on.bad { background: var(--danger); color: #fff; }
+.vtabs button.add { color: var(--accent); border-color: var(--accent); font-family: var(--font); }
+
+/* rhythm field + pad */
+.fieldlab { display: flex; justify-content: space-between; align-items: center; margin: 14px 0 6px; font-size: 13px; color: var(--muted); }
+#rhythmField { width: 100%; min-height: 64px; resize: vertical; border: 1.5px solid var(--line-strong); border-radius: var(--radius-sm);
+               background: var(--soft); padding: 10px 12px; font: 21px/1.45 var(--mono); color: var(--ink); outline: none; }
+#rhythmField:focus { border-color: var(--accent); background: var(--card); }
+.pad { display: grid; gap: 8px; margin-top: 10px; }
+.pad .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.pad button { height: var(--tap); border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--card);
+              font: 500 21px/1 var(--mono); user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; padding: 0 2px; }
+.pad button small { display: block; font: 10px/1.1 var(--font); color: var(--muted); margin-top: 3px; }
+.pad button:active { background: var(--soft); transform: translateY(1px); }
+.pad .stroke { background: var(--accent-soft); border-color: transparent; color: var(--ink); font-weight: 600; }
+.pad .circ { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 2px solid currentColor; border-radius: 50%; font-size: 15px; }
+.pad .edit { font-family: var(--font); font-size: 18px; }
+.cmt { width: 100%; height: 44px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--card); padding: 0 12px; font-size: 16px; }
+.linkish { background: none; border: 0; color: var(--accent); font-size: 14px; padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; }
+details.yaml { margin-top: 14px; }
+details.yaml summary { cursor: pointer; color: var(--ink-soft); font-size: 14px; padding: 8px 0; min-height: 44px; display: flex; align-items: center; }
+#yaml { width: 100%; min-height: 260px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--soft);
+        padding: 10px; font: 14px/1.5 var(--mono); tab-size: 2; white-space: pre; overflow: auto; resize: vertical; color: var(--ink); }
+
+/* diagnostics */
+.diag { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.diag li { font: 13px/1.35 var(--mono); padding: 8px 10px; border-radius: 8px; overflow-wrap: anywhere; }
+.diag li.error { background: var(--danger-bg); color: var(--danger); }
+.diag li.warn { background: var(--warn-bg); color: var(--warn); }
+.diag li.ok { background: var(--ok-bg); color: var(--ok); }
+
+/* transport */
+.transport { display: grid; gap: 12px; }
+.trow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bpm { display: grid; grid-template-columns: 48px 1fr 48px auto; gap: 8px; align-items: center; flex: 1 1 260px; }
+.bpm button { height: 48px; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--card); font-size: 22px; }
+.bpm input { width: 100%; accent-color: var(--accent); height: 32px; }
+.bpm output { font: 600 20px var(--mono); min-width: 4.2ch; text-align: right; font-variant-numeric: tabular-nums; }
+.bpm output small { font: 11px var(--font); color: var(--muted); display: block; text-align: right; }
+.seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; }
+.seg button { height: 44px; padding: 0 14px; border: 0; background: var(--card); font-size: 15px; }
+.seg button + button { border-left: 1px solid var(--line-strong); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.toggle { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--card); font-size: 15px; }
+.toggle[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.dots { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.dot { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-strong); display: inline-grid; place-items: center; font: 12px var(--mono); color: var(--muted); }
+.dot.on { background: var(--live); border-color: var(--live); color: #fff; }
+#playStat { font-size: 13px; color: var(--muted); }
+
+/* notation (validator style, on paper in both themes) */
+.notation { background: var(--paper); color: #000; border: 1px solid var(--paper-line); border-radius: var(--radius-sm); padding: 10px 12px; overflow-x: auto; }
+.notation + .notation { margin-top: 10px; }
+.notation .vhead { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+.notation .vlabel { font: 12px var(--mono); color: #555; white-space: nowrap; }
+.notation .vcode { font: 12px/1.4 var(--mono); color: #222; background: #f4f4f7; border: 1px solid #e2e2e8; padding: 2px 8px; border-radius: 4px; white-space: pre-wrap; word-break: break-word; }
+.notation .staff { overflow-x: auto; }
+.notation .staff svg { max-width: 100%; height: auto; display: block; }
+.notation .fallback { font: 12px monospace; color: #92400e; background: #fef3c7; padding: 6px 8px; border-radius: 4px; }
+.notation .tubs { display: flex; align-items: flex-start; overflow-x: auto; margin-top: 6px; }
+.notation .tubs .bar { display: flex; flex-direction: column; }
+.notation .tubs .row { display: flex; }
+.notation .cell { --w: 30px; width: var(--w); flex: 0 0 var(--w); height: 28px; display: flex; align-items: center; justify-content: center; font: 16px/1 "Times New Roman", serif; border-left: 1px solid #999; border-top: 1px solid #000; box-sizing: border-box; color: #000; }
+.notation .row.greek .cell { border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.notation .cell.first { border-left: 2px solid #000; }
+.notation .cell.sub { border-left: 1px dashed #999; }
+.notation .cell.beat { border-left: 2px solid #555; }
+.notation .cell.tup { border-left: 1px dotted #999; }
+.notation .cell.barend { border-right: 3px solid #000; }
+.notation .row.count .cell { height: 18px; border: 0; font-size: 10px; color: #666; }
+.notation .row.count .cell.beat, .notation .row.count .cell.first { border-left: 1px solid #ccc; }
+.notation .circled { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1.5px solid #000; border-radius: 50%; font-size: 11px; }
+.notation .trill { font-size: 12px; vertical-align: 2px; }
+.notation .repeat-cell { width: 34px; height: 56px; display: flex; align-items: center; justify-content: center; border-left: 2px solid #555; border-right: 3px solid #000; border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.notation .pct { position: relative; width: 18px; height: 30px; }
+.notation .pct::before { content: ""; position: absolute; left: 50%; top: 8%; width: 2px; height: 84%; background: #000; transform: translateX(-50%) rotate(28deg); }
+.notation .pct::after { content: "●  ●"; position: absolute; inset: 0; font-size: 7px; color: #000; display: flex; align-items: center; justify-content: center; letter-spacing: 6px; }
+.notation .legend { display: none; }
+.notation .hot, .notation .hot * { fill: var(--live) !important; stroke: var(--live) !important; }
+.notation.playing { box-shadow: 0 0 0 2px var(--accent); }
+@media (max-width: 520px) { .notation .cell { --w: 24px; height: 24px; font-size: 14px; } .notation .row.count .cell { font-size: 9px; } }
+
+/* LilyPond score */
+.score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+#scoreStat { font-size: 13px; color: var(--muted); }
+#scoreStat.err { color: var(--danger); }
+.pages { background: #fff; border: 1px solid var(--paper-line); border-radius: var(--radius-sm); overflow: hidden; }
+.pages img { display: block; width: 100%; height: auto; }
+.pages img + img { border-top: 1px solid #ddd; }
+.pages.stale { opacity: .45; }
+.empty { color: var(--muted); font-size: 14px; padding: 18px 4px; }
+#notation.live { margin-top: 10px; }
+#notation.single .vhead { display: none; }
+
+/* history */
+.hist { list-style: none; margin: 8px 0 0; padding: 0; font-size: 13px; color: var(--ink-soft); display: grid; gap: 4px; }
+.hist li span { color: var(--muted); }
+
+/* bottom action bar */
+.actions { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 92%, transparent);
+           backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--line);
+           padding: 10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+.actions .in { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 10px; align-items: center; }
+.big { height: 56px; border-radius: 14px; border: 0; font-weight: 650; font-size: 18px; }
+#playBtn { background: var(--ink); color: var(--bg); }
+#playBtn[data-playing="1"] { background: var(--live); color: #fff; }
+#saveBtn { background: var(--accent); color: var(--accent-ink); }
+#saveBtn:disabled { background: var(--soft); color: var(--muted); }
+#revertBtn { height: 56px; padding: 0 14px; border-radius: 14px; border: 1px solid var(--line-strong); background: var(--card); font-size: 14px; line-height: 1.1; }
+#revertBtn:disabled { opacity: .45; }
+#saveStat { font-size: 12px; color: var(--muted); text-align: center; grid-column: 1 / -1; min-height: 15px; margin-top: -4px; }
+#saveStat.dirty { color: var(--warn); }
+#saveStat.err { color: var(--danger); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(120px + env(safe-area-inset-bottom)); z-index: 40; background: var(--ink); color: var(--bg);
+         padding: 10px 16px; border-radius: 12px; font-size: 14px; max-width: calc(100vw - 32px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.banner { background: var(--warn-bg); color: var(--warn); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 14px; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.banner button { height: 36px; border-radius: 8px; border: 1px solid currentColor; background: transparent; padding: 0 10px; }
+footer { color: var(--muted); font-size: 12px; padding: 18px 0 8px; }
+footer code { font-family: var(--mono); overflow-wrap: anywhere; }
+footer a { color: inherit; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Rhythms<small>local editor</small></div>
+    <select id="picker" aria-label="Rhythm"></select>
+    <button class="iconbtn" id="themeBtn" title="Theme: auto / light / dark" aria-label="Theme">◐</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="editCol">
+    <section class="card">
+      <div id="draftBanner" class="banner" hidden>
+        <span>Unsaved edits from earlier on this device.</span>
+        <button id="draftRestore">Restore</button><button id="draftDrop">Discard</button>
+      </div>
+      <div class="title-row">
+        <h1 id="title">…</h1>
+        <span class="meta" id="rmeta"></span>
+        <span class="badge" id="editedBadge" hidden>edited here</span>
+      </div>
+      <div class="vtabs" id="vtabs" role="tablist" aria-label="Variations"></div>
+
+      <div class="fieldlab"><span id="fieldLab">Variation</span>
+        <span><button class="linkish" id="kbBtn" type="button">Use keyboard</button></span></div>
+      <textarea id="rhythmField" rows="2" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" inputmode="none" aria-label="Rhythm of this variation"></textarea>
+
+      <div id="notation" class="live"><div class="empty">Loading…</div></div>
+      <div style="text-align:right"><button class="linkish" id="allBtn" type="button" aria-pressed="false">Show all variations</button></div>
+
+      <div class="pad" id="pad">
+        <div class="row">
+          <button class="stroke" data-head=">" title="dum">&gt;<small>dum</small></button>
+          <button class="stroke" data-head="Δ" title="tek, right ring finger">Δ<small>tek</small></button>
+          <button class="stroke" data-head="Α" title="ka, left ring finger">Α<small>ka</small></button>
+          <button class="stroke" data-head="(Α)" title="ka, left middle finger"><span class="circ">Α</span></button>
+          <button class="stroke" data-head="S" title="slap">S<small>slap</small></button>
+          <button class="stroke" data-head="r" title="rest">r<small>rest</small></button>
+        </div>
+        <div class="row">
+          <button data-raw="16" title="sixteenth">16<small>1/16</small></button>
+          <button data-raw="8" title="eighth">8<small>1/8</small></button>
+          <button data-raw="4" title="quarter">4<small>1/4</small></button>
+          <button data-raw="2" title="half">2<small>1/2</small></button>
+          <button data-raw="." title="dotted">.<small>dot</small></button>
+          <button data-raw=">" title="accent on the tek/ka before the cursor">&gt;<small>accent</small></button>
+        </div>
+        <div class="row">
+          <button data-raw="[" title="open a beam">[<small>beam</small></button>
+          <button data-raw="]" title="close a beam">]<small>end</small></button>
+          <button data-token="|" title="bar line">|<small>bar</small></button>
+          <button data-raw=":" title="τρίλια (roll) on this note">:<small>roll</small></button>
+          <button data-token="{3" title="open a triplet">{3<small>triplet</small></button>
+          <button data-token="}" title="close the triplet">}<small>close</small></button>
+        </div>
+        <div class="row">
+          <button class="edit" data-act="left" title="cursor left">◀</button>
+          <button class="edit" data-act="right" title="cursor right">▶</button>
+          <button class="edit" data-act="space" title="space">␣</button>
+          <button class="edit" data-act="delword" title="delete the token before the cursor">⌫<small>token</small></button>
+          <button class="edit" data-act="back" title="delete one character">⌫</button>
+          <button class="edit" data-act="undo" title="undo the last change">↶<small>undo</small></button>
+        </div>
+      </div>
+
+      <div class="fieldlab"><span>Note on this variation</span></div>
+      <input class="cmt" id="vComment" type="text" placeholder="optional" autocomplete="off">
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:6px">
+        <button class="linkish" id="delVarBtn" type="button">Delete this variation</button>
+      </div>
+
+      <ul class="diag" id="diag"></ul>
+
+      <details class="yaml" id="yamlBox">
+        <summary>Whole file (YAML): name, meter, tempo, notes</summary>
+        <textarea id="yaml" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+      </details>
+    </section>
+  </div>
+
+  <div id="previewCol">
+    <section class="card">
+      <h2>Play</h2>
+      <div class="transport">
+        <div class="trow">
+          <div class="bpm">
+            <button id="bpmDown" aria-label="slower">−</button>
+            <input type="range" id="bpm" min="30" max="200" step="1" value="90" aria-label="Tempo, beats per minute">
+            <button id="bpmUp" aria-label="faster">+</button>
+            <output id="bpmOut">90<small>BPM</small></output>
+          </div>
+        </div>
+        <div class="trow">
+          <div class="seg" id="scopeSeg" role="group" aria-label="What to play">
+            <button data-scope="one" aria-pressed="true">This variation</button>
+            <button data-scope="all" aria-pressed="false">All</button>
+          </div>
+          <button class="toggle" id="loopBtn" aria-pressed="true">⟲ Loop</button>
+          <button class="toggle" id="tempoBtn" title="Back to the tempo written in the file">♩ = file</button>
+        </div>
+        <div class="trow"><span class="dots" id="dots"></span><span id="playStat"></span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="score-head">
+        <h2 style="margin:0">Score (LilyPond)</h2>
+        <div class="seg" id="styleSeg" role="group" aria-label="Score style">
+          <button data-style="teacher" aria-pressed="true">Teacher</button>
+          <button data-style="full" aria-pressed="false">Full</button>
+        </div>
+      </div>
+      <div class="trow" style="margin-bottom:10px"><span id="scoreStat">…</span> <a id="pdfLink" class="linkish" target="_blank" rel="noopener" hidden>Open PDF</a></div>
+      <div id="pages" class="pages" hidden></div>
+    </section>
+
+    <section class="card">
+      <h2>Saved versions</h2>
+      <div class="meta" id="histMeta"></div>
+      <ul class="hist" id="hist"></ul>
+    </section>
+
+    <footer>
+      Edits are saved on hermes in <code id="dataPath">…</code>, not in git and not on GitHub. Each save keeps the previous file in <code>.history/</code>; “Revert” puts it back.<br>
+      Drum samples: <a href="https://freesound.org/people/hollandm/packs/38695/">Doumbek / darbuka / goblet drum</a> by hollandm (CC0) · <a href="https://freesound.org/people/pjcohen/packs/23315/">Doumbek</a> by pjcohen (CC BY 4.0).
+    </footer>
+  </div>
+</main>
+
+<div class="actions">
+  <div class="in">
+    <button class="big" id="playBtn" data-playing="0">▶ Play</button>
+    <button class="big" id="saveBtn" disabled>Save</button>
+    <button id="revertBtn" disabled title="Put back the version before the last save">↶ Revert</button>
+    <div id="saveStat"></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.3/build/cjs/vexflow.js"></script>
+<script src="static/notation.js"></script>
+<script src="static/player.js"></script>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const store = {
+  get(k) { try { return localStorage.getItem('rhythm-editor:' + k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem('rhythm-editor:' + k, v); } catch (e) {} },
+  del(k) { try { localStorage.removeItem('rhythm-editor:' + k); } catch (e) {} },
+};
+async function api(path, body) {
+  const r = await fetch('api/' + path, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  let j = {}; try { j = await r.json(); } catch (e) {}
+  if (!r.ok && !j.error) j.error = `HTTP ${r.status}`;
+  j._status = r.status;
+  return j;
+}
+let toastT = null;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
+
+// ---- theme ---------------------------------------------------------------
+const THEMES = ['auto', 'light', 'dark'];
+function applyTheme(t) { if (t === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t); $('themeBtn').title = 'Theme: ' + t; }
+let theme = store.get('theme') || 'auto'; applyTheme(theme);
+$('themeBtn').onclick = () => { theme = THEMES[(THEMES.indexOf(theme) + 1) % 3]; store.set('theme', theme); applyTheme(theme); toast('Theme: ' + theme); };
+
+// ---- state ---------------------------------------------------------------
+const S = { slug: null, yaml: '', savedYaml: '', sha: null, cur: null, analysis: null, history: [], showAll: store.get('showAll') === '1', style: store.get('style') || 'teacher', undo: [] };
+
+// YAML text helpers from the web validator (web/index.html), on S.yaml.
+function listVariations() { const re = /^\s+(v\d+):\s*$/gm, out = []; let m; while ((m = re.exec(S.yaml)) !== null) out.push(m[1]); return out; }
+const rhythmRe = v => new RegExp(`^(\\s+${v}:\\s*\\n\\s+rhythm:\\s*)(["'])(.*?)\\2`, 'm');
+function getRhythmFor(v) { const m = S.yaml.match(rhythmRe(v)); return m ? m[3] : null; }
+function setRhythmFor(v, val) {
+  const nv = S.yaml.replace(rhythmRe(v), (_m, prefix, q) => prefix + q + (q === '"' ? val.replace(/\\/g, '').replace(/"/g, "'") : val.replace(/'/g, '"')) + q);
+  if (nv === S.yaml) return false; S.yaml = nv; return true;
+}
+function yamlQuote(s) { return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'; }
+function addVariation() {
+  const vars = listVariations();
+  const n = vars.reduce((a, v) => Math.max(a, parseInt(v.slice(1), 10)), 0) + 1, name = 'v' + n;
+  const sample = S.yaml.match(/^(\s+)v\d+:\s*$/m); const vi = sample ? sample[1] : '    ';
+  const tmpl = (S.cur && getRhythmFor(S.cur)) || '';
+  S.yaml = S.yaml.replace(/\s*$/, '') + '\n' + `${vi}${name}:\n${vi}  rhythm: ${yamlQuote(tmpl)}` + '\n';
+  return name;
+}
+function deleteVariation(v) {
+  const vars = listVariations(); if (vars.length <= 1 || !vars.includes(v)) return false;
+  const re = new RegExp(`^(\\s+)${v}:\\s*\\n(?:(?:\\1\\s+\\S.*\\n?)|(?:\\s*\\n))*`, 'm');
+  const nv = S.yaml.replace(re, ''); if (nv === S.yaml) return false; S.yaml = nv; return true;
+}
+function getVarComment(v) {
+  const lines = S.yaml.split('\n'); let inVar = false, ind = -1;
+  for (const ln of lines) { const m = ln.match(/^(\s+)(\w+):/); if (!m) continue; const i = m[1].length;
+    if (inVar && i <= ind) return ''; if (m[2] === v && !inVar) { inVar = true; ind = i; continue; }
+    if (inVar && m[2] === 'comment') { const c = ln.match(/^\s+comment:\s*(["'])(.*?)\1\s*$/) || ln.match(/^\s+comment:\s*(.*?)\s*$/); return c ? c[c.length - 1] : ''; } }
+  return '';
+}
+function setVarComment(v, text) {
+  const lines = S.yaml.split('\n'); let inVar = false, ind = -1, rIdx = -1, cIdx = -1, pInd = '';
+  for (let i = 0; i < lines.length; i++) { const m = lines[i].match(/^(\s+)(\w+):/); if (!m) continue; const n = m[1].length;
+    if (inVar && n <= ind) break; if (m[2] === v && !inVar) { inVar = true; ind = n; continue; }
+    if (inVar) { if (m[2] === 'rhythm') { rIdx = i; pInd = m[1]; } if (m[2] === 'comment') cIdx = i; } }
+  if (!inVar) return false;
+  if (cIdx >= 0 && text) lines[cIdx] = `${pInd}comment: ${yamlQuote(text)}`;
+  else if (cIdx >= 0) lines.splice(cIdx, 1);
+  else if (text && rIdx >= 0) lines.splice(rIdx + 1, 0, `${pInd}comment: ${yamlQuote(text)}`);
+  else return false;
+  S.yaml = lines.join('\n'); return true;
+}
+
+// ---- editing -------------------------------------------------------------
+const field = $('rhythmField'), yamlEl = $('yaml');
+function pushUndo() { if (S.undo[S.undo.length - 1] !== S.yaml) { S.undo.push(S.yaml); if (S.undo.length > 200) S.undo.shift(); } }
+function changed(opts) {
+  opts = opts || {};
+  if (!opts.fromYaml) yamlEl.value = S.yaml;
+  if (!opts.fromField) syncField();
+  if (opts.tabs) buildTabs();
+  markDirty();
+  schedulePreview();
+}
+function syncField() {
+  const r = S.cur ? getRhythmFor(S.cur) : null;
+  field.disabled = r === null;
+  field.value = r === null ? '' : r;
+  $('fieldLab').textContent = r === null ? 'This variation can only be edited in the YAML below' : `Variation ${S.cur.slice(1)}`;
+  $('vComment').value = S.cur ? getVarComment(S.cur) : '';
+}
+field.addEventListener('beforeinput', pushUndo);
+field.addEventListener('input', () => { if (S.cur && setRhythmFor(S.cur, field.value.replace(/\n/g, ' '))) changed({ fromField: true }); });
+$('vComment').addEventListener('input', () => { if (S.cur) { pushUndo(); if (setVarComment(S.cur, $('vComment').value.trim())) changed({ fromField: true }); } });
+yamlEl.addEventListener('input', () => { pushUndo(); S.yaml = yamlEl.value; const vs = listVariations(); if (!vs.includes(S.cur)) S.cur = vs[0] || null; changed({ fromYaml: true, tabs: true }); });
+
+function insertAt(text, mode) {
+  if (field.disabled) return;
+  pushUndo();
+  let s = field.selectionStart ?? field.value.length, e = field.selectionEnd ?? s;
+  const v = field.value, before = v.slice(0, s), after = v.slice(e);
+  if (mode === 'token') {
+    if (before && !/\s$/.test(before)) text = ' ' + text;
+    if (after && !/^\s/.test(after)) text = text + ' ';
+  }
+  field.value = before + text + after;
+  const p = before.length + text.length;
+  field.setSelectionRange(p, p);
+  field.dispatchEvent(new Event('input'));
+}
+function act(a) {
+  if (field.disabled) return;
+  const v = field.value; let s = field.selectionStart ?? v.length, e = field.selectionEnd ?? s;
+  if (a === 'left') { const p = Math.max(0, s - 1); field.setSelectionRange(p, p); return; }
+  if (a === 'right') { const p = Math.min(v.length, e + 1); field.setSelectionRange(p, p); return; }
+  if (a === 'space') return insertAt(' ', 'raw');
+  if (a === 'undo') { if (!S.undo.length) return toast('Nothing to undo'); S.yaml = S.undo.pop(); const vs = listVariations(); if (!vs.includes(S.cur)) S.cur = vs[0] || null; changed({ tabs: true }); return; }
+  pushUndo();
+  if (s === e) {
+    if (a === 'back') { if (!s) return; field.value = v.slice(0, s - 1) + v.slice(s); s -= 1; }
+    if (a === 'delword') { let i = s; while (i > 0 && /\s/.test(v[i - 1])) i--; while (i > 0 && !/\s/.test(v[i - 1])) i--; field.value = v.slice(0, i) + v.slice(s).replace(/^\s+(?=\S)/, s < v.length && i > 0 ? ' ' : ''); s = i; }
+  } else { field.value = v.slice(0, s) + v.slice(e); }
+  field.setSelectionRange(s, s);
+  field.dispatchEvent(new Event('input'));
+}
+$('pad').addEventListener('pointerdown', ev => { if (ev.target.closest('button')) ev.preventDefault(); });
+$('pad').addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if (!b) return;
+  if (b.dataset.head) insertAt(b.dataset.head, 'token');
+  else if (b.dataset.token) insertAt(b.dataset.token, 'token');
+  else if (b.dataset.raw) insertAt(b.dataset.raw, 'raw');
+  else if (b.dataset.act) act(b.dataset.act);
+});
+$('kbBtn').onclick = () => {
+  const on = field.getAttribute('inputmode') === 'none';
+  field.setAttribute('inputmode', on ? 'text' : 'none');
+  $('kbBtn').textContent = on ? 'Hide keyboard' : 'Use keyboard';
+  field.blur(); field.focus();
+};
+
+// ---- variation tabs --------------------------------------------------------
+function buildTabs() {
+  const box = $('vtabs'); box.innerHTML = '';
+  const vars = listVariations();
+  if (!vars.includes(S.cur)) S.cur = vars[0] || null;
+  const bad = new Set(((S.analysis || {}).diagnostics || []).filter(d => d.severity === 'error').map(d => (d.where.split(' ')[0].split('.')[1])));
+  vars.forEach(v => {
+    const b = document.createElement('button'); b.textContent = v.slice(1); b.title = v; b.setAttribute('role', 'tab');
+    b.className = (v === S.cur ? 'on' : '') + (bad.has(v) ? ' bad' : '');
+    b.onclick = () => { S.cur = v; store.set('cur:' + S.slug, v); syncField(); buildTabs(); renderNotationView(); if (Player.playing && Player.only !== null) { Player.only = curIndex(); Player.restart(); } };
+    box.appendChild(b);
+  });
+  const add = document.createElement('button'); add.className = 'add'; add.textContent = '+ New';
+  add.title = 'Add a variation (starts as a copy of this one)';
+  add.onclick = () => { pushUndo(); const n = addVariation(); S.cur = n; changed({ tabs: true }); toast(`Added ${n}: a copy of the one you were on. Edit it, then Save.`); };
+  box.appendChild(add);
+  const cur = box.querySelector('.on'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  $('delVarBtn').hidden = vars.length <= 1;
+  $('delVarBtn').textContent = S.cur ? `Delete variation ${S.cur.slice(1)}` : 'Delete';
+}
+$('delVarBtn').onclick = () => {
+  if (!S.cur || !confirm(`Delete variation ${S.cur.slice(1)}? (Nothing is lost until you Save, and Revert brings it back after.)`)) return;
+  pushUndo(); if (deleteVariation(S.cur)) { S.cur = listVariations()[0]; changed({ tabs: true }); }
+};
+function curIndex() { const vs = ((S.analysis || {}).rhythm || {}).variations || []; const i = vs.findIndex(v => v.id === S.cur); return i < 0 ? 0 : i; }
+
+// ---- preview: server-side parse, VexFlow + TUBS here ----------------------
+let pvT = null, pvSeq = 0;
+function schedulePreview(now) { clearTimeout(pvT); pvT = setTimeout(preview, now ? 0 : 220); }
+async function preview() {
+  const seq = ++pvSeq, text = S.yaml;
+  const res = await api('preview', { slug: S.slug, yaml: text });
+  if (seq !== pvSeq) return;
+  applyAnalysis(res);
+}
+function applyAnalysis(res) {
+  if (!res || !res.diagnostics) return;
+  S.analysis = res;
+  const r = res.rhythm;
+  $('title').textContent = r ? r.display : S.slug;
+  $('rmeta').innerHTML = r ? `<b>${r.meter}</b> · ${r.variations.length} variations · ♩ = ${r.tempo}` : '';
+  const diag = $('diag'); diag.innerHTML = '';
+  const shown = res.diagnostics.filter(d => d.severity !== 'ok' && (S.showAll || !d.where.includes('.') || d.where.split(' ')[0] === `${S.slug}.${S.cur}`));
+  const others = res.diagnostics.filter(d => d.severity === 'error').length - shown.filter(d => d.severity === 'error').length;
+  (shown.length ? shown : res.diagnostics.filter(d => d.where === `${S.slug}.${S.cur}`)).forEach(d => {
+    const li = document.createElement('li'); li.className = d.severity; li.textContent = `${d.where.replace(S.slug + '.', '')}: ${d.message}`; diag.appendChild(li);
+  });
+  if (others > 0) { const li = document.createElement('li'); li.className = 'error'; li.textContent = `${others} error(s) in other variations (red tabs).`; diag.appendChild(li); }
+  buildTabs();
+  renderNotationView();
+  if (r) { Player.setRhythm(r); if (!S.bpmTouched) setBpm(r.tempo, false); }
+}
+function renderNotationView() {
+  const host = $('notation'); host.innerHTML = ''; host.classList.toggle('single', !S.showAll);
+  const r = (S.analysis || {}).rhythm;
+  if (!r) { host.innerHTML = '<div class="empty">Fix the YAML error to see the notation.</div>'; return; }
+  const list = S.showAll ? r.variations : r.variations.filter(v => v.id === S.cur);
+  if (!list.length) { host.innerHTML = '<div class="empty">No variation.</div>'; return; }
+  if (!window.Vex) { host.innerHTML = '<div class="empty">The staff renderer (VexFlow) did not load: no internet on this device?</div>'; }
+  const w = host.clientWidth || 340;
+  list.forEach(v => {
+    const box = document.createElement('div'); box.dataset.vid = v.id; host.appendChild(box);
+    if (!v.bars.length) { box.innerHTML = `<div class="notation"><div class="vlabel">${v.id}: nothing to draw</div></div>`; return; }
+    try { renderNotation(box, v, { width: w - 26 }); } catch (e) { box.textContent = 'render failed: ' + e; }
+  });
+}
+function allLabel() { $('allBtn').textContent = S.showAll ? 'Show only this variation' : 'Show all variations'; }
+$('allBtn').onclick = () => { S.showAll = !S.showAll; store.set('showAll', S.showAll ? '1' : '0'); allLabel(); if (S.analysis) applyAnalysis(S.analysis); };
+allLabel();
+let rzT = null; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(renderNotationView, 200); });
+
+// ---- dirty / save / revert ----------------------------------------------------
+function dirty() { return S.yaml !== S.savedYaml; }
+function markDirty() {
+  const d = dirty();
+  $('saveBtn').disabled = !d;
+  const st = $('saveStat'); st.className = d ? 'dirty' : '';
+  st.textContent = d ? 'Unsaved changes' : (S.savedAt ? `Saved ${S.savedAt}` : 'No changes');
+  if (S.slug) { if (d) { store.set('draft:' + S.slug, JSON.stringify({ base: S.sha, yaml: S.yaml })); } else store.del('draft:' + S.slug); }
+}
+window.addEventListener('beforeunload', e => { if (dirty()) { e.preventDefault(); e.returnValue = ''; } });
+$('saveBtn').onclick = async () => {
+  if (!dirty()) return;
+  const errs = ((S.analysis || {}).diagnostics || []).filter(d => d.severity === 'error');
+  if (errs.length && !confirm(`${errs.length} problem(s): ${errs[0].message}\n\nSave anyway? (Playback and the score skip a broken variation.)`)) return;
+  $('saveBtn').disabled = true; $('saveStat').textContent = 'Saving…';
+  const res = await api('save', { slug: S.slug, yaml: S.yaml, base: S.sha });
+  if (!res.ok) {
+    $('saveStat').className = 'err'; $('saveStat').textContent = res.error || 'Save failed';
+    $('saveBtn').disabled = false;
+    if (res.conflict && confirm(res.error + '\n\nLoad the newer version now? Your unsaved edit will be dropped.')) loadRhythm(S.slug, true);
+    return;
+  }
+  if (!S.yaml.endsWith('\n')) S.yaml += '\n';
+  S.savedYaml = S.yaml; S.sha = res.sha; S.history = res.history || S.history;
+  S.savedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  yamlEl.value = S.yaml;
+  markDirty(); drawHistory(); applyAnalysis(res.analysis);
+  toast(res.unchanged ? 'No change to save' : 'Saved. Rendering the score…');
+  pollRender(true);
+  refreshList();
+};
+$('revertBtn').onclick = async () => {
+  const prev = S.history.find(h => !h.undone);
+  if (!prev) return;
+  if (!confirm(`Put back the version saved before ${prev.when}?` + (dirty() ? '\nYour unsaved edits will be dropped.' : ''))) return;
+  const res = await api('revert', { slug: S.slug });
+  if (!res.ok) return toast(res.error || 'Revert failed');
+  S.yaml = S.savedYaml = res.yaml; S.sha = res.sha; S.history = res.history; S.undo = [];
+  S.savedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  yamlEl.value = S.yaml; syncField(); markDirty(); drawHistory(); applyAnalysis(res.analysis);
+  toast('Reverted to the previous saved version'); pollRender(true); refreshList();
+};
+function drawHistory() {
+  const backs = S.history.filter(h => !h.undone);
+  $('revertBtn').disabled = !backs.length;
+  $('revertBtn').innerHTML = backs.length ? `↶ Revert<br><small>${backs.length} back</small>` : '↶ Revert';
+  $('histMeta').textContent = backs.length ? `${backs.length} earlier version(s). Revert steps back one at a time; the version it replaces is kept as “undone”.` : 'No earlier versions yet: the first Save keeps the original here.';
+  const ul = $('hist'); ul.innerHTML = '';
+  S.history.slice(0, 12).forEach(h => { const li = document.createElement('li'); li.innerHTML = `${h.when} <span>${h.undone ? 'replaced by a revert' : 'before a save'}</span>`; ul.appendChild(li); });
+}
+
+// ---- LilyPond score --------------------------------------------------------
+let rT = null, renderSeq = 0;
+async function pollRender(fresh) {
+  clearTimeout(rT);
+  const seq = ++renderSeq, slug = S.slug;
+  if (fresh) { $('scoreStat').className = ''; $('scoreStat').textContent = 'Rendering with LilyPond…'; $('pages').classList.add('stale'); }
+  const st = await api('render?slug=' + encodeURIComponent(slug));
+  if (seq !== renderSeq || slug !== S.slug) return;
+  const busy = st.state === 'running' || st.state === 'none' || !st.current || st.version !== S.sha;
+  showScore(st, busy);
+  if (busy) rT = setTimeout(() => pollRender(false), 700);
+}
+function showScore(st, busy) {
+  const stat = $('scoreStat'), pages = $('pages'), link = $('pdfLink');
+  const s = (st.styles || {})[S.style];
+  if (st.state === 'error' && !busy) { stat.className = 'err'; stat.textContent = st.error || 'LilyPond failed'; }
+  else if (busy) { stat.className = ''; stat.textContent = 'Rendering with LilyPond…'; }
+  else { stat.className = ''; stat.textContent = `Rendered from the saved file${st.finished ? ' at ' + new Date(st.finished * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}${st.seconds ? ` (${st.seconds} s)` : ''}.`; }
+  if (s && s.pages && s.pages.length) {
+    const want = s.pages.join('|');
+    if (pages.dataset.key !== want) { pages.innerHTML = s.pages.map((p, i) => `<img alt="Score page ${i + 1}" src="${p}">`).join(''); pages.dataset.key = want; }
+    pages.hidden = false;
+  } else if (!busy) pages.hidden = true;
+  pages.classList.toggle('stale', busy);
+  if (s && s.pdf) { link.href = s.pdf; link.hidden = false; } else link.hidden = true;
+  if (dirty() && !busy) stat.textContent += ' Save to update it with your edits.';
+}
+$('styleSeg').addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if (!b) return;
+  S.style = b.dataset.style; store.set('style', S.style);
+  $('styleSeg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  $('pages').dataset.key = ''; pollRender(false);
+});
+$('styleSeg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.style === S.style)));
+
+// ---- player ------------------------------------------------------------------
+function setBpm(n, touched) {
+  n = Math.max(30, Math.min(200, Math.round(n)));
+  $('bpm').value = n; $('bpmOut').innerHTML = `${n}<small>BPM</small>`; Player.setBpm(n);
+  if (touched) { S.bpmTouched = true; store.set('bpm:' + S.slug, String(n)); }
+  const ft = ((S.analysis || {}).rhythm || {}).tempo;
+  $('tempoBtn').textContent = ft ? `♩ = ${ft}` : '♩ = file';
+  $('tempoBtn').setAttribute('aria-pressed', String(ft === n));
+}
+$('bpm').addEventListener('input', () => setBpm(Number($('bpm').value), true));
+$('bpmDown').onclick = () => setBpm(Player.bpm - 2, true);
+$('bpmUp').onclick = () => setBpm(Player.bpm + 2, true);
+$('tempoBtn').onclick = () => { const t = ((S.analysis || {}).rhythm || {}).tempo; if (t) { setBpm(t, false); S.bpmTouched = false; store.del('bpm:' + S.slug); } };
+let scope = store.get('scope') || 'one';
+function setScope(s) { scope = s; store.set('scope', s); $('scopeSeg').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.scope === s))); }
+setScope(scope);
+$('scopeSeg').addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; setScope(b.dataset.scope); Player.only = scope === 'one' ? curIndex() : null; Player.restart(); });
+Player.loop = store.get('loop') !== '0';
+$('loopBtn').setAttribute('aria-pressed', String(Player.loop));
+$('loopBtn').onclick = () => { Player.loop = !Player.loop; store.set('loop', Player.loop ? '1' : '0'); $('loopBtn').setAttribute('aria-pressed', String(Player.loop)); };
+$('playBtn').onclick = () => {
+  if (Player.playing) return Player.stop();
+  Player.only = scope === 'one' ? curIndex() : null;
+  Player.play();
+};
+function drawDots(n, on) {
+  const d = $('dots');
+  if (d.children.length !== n) { d.innerHTML = ''; for (let i = 0; i < n; i++) { const s = document.createElement('span'); s.className = 'dot'; s.textContent = i + 1; d.appendChild(s); } }
+  Array.from(d.children).forEach((s, i) => s.classList.toggle('on', i === on));
+}
+Player.onchange = st => {
+  const pb = $('playBtn');
+  pb.dataset.playing = st.playing ? '1' : '0'; pb.textContent = st.playing ? '■ Stop' : '▶ Play';
+  if (st.error) { $('playStat').textContent = st.error; toast(st.error); return; }
+  const r = (S.analysis || {}).rhythm;
+  if (!st.playing) { drawDots(0, -1); $('playStat').textContent = st.finished ? 'Done.' : ''; document.querySelectorAll('.notation.playing').forEach(n => n.classList.remove('playing')); return; }
+  if (st.variation === undefined || !r) return;
+  const v = r.variations[st.variation];
+  drawDots(Math.ceil(v.sound[st.bar] ? v.sound[st.bar].beats : v.beats), st.beat);
+  $('playStat').textContent = `${v.id}${v.sound.length > 1 ? ' · bar ' + (st.bar + 1) : ''}`;
+  document.querySelectorAll('#notation > div').forEach(b => { const n = b.querySelector('.notation'); if (n) n.classList.toggle('playing', b.dataset.vid === v.id); });
+};
+
+// ---- load ------------------------------------------------------------------------
+async function refreshList() {
+  const res = await api('list');
+  if (!res.rhythms) return;
+  $('dataPath').textContent = res.data + '/rhythms';
+  const p = $('picker'), keep = S.slug || p.value;
+  p.innerHTML = res.rhythms.map(r => `<option value="${r.slug}">${r.display} (${r.meter}, ${r.variations.length})${r.edited ? ' •' : ''}${r.errors ? ' ⚠' : ''}</option>`).join('');
+  if (keep) p.value = keep;
+  return res.rhythms;
+}
+async function loadRhythm(slug, force) {
+  if (!force && S.slug && dirty() && !confirm('You have unsaved edits. Leave them?')) { $('picker').value = S.slug; return; }
+  if (Player.playing) Player.stop();
+  const res = await api('rhythm?slug=' + encodeURIComponent(slug));
+  if (res.error) { toast(res.error); return; }
+  Object.assign(S, { slug, yaml: res.yaml, savedYaml: res.yaml, sha: res.sha, history: res.history, analysis: null, undo: [], savedAt: null, bpmTouched: false });
+  store.set('slug', slug);
+  history.replaceState(null, '', '#' + slug);
+  $('picker').value = slug;
+  $('editedBadge').hidden = !res.edited;
+  const vars = listVariations(), want = store.get('cur:' + slug);
+  S.cur = vars.includes(want) ? want : vars[0] || null;
+  yamlEl.value = S.yaml; syncField(); markDirty(); drawHistory();
+  // a draft left on this device for this same saved version?
+  let draft = null; try { draft = JSON.parse(store.get('draft:' + slug) || 'null'); } catch (e) {}
+  $('draftBanner').hidden = !(draft && draft.yaml !== S.yaml && draft.base === S.sha);
+  $('draftRestore').onclick = () => { pushUndo(); S.yaml = draft.yaml; $('draftBanner').hidden = true; changed({ tabs: true }); };
+  $('draftDrop').onclick = () => { store.del('draft:' + slug); $('draftBanner').hidden = true; };
+  applyAnalysis(res.analysis);
+  const b = Number(store.get('bpm:' + slug));
+  if (b >= 30 && b <= 200) { setBpm(b, false); S.bpmTouched = true; }
+  $('pages').dataset.key = ''; $('pages').hidden = true;
+  pollRender(false);
+}
+$('picker').addEventListener('change', () => loadRhythm($('picker').value));
+window.addEventListener('hashchange', () => { const h = decodeURIComponent(location.hash.slice(1)); if (h && h !== S.slug) loadRhythm(h); });
+(async () => {
+  const list = await refreshList();
+  if (!list || !list.length) { $('notation').innerHTML = '<div class="empty">No rhythms found.</div>'; return; }
+  const h = decodeURIComponent(location.hash.slice(1)), last = store.get('slug');
+  const slug = [h, last, 'eptasimos'].find(s => s && list.some(r => r.slug === s)) || list[0].slug;
+  loadRhythm(slug, true);
+})();
+</script>
+</body>
+</html>
