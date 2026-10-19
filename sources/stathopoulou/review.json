@@ -1,0 +1,1418 @@
+{
+ "about": "Grouping of candidates.json for the review page (19 Oct 2026). Variations of a rhythm that exists in rhythms/ are numbered after its last vN, so an approved one joins it under that vid. Decisions are in the artifact db at decisions/<candidate id> {status, comment, at}; edited strings at edits/<candidate id> {rhythm, original, at}.",
+ "counts": {
+  "candidates": 158,
+  "rhythms": 26,
+  "variations": 124,
+  "excluded": 34,
+  "rhythms_in_library": 13
+ },
+ "groups": [
+  {
+   "slug": "semai",
+   "display": "Semai",
+   "meter": "3/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v6",
+     "id": "semai-base",
+     "title": "Semai, βάση (dum tek ka)",
+     "rhythm": ">4 Δ4 Α4",
+     "written_meter": "3/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v7",
+     "id": "elate-edo-bendir",
+     "title": "«Ελάτ' εδώ γειτόνισσες» για bendir",
+     "rhythm": ">4 S4 S4>",
+     "written_meter": "3/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v8",
+     "id": "semai-bendir",
+     "title": "Semai για bendir («Μανώλια»)",
+     "rhythm": ">4 S4 S4",
+     "written_meter": "3/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "rythmos_4_4",
+   "display": "Ρυθμός σε 4/4",
+   "meter": "4/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "rythmos-4-4",
+     "title": "Ρυθμός σε 4/4",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "zeibekiko",
+   "display": "Ζεϊμπέκικο 9/4",
+   "meter": "9/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "palio-zeibekiko",
+     "title": "Παλιό ζεϊμπέκικο (Agir Zeybek, βαρύ ζεϊμπέκικο)",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8] >4 Δ4> Δ4>",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "zeibekiko-9-4-b",
+     "title": "9/4, ίδιο σε αξία με το παλιό ζεϊμπέκικο",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8]",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "neo-zeibekiko",
+     "title": "Νέο ζεϊμπέκικο (άσκηση)",
+     "rhythm": ">8[ Α8] r8 Α8 >4 Δ4> >8[ Α8] r8 Α8 >4 Δ4> Δ4>",
+     "written_meter": "9/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "kamilierikos",
+   "display": "Καμηλιέρικο (παλιός καρσιλαμάς 9/4)",
+   "meter": "9/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "palios-karsilamas-9-4",
+     "title": "Παλιός (ή βαρύς) καρσιλαμάς ή καμηλιέρικο",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8]",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "kamilierikos",
+     "title": "Καμηλιέρικος ή Παλιός Καρσιλαμάς",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ8[ Α8] >4 Δ4> Δ4>",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "kamilierikos-trilia",
+     "title": "Παλιός καρσιλαμάς με τρίλια",
+     "rhythm": ">4 Α8:[ Α8] >4 Α8:[ Α8] >4 Α8:[ Α8] >4 Δ4 Δ4",
+     "written_meter": "9/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v4",
+     "id": "kamilierikos-mesos",
+     "title": "Καμηλιέρικος με (Α)",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ8[ (Α)8] >4 Δ8[ Α8] >4 Δ4 Δ4",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "kamilierikos-mesos-trilia",
+     "title": "Καμηλιέρικος με τρίλια και (Α)",
+     "rhythm": ">4 Α8:[ (Α)8] >4 Α8:[ (Α)8] >4 Α8:[ (Α)8] >4 Δ4 Δ4",
+     "written_meter": "9/4",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "aptaliko",
+   "display": "Απτάλικο",
+   "meter": "9/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v3",
+     "id": "palio-aptaliko",
+     "title": "Παλιό απτάλικο",
+     "rhythm": ">4 Δ4 Α4 >4 Δ8[ Α8] >4 Δ4> >4 r4",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v4",
+     "id": "aptaliko-parallagi",
+     "title": "Παλιό απτάλικο, παραλλαγή",
+     "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 Δ8[ Α8]",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "aptaliko-trilia",
+     "title": "Παλιό απτάλικο με τρίλια",
+     "rhythm": ">4 Δ4 Δ4 >4 Α8:[ Α8] >4 Δ4 >4 r4",
+     "written_meter": "9/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v6",
+     "id": "neo-aptaliko",
+     "title": "Νέο απτάλικο",
+     "rhythm": ">4 Δ4 Δ4 >8[ Α8] r8 Α8 >4 Δ4> >8[ Α8] r8 Α8",
+     "written_meter": "9/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v7",
+     "id": "aptaliko-16-trilia",
+     "title": "Απτάλικο με 16κτα, slap και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] S4> >4 Α8:[ Α8] >4 Δ4> >4 r4",
+     "written_meter": "9/4",
+     "conf": "low"
+    }
+   ]
+  },
+  {
+   "slug": "enniasimos",
+   "display": "Aksak Osul",
+   "meter": "9/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v9",
+     "id": "aksak-slap",
+     "title": "Aksak με hek/slap",
+     "rhythm": ">4 S4 >4 S8[ r8 S8]",
+     "written_meter": "9/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v10",
+     "id": "enniasimos-hek",
+     "title": "Εννιάσημος με H (σαν καρσιλαμάς)",
+     "rhythm": ">4 S4 >4 S4.",
+     "written_meter": "9/8",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "karsilamas",
+   "display": "Καρσιλαμάς",
+   "meter": "9/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v7",
+     "id": "karsilamas-trilia",
+     "title": "Καρσιλαμάς, παραλλαγή με τρίλια",
+     "rhythm": ">4 Α8:[ Α8] >4 Δ8[ Δ8 Α8]",
+     "written_meter": "9/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v8",
+     "id": "karsilamas-16a",
+     "title": "Καρσιλαμάς με 16κτα (παραλλαγή)",
+     "rhythm": ">4 Δ16[ Α16 Δ16 Α16] >4 Δ8[ Δ8 Α8]",
+     "written_meter": "9/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v9",
+     "id": "karsilamas-16b",
+     "title": "Καρσιλαμάς με 16κτα (παραλλαγή 2)",
+     "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Α16 Α16 Δ16 Α16]",
+     "written_meter": "9/8",
+     "conf": "low"
+    }
+   ]
+  },
+  {
+   "slug": "eptasimos",
+   "display": "Επτάσημος",
+   "meter": "7/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v11",
+     "id": "eptasimos-syrtos-ntaouli",
+     "title": "Επτάσημος τύπου συρτός βορειοελλαδίτικος ή παλιός καλαματιανός (νταούλι)",
+     "rhythm": ">8[ Δ8 Δ8] >4 Δ4> | >8[ r8 Δ8] >4 Δ4>",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v12",
+     "id": "eptasimos-ntaouli-dipli",
+     "title": "Επτάσημος για νταούλι, με δεύτερο dum",
+     "rhythm": ">8[ >8 Δ8] >4 Δ4> | >8[ r8 Δ8] >4 Δ4>",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v13",
+     "id": "eptasimos-vasi",
+     "title": "Επτάσημος, βάση (3+2+2)",
+     "rhythm": ">4. >4 Δ4",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v14",
+     "id": "eptasimos-trilia",
+     "title": "Επτάσημος, παραλλαγή με τρίλια",
+     "rhythm": ">8[ Δ8 Α8] >4 Α8:[ Α8]",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v15",
+     "id": "eptasimos-ntaouli-plousios-1",
+     "title": "Επτάσημος για νταούλι, πιο πολλά κτυπήματα (1)",
+     "rhythm": ">8[ Δ8 Δ8] >8[ >8] Δ4>",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v16",
+     "id": "eptasimos-ntaouli-plousios-2",
+     "title": "Επτάσημος για νταούλι, πιο πολλά κτυπήματα (2)",
+     "rhythm": ">8[ >8 Δ8] >8[ >8] Δ4>",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v17",
+     "id": "eptasimos-p-argos",
+     "title": "Επτάσημος, παραλλαγή για αργούς επτάσημους",
+     "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8>[ Α8>]",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v18",
+     "id": "eptasimos-p-16-trilia",
+     "title": "Επτάσημος, παραλλαγή με 16κτα και τρίλια",
+     "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Α8:[ Α8]",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v19",
+     "id": "eptasimos-mesos",
+     "title": "Επτάσημος με (Α)",
+     "rhythm": ">8[ Δ16 Α16 Δ16 (Α)16] >4 Δ4>",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v20",
+     "id": "kalamatianos-mesos",
+     "title": "Καλαματιανός με (Α)",
+     "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 (Α)16]",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v21",
+     "id": "eptasimos-trilia-mesos",
+     "title": "Επτάσημος με τρίλια και (Α)",
+     "rhythm": ">8[ Δ8 Α8] >4 Α8:[ (Α)8]",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v22",
+     "id": "eptasimos-16-mesos-slap",
+     "title": "Επτάσημος με 16κτα, (Α) και slap",
+     "rhythm": ">8[ Δ16 Α16 Δ16 (Α)16] >4 S4",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v23",
+     "id": "thrakis-bendir",
+     "title": "Θράκης, επτάσημο για bendir",
+     "rhythm": ">4. >4 S4",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v24",
+     "id": "syrtos-makedonias",
+     "title": "Συρτός Μακεδονίας (Καλαματιανός), Devri Hindi",
+     "rhythm": ">4. >4 Δ4 | >8[ r8 Δ8] >4 Δ4",
+     "written_meter": "7/8",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "raiko",
+   "display": "Ράικο",
+   "meter": "7/8",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "raiko-1",
+     "title": "Ρυθμός Ράικο",
+     "rhythm": ">8[ Δ8 Δ8] Δ4> Δ4>",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v2",
+     "id": "raiko-2",
+     "title": "Ράικο (ή)",
+     "rhythm": ">8[ r8 Δ8] Δ4> Δ4>",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v3",
+     "id": "raiko-3",
+     "title": "Ράικο (ή)",
+     "rhythm": ">4. Δ4> Δ4>",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v4",
+     "id": "raiko-3-2-2",
+     "title": "Ράικο (3-2-2 για πολύ γρήγορους ρυθμούς της Μακεδονίας)",
+     "rhythm": ">4. Δ4 Δ4 | >8[ r8 Δ8] Δ4 Δ4",
+     "written_meter": "7/8",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "wahda_forma",
+   "display": "Φόρμα 4/4 πάνω στο wahda",
+   "meter": "4/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "forma-rythmou",
+     "title": "Φόρμα ρυθμού (4/4)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 Δ16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "forma-mesos",
+     "title": "4/4 με (Α)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 Δ16 (Α)16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "forma-mesos-teke",
+     "title": "4/4 με (Α), τέλος te-ke",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 Δ16 (Α)16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v4",
+     "id": "wahda-vasi-slap",
+     "title": "4/4 βασισμένο πάνω στο ρυθμό wahda (= ένα, πρώτο)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 Δ16 Α16] S4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "wahda-vasi-slap-2",
+     "title": "4/4, και μετά από αυτό",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 S8>] Δ16[ Α16 Δ16 Α16] S4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v6",
+     "id": "wahda-vasi-slap-mesos",
+     "title": "4/4 με (Α) και slap",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 S8>] Δ16[ Α16 Δ16 (Α)16] S4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v7",
+     "id": "wahda-pafsi-16",
+     "title": "4/4 βασισμένο στο wahda, με παύση 1/16",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 r16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v8",
+     "id": "livisiani-b-telos",
+     "title": "Λιβισιανή (Β), το τελευταίο μέτρο",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] Δ16[ Α16 r16 (Α)16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v9",
+     "id": "forma-pafsi",
+     "title": "4/4 με παύσεις (16κτα)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] Δ16[ Α16 r16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v10",
+     "id": "forma-pafsi-2",
+     "title": "4/4 με παύσεις (2)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] r16 Α16[ Δ16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v11",
+     "id": "forma-pafsi-3",
+     "title": "4/4 με παύσεις (e-ke e-ke)",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ Α16 Δ8>] r16 Α16 r16 Α16 Δ4>",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v12",
+     "id": "wahda-forma-trilia",
+     "title": "4/4 με (Α) και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] r4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v13",
+     "id": "wahda-forma-slap-trilia",
+     "title": "4/4 με (Α), slap και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] Δ16[ (Α)16 S8>] r4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "mikrasiatikos",
+   "display": "Αργός μικρασιάτικος (Sofian στα περσικά)",
+   "meter": "4/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "sofian-persiko",
+     "title": "Ρυθμός Sofian στα περσικά",
+     "rhythm": ">4 r8 Α8 Δ4 Α4",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "argos-mikrasiatikos-a",
+     "title": "Αργός μικρασιάτικος (Α)",
+     "rhythm": ">4 r8 Α8 Δ4 (Α)4 | % | % | >8[ Α8] >8[ (Α)8] Δ4> r4",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "argos-mikrasiatikos-b",
+     "title": "Αργός μικρασιάτικος (Β)",
+     "rhythm": ">4 r8 Α8 Δ4 (Α)4 | % | % | >8[ Δ16 Α16] Δ8[ (Α)8] Δ4> r4",
+     "written_meter": "4/4",
+     "conf": "low"
+    }
+   ]
+  },
+  {
+   "slug": "wahda",
+   "display": "Wahda",
+   "meter": "4/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v4",
+     "id": "wahda-proseggisi",
+     "title": "Wahda, προσέγγιση",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] Δ16[ (Α)16 r16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v5",
+     "id": "wahda-teke",
+     "title": "Wahda, παραλλαγή (τέλος te-ke)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v6",
+     "id": "wahda-trilia",
+     "title": "Wahda, παραλλαγή με τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v7",
+     "id": "wahda-slap-trilia",
+     "title": "Wahda, παραλλαγή με slap και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 S4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v8",
+     "id": "wahda-s-trilia",
+     "title": "Wahda, παραλλαγή με S στο 2ο χρόνο και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 r4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v9",
+     "id": "wahda-k-16",
+     "title": "Wahda με Α και 16κτα",
+     "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 Δ16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v10",
+     "id": "wahda-k",
+     "title": "Wahda με Α",
+     "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 r16 Α16] Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v11",
+     "id": "wahda-k-teke",
+     "title": "Wahda με Α, τέλος te-ke",
+     "rhythm": ">8[ Δ16 Α16] r16 Α16[ Δ16>] r16 Δ16[ Α16 r16 Α16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v12",
+     "id": "wahda-mia",
+     "title": "Wahda (= μία, πρώτη, μονάδα)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ (Α)16 r16 Α16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v13",
+     "id": "wahda-4s-trilia",
+     "title": "Wahda, 4ος χρόνος με τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 Α16:[ (Α)16 Δ8>]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v14",
+     "id": "wahda-dyo-trilies",
+     "title": "Wahda με δύο τρίλιες",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Α16:[ (Α)16 Δ8>] Α16:[ (Α)16 Δ8>]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "aksak_semai",
+   "display": "Aksak semai",
+   "meter": "10/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "aksak-semai",
+     "title": "Aksak semai",
+     "rhythm": ">4 Δ8[ Α8] Δ4> Α4> Δ8[ Α8] >8[ Α8] >4 Δ4> r4 Δ4>",
+     "written_meter": "10/4",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "yuruk_semai",
+   "display": "Yürük semai",
+   "meter": "6/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "yuruk-semai",
+     "title": "Yürük semai",
+     "rhythm": ">4 Δ4 Α4 >4 Δ4> r4",
+     "written_meter": "6/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "tsifteteli_enniari",
+   "display": "Τσιφτετελοειδές εννιάρι (Αν. Θράκη)",
+   "meter": "9/8",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "tsifteteli-enniari",
+     "title": "Τσιφτετελοειδές εννιάρι από Αν. Θράκη",
+     "rhythm": ">4 >4 Δ4 Δ8[ Α8] r8",
+     "written_meter": "9/8",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "arabesk",
+   "display": "Arabesk",
+   "meter": "4/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "arabesk",
+     "title": "Arabesk",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >8[ Δ16 Α16] Δ8>[ Δ16 (Α)16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "oriental-arabesk",
+     "title": "Oriental προς Arabesk (*)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "arabesk-p-16",
+     "title": "Arabesk παραλλαγή (16κτα στο τέλος)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ16[ Α16 Δ16 (Α)16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v4",
+     "id": "arabesk-p-pafsi",
+     "title": "Arabesk παραλλαγή (παύση στο τέλος)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Δ16[ Α16 r16 (Α)16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "arabesk-p1-trilia",
+     "title": "Arabesk παραλλαγή 1 (τρίλια)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v6",
+     "id": "arabesk-s-trilia",
+     "title": "Arabesk με S και τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 >4 Α8:[ (Α)8]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v7",
+     "id": "arabesk-s",
+     "title": "Arabesk με S",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ S16>] r16 >8[ Δ16 Α16] S4>",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v8",
+     "id": "arabesk-ii",
+     "title": "Arabesk II",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >16[ Α16 r16 (Α)16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v9",
+     "id": "arabesk-ii-trilia",
+     "title": "Arabesk II με τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >16[ Α16 r16 (Α)16] Δ8>[ Α16: (Α)16]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v10",
+     "id": "arabesk-k",
+     "title": "Arabesk (Α στο τέλος)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+     "written_meter": "4/4",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "duyek",
+   "display": "Duyek",
+   "meter": "4/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v9",
+     "id": "vasi-oriental-s",
+     "title": "Βάση Oriental με S / Duyek",
+     "rhythm": ">8[ S8] r8 S8 >4 S4",
+     "written_meter": "4/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "nim_sofyan",
+   "display": "Nim Sofyan",
+   "meter": "2/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v8",
+     "id": "bendir-4-8",
+     "title": "Μωραΐτικα, Ικαρίας, Χίου: bendir",
+     "rhythm": ">4 >8[ S8]",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v9",
+     "id": "ikarias",
+     "title": "Ικαρίας, τουμπελέκι",
+     "rhythm": ">8[ Δ16 Α16] >8[ Α8] | >8[ Δ16 Α16] >8[ Δ8>] | >8[ Α8] >8[ Α8]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "kritis",
+   "display": "Κρήτης",
+   "meter": "10/4",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "kritis",
+     "title": "Κρήτης, τουμπελέκι",
+     "rhythm": ">4 Δ8[ Α8] Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8] >4 Δ8[ Α8] Δ8[ Α8] >4",
+     "written_meter": "10/4",
+     "conf": "low"
+    },
+    {
+     "vid": "v2",
+     "id": "kritis-bendir",
+     "title": "Κρήτης, bendir",
+     "rhythm": ">4 S4 S4 >4 S4 S4 >4 S4 S4 >4",
+     "written_meter": "10/4",
+     "conf": "low"
+    }
+   ]
+  },
+  {
+   "slug": "syrtoidi",
+   "display": "Συρτοειδή",
+   "meter": "4/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v4",
+     "id": "syrtos-tonismenos",
+     "title": "Συρτός, 2ο μέτρο με τονισμούς",
+     "rhythm": ">8[ Δ16> Α16] r16 (Α)16[ Δ16> Α16>]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v5",
+     "id": "syrtos-4metro-klisimo",
+     "title": "Συρτός, τετράμετρο με κλείσιμο",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >8[ Δ8] r8 Δ8",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v6",
+     "id": "syrtos-trilia-2o",
+     "title": "Συρτός, τρίλια στο 2ο μέτρο",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α8:[ (Α)8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ8] r8 Δ8",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v7",
+     "id": "syrtos-trilia-16",
+     "title": "Συρτός, τρίλια σε 16κτο στο 2ο μέτρο",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α16: Α16] Δ8[ Α8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ8] r8 Δ8",
+     "written_meter": "4/8",
+     "conf": "low"
+    },
+    {
+     "vid": "v8",
+     "id": "syrtos-nisia-trilia",
+     "title": "Συρτός (νησιά), 4ο μέτρο με τρίλια",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Α8:[ (Α)8]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v9",
+     "id": "syrtos-klisimo-tete",
+     "title": "Συρτός, κλείσιμο με δύο tek (π.χ. Νάξου)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Δ8[ Δ8]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v10",
+     "id": "syrtos-klisimo-k",
+     "title": "Συρτός, κλείσιμο με κλειστό K (K)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >4 Α8[ (Α)8]",
+     "written_meter": "4/8",
+     "conf": "low"
+    },
+    {
+     "vid": "v11",
+     "id": "syrtos-klisimo-kkk",
+     "title": "Συρτός, κλείσιμο > K (K) K",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | % | % | >8[ Α8] (Α)8[ Α8]",
+     "written_meter": "4/8",
+     "conf": "low"
+    },
+    {
+     "vid": "v12",
+     "id": "syrtos-4metro-trilia-k",
+     "title": "Συρτός, τετράμετρο με τρίλια και κλειστά",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α8:[ Α8] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α8] (Α)8[ Α8]",
+     "written_meter": "4/8",
+     "conf": "low"
+    },
+    {
+     "vid": "v13",
+     "id": "syrtos-trilia-tek",
+     "title": "Συρτός, 2ο μέτρο τρίλια (Α)Δ",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α16:[ (Α)16 Δ8>] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v14",
+     "id": "syrtos-2o-ekeke",
+     "title": "Συρτός, 2ο μέτρο (παύση ογδόου)",
+     "rhythm": ">8[ Δ16 Α16] r8 Α16[ (Α)16]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v15",
+     "id": "syrtos-trilia-16-aldaa",
+     "title": "Συρτός, τρίλια σε 16κτα (αρ.-δεξί-αρ.-αρ.)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >4 Α16:[ Δ16 Α16 (Α)16] | >8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16] | >8[ Α8] (Α)8[ Α8]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "sofyan",
+   "display": "Sofyan",
+   "meter": "4/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v6",
+     "id": "sofyan-trilia",
+     "title": "Sofyan, 4ο μέτρο με τρίλια",
+     "rhythm": ">8.[ Α16] Δ8[ (Α)8] | % | % | >4 Α8:[ Α8]",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v7",
+     "id": "sympethera",
+     "title": "«Συμπεθέρα», 2/4",
+     "rhythm": ">8.[ Α16] Δ8[ (Α)8] | % | % | >4 Α8:[ (Α)8]",
+     "written_meter": "2/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v8",
+     "id": "sympethera-klisimo-2",
+     "title": "«Συμπεθέρα», κλείσιμο (ή)",
+     "rhythm": ">8[ Δ16 Α16] Δ8[ (Α)8]",
+     "written_meter": "2/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v9",
+     "id": "sympethera-klisimo-3",
+     "title": "«Συμπεθέρα», κλείσιμο με τρίλια (ή)",
+     "rhythm": ">8[ Α16: (Α)16] Δ8[ Α8]",
+     "written_meter": "2/4",
+     "conf": "medium"
+    },
+    {
+     "vid": "v10",
+     "id": "sofyan-p-sss",
+     "title": "Παραλλαγές Sofyan (1)",
+     "rhythm": ">8.[ S16] S8[ S8]",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v11",
+     "id": "sofyan-p-ss",
+     "title": "Παραλλαγές Sofyan (2)",
+     "rhythm": ">8[ S16 S16] r8 S8",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v12",
+     "id": "sofyan-p-dum",
+     "title": "Παραλλαγές Sofyan (4)",
+     "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ >16] r16",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v13",
+     "id": "sofyan-p-s-dum",
+     "title": "Παραλλαγές Sofyan (5)",
+     "rhythm": ">8.[ S16] r16 S16[ >16] r16",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v14",
+     "id": "sofyan-p-dumdum",
+     "title": "Παραλλαγές Sofyan (8)",
+     "rhythm": ">8. >8. Δ8>",
+     "written_meter": "4/8",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "mandilatos",
+   "display": "Μαντιλάτος",
+   "meter": "7/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v3",
+     "id": "thrakiotikos-ka",
+     "title": "Θρακιώτικος ρυθμός (ΔΑ ΔΑ(Α))",
+     "rhythm": ">4 Δ8[ Α8] Δ8[ Α8 (Α)8]",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v4",
+     "id": "perperouna",
+     "title": "Θρακιώτικος ρυθμός (Περπερούνα)",
+     "rhythm": ">4 Δ4 Δ8[ r8 Δ8]",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "mantilatos-fraseis",
+     "title": "Μαντηλάτος / Δενδρίτσι, τετράμετρη «μελωδική φράση» (καθιστή θέση)",
+     "rhythm": ">4 Δ8[ Α8] Δ8[ Δ8 (Α)8] | % | % | >4 >4 Δ4.",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v6",
+     "id": "orthia-1",
+     "title": "Επτάσημος, ορθία θέση (1)",
+     "rhythm": ">4 Δ4 Δ4. | >4 >4 Δ4. | >4 Δ4 Δ4. | >4 >4 Δ4.",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v7",
+     "id": "orthia-2",
+     "title": "Επτάσημος, ορθία θέση (2)",
+     "rhythm": ">4 Δ4 Δ4. | >4 Δ4 Δ8[ r8 Δ8>] | % | %",
+     "written_meter": "7/8",
+     "conf": "low"
+    },
+    {
+     "vid": "v8",
+     "id": "orthia-3",
+     "title": "Επτάσημος, ορθία θέση (3)",
+     "rhythm": ">4 Δ4 Δ8[ r8 Δ8>] | % | % | >4 >4 Δ4.",
+     "written_meter": "7/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v9",
+     "id": "kathisti-2",
+     "title": "Επτάσημος, καθιστή θέση (2)",
+     "rhythm": ">4 Δ4 Α8[ r8 Α8] | % | % | >4 >4 Δ4.",
+     "written_meter": "7/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v10",
+     "id": "mantilatos-devri-turan",
+     "title": "Μαντηλάτος (βασικός ρυθμός), Devri Turan",
+     "rhythm": ">4 Δ4 Δ4. | >4 Δ4 Δ8[ r8 (Α)8]",
+     "written_meter": "7/8",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "turk_aksagy",
+   "display": "Türk aksağı",
+   "meter": "5/8",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v8",
+     "id": "pentasimo-hek",
+     "title": "5/8 με H",
+     "rhythm": ">4 S4. | >4 S8[ r8 Α8]",
+     "written_meter": "5/8",
+     "conf": "medium"
+    }
+   ]
+  },
+  {
+   "slug": "nisiotiko",
+   "display": "Τετράσημος για νησιώτικα",
+   "meter": "4/8",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "beria-4",
+     "title": "Μπεριά 4σημο (Κάτω Στενή) / Νησιώτικο Γ",
+     "rhythm": ">8.[ >16] >8[ Δ8>]",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v2",
+     "id": "nisiotiko-a",
+     "title": "Τετράσημος για νησιώτικα (Α) / για όρθιο",
+     "rhythm": ">8.[ Δ16] Δ8[ Δ8]",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v3",
+     "id": "nisiotiko-b",
+     "title": "Τετράσημος για νησιώτικα (Β)",
+     "rhythm": ">8.[ Δ16] >8[ >8]",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v4",
+     "id": "nisiotiko-d",
+     "title": "Τετράσημος για νησιώτικα (Δ) / στο όρθιο",
+     "rhythm": ">8.[ Δ16] r16 Δ16[ >16] r16",
+     "written_meter": "4/8",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "nisiotiko-e",
+     "title": "Τετράσημος για νησιώτικα (Ε)",
+     "rhythm": ">8. Δ8. Δ8>",
+     "written_meter": "4/8",
+     "conf": "medium"
+    },
+    {
+     "vid": "v6",
+     "id": "samothraki",
+     "title": "Σαμοθρακίτικος συρτός",
+     "rhythm": ">8.[ Δ16] Δ8[ >8]",
+     "written_meter": "4/8",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "kasik_havasi",
+   "display": "Kaşık Havası",
+   "meter": "2/4",
+   "in_library": true,
+   "variations": [
+    {
+     "vid": "v4",
+     "id": "kasik-havasi",
+     "title": "Kaşık havası (= κουτάλια)",
+     "rhythm": ">4 Δ8>[ Α8>]",
+     "written_meter": "2/4",
+     "conf": "high"
+    },
+    {
+     "vid": "v5",
+     "id": "kasik-havasi-kofto",
+     "title": "Kaşık havası, κοφτό δίμετρο",
+     "rhythm": ">4 Δ8>[ Α8>] | r4 Δ8>[ Α8>]",
+     "written_meter": "2/4",
+     "conf": "high"
+    }
+   ]
+  },
+  {
+   "slug": "argilamas",
+   "display": "Αργιλαμάς (2+3+2+2)",
+   "meter": "9/8",
+   "in_library": false,
+   "variations": [
+    {
+     "vid": "v1",
+     "id": "argilamas",
+     "title": "Αργιλαμάς (2+3+2+2)",
+     "rhythm": ">4 >4. >4 S4",
+     "written_meter": "9/8",
+     "conf": "high"
+    }
+   ]
+  }
+ ],
+ "excluded": [
+  {
+   "id": "semai-eighths",
+   "title": "Semai με όγδοα (dum teke teke)",
+   "rhythm": ">4 Δ8[ Α8] Δ8[ Α8]",
+   "reason": "azeri v2 χωρίς τον τονισμό στο 2ο tek"
+  },
+  {
+   "id": "palios-aptalikos",
+   "title": "Παλιός απτάλικος",
+   "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+   "reason": "ίδιο με aptaliko v1"
+  },
+  {
+   "id": "enniasimos-vasi",
+   "title": "Εννιάσημος (9/8), βάση",
+   "rhythm": ">4 Δ4 >4 Δ4.",
+   "reason": "enniasimos v1 χωρίς τους τονισμούς στα tek"
+  },
+  {
+   "id": "karsilamas",
+   "title": "Καρσιλαμάς (αντικρυστός)",
+   "rhythm": ">4 Δ8[ Α8] >4 Δ8[ Δ8 Α8]",
+   "reason": "karsilamas v1 χωρίς τον τονισμό στο 2ο tek"
+  },
+  {
+   "id": "aksak",
+   "title": "Aksak (= κουτσός), ο ρυθμός του καρσιλαμά",
+   "rhythm": ">4 Δ4 >4 Δ8[ r8 Α8]",
+   "reason": "enniasimos v2 χωρίς τους τονισμούς στα tek"
+  },
+  {
+   "id": "eptasimos",
+   "title": "Επτάσημος ρυθμός (ο αργός)",
+   "rhythm": ">8[ Δ8 Α8] >4 Δ4>",
+   "reason": "ίδιο με eptasimos v1"
+  },
+  {
+   "id": "eptasimos-slap",
+   "title": "Επτάσημος, παραλλαγή με slap",
+   "rhythm": ">8[ Δ8 Α8] >4 S4",
+   "reason": "ίδιο με eptasimos v7"
+  },
+  {
+   "id": "eptasimos-ntaouli",
+   "title": "Επτάσημος απλοποιημένος για νταούλι",
+   "rhythm": ">8[ r8 Δ8] >4 Δ4>",
+   "reason": "ίδιο με eptasimos v2 (μόνο οι γραμμές σύνδεσης διαφέρουν)"
+  },
+  {
+   "id": "eptasimos-p-teke-ka",
+   "title": "Επτάσημος, παραλλαγή (te-ke στο 2ο)",
+   "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8[ Α8]",
+   "reason": "ίδιο με eptasimos v4 και v5 (μόνο οι γραμμές σύνδεσης διαφέρουν)"
+  },
+  {
+   "id": "eptasimos-p-teke-teke",
+   "title": "Επτάσημος, παραλλαγή (teke-teke)",
+   "rhythm": ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+   "reason": "eptasimos v6 με τονισμό στο 3ο tek· στις 05/03/2025 το γράφει κι εκείνη χωρίς τονισμό"
+  },
+  {
+   "id": "eptasimos-p-16-teke",
+   "title": "Επτάσημος, παραλλαγή με 16κτα",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]",
+   "reason": "ίδιο με eptasimos v9"
+  },
+  {
+   "id": "eptasimos-p-16-teke-ka",
+   "title": "Επτάσημος, παραλλαγή με 16κτα (2ο μέτρο)",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8[ Α8]",
+   "reason": "eptasimos v10 χωρίς τους τονισμούς (το σημάδι πάνω από το τελευταίο ζεύγος μάλλον είναι τονισμός)"
+  },
+  {
+   "id": "eptasimos-p-16-teletaio",
+   "title": "Επτάσημος, παραλλαγή με 16κτα στο τέλος",
+   "rhythm": ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 Α16]",
+   "reason": "ίδιο με eptasimos v3"
+  },
+  {
+   "id": "eptasimos-p-16-slap",
+   "title": "Επτάσημος, παραλλαγή με 16κτα και slap",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 S4",
+   "reason": "ίδιο με eptasimos v8"
+  },
+  {
+   "id": "eptasimos-p-16-tonismena",
+   "title": "Επτάσημος, παραλλαγή με 16κτα και δύο τονισμένα",
+   "rhythm": ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8>[ Α8>]",
+   "reason": "ίδιο με eptasimos v10"
+  },
+  {
+   "id": "aptaliko-16",
+   "title": "Απτάλικο με 16κτα",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+   "reason": "ίδιο με aptaliko v2"
+  },
+  {
+   "id": "karsilamas-16-v3",
+   "title": "Καρσιλαμάς με 16κτα (Εννιάσημος παραλλαγές)",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8[ Δ8 Α8]",
+   "reason": "karsilamas v3 χωρίς τον τονισμό στο 3ο tek"
+  },
+  {
+   "id": "karsilamas-16-v5",
+   "title": "Καρσιλαμάς με 16κτα (τρίτη παραλλαγή)",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8[ Δ8 Α8]",
+   "reason": "karsilamas v5 χωρίς τον τονισμό στο τελευταίο tek"
+  },
+  {
+   "id": "karsilamas-16-v2",
+   "title": "Καρσιλαμάς με 16κτα στο τέλος",
+   "rhythm": ">4 Δ8[ Α8] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "reason": "ίδιο με karsilamas v2"
+  },
+  {
+   "id": "karsilamas-16-v4",
+   "title": "Καρσιλαμάς με 16κτα στην αρχή και στο τέλος",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "reason": "ίδιο με karsilamas v4"
+  },
+  {
+   "id": "karsilamas-16-v6",
+   "title": "Καρσιλαμάς με 16κτα (για αργά)",
+   "rhythm": ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16 Δ16 Α16]",
+   "reason": "ίδιο με karsilamas v6"
+  },
+  {
+   "id": "wahda",
+   "title": "Wahda",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 Δ16[ Α16 r16 (Α)16] Δ4>",
+   "reason": "ίδιο με wahda v1"
+  },
+  {
+   "id": "syrtobalos",
+   "title": "Συρτομπάλος (το 1ο κομμάτι του wahda)",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16",
+   "reason": "ίδιο με sofyan v3 και syrtoidi v2"
+  },
+  {
+   "id": "vasi-oriental",
+   "title": "Βάση Oriental",
+   "rhythm": ">8[ Δ8] r8 Δ8 >4 Δ4>",
+   "reason": "duyek v1 («Βάση (oriental)») με τονισμό στο τελευταίο tek"
+  },
+  {
+   "id": "elate-edo",
+   "title": "«Ελάτ' εδώ γειτόνισσες» (βαλσάκι)",
+   "rhythm": ">4 Δ4 Δ4",
+   "reason": "azeri v1 και semai v1 χωρίς τον τονισμό στο τελευταίο tek"
+  },
+  {
+   "id": "moraitika-toumbeleki",
+   "title": "Μωραΐτικα, τουμπελέκι",
+   "rhythm": ">8[ Δ16 Α16] >8[ Δ8>]",
+   "reason": "ίδιο με nim_sofyan v2"
+  },
+  {
+   "id": "syrtos",
+   "title": "Συρτός (νησιώτικος)",
+   "rhythm": ">8[ Δ16 Α16] r16 (Α)16[ Δ16 Α16]",
+   "reason": "ίδιο με syrtoidi v1"
+  },
+  {
+   "id": "sofyan",
+   "title": "Sofyan (παλιός μπάλος)",
+   "rhythm": ">8.[ Α16] Δ8>[ (Α)8>]",
+   "reason": "ίδιο με sofyan v1"
+  },
+  {
+   "id": "koutalia",
+   "title": "Χορός των κουταλιών (π.χ. η Βράκα)",
+   "rhythm": ">8[ Δ16> Α16>] r8 Δ16>[ (Α)16>]",
+   "reason": "ίδιο με nim_sofyan v6"
+  },
+  {
+   "id": "mantilatos-vasi",
+   "title": "Θρακιώτικος ρυθμός, βάση Μαντηλάτου / Δενδρίτσι",
+   "rhythm": ">4 Δ4 Δ4.",
+   "reason": "ίδιο με mandilatos v1"
+  },
+  {
+   "id": "beria-5",
+   "title": "«Μπέρια» 5σημη (έθιμο από Εύβοια)",
+   "rhythm": ">4 Δ4.",
+   "reason": "turk_aksagy v1 χωρίς τον τονισμό (Μπέρια είναι το έθιμο, ο ρυθμός ο ίδιος)"
+  },
+  {
+   "id": "baintouska-5",
+   "title": "5/8, βάση της Μπαϊντούσκας",
+   "rhythm": ">4 Δ8[ r8 Δ8]",
+   "reason": "turk_aksagy v2 χωρίς τον τονισμό"
+  },
+  {
+   "id": "neos-balos",
+   "title": "Νέος μπάλος",
+   "rhythm": ">8.[ Α16] r16 (Α)16[ Δ16>] r16",
+   "reason": "ίδιο με sofyan v4 και syrtoidi v3"
+  },
+  {
+   "id": "sympethera-klisimo-s",
+   "title": "«Συμπεθέρα», κλείσιμο με S (ή)",
+   "rhythm": ">4 S8[ S8]",
+   "reason": "ίδιο με sofyan v5 (εκείνη το γράφει σε 2/4)"
+  }
+ ]
+}

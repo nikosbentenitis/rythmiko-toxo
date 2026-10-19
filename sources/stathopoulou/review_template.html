@@ -1,0 +1,627 @@
+<title>Ρυθμοί Κωνσταντίνας</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one review column; a sticky tally bar, then one card per rhythm holding its variations (vN) in notebook order, each with scan, editable transcription, notation, play and decision. */
+:root {
+  --bg: #eef0ec; --surface: #ffffff; --surface-2: #f6f7f4; --ink: #1c2126; --muted: #5b646d; --line: #d5dad2;
+  --accent: #2c4c86; --accent-soft: #e3e9f5;
+  --ok: #2c7a4b; --ok-soft: #e1f1e7; --fix: #9a6510; --fix-soft: #f8edd8; --no: #a8382c; --no-soft: #f7e2df;
+  --edit: #6a3f8f; --edit-soft: #efe6f6;
+  --paper: #fbfaf6;
+  --f-display: "Alegreya", "Iowan Old Style", Georgia, serif;
+  --f-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #13161a; --surface: #1b1f25; --surface-2: #22272e; --ink: #e5e8eb; --muted: #9aa3ad; --line: #2f353d;
+  --accent: #93b2ea; --accent-soft: #233149;
+  --ok: #6cc592; --ok-soft: #1d3327; --fix: #e2b25f; --fix-soft: #3a2f1b; --no: #ee8a7e; --no-soft: #3c2422;
+  --edit: #c9a4ec; --edit-soft: #33263f;
+  --paper: #e9e7e0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #13161a; --surface: #1b1f25; --surface-2: #22272e; --ink: #e5e8eb; --muted: #9aa3ad; --line: #2f353d;
+  --accent: #93b2ea; --accent-soft: #233149;
+  --ok: #6cc592; --ok-soft: #1d3327; --fix: #e2b25f; --fix-soft: #3a2f1b; --no: #ee8a7e; --no-soft: #3c2422;
+  --edit: #c9a4ec; --edit-soft: #33263f;
+  --paper: #e9e7e0; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--f-body); }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 60px; }
+header.top h1 { font: 700 clamp(28px, 5vw, 40px)/1.1 var(--f-display); margin: 0 0 6px; text-wrap: balance; }
+header.top p { margin: 0 0 4px; color: var(--muted); max-width: 70ch; }
+header.top .legend { font-size: 14px; }
+header.top .sum { color: var(--ink); font-variant-numeric: tabular-nums; }
+.mono, code { font-family: var(--f-mono); }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; margin-top: 14px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; min-width: 0; }
+.tally { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 14px/1 var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; font-variant-numeric: tabular-nums; }
+.chip b { font-weight: 700; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.dot.approved { background: var(--ok); } .dot.fix { background: var(--fix); } .dot.rejected { background: var(--no); } .dot.edited { background: var(--edit); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+.filters select, .filters input[type=search] { font: 15px var(--f-body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; min-width: 0; }
+.filters input[type=search] { flex: 1 1 180px; }
+.tempo { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tempo input { width: 110px; accent-color: var(--accent); }
+.shown { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.notice { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--fix-soft); color: var(--ink); font-size: 14px; }
+
+.list { display: grid; gap: 22px; margin-top: 18px; }
+.rcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; min-width: 0; overflow: hidden; }
+.rhead { padding: 16px 16px 12px; display: grid; gap: 8px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.rtitle { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.rtitle h2 { font: 700 24px/1.2 var(--f-display); margin: 0; text-wrap: balance; }
+.slug { font: 13px var(--f-mono); color: var(--muted); }
+.rcomment { margin: 0; color: var(--muted); font-size: 14px; max-width: 75ch; }
+details.libv summary { cursor: pointer; font-size: 14px; color: var(--accent); }
+details.libv ol { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+details.libv li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; min-width: 0; }
+details.libv li b { font: 600 13px var(--f-mono); color: var(--muted); min-width: 30px; }
+details.libv code { font-size: 13px; overflow-wrap: anywhere; }
+details.libv .c { color: var(--muted); }
+.vars { display: grid; }
+.var { padding: 16px; display: grid; gap: 12px; min-width: 0; border-top: 1px solid var(--line); }
+.var:first-child { border-top: 0; }
+.var > * { min-width: 0; max-width: 100%; }
+.vh { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.vid { font: 600 20px/1 var(--f-mono); color: var(--accent); }
+.vh h3 { font: 700 19px/1.25 var(--f-display); margin: 0; text-wrap: balance; min-width: 0; flex: 1 1 200px; }
+.cid { font: 12px var(--f-mono); color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; font-size: 14px; }
+.pill { border-radius: 6px; padding: 2px 8px; background: var(--surface-2); border: 1px solid var(--line); white-space: nowrap; }
+.pill.meter { font: 600 14px var(--f-mono); background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.pill.conf-high { background: var(--ok-soft); border-color: transparent; color: var(--ok); }
+.pill.conf-medium { background: var(--fix-soft); border-color: transparent; color: var(--fix); }
+.pill.conf-low { background: var(--no-soft); border-color: transparent; color: var(--no); }
+.pill.lib-in { background: var(--ok-soft); border-color: transparent; color: var(--ok); }
+.pill.lib-new { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.pill.edited { background: var(--edit-soft); border-color: transparent; color: var(--edit); font-weight: 600; }
+.pill.st-approved { background: var(--ok); color: var(--surface); border-color: transparent; }
+.pill.st-fix { background: var(--fix); color: var(--surface); border-color: transparent; }
+.pill.st-rejected { background: var(--no); color: var(--surface); border-color: transparent; }
+.label { font: 600 12px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
+.scan { background: var(--paper); border-radius: 6px; padding: 4px; overflow: hidden; }
+.scan img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.txrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tokens { flex: 1 1 260px; min-width: 0; font: 14px/1.5 var(--f-mono); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; overflow-x: auto; white-space: pre; }
+.txbtns { display: flex; gap: 8px; }
+.notehost { min-height: 120px; min-width: 0; margin-top: 8px; }
+.diag { font-size: 14px; margin-top: 6px; }
+.diag:empty { display: none; }
+.diag.err { color: var(--no); } .diag.warn { color: var(--fix); } .diag.ok { color: var(--ok); }
+.notes { display: grid; gap: 6px; font-size: 15px; }
+.notes p { margin: 0; max-width: 75ch; }
+.notes .her { font-style: italic; }
+.notes .k { color: var(--muted); font-weight: 500; }
+
+.btn { font: 600 15px var(--f-body); min-height: 44px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.play { min-width: 104px; }
+.btn.play[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn.approved[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.btn.fix[aria-pressed="true"] { background: var(--fix); border-color: var(--fix); color: var(--surface); }
+.btn.rejected[aria-pressed="true"] { background: var(--no); border-color: var(--no); color: var(--surface); }
+.btn.save { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn.link { border-color: transparent; background: none; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; padding-inline: 6px; }
+
+.editor { display: grid; gap: 10px; margin-top: 10px; padding: 12px; border-radius: 10px; background: var(--edit-soft); }
+.editor textarea { width: 100%; min-height: 64px; font: 20px/1.45 var(--f-mono); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; resize: vertical; }
+.pad { display: grid; gap: 8px; }
+.pad .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 8px; }
+.pad button { min-height: 54px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 500 21px/1 var(--f-mono); cursor: pointer; padding: 2px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: manipulation; }
+.pad button small { display: block; font: 11px/1.1 var(--f-body); color: var(--muted); margin-top: 3px; }
+.pad button:active { transform: translateY(1px); background: var(--surface-2); }
+.pad .stroke { background: var(--accent-soft); border-color: transparent; font-weight: 600; }
+.pad .circ { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 2px solid currentColor; border-radius: 50%; font-size: 15px; }
+.pad .ed { font-family: var(--f-body); font-size: 19px; }
+.edbtns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.orig { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.orig code { color: var(--ink); }
+
+.decide { display: grid; gap: 8px; border-top: 1px dashed var(--line); padding-top: 12px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.fixbox { display: grid; gap: 6px; }
+.fixbox textarea { width: 100%; min-height: 70px; font: 15px/1.4 var(--f-body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px; resize: vertical; }
+.state { font-size: 13px; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section.ex { margin-top: 34px; }
+section.ex h2 { font: 700 22px/1.2 var(--f-display); margin: 0; display: inline; }
+section.ex summary { cursor: pointer; padding-block: 6px; }
+section.ex ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 8px; }
+section.ex li { max-width: 80ch; }
+section.ex li code { font-size: 13px; overflow-wrap: anywhere; }
+section.ex li span { color: var(--muted); font-variant-numeric: tabular-nums; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) { .bar { position: static; } }
+@media (max-width: 520px) { .var { padding: 12px; } .rhead { padding: 12px; } .rtitle h2 { font-size: 21px; } }
+
+/* notation, as the web validator draws it (web/index.html) */
+.notation { background: #fff; color: #000; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; max-width: 100%; }
+.notation .vhead, .notation .legend { display: none; }
+.notation .staff { overflow-x: auto; }
+.notation .staff svg { max-width: 100%; height: auto; display: block; }
+.notation .fallback { font: 12px monospace; color: #92400e; background: #fef3c7; padding: 6px 8px; border-radius: 4px; }
+.notation .tubs { display: flex; align-items: flex-start; overflow-x: auto; margin-top: 6px; }
+.notation .tubs .bar { display: flex; flex-direction: column; position: static; padding: 0; margin: 0; border: 0; background: none; gap: 0; }
+.notation .tubs .row { display: flex; }
+.notation .cell { --w: 30px; width: var(--w); flex: 0 0 var(--w); height: 26px; display: flex; align-items: center; justify-content: center; font: 15px/1 "Times New Roman", serif; border-left: 1px solid #999; border-top: 1px solid #000; box-sizing: border-box; }
+.notation .row.greek .cell { border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.notation .cell.first { border-left: 2px solid #000; }
+.notation .cell.sub { border-left: 1px dashed #999; }
+.notation .cell.beat { border-left: 2px solid #555; }
+.notation .cell.tup { border-left: 1px dotted #999; }
+.notation .cell.barend { border-right: 3px solid #000; }
+.notation .row.count .cell { height: 18px; border: 0; font-size: 10px; color: #666; }
+.notation .row.count .cell.beat, .notation .row.count .cell.first { border-left: 1px solid #ccc; }
+.notation .circled { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1.5px solid #000; border-radius: 50%; font-size: 11px; }
+.notation .trill { font-size: 12px; vertical-align: 2px; }
+.notation .repeat-cell { width: 34px; height: 52px; display: flex; align-items: center; justify-content: center; border-left: 2px solid #555; border-right: 3px solid #000; border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.notation .pct { position: relative; width: 18px; height: 30px; }
+.notation .pct::before { content: ""; position: absolute; left: 50%; top: 8%; width: 2px; height: 84%; background: #000; transform: translateX(-50%) rotate(28deg); }
+.notation .pct::after { content: "●  ●"; position: absolute; inset: 0; font-size: 7px; color: #000; display: flex; align-items: center; justify-content: center; letter-spacing: 6px; }
+.notation .hot, .notation .hot * { fill: #c2410c !important; stroke: #c2410c !important; }
+@media (prefers-reduced-motion: no-preference) { .var { transition: background-color .2s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Ρυθμοί Κωνσταντίνας</h1>
+    <p>Οι ρυθμοί από τα τετράδια κρουστών της Κωνσταντίνας Σταθοπούλου (2024-25 και 2025-26), μία κάρτα ανά ρυθμό με τις παραλλαγές του (v1, v2, …) όπως στη βιβλιοθήκη rythmiko-toxo. Όταν ο ρυθμός υπάρχει ήδη στη βιβλιοθήκη, οι νέες παραλλαγές αριθμούνται μετά τις υπάρχουσες. Όσα έχει ήδη η βιβλιοθήκη λείπουν από εδώ· η λίστα τους είναι στο τέλος.</p>
+    <p class="sum" id="sum"></p>
+    <p class="legend">Δ = δεξί παράμεσος (tek), Α = αριστερός παράμεσος (ka), Ⓐ = αριστερός μέσος, S = slap/hek, ⊞ και ~ = τρίλια. Με «Επεξεργασία» αλλάζεις τη μεταγραφή με τα κουμπιά και η σημειογραφία ξανασχεδιάζεται αμέσως. Τίποτα δεν έχει μπει ακόμα στη βιβλιοθήκη.</p>
+  </header>
+
+  <div class="bar" id="bar">
+    <div class="tally" id="tally"></div>
+    <div class="filters">
+      <label class="shown" for="fConf">Βεβαιότητα</label>
+      <select id="fConf"><option value="">όλες</option><option value="high">υψηλή</option><option value="medium">μέτρια</option><option value="low">χαμηλή</option></select>
+      <label class="shown" for="fLib">Ρυθμός</label>
+      <select id="fLib"><option value="">όλοι</option><option value="in">υπάρχει στη βιβλιοθήκη</option><option value="new">νέος</option></select>
+      <label class="shown" for="fMeter">Μέτρο</label>
+      <select id="fMeter"><option value="">όλα</option></select>
+      <input id="fText" type="search" placeholder="Αναζήτηση ονόματος ή σημείωσης" aria-label="Αναζήτηση">
+      <label class="tempo" for="bpm">Tempo <input id="bpm" type="range" min="40" max="200" step="2" value="90"> <output id="bpmOut">90</output></label>
+      <span class="shown" id="shown"></span>
+    </div>
+  </div>
+  <div class="notice" id="notice" hidden></div>
+
+  <div class="list" id="list"></div>
+
+  <section class="ex">
+    <details id="exDetails">
+      <summary><h2 id="exHead">Δεν μπήκαν: υπάρχουν ήδη στη βιβλιοθήκη</h2></summary>
+      <p class="shown">Ίδιος ρυθμός και ίδια παραλλαγή με μια παραλλαγή της βιβλιοθήκης, ή διαφορά μόνο σε τονισμό που η βιβλιοθήκη ήδη γράφει.</p>
+      <ul id="exclList"></ul>
+    </details>
+  </section>
+
+  <section class="ex">
+    <details>
+      <summary><h2>Ασκήσεις που δεν είναι ρυθμοί</h2></summary>
+      <p class="shown">Καταγράφονται μόνο ως λίστα, χωρίς μεταγραφή.</p>
+      <ul id="exlist"></ul>
+    </details>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.3/build/cjs/vexflow.js"></script>
+<script>
+const GROUPS=/*GROUPS*/[];
+const EXCLUDED=/*EXCLUDED*/[];
+const EXERCISES=/*EXERCISES*/[];
+const SAMPLES=/*SAMPLES*/{};
+const MANIFEST=/*MANIFEST*/{};
+const COUNTS=/*COUNTS*/{};
+
+/*RHYTHM_JS*/
+
+/*NOTATION_JS*/
+
+/*PLAYER_JS*/
+
+// ---- review app ----
+const CONF = {high: "υψηλή βεβαιότητα", medium: "μέτρια βεβαιότητα", low: "χαμηλή βεβαιότητα"};
+const STATUS = [["pending", "Εκκρεμούν"], ["approved", "Εγκρίθηκαν"], ["fix", "Θέλουν διόρθωση"], ["rejected", "Απορρίφθηκαν"]];
+const STLABEL = {approved: "Εγκρίθηκε", fix: "Θέλει διόρθωση", rejected: "Απορρίφθηκε"};
+const VARS = [];
+GROUPS.forEach(g => g.variations.forEach(v => { v.g = g; VARS.push(v); }));
+const BYID = Object.fromEntries(VARS.map(v => [v.id, v]));
+const decisions = {};   // candidate id -> {status, comment, at}
+const edits = {};       // candidate id -> {rhythm, original, at}
+const drafts = {};      // candidate id -> unsaved string in an open editor
+const undo = {};
+let db = null, colD = null, colE = null, filterStatus = "", onlyEdited = false, playingId = null;
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"})[c]);
+const current = v => drafts[v.id] != null ? drafts[v.id] : (edits[v.id] ? edits[v.id].rhythm : v.rhythm);
+const range = vs => vs.length ? (vs.length === 1 ? vs[0].vid : `${vs[0].vid}–${vs[vs.length - 1].vid}`) : "";
+
+function libLine(v) {
+  const l = v.lib;
+  if (l.kind === "new") return v.note ? `<p><span class="k">Βιβλιοθήκη:</span> ${esc(v.note)}</p>` : "";
+  return `<p><span class="k">Σε σχέση με τη βιβλιοθήκη:</span> ${esc(l.text)}, ${esc(l.detail)}. <code>${esc(l.ref)}</code>${v.note ? " " + esc(v.note) : ""}</p>`;
+}
+
+function varHtml(v) {
+  const wm = v.written_meter !== v.g.meter ? `<span class="pill">γραμμένο σε ${esc(v.written_meter)}</span>` : "";
+  return `<section class="var" id="c-${v.id}" data-id="${v.id}">
+    <div class="vh"><span class="vid">${v.vid}</span><h3>${esc(v.title)}</h3><span class="cid">${esc(v.id)}</span></div>
+    <div class="meta">
+      <span class="pill">${esc(v.date)}</span><span class="pill">${esc(v.page)}</span>
+      <span class="pill conf-${v.conf}">${CONF[v.conf]}</span>${wm}
+      <span class="pill edited" hidden>επεξεργασμένη</span><span class="pill stp" hidden></span>
+    </div>
+    <div><div class="label">Σημειώσεις της</div>
+      <div class="scan"><img src="${v.img.src}" width="${v.img.w}" height="${v.img.h}" loading="lazy" alt="Σάρωση: ${esc(v.title)}"></div></div>
+    <div><div class="label">Μεταγραφή</div>
+      <div class="txrow"><code class="tokens"></code>
+        <div class="txbtns"><button class="btn play" id="p-${v.id}" aria-pressed="false">▶ Παίξε</button><button class="btn edit" id="ed-${v.id}">Επεξεργασία</button></div></div>
+      <div class="edhost"></div>
+      <div class="diag" aria-live="polite"></div>
+      <div class="notehost"></div></div>
+    <div class="notes">
+      ${v.why ? `<p><span class="k">Γιατί όχι υψηλή:</span> ${esc(v.why)}</p>` : ""}
+      ${v.remarks ? `<p class="her"><span class="k">Τι γράφει:</span> ${esc(v.remarks)}</p>` : ""}
+      ${libLine(v)}
+      ${v.others.length ? `<p><span class="k">Γράφεται επίσης:</span> ${esc(v.others.join(", "))}</p>` : ""}
+    </div>
+    <div class="decide">
+      <div class="btns" role="group" aria-label="Απόφαση για ${v.vid}">
+        <button class="btn approved" data-s="approved" id="b-${v.id}-a" aria-pressed="false">Έγκριση</button>
+        <button class="btn fix" data-s="fix" id="b-${v.id}-f" aria-pressed="false">Θέλει διόρθωση</button>
+        <button class="btn rejected" data-s="rejected" id="b-${v.id}-r" aria-pressed="false">Απόρριψη</button>
+      </div>
+      <div class="fixbox" hidden>
+        <label class="state" for="t-${v.id}">Τι πρέπει να αλλάξει</label>
+        <textarea id="t-${v.id}" placeholder="π.χ. το 3ο γράμμα είναι Δ, όχι Α"></textarea>
+        <div><button class="btn save" id="s-${v.id}">Αποθήκευση σχολίου</button></div>
+      </div>
+      <div class="state dstate" aria-live="polite"></div>
+    </div>
+  </section>`;
+}
+
+function groupHtml(g) {
+  const lv = g.library_variations;
+  const libPill = g.in_library
+    ? `<span class="pill lib-in">Στη βιβλιοθήκη: ${esc(range(lv))}</span>`
+    : `<span class="pill lib-new">Νέος ρυθμός</span>`;
+  const n = g.variations.length;
+  const libList = lv.length ? `<details class="libv"><summary>Οι παραλλαγές της βιβλιοθήκης (${lv.length})</summary><ol>${
+    lv.map(x => `<li><b>${x.vid}</b><code>${esc(x.rhythm)}</code>${x.comment ? `<span class="c">${esc(x.comment)}</span>` : ""}</li>`).join("")}</ol></details>` : "";
+  return `<article class="rcard" id="g-${g.slug}">
+    <header class="rhead">
+      <div class="rtitle"><h2>${esc(g.display)}</h2><span class="slug">${esc(g.slug)}</span></div>
+      <div class="meta"><span class="pill meter">${esc(g.meter)}</span>${libPill}<span class="pill">${n === 1 ? "1 νέα παραλλαγή" : n + " νέες παραλλαγές"}: ${esc(range(g.variations))}</span></div>
+      ${g.comment ? `<p class="rcomment">${esc(g.comment)}</p>` : ""}
+      ${libList}
+    </header>
+    <div class="vars">${g.variations.map(varHtml).join("")}</div>
+  </article>`;
+}
+
+// ---- notation + diagnostics ----
+const drawn = new Set();
+function renderVar(v, force) {
+  const el = document.getElementById("c-" + v.id); if (!el) return;
+  const host = $(".notehost", el);
+  if (!force && drawn.has(v.id)) return;
+  if (!host.clientWidth || !getVF()) return;
+  drawn.add(v.id);
+  const rs = current(v);
+  const a = RH.analyze(rs, v.g.meter); v.parsed = a;
+  $(".tokens", el).textContent = a.rhythm || "(κενό)";
+  const dg = $(".diag", el);
+  const editing = drafts[v.id] != null;
+  if (a.errors.length) { dg.className = "diag err"; dg.textContent = a.errors.join(" · "); }
+  else if (a.warnings.length) { dg.className = "diag warn"; dg.textContent = a.warnings.join(" · "); }
+  else if (editing) { dg.className = "diag ok"; dg.textContent = `Κάθε μέτρο γεμίζει τα ${v.g.meter}.`; }
+  else { dg.className = "diag"; dg.textContent = ""; }
+  host.innerHTML = "";
+  if (a.bars.length) {
+    try { renderNotation(host, {id: v.id, rhythm: a.rhythm, meter: a.meter, bpb: a.bpb || 1, beats: a.beats, bars: a.bars}, {width: host.clientWidth - 30}); }
+    catch (e) { host.textContent = "Η σημειογραφία δεν σχεδιάστηκε: " + e.message; }
+  }
+  if (playingId === v.id) Player.setRhythm({variations: [{sound: a.sound, bars: a.bars}]});
+}
+let io = null;
+function observeAll() {
+  if (!("IntersectionObserver" in window)) { VARS.forEach(v => renderVar(v)); return; }
+  io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const v = BYID[e.target.dataset.id]; if (v) renderVar(v); } }), {rootMargin: "900px 0px"});
+  VARS.forEach(v => io.observe(document.getElementById("c-" + v.id)));
+}
+const pending = new Map();
+function rerender(v) { clearTimeout(pending.get(v.id)); pending.set(v.id, setTimeout(() => renderVar(v, true), 90)); }
+
+// ---- editor ----
+const PAD = `<div class="pad">
+  <div class="row">
+    <button class="stroke" data-head=">" title="dum">&gt;<small>dum</small></button>
+    <button class="stroke" data-head="Δ" title="tek, δεξί">Δ<small>tek</small></button>
+    <button class="stroke" data-head="Α" title="ka, αριστερός παράμεσος">Α<small>ka</small></button>
+    <button class="stroke" data-head="(Α)" title="ka, αριστερός μέσος"><span class="circ">Α</span></button>
+    <button class="stroke" data-head="S" title="slap">S<small>slap</small></button>
+    <button class="stroke" data-head="r" title="παύση">r<small>παύση</small></button>
+  </div>
+  <div class="row">
+    <button data-raw="16" title="δέκατο έκτο">16<small>1/16</small></button>
+    <button data-raw="8" title="όγδοο">8<small>1/8</small></button>
+    <button data-raw="4" title="τέταρτο">4<small>1/4</small></button>
+    <button data-raw="2" title="μισό">2<small>1/2</small></button>
+    <button data-raw="." title="παρεστιγμένο">.<small>τελεία</small></button>
+    <button data-raw=">" title="τονισμός στο προηγούμενο Δ ή Α">&gt;<small>τονισμός</small></button>
+  </div>
+  <div class="row">
+    <button data-raw="[" title="αρχή ομάδας">[<small>ομάδα</small></button>
+    <button data-raw="]" title="τέλος ομάδας">]<small>τέλος</small></button>
+    <button data-token="|" title="διαστολή">|<small>μέτρο</small></button>
+    <button data-token="%" title="επανάληψη μέτρου">%<small>ίδιο</small></button>
+    <button data-raw=":" title="τρίλια στη νότα">:<small>τρίλια</small></button>
+    <button data-token="{3" title="αρχή τρίηχου">{3<small>τρίηχο</small></button>
+    <button data-token="}" title="τέλος τρίηχου">}<small>κλείσε</small></button>
+  </div>
+  <div class="row">
+    <button class="ed" data-act="left" title="δρομέας αριστερά">◀</button>
+    <button class="ed" data-act="right" title="δρομέας δεξιά">▶</button>
+    <button class="ed" data-act="space" title="κενό">␣</button>
+    <button class="ed" data-act="delword" title="σβήσε το σύμβολο πριν τον δρομέα">⌫<small>σύμβολο</small></button>
+    <button class="ed" data-act="back" title="σβήσε έναν χαρακτήρα">⌫</button>
+    <button class="ed" data-act="undo" title="αναίρεση">↶<small>αναίρεση</small></button>
+  </div>
+</div>`;
+
+function openEditor(v) {
+  const el = document.getElementById("c-" + v.id), host = $(".edhost", el);
+  if (host.firstChild) { closeEditor(v, false); return; }
+  drafts[v.id] = current(v); undo[v.id] = [];
+  host.innerHTML = `<div class="editor">
+    <label class="state" for="e-${v.id}">Μεταγραφή ${v.vid} (τα κουμπιά γράφουν στη θέση του δρομέα)</label>
+    <textarea id="e-${v.id}" rows="2" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" inputmode="none"></textarea>
+    ${PAD}
+    <div class="edbtns">
+      <button class="btn save" data-ed="save">Αποθήκευση αλλαγής</button>
+      <button class="btn" data-ed="cancel">Ακύρωση</button>
+      <button class="btn" data-ed="reset" ${edits[v.id] ? "" : "hidden"}>Επαναφορά στην αρχική</button>
+      <button class="btn link" data-ed="kb">Πληκτρολόγιο</button>
+    </div>
+    <div class="orig">Αρχική μεταγραφή: <code>${esc(v.rhythm)}</code></div>
+    <div class="state estate" aria-live="polite"></div>
+  </div>`;
+  const ta = $("textarea", host); ta.value = drafts[v.id];
+  ta.addEventListener("beforeinput", () => pushUndo(v, ta));
+  ta.addEventListener("input", () => { drafts[v.id] = ta.value.replace(/\n/g, " "); rerender(v); });
+  const pad = $(".pad", host);
+  pad.addEventListener("pointerdown", ev => { if (ev.target.closest("button")) ev.preventDefault(); });
+  pad.addEventListener("click", ev => {
+    const b = ev.target.closest("button"); if (!b) return;
+    if (b.dataset.head) insertAt(v, ta, b.dataset.head, "token");
+    else if (b.dataset.token) insertAt(v, ta, b.dataset.token, "token");
+    else if (b.dataset.raw) insertAt(v, ta, b.dataset.raw, "raw");
+    else if (b.dataset.act) act(v, ta, b.dataset.act);
+  });
+  $(".edbtns", host).addEventListener("click", ev => {
+    const b = ev.target.closest("button"); if (!b) return;
+    if (b.dataset.ed === "save") saveEdit(v);
+    else if (b.dataset.ed === "cancel") closeEditor(v, false);
+    else if (b.dataset.ed === "reset") resetEdit(v);
+    else if (b.dataset.ed === "kb") { const on = ta.getAttribute("inputmode") === "none"; ta.setAttribute("inputmode", on ? "text" : "none"); b.textContent = on ? "Κρύψε το πληκτρολόγιο" : "Πληκτρολόγιο"; ta.blur(); ta.focus(); }
+  });
+  $(".btn.edit", el).textContent = "Κλείσιμο επεξεργασίας";
+  ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+  renderVar(v, true);
+}
+function closeEditor(v, keep) {
+  const el = document.getElementById("c-" + v.id);
+  $(".edhost", el).innerHTML = ""; delete drafts[v.id];
+  $(".btn.edit", el).textContent = "Επεξεργασία";
+  renderVar(v, true); paintVar(v.id);
+}
+function pushUndo(v, ta) { const u = undo[v.id]; if (!u.length || u[u.length - 1] !== ta.value) u.push(ta.value); if (u.length > 200) u.shift(); }
+function insertAt(v, ta, text, mode) {
+  pushUndo(v, ta);
+  const s = ta.selectionStart != null ? ta.selectionStart : ta.value.length, e = ta.selectionEnd != null ? ta.selectionEnd : s;
+  const before = ta.value.slice(0, s), after = ta.value.slice(e);
+  if (mode === "token") { if (before && !/\s$/.test(before)) text = " " + text; if (after && !/^\s/.test(after)) text = text + " "; }
+  ta.value = before + text + after;
+  const p = before.length + text.length; ta.setSelectionRange(p, p);
+  ta.dispatchEvent(new Event("input"));
+}
+function act(v, ta, a) {
+  const val = ta.value; let s = ta.selectionStart != null ? ta.selectionStart : val.length, e = ta.selectionEnd != null ? ta.selectionEnd : s;
+  if (a === "left") { const p = Math.max(0, s - 1); ta.setSelectionRange(p, p); return; }
+  if (a === "right") { const p = Math.min(val.length, e + 1); ta.setSelectionRange(p, p); return; }
+  if (a === "space") return insertAt(v, ta, " ", "raw");
+  if (a === "undo") { const u = undo[v.id]; if (!u.length) return; ta.value = u.pop(); ta.dispatchEvent(new Event("input")); return; }
+  pushUndo(v, ta);
+  if (s === e) {
+    if (a === "back") { if (!s) return; ta.value = val.slice(0, s - 1) + val.slice(s); s -= 1; }
+    if (a === "delword") { let i = s; while (i > 0 && /\s/.test(val[i - 1])) i--; while (i > 0 && !/\s/.test(val[i - 1])) i--; ta.value = val.slice(0, i) + val.slice(s).replace(/^\s+(?=\S)/, s < val.length && i > 0 ? " " : ""); s = i; }
+  } else ta.value = val.slice(0, s) + val.slice(e);
+  ta.setSelectionRange(s, s);
+  ta.dispatchEvent(new Event("input"));
+}
+async function saveEdit(v) {
+  const el = document.getElementById("c-" + v.id), st = $(".estate", el);
+  const rs = (drafts[v.id] || "").replace(/\s+/g, " ").trim();
+  if (!colE) { st.textContent = "Δεν αποθηκεύεται: η βάση δεν είναι διαθέσιμη σε αυτή την προβολή."; return; }
+  const prev = edits[v.id];
+  try {
+    if (rs === v.rhythm) { if (prev) await colE.doc(v.id).delete(); delete edits[v.id]; }
+    else { const rec = {rhythm: rs, original: v.rhythm, at: new Date().toISOString()}; await colE.doc(v.id).set(rec); edits[v.id] = rec; }
+  } catch (e) { st.textContent = "Η αποθήκευση απέτυχε (" + (e && e.code || "σφάλμα") + "). Δοκίμασε ξανά."; return; }
+  closeEditor(v, true); refresh();
+  $(".dstate", el).textContent = rs === v.rhythm ? "Η μεταγραφή είναι πάλι η αρχική." : "Η αλλαγή αποθηκεύτηκε.";
+}
+async function resetEdit(v) {
+  const el = document.getElementById("c-" + v.id), st = $(".estate", el);
+  if (!colE) { st.textContent = "Δεν αποθηκεύεται: η βάση δεν είναι διαθέσιμη σε αυτή την προβολή."; return; }
+  try { await colE.doc(v.id).delete(); } catch (e) { st.textContent = "Η επαναφορά απέτυχε (" + (e && e.code || "σφάλμα") + ")."; return; }
+  delete edits[v.id]; closeEditor(v, false); refresh();
+  $(".dstate", el).textContent = "Επανήλθε η αρχική μεταγραφή.";
+}
+
+// ---- play ----
+function togglePlay(v) {
+  if (playingId === v.id && Player.playing) { Player.stop(); return; }
+  if (Player.playing) Player.stop();
+  if (!v.parsed || drafts[v.id] != null) renderVar(v, true);
+  const a = v.parsed || RH.analyze(current(v), v.g.meter);
+  if (!a.sound.length) { const dg = $("#c-" + v.id + " .diag"); dg.className = "diag err"; dg.textContent = "Δεν παίζει: " + (a.errors[0] || "κενός ρυθμός"); return; }
+  playingId = v.id;
+  Player.loop = true; Player.reps = 1; Player.only = null; Player.bpm = +$("#bpm").value;
+  Player.setRhythm({variations: [{sound: a.sound, bars: a.bars}]});
+  Player.play(); paintPlay();
+}
+function paintPlay() {
+  document.querySelectorAll(".btn.play").forEach(b => {
+    const on = Player.playing && b.id === "p-" + playingId;
+    b.setAttribute("aria-pressed", String(on)); b.textContent = on ? "■ Στοπ" : "▶ Παίξε";
+  });
+}
+Player.onchange = s => {
+  if (s && s.error) { const dg = playingId && $("#c-" + playingId + " .diag"); if (dg) { dg.className = "diag err"; dg.textContent = s.error; } }
+  if (!Player.playing && s && (s.finished || s.error || !s.variation)) { /* stopped */ }
+  paintPlay();
+};
+
+// ---- decisions ----
+function paintVar(id) {
+  const el = document.getElementById("c-" + id); if (!el) return;
+  const d = decisions[id] || {status: "pending", comment: ""};
+  el.dataset.status = d.status;
+  el.querySelectorAll(".btns .btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === d.status)));
+  const fb = $(".fixbox", el); fb.hidden = d.status !== "fix";
+  const ta = $(".fixbox textarea", el); if (document.activeElement !== ta) ta.value = d.comment || "";
+  const sp = $(".pill.stp", el); sp.hidden = d.status === "pending"; sp.className = "pill stp st-" + d.status; sp.textContent = STLABEL[d.status] || "";
+  $(".pill.edited", el).hidden = !edits[id];
+  const rb = $("[data-ed=reset]", el); if (rb) rb.hidden = !edits[id];
+  const st = $(".dstate", el);
+  if (d.at) st.textContent = `Απόφαση αποθηκεύτηκε ${new Date(d.at).toLocaleString("el-GR")}` + (edits[id] ? " · η μεταγραφή έχει αλλάξει" : "");
+}
+async function write(id, rec) {
+  const st = $("#c-" + id + " .dstate");
+  if (!colD) { st.textContent = "Δεν αποθηκεύεται: η βάση δεν είναι διαθέσιμη σε αυτή την προβολή."; return false; }
+  try { if (rec) await colD.doc(id).set(rec); else await colD.doc(id).delete(); return true; }
+  catch (e) { st.textContent = "Η αποθήκευση απέτυχε (" + (e && e.code || "σφάλμα") + "). Δοκίμασε ξανά."; return false; }
+}
+async function choose(id, status) {
+  const prev = decisions[id];
+  if (prev && prev.status === status) {           // pressing the active button again clears the decision
+    delete decisions[id]; paintVar(id); refresh();
+    if (!(await write(id, null))) { decisions[id] = prev; paintVar(id); refresh(); }
+    return;
+  }
+  const comment = status === "fix" ? ($("#t-" + id).value || (prev && prev.comment) || "") : "";
+  const rec = {status, comment, at: new Date().toISOString()};
+  decisions[id] = rec; paintVar(id); refresh();
+  if (status === "fix") $("#t-" + id).focus();
+  if (!(await write(id, rec))) { if (prev) decisions[id] = prev; else delete decisions[id]; paintVar(id); refresh(); }
+}
+async function saveComment(id) {
+  const rec = {status: "fix", comment: $("#t-" + id).value.trim(), at: new Date().toISOString()};
+  decisions[id] = rec; paintVar(id); refresh();
+  await write(id, rec);
+}
+
+// ---- filters ----
+function matches(v) {
+  const s = (decisions[v.id] || {}).status || "pending";
+  if (filterStatus && s !== filterStatus) return false;
+  if (onlyEdited && !edits[v.id]) return false;
+  if ($("#fConf").value && v.conf !== $("#fConf").value) return false;
+  const fl = $("#fLib").value; if (fl && (fl === "in") !== v.g.in_library) return false;
+  if ($("#fMeter").value && v.g.meter !== $("#fMeter").value) return false;
+  const q = $("#fText").value.trim().toLowerCase();
+  if (q && !(v.title + " " + v.remarks + " " + v.id + " " + v.g.display + " " + v.g.slug + " " + v.vid).toLowerCase().includes(q)) return false;
+  return true;
+}
+function refresh() {
+  const n = {pending: 0, approved: 0, fix: 0, rejected: 0};
+  VARS.forEach(v => n[(decisions[v.id] || {}).status || "pending"]++);
+  const ne = VARS.filter(v => edits[v.id]).length;
+  const tally = $("#tally"); tally.innerHTML = "";
+  const all = document.createElement("button"); all.className = "chip"; all.id = "f-all";
+  all.setAttribute("aria-pressed", String(!filterStatus && !onlyEdited)); all.innerHTML = `Όλες <b>${VARS.length}</b>`;
+  all.onclick = () => { filterStatus = ""; onlyEdited = false; refresh(); }; tally.appendChild(all);
+  STATUS.forEach(([k, label]) => {
+    const b = document.createElement("button"); b.className = "chip"; b.id = "f-" + k;
+    b.setAttribute("aria-pressed", String(filterStatus === k));
+    b.innerHTML = `<span class="dot ${k}"></span>${label} <b>${n[k]}</b>`;
+    b.onclick = () => { filterStatus = filterStatus === k ? "" : k; refresh(); };
+    tally.appendChild(b);
+  });
+  const eb = document.createElement("button"); eb.className = "chip"; eb.id = "f-edited";
+  eb.setAttribute("aria-pressed", String(onlyEdited)); eb.innerHTML = `<span class="dot edited"></span>Επεξεργασμένες <b>${ne}</b>`;
+  eb.onclick = () => { onlyEdited = !onlyEdited; refresh(); }; tally.appendChild(eb);
+  let shown = 0, gshown = 0;
+  GROUPS.forEach(g => {
+    let k = 0;
+    g.variations.forEach(v => { const m = matches(v); document.getElementById("c-" + v.id).hidden = !m; if (m) k++; });
+    document.getElementById("g-" + g.slug).hidden = !k; shown += k; if (k) gshown++;
+  });
+  $("#shown").textContent = `${shown} παραλλαγές σε ${gshown} ρυθμούς`;
+}
+
+function boot() {
+  $("#list").innerHTML = GROUPS.map(groupHtml).join("");
+  const nl = GROUPS.filter(g => g.in_library).length;
+  $("#sum").textContent = `${GROUPS.length} ρυθμοί με ${VARS.length} παραλλαγές (${nl} ρυθμοί υπάρχουν ήδη στη βιβλιοθήκη και παίρνουν νέες παραλλαγές, ${GROUPS.length - nl} είναι νέοι). ${EXCLUDED.length} καταγραφές λείπουν γιατί τις έχει ήδη η βιβλιοθήκη.`;
+  VARS.forEach(v => {
+    const el = document.getElementById("c-" + v.id);
+    $(".tokens", el).textContent = current(v);
+    el.querySelectorAll(".btns .btn").forEach(b => b.addEventListener("click", () => choose(v.id, b.dataset.s)));
+    $("#s-" + v.id).addEventListener("click", () => saveComment(v.id));
+    $(".btn.edit", el).addEventListener("click", () => openEditor(v));
+    $(".btn.play", el).addEventListener("click", () => togglePlay(v));
+    paintVar(v.id);
+  });
+  const order = m => { const [a, b] = m.split("/").map(Number); return a / b; };
+  [...new Set(GROUPS.map(g => g.meter))].sort((a, b) => order(a) - order(b)).forEach(m => { const o = document.createElement("option"); o.value = m; o.textContent = m; $("#fMeter").appendChild(o); });
+  ["fConf", "fLib", "fMeter"].forEach(id => $("#" + id).addEventListener("change", refresh));
+  $("#fText").addEventListener("input", refresh);
+  $("#bpm").addEventListener("input", e => { $("#bpmOut").textContent = e.target.value; Player.setBpm(+e.target.value); });
+  $("#exHead").textContent = `Δεν μπήκαν: υπάρχουν ήδη στη βιβλιοθήκη (${EXCLUDED.length})`;
+  $("#exclList").innerHTML = EXCLUDED.map(x => `<li><b>${esc(x.title)}</b> <span>(${esc(x.date)}, ${esc(x.page)})</span><br><code>${esc(x.rhythm)}</code><br>${esc(x.reason)}.</li>`).join("");
+  $("#exlist").innerHTML = EXERCISES.map(([d, p, t]) => `<li>${esc(t)} <span>(${esc(d)}, ${esc(p)})</span></li>`).join("");
+  refresh();
+  observeAll();
+  connect();
+}
+
+async function connect() {
+  try { db = window.claude && window.claude.use ? await window.claude.use("db") : null; } catch (_) { db = null; }
+  if (!db) {
+    const n = $("#notice"); n.hidden = false;
+    n.textContent = "Οι αποφάσεις και οι αλλαγές δεν αποθηκεύονται σε αυτή την προβολή (η βάση δεν είναι διαθέσιμη). Η επεξεργασία και η αναπαραγωγή δουλεύουν. Άνοιξε τη σελίδα στο claude.ai συνδεδεμένος για να αποθηκεύεις.";
+    document.querySelectorAll(".btns .btn, .fixbox .save").forEach(b => b.disabled = true);
+    return;
+  }
+  const lost = e => { const n = $("#notice"); n.hidden = false; n.textContent = "Η σύνδεση με τη βάση διακόπηκε (" + (e && e.code || "σφάλμα") + "). Ανανέωσε τη σελίδα."; };
+  colD = db.collection("decisions");
+  colE = db.collection("edits");
+  colD.onSnapshot(snap => {
+    const seen = new Set();
+    snap.docs.forEach(d => { const v = d.data() || {}; seen.add(d.id); if (v.status) decisions[d.id] = {status: v.status, comment: v.comment || "", at: v.at || ""}; });
+    Object.keys(decisions).forEach(k => { if (!seen.has(k)) delete decisions[k]; });
+    VARS.forEach(v => paintVar(v.id)); refresh();
+  }, lost);
+  colE.onSnapshot(snap => {
+    const seen = new Set(), changed = new Set();
+    snap.docs.forEach(d => { const x = d.data() || {}; seen.add(d.id); if (typeof x.rhythm === "string") { if (!edits[d.id] || edits[d.id].rhythm !== x.rhythm) changed.add(d.id); edits[d.id] = {rhythm: x.rhythm, original: x.original || "", at: x.at || ""}; } });
+    Object.keys(edits).forEach(k => { if (!seen.has(k)) { delete edits[k]; changed.add(k); } });
+    changed.forEach(id => { const v = BYID[id]; if (!v) return; const el = document.getElementById("c-" + id); if (drafts[id] == null) { $(".tokens", el).textContent = current(v); if (drawn.has(id)) renderVar(v, true); } });
+    VARS.forEach(v => paintVar(v.id)); refresh();
+  }, lost);
+}
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+window.addEventListener("load", () => VARS.forEach(v => { const el = document.getElementById("c-" + v.id); if (el && !el.hidden && el.getBoundingClientRect().top < innerHeight + 900) renderVar(v); }));
+</script>
