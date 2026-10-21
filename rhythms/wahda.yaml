@@ -13,11 +13,11 @@ wahda:
       rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 {3 Α8:[ Α8 (Α)8] } Δ8>[ Δ16 Α16]"
       comment: "Beat 3: same triplet with τρίλια"
     v4:
-      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r8. Α16: Α16[ Δ16 Α16 (Α)16]"
-      comment: "Whiteboard 21 Oct 2026: beat 3 rest, a τρίλια leading into beat 4, then Α Δ Α (Α) in 16ths. The roll is written in the last 16th of beat 3, where Nikos's recording of 21 Oct puts it (three hits about 0, 60 and 110 ms into that 16th, landing on beat 4)"
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 r4 {3 Α16:[ Α16 Δ16 } Α16 (Α)16]"
+      comment: "Whiteboard 21 Oct 2026: beat 3 rest; beat 4 the τρίλια leading into Α Δ Α (Α) in 16ths, written as the 19 Oct convention has it: box, Α and the next stroke as a 16th triplet"
     v5:
-      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 S8. Α16: Α16[ Δ16 Α16 (Α)16]"
-      comment: "Whiteboard 21 Oct 2026: as v4 with a slap on beat 3 (a quarter on the board, shortened to make room for the roll)"
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16[ Δ16>] r16 S4 {3 Α16:[ Α16 Δ16 } Α16 (Α)16]"
+      comment: "Whiteboard 21 Oct 2026: as v4 with a slap on beat 3"
     v6:
       rhythm: ">8[ Δ16 Α16] r16 (Α)16[ S16] r16 Δ16[ Α16 r16 (Α)16] S8[ Δ16 Α16]"
       comment: "Whiteboard 21 Oct 2026: v1 with slaps on 2 and 4, beat 4 slap then Δ Α"
