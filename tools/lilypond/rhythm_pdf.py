@@ -10,9 +10,64 @@ rhythm's display name + variation tag, the music staff, then the
 Greek / Latin TUBS rows + count row. The user-given title is the PDF
 title at the top of page 1.
 
-Rhythms live in `process/music/rhythms.yaml`. Output lands at
-`process/music/rhythms/bundles/<slugified-title>.{ly,pdf}` and the PDF
+Rhythms live in `rhythms/<slug>.yaml` (one file per rhythm, merged by
+load_db). Output lands at `bundles/<slugified-title>.{ly,pdf}` and the PDF
 opens automatically (unless --no-open is passed).
+
+Database maintenance (23 Oct 2026):
+    rhythm_pdf.py --validate rhythms/aptaliko.yaml [--validate <slug>] ...
+        parse every variation of the named file(s) with the grammar below and
+        check each bar fills the meter; exit 1 on the first file with an error.
+    rhythm_pdf.py add <slug> <vN> "<tokens>" [--meter 9/8] [--comment ..]
+                  [--source ..] [--display ..] [--dry-run]
+        append one variation to rhythms/<slug>.yaml (ruamel round trip, the
+        comments and the quoting of the other entries survive). The tokens are
+        parsed before anything is written; an existing vN is never overwritten
+        and variations are never renumbered. A new slug needs --display and
+        --meter. The file is written through a temp file and read back.
+
+Rhythm token grammar (the one source; the /rhythm-pdf skill links here):
+    Tokens are space-separated; `|` separates bars.
+        <glyph>[duration][accent][trill][beam]
+    glyph     `>` dum, `Δ` tek, `Α` kah (Latin `A` is an alias), `S` or `H`
+              slap (cross notehead on the middle line), `r` rest. Words work
+              too: `dum`/`D`, `tek`, `ka`, `slap`. `(Α)`, `(A)` or `(ka)` is
+              the middle-finger kah; its TUBS letter is circled.
+    duration  `4` quarter, `8` eighth, `16` sixteenth, `2` half, `1` whole;
+              a trailing `.` dots it (`8.`). Sticky: a token without a
+              duration reuses the previous one.
+    accent    a `>` after the duration (or `^>` in word notation). Only
+              meaningful on `Δ` and `Α`; dum is always emphasised. `Δ4>` is an
+              accented tek quarter, `Α8` an unaccented ka eighth.
+    trill     `:` after the duration and accent (`Α8:`) rolls the stroke for
+              its whole length (tremolo slashes, default 32; `:16`/`:64` set
+              the slash count). TUBS shows `α~`/`k~`. Not on a rest.
+    beam      `[` opens and `]` closes a manual beam group (`Δ8[ Α8]`).
+    tuplet    `{3 r8 Α8 (Α)8 }` plays N written notes in the time of K; K
+              defaults to the largest power of two below N (`{3:2` sets it).
+              The closing `}` is its own token. Inner durations are the
+              WRITTEN ones. Not nested.
+    repeat    a bar that is only `%` repeats the previous bar (compact
+              measure-repeat sign on the staff, one small percent box in the
+              TUBS row). `>8. Α16 Δ8 (Α)8 | % | %` is that bar three times.
+    The TUBS rows under each staff: Greek glyphs (`>`, `δ`/`Δ`, `α`/`Α`, `S`),
+    Latin glyphs (`D`, `t`/`T`, `k`/`K`, `S`) and the count row (`1 e + a` at
+    4 boxes per beat, `1 +` at 2). Boxes per beat come from the variation's
+    `boxes_per_beat`, else the rhythm's, else the LCM of the durations used.
+
+YAML schema (rhythms/<slug>.yaml):
+    <slug>:                 # English code, e.g. aptaliko, kasik_havasi
+      display: "..."        # native-language name shown as the PDF subheading
+      meter: "9/4"          # rhythm-level default; a variation may override
+      comment: "..."        # optional, printed with --show-comments
+      variations:
+        v1:
+          rhythm: "<tokens>"
+          meter: "9/8"           # optional override
+          source: "..."          # optional: page or lesson reference
+          comment: "..."         # optional
+          boxes_per_beat: 4      # optional override
+          single_line: true      # optional; false breaks the system per bar
 """
 
 from __future__ import annotations
@@ -1305,8 +1360,210 @@ def compile_ly(path: Path) -> bool:
     return True
 
 
+_VAR_ID_RE = re.compile(r"^v\d+$")
+
+
+def _resolve_yaml(arg: str) -> Path:
+    """A path, or a slug meaning rhythms/<slug>.yaml."""
+    p = Path(arg).expanduser()
+    if p.exists():
+        return p.resolve()
+    cand = RHYTHMS_DIR / f"{arg}.yaml"
+    if cand.exists():
+        return cand
+    sys.exit(f"no such file or slug: {arg}")
+
+
+def _var_meter_bpb(rhythm: dict, var: dict, slug: str, var_id: str):
+    meter = var.get("meter") or rhythm.get("meter")
+    if not meter or not re.match(r"^\d+/\d+$", str(meter)):
+        raise ValueError(f"{slug}-{var_id}: no usable meter (got {meter!r})")
+    if var.get("boxes_per_beat") is not None:
+        bpb = int(var["boxes_per_beat"])
+    elif rhythm.get("boxes_per_beat") is not None:
+        bpb = int(rhythm["boxes_per_beat"])
+    else:
+        bpb = auto_bpb(rhythm, str(meter))
+    return str(meter), bpb
+
+
+def validate_variation(rhythm: dict, slug: str, var_id: str, var: dict) -> list[str]:
+    """Problems with one variation, [] when it is clean."""
+    problems = []
+    if not _VAR_ID_RE.match(var_id):
+        problems.append(f"{slug}: variation key {var_id!r} is not vN")
+    if not isinstance(var, dict) or not var.get("rhythm"):
+        return problems + [f"{slug}-{var_id}: no `rhythm` string"]
+    try:
+        meter, bpb = _var_meter_bpb(rhythm, var, slug, var_id)
+        meter_num, meter_den = (int(x) for x in meter.split("/"))
+        bars = parse_rhythm(str(var["rhythm"]), bpb, meter_den)
+        expected = meter_num * bpb
+        for i, (_drum, cells) in enumerate(bars):
+            if cells is None:
+                continue
+            total = sum(cell_span(c) for c in cells)
+            if abs(total - expected) > 1e-6:
+                problems.append(f"{slug}-{var_id} bar {i + 1}: {total:g} cells, the meter "
+                                f"{meter} at {bpb} boxes per beat needs {expected}")
+            count_row_from_cells(cells, bpb)
+    except (ValueError, KeyError) as exc:
+        problems.append(f"{slug}-{var_id}: {exc}")
+    return problems
+
+
+def validate_file(path: Path) -> list[str]:
+    try:
+        loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        return [f"{path.name}: YAML error: {exc}"]
+    if not isinstance(loaded, dict) or not loaded:
+        return [f"{path.name}: top level must be a mapping of slug -> rhythm"]
+    problems = []
+    for slug, rhythm in loaded.items():
+        if not isinstance(rhythm, dict):
+            problems.append(f"{slug}: not a mapping")
+            continue
+        if not rhythm.get("display"):
+            problems.append(f"{slug}: no `display` name")
+        variations = rhythm.get("variations")
+        if not isinstance(variations, dict) or not variations:
+            problems.append(f"{slug}: no `variations`")
+            continue
+        for var_id, var in variations.items():
+            problems.extend(validate_variation(rhythm, slug, str(var_id), var))
+    return problems
+
+
+def cmd_validate(args: list[str]) -> int:
+    rc = 0
+    for arg in args:
+        path = _resolve_yaml(arg)
+        problems = validate_file(path)
+        if problems:
+            rc = 1
+            print(f"{path.name}: {len(problems)} problem(s)")
+            for p in problems:
+                print("  " + p)
+        else:
+            loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+            n = sum(len((r or {}).get("variations") or {}) for r in loaded.values())
+            print(f"{path.name}: ok ({n} variation(s))")
+    return rc
+
+
+def cmd_add(argv: list[str]) -> int:
+    ap = argparse.ArgumentParser(prog="rhythm_pdf.py add",
+                                 description="append one variation to rhythms/<slug>.yaml")
+    ap.add_argument("slug")
+    ap.add_argument("var", help="the variation key, vN")
+    ap.add_argument("tokens", help="the rhythm string, quoted")
+    ap.add_argument("--meter", help="required for a new slug; otherwise a per-variation override")
+    ap.add_argument("--display", help="required for a new slug")
+    ap.add_argument("--comment")
+    ap.add_argument("--source")
+    ap.add_argument("--boxes-per-beat", type=int)
+    ap.add_argument("--dry-run", action="store_true")
+    a = ap.parse_args(argv)
+
+    if not _VAR_ID_RE.match(a.var):
+        sys.exit(f"variation must look like v3, got {a.var!r}")
+    try:
+        from ruamel.yaml import YAML
+        from ruamel.yaml.comments import CommentedMap
+        from ruamel.yaml.scalarstring import SingleQuotedScalarString as SQ
+    except ImportError:
+        sys.exit("ruamel.yaml is required for `add` (it keeps the file's comments and quoting)")
+    y = YAML()
+    y.preserve_quotes = True
+    y.width = 4096
+    y.indent(mapping=2, sequence=2, offset=0)
+
+    path = RHYTHMS_DIR / f"{a.slug}.yaml"
+    if path.exists():
+        doc = y.load(path.read_text(encoding="utf-8"))
+        if not isinstance(doc, dict) or a.slug not in doc:
+            sys.exit(f"{path.name} does not hold the key {a.slug!r}")
+        rhythm = doc[a.slug]
+        new_file = False
+    else:
+        if not (a.display and a.meter):
+            sys.exit(f"{path.name} does not exist; a new rhythm needs --display and --meter")
+        doc = CommentedMap()
+        rhythm = CommentedMap()
+        rhythm["display"] = a.display
+        rhythm["meter"] = a.meter
+        rhythm["variations"] = CommentedMap()
+        doc[a.slug] = rhythm
+        new_file = True
+    variations = rhythm.get("variations")
+    if variations is None:
+        variations = CommentedMap()
+        rhythm["variations"] = variations
+    if a.var in variations:
+        sys.exit(f"{a.slug}-{a.var} exists; variations are never overwritten or renumbered "
+                 f"(existing: {', '.join(variations)})")
+
+    var = CommentedMap()
+    var["rhythm"] = SQ(a.tokens)
+    if a.meter and not new_file:
+        var["meter"] = a.meter
+    if a.boxes_per_beat:
+        var["boxes_per_beat"] = a.boxes_per_beat
+    if a.source:
+        var["source"] = a.source
+    if a.comment:
+        var["comment"] = a.comment
+
+    # Validate before writing: the new variation against the rhythm as it will be.
+    probe = {**{k: v for k, v in rhythm.items() if k != "variations"},
+             "variations": {**dict(variations), a.var: dict(var)}}
+    problems = validate_variation(probe, a.slug, a.var, dict(var))
+    if problems:
+        print("REFUSING, the tokens do not parse:")
+        for p in problems:
+            print("  " + p)
+        return 1
+    variations[a.var] = var
+
+    import io
+    buf = io.StringIO()
+    y.dump(doc, buf)
+    text = buf.getvalue()
+    if a.dry_run:
+        print(f"dry run: {path.relative_to(REPO)} would become:\n")
+        print(text.rstrip())
+        return 0
+    import os
+    import tempfile
+    RHYTHMS_DIR.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=str(RHYTHMS_DIR), prefix="." + path.name + ".", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(text)
+        os.replace(tmp, path)
+    except BaseException:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+    back = yaml.safe_load(path.read_text(encoding="utf-8"))
+    got = ((back or {}).get(a.slug) or {}).get("variations", {}).get(a.var, {})
+    if got.get("rhythm") != a.tokens:
+        print(f"read-back FAILED: {a.slug}-{a.var} not found in {path}")
+        return 1
+    print(f"added {a.slug}-{a.var} to {path.relative_to(REPO)} and read it back "
+          f"({len(back[a.slug]['variations'])} variation(s) now)")
+    return 0
+
+
 def main() -> int:
+    if sys.argv[1:2] == ["add"]:
+        return cmd_add(sys.argv[2:])
     ap = argparse.ArgumentParser()
+    ap.add_argument("--validate", action="append", metavar="YAML|slug",
+                    help="check a rhythm file (or slug) against the grammar and exit")
     ap.add_argument("--title", help="PDF title (overrides a set-file title:)")
     ap.add_argument("specs", nargs="*", help="rhythm specs (slug-vN)")
     ap.add_argument("--set", dest="set_file",
@@ -1350,6 +1607,9 @@ def main() -> int:
                           "segment after the last variation. Used by the "
                           "teacher edition."))
     args = ap.parse_args()
+
+    if args.validate:
+        return cmd_validate(args.validate)
 
     layout = LAYOUT_PRESETS[args.variant] if args.variant else DEFAULT_LAYOUT
 
