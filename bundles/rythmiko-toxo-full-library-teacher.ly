@@ -418,6 +418,93 @@ drumPitchNames.slap = #'slap
 }
 }
 \bookpart {
+  \tocItem \markup "Arabesque"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Arabesque" }
+\markup { \vspace #3 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^> tek4_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } ka4_\markup { \center-align "Α" } dum8_\markup { \center-align ">" }[ dum8_\markup { \center-align ">" }] ka4_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^> tek4_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } ka8_\markup { \center-align "Α" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ ka8_\markup { \center-align "Α" }] ka4_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^> dum4_\markup { \center-align ">" } dum4_\markup { \center-align ">" } ka8_\markup { \center-align "Α" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }[ dum8_\markup { \center-align ">" }] ka4_\markup { \center-align "Α" }
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \bar "." s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+}
+\bookpart {
   \tocItem \markup "Μαντιλάτος"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Μαντιλάτος" }
