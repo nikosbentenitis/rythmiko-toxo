@@ -1,0 +1,18 @@
+karsilamas:
+  display: Καρσιλαμάς
+  meter: 9/8
+  tempo: 100
+  comment: "Καρσιλαμάς (9/8, 2+2+2+3). Transcribed from the teacher's printout (rt0.pdf p. 2), 15 Oct 2026; the beats 1–4 are pencilled across the staves. Handwritten note beside v5: Θρακιώτικο (first word unclear)."
+  variations:
+    v1:
+      rhythm: ">4 Δ8[ Α8] >4 Δ8>[ Δ8 Α8]"
+    v2:
+      rhythm: ">4 Δ8[ Α8] >4 Δ8>[ Δ16 Α16 Δ16 Α16]"
+    v3:
+      rhythm: ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ8 Α8]"
+    v4:
+      rhythm: ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >4 Δ8>[ Δ16 Α16 Δ16 Α16]"
+    v5:
+      rhythm: ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ8 Α8]"
+    v6:
+      rhythm: ">8[ Δ16 Α16] Δ8>[ Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16 Δ16 Α16]"

@@ -1,7 +1,7 @@
 duyek:
   display: Duyek
   meter: 4/4
-  comment: "Duyek Osul. Τσιφτετελοειδή"
+  comment: "Duyek Osul. Τσιφτετελοειδή. Τραγούδι: «Φεύγω»"
   variations:
     v1:
       rhythm: '>8[ Δ8] r8 Δ8 >4 Δ4'
@@ -13,7 +13,14 @@ duyek:
       comment: "Λόγιο"
     v4:
       rhythm: ">8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] >16[ Α16 >16 (Α)16] Δ4>"
+      comment: "Οργανικό μέρος"
     v5:
       rhythm: '>8[ Δ16 Α16] r16 Δ16[ (Α)16] r16 >16[ Α16 >16 (Α)16] Δ4>'
     v6:
       rhythm: '>8[ Δ16 Α16] r16 Δ16[ (Α)16] r16 >16[ Α16 >16 (Α)16] Δ8>[ Δ16 (Α)16]'
+    v7:
+      rhythm: '>8[ Δ16 Α16] Δ8[ (Α)8] >16[ Α16 >8] Δ4>'
+      comment: "Λόγιο (no. 5 on the teacher's printout, rt3.pdf p. 3)"
+    v8:
+      rhythm: '>8[ Δ16 Α16] Δ16[ (Α)16 Δ8>] >8[ Δ16 Α16] Δ8>[ Δ16 (Α)16]'
+      comment: "Τραγουδιστικό μέρος (no. 7 on the teacher's printout)"

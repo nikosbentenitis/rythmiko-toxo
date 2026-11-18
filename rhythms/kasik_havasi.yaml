@@ -1,6 +1,7 @@
 kasik_havasi:
   display: Kaşık Havası
   meter: 2/4
+  comment: "Nim Sofyan subtype"
   variations:
     v1:
       rhythm: '>4 r4 | >4 Δ4>'

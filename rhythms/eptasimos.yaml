@@ -1,0 +1,27 @@
+eptasimos:
+  display: Επτάσημος
+  meter: 7/8
+  tempo: 110
+  comment: "Επτάσημος (7/8, 3+2+2). Transcribed from the teacher's printout (rt0.pdf p. 1), 15 Oct 2026."
+  variations:
+    v1:
+      rhythm: ">8[ Δ8 Α8] >4 Δ4>"
+    v2:
+      rhythm: ">8 r8 Δ8 >4 Δ4>"
+    v3:
+      rhythm: ">8[ Δ8 Α8] >4 Δ16[ Α16 Δ16 Α16]"
+    v4:
+      rhythm: ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8 Α8"
+    v5:
+      rhythm: ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8 Α8"
+      comment: "Printed identical to v4 on the scan"
+    v6:
+      rhythm: ">8[ Δ8 Α8] >8[ Δ16 Α16] Δ8[ Δ16 Α16]"
+    v7:
+      rhythm: ">8[ Δ8 Α8] >4 S4"
+    v8:
+      rhythm: ">8[ Δ16 Α16 Δ16 Α16] >4 S4"
+    v9:
+      rhythm: ">8[ Δ16 Α16 Δ16 Α16] >8[ Δ16 Α16] Δ8>[ Δ16 Α16]"
+    v10:
+      rhythm: ">8[ Δ16 Α16 Δ16 Α16] >4 Δ8>[ Α8>]"
