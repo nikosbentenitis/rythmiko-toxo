@@ -569,7 +569,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
+        dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> ka4_\markup { \center-align "Α" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
@@ -1827,7 +1827,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
