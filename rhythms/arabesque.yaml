@@ -1,10 +1,11 @@
 arabesque:
   display: "Arabesque"
   meter: "4/4"
+  comment: "Arabesque. Transcribed from the whiteboard scan, 18 Nov 2026. Each variation is one 4/4 bar; every beat is one beamed group with the dum beamed into it (dum8 + tek/ka sixteenths), off-beats filled with sixteenth rests, as drawn."
   variations:
     v1:
-      rhythm: ">4 Δ8[ Α8] r8 (Α)8> Δ4 | >4 Α4 >8[ >8] (Α)4"
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16>[ Δ16] r16 >8[ Δ16 Α16] Δ8>[ Δ16 (Α)16]"
     v2:
-      rhythm: ">4 Δ8[ Α8] r8 (Α)8> Δ4 | >4 Α8[ (Α)8] S8[ Α8] (Α)4"
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16>[ Δ16] r16 >8[ Α16 (Α)16] S8[ Α16 (Α)16]"
     v3:
-      rhythm: ">4 Δ8[ Α8] r8 (Α)8> >4 | >4 Α8[ (Α)8] Δ8[ >8] Α4"
+      rhythm: ">8[ Δ16 Α16] r16 (Α)16>[ Δ16] r16 >16[ Α16] r16 (Α)16 Δ8>[ Δ16 Α16]"
