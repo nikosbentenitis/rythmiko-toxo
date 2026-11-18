@@ -30,8 +30,8 @@
 % and slap share one upper level; the dum hangs low on a long stem so its
 % beam reaches up to the tek/ka beam height, as the teacher draws it.
 #(define darbuka-style-scan '(
-  (dum default #f -6)
-  (slap cross #f 1)
+  (dum default #f -2)
+  (slap cross #f -2)
   (tek default #f 1)
   (ka default #f 1)
 ))
@@ -254,9 +254,19 @@ drumPitchNames.slap = #'slap
 \score {
   <<
     \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-scan)
       instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+      \numericTimeSignature
+      \override BarLine.stencil = ##f
+      \override TextScript.staff-padding = #2.9
+      \override LedgerLineSpanner.stencil = ##f
     }
     <<
       \drummode {
@@ -267,14 +277,25 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
+        \override Score.SystemStartBar.stencil = ##f
         dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
-      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
     \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-scan)
       instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+      \numericTimeSignature
+      \override BarLine.stencil = ##f
+      \override TextScript.staff-padding = #2.9
+      \override LedgerLineSpanner.stencil = ##f
     }
     <<
       \drummode {
@@ -285,14 +306,25 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
+        \override Score.SystemStartBar.stencil = ##f
         dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 dum8_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
-      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
     \new DrumStaff \with {
-      \override StaffSymbol.line-count = #3
-      drumStyleTable = #(alist->hash-table darbuka-style)
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-scan)
       instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+      \numericTimeSignature
+      \override BarLine.stencil = ##f
+      \override TextScript.staff-padding = #2.9
+      \override LedgerLineSpanner.stencil = ##f
     }
     <<
       \drummode {
@@ -303,9 +335,10 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
+        \override Score.SystemStartBar.stencil = ##f
         dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
       }
-      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
   >>
 }
