@@ -1800,7 +1800,7 @@ def main() -> int:
                                                   bars_count=bars_count,
                                                   label=label,
                                                   no_interior_bars=args.no_interior_bars,
-                                                  teacher_staff=args.teacher_staff))
+                                                  teacher_staff=args.teacher_staff and not args.scan_style))
 
         display = group_sections[0][2]
         rhythm_comment = group_sections[0][5]  # same on every section in the group
@@ -1897,7 +1897,7 @@ def main() -> int:
     # and no internal bar lines, for the teacher to draft brand-new rhythms.
     if args.new_rhythm_blanks > 0:
         canvas_staves = [render_blank_canvas(label=str(i + 1),
-                                              teacher_staff=args.teacher_staff)
+                                              teacher_staff=args.teacher_staff and not args.scan_style)
                          for i in range(args.new_rhythm_blanks)]
         if args.ragged:
             canvas_scores = "".join(
