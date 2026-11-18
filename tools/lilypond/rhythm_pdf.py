@@ -659,7 +659,7 @@ PREAMBLE = r"""\version "2.24.0"
 % and slap share one upper level; the dum hangs low on a long stem so its
 % beam reaches up to the tek/ka beam height, as the teacher draws it.
 #(define darbuka-style-scan '(
-  (dum default #f -6)
+  (dum default #f -2)
   (slap cross #f 1)
   (tek default #f 1)
   (ka default #f 1)
@@ -1152,7 +1152,7 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
         extra_overrides += (
             "\n      \\numericTimeSignature"
             "\n      \\override BarLine.stencil = ##f"
-            "\n      \\override TextScript.staff-padding = #4.5"
+            "\n      \\override TextScript.staff-padding = #2.9"
             "\n      \\override LedgerLineSpanner.stencil = ##f"
         )
 
