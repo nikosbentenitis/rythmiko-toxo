@@ -62,10 +62,13 @@ jobs:
       - name: Copy validator + bundles, push to master
         working-directory: bentenitis
         run: |
-          mkdir -p rhythms/bundles
+          mkdir -p rhythms/bundles rhythms/validator
           # rhythms/index.html is the public rhythm index (built by
-          # rhythm-scan/build_index.py); the validator lives beside it
-          # as index.html.bak so this sync never overwrites the index.
+          # rhythm-scan/build_index.py). The validator lives at its own
+          # URL, rhythms/validator/index.html (moved off /rhythms 18 Nov
+          # 2026), so this sync never touches the public index. The .bak
+          # copy is kept for backward compatibility.
+          cp ../rythmiko-toxo/web/index.html rhythms/validator/index.html
           cp ../rythmiko-toxo/web/index.html rhythms/index.html.bak
           cp ../rythmiko-toxo/bundles/*.pdf rhythms/bundles/
           if git diff --quiet -- rhythms/; then
@@ -74,6 +77,6 @@ jobs:
           fi
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add rhythms/index.html.bak rhythms/bundles/
+          git add rhythms/validator/index.html rhythms/index.html.bak rhythms/bundles/
           git commit -m "rhythms: sync validator + bundles from rythmiko-toxo@${GITHUB_SHA::7}"
           git push origin master
