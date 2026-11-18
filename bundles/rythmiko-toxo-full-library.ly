@@ -26,6 +26,16 @@
   (ka default #f 1)
 ))
 
+% Scan style (18 Nov 2026): the whiteboard look. No staff lines; tek, ka
+% and slap share one upper level; the dum hangs low on a long stem so its
+% beam reaches up to the tek/ka beam height, as the teacher draws it.
+#(define darbuka-style-scan '(
+  (dum default #f -6)
+  (slap cross #f 1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
 drumPitchNames.dum = #'dum
 drumPitchNames.tek = #'tek
 drumPitchNames.ka = #'ka
@@ -181,6 +191,55 @@ drumPitchNames.slap = #'slap
          }
        } #}))
 
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBOne layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 3.8500))
+         (hw (/ w 2))
+         (thickness (if thick 3.300 1.320)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-1.9250 . 1.9250)
+                 \translate #'(0 . -1.3475)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-2 #text
+               \translate #(cons hw -1.9250)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 3.8500)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-1.9250 . 1.9250)
+                 \translate #'(0 . -1.3475)
+                 \halign #CENTER \fontsize #-2 #text
+               \translate #(cons hw -1.9250)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 3.8500)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBOne layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 3.8500))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-5 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 1.320)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
+
 
 % --- TUBS markup commands for boxes_per_beat = BTwo ---
 #(define-markup-command (tubsCellBTwo layout props text)
@@ -253,6 +312,55 @@ drumPitchNames.slap = #'slap
              \draw-line #'(0 . 0.8000)
          }
        } #}))
+
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBTwo layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 1.9250))
+         (hw (/ w 2))
+         (thickness (if thick 1.650 0.660)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.9625 . 0.9625)
+                 \translate #'(0 . -0.6738)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-4 #text
+               \translate #(cons hw -0.9625)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 1.9250)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.9625 . 0.9625)
+                 \translate #'(0 . -0.6738)
+                 \halign #CENTER \fontsize #-4 #text
+               \translate #(cons hw -0.9625)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 1.9250)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBTwo layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 1.9250))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-7 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 0.660)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
 
 
 % --- TUBS markup commands for boxes_per_beat = BFour ---
@@ -327,6 +435,55 @@ drumPitchNames.slap = #'slap
          }
        } #}))
 
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBFour layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 0.9625))
+         (hw (/ w 2))
+         (thickness (if thick 0.825 0.330)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.4813 . 0.4813)
+                 \translate #'(0 . -0.3369)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-6 #text
+               \translate #(cons hw -0.4813)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 0.9625)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.4813 . 0.4813)
+                 \translate #'(0 . -0.3369)
+                 \halign #CENTER \fontsize #-6 #text
+               \translate #(cons hw -0.4813)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 0.9625)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBFour layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 0.9625))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-9 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 0.330)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
+
 \book {
   \markup { \vspace #2 \fill-line { \fontsize #6 \bold "Rythmiko Toxo — Full Library" } }
   \markup { \vspace #1 }
@@ -356,25 +513,25 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
     \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "2"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 9/4
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r4 r4 r4 r4 r4 r4 r4 r4 r4
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
     \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
@@ -392,7 +549,7 @@ drumPitchNames.slap = #'slap
         \override Rest.transparent = ##t
         r4 r4 r4 r4 r4 r4 r4 r4 r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
     \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
@@ -410,7 +567,7 @@ drumPitchNames.slap = #'slap
         \override Rest.transparent = ##t
         r4 r4 r4 r4 r4 r4 r4 r4 r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
     \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
@@ -428,7 +585,7 @@ drumPitchNames.slap = #'slap
         \override Rest.transparent = ##t
         r4 r4 r4 r4 r4 r4 r4 r4 r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
     \new DrumStaff \with {
       \override StaffSymbol.line-count = #3
@@ -446,7 +603,25 @@ drumPitchNames.slap = #'slap
         \override Rest.transparent = ##t
         r4 r4 r4 r4 r4 r4 r4 r4 r4
       }
-      { s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak s8 \bar "!" \noBreak s8 \bar "." }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4 r4 r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
   >>
 }
@@ -456,9 +631,18 @@ drumPitchNames.slap = #'slap
     \concat {
       \hspace #2 \raise #1 { \bold "1" } \hspace #2
             \center-column {
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
-        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
-        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "5" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "6" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "7" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "8" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "9" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "5" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "6" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "7" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "8" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "9" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
       }
     }
   }
@@ -522,7 +706,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -645,6 +829,888 @@ drumPitchNames.slap = #'slap
         { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "Α" \tubsCellBFour "δ" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellCircleThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" } }
         { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "K" \tubsCellBFour "t" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellCircleThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" } }
         \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+  }
+}
+}
+\bookpart {
+  \tocItem \markup "Αρμένικο (Curcuna)"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Αρμένικο (Curcuna)" }
+\markup { \vspace #3 }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4._\markup { \center-align ">" } tek4_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ r8 ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "|" \noBreak s8 \bar "." }
+    >>
+  >>
+}
+
+\markup {
+  \column {
+    \concat {
+      \hspace #2 \raise #1 { \bold "1" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne " " \tubsCellThickBOne "δ" \tubsCellThickBOne " " \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "δ" \tubsCellThickBOne " " \tubsCellThickBOne " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne " " \tubsCellThickBOne "t" \tubsCellThickBOne " " \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "t" \tubsCellThickBOne " " \tubsCellThickBOne " " } }
+        \concat { \countCellBOne "1" \countCellBOne "2" \countCellBOne "3" \countCellBOne "4" \countCellBOne "5" \countCellBOne "6" \countCellBOne "7" \countCellBOne "8" \countCellBOne "9" \countCellBOne "10" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "α" \tubsCellThickBOne "Δ" \tubsCellThickBOne " " \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "δ" \tubsCellThickBOne " " \tubsCellThickBOne " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "k" \tubsCellThickBOne "T" \tubsCellThickBOne " " \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "t" \tubsCellThickBOne " " \tubsCellThickBOne " " } }
+        \concat { \countCellBOne "1" \countCellBOne "2" \countCellBOne "3" \countCellBOne "4" \countCellBOne "5" \countCellBOne "6" \countCellBOne "7" \countCellBOne "8" \countCellBOne "9" \countCellBOne "10" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "3" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "α" \tubsCellThickBOne "Δ" \tubsCellThickBOne " " \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "Δ" \tubsCellThickBOne " " \tubsCellThickBOne "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "k" \tubsCellThickBOne "T" \tubsCellThickBOne " " \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "T" \tubsCellThickBOne " " \tubsCellThickBOne "k" } }
+        \concat { \countCellBOne "1" \countCellBOne "2" \countCellBOne "3" \countCellBOne "4" \countCellBOne "5" \countCellBOne "6" \countCellBOne "7" \countCellBOne "8" \countCellBOne "9" \countCellBOne "10" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "4" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "α" \tubsCellThickBOne "Δ" \tubsCellThickBOne " " \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "Δ" \tubsCellThickBOne "δ" \tubsCellThickBOne "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "k" \tubsCellThickBOne "T" \tubsCellThickBOne " " \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "T" \tubsCellThickBOne "t" \tubsCellThickBOne "k" } }
+        \concat { \countCellBOne "1" \countCellBOne "2" \countCellBOne "3" \countCellBOne "4" \countCellBOne "5" \countCellBOne "6" \countCellBOne "7" \countCellBOne "8" \countCellBOne "9" \countCellBOne "10" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne ">" \tubsCellThickBOne "α" \tubsCellCircleThickBOne "α" \tubsCellThickBOne "Δ" \tubsCellThickBOne "α" \tubsCellThickBOne ">" \tubsCellThickBOne " " \tubsCellThickBOne "Δ" \tubsCellThickBOne "δ" \tubsCellThickBOne "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 1.320) \box \concat { \tubsCellThickBOne "D" \tubsCellThickBOne "k" \tubsCellCircleThickBOne "k" \tubsCellThickBOne "T" \tubsCellThickBOne "k" \tubsCellThickBOne "D" \tubsCellThickBOne " " \tubsCellThickBOne "T" \tubsCellThickBOne "t" \tubsCellThickBOne "k" } }
+        \concat { \countCellBOne "1" \countCellBOne "2" \countCellBOne "3" \countCellBOne "4" \countCellBOne "5" \countCellBOne "6" \countCellBOne "7" \countCellBOne "8" \countCellBOne "9" \countCellBOne "10" }
+      }
+    }
+  }
+}
+}
+\bookpart {
+  \tocItem \markup "Επτάσημος"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Επτάσημος" }
+\markup { \vspace #3 }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" } r8 tek8_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } slap4_\markup { \center-align "S" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } slap4_\markup { \center-align "S" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }^>]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "13"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "14"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "15"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+  >>
+}
+
+\markup {
+  \column {
+    \concat {
+      \hspace #2 \raise #1 { \bold "1" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "3" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "4" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "6" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "8" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "9" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "10" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "Α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "K" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" }
+      }
+    }
+  }
+}
+}
+\bookpart {
+  \tocItem \markup "Καρσιλαμάς"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Καρσιλαμάς" }
+\markup { \vspace #3 }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8 r8 r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+  >>
+}
+
+\markup {
+  \column {
+    \concat {
+      \hspace #2 \raise #1 { \bold "1" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "3" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "4" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo " " \tubsCellBTwo "α" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo " " \tubsCellBTwo "k" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "6" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " \tubsCellBTwo "δ" \tubsCellThickBTwo "α" \tubsCellBTwo "δ" \tubsCellThickBTwo "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " \tubsCellBTwo "t" \tubsCellThickBTwo "k" \tubsCellBTwo "t" \tubsCellThickBTwo "k" } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" \countCellBTwo "5" \countCellBTwo "+" \countCellBTwo "6" \countCellBTwo "+" \countCellBTwo "7" \countCellBTwo "+" \countCellBTwo "8" \countCellBTwo "+" \countCellBTwo "9" \countCellBTwo "+" }
       }
     }
   }
@@ -1236,6 +2302,783 @@ drumPitchNames.slap = #'slap
 }
 }
 \bookpart {
+  \tocItem \markup "Τεσσάρι"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Τεσσάρι" }
+\markup { \vspace #3 }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] r4 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "11"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "13"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "14"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "15"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "16"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "17"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "18"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "19"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+  >>
+}
+
+\markup {
+  \column {
+    \concat {
+      \hspace #2 \raise #1 { \bold "1" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "3" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "4" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "6" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "8" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "9" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "10" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "11" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "12" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "13" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "14" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour "α" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour "k" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+  }
+}
+}
+\bookpart {
+  \tocItem \markup "Wahda"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Wahda" }
+\markup { \vspace #3 }
+
+\score {
+  <<
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "1"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "2"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 r4 \tuplet 3/2 { ka8:32_\markup { \center-align "Α" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] }
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak \tuplet 3/2 { s8 \bar "!" \noBreak s8 \bar "!" \noBreak s8 \bar "." } }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "3"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 \tuplet 3/2 { ka8:32_\markup { \center-align "Α" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak \tuplet 3/2 { s8 \bar "!" \noBreak s8 \bar "!" \noBreak s8 \bar "|" \noBreak } s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "4"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 r4 \tuplet 3/2 { ka16:32_\markup { \center-align "Α" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } } ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak \tuplet 3/2 { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak } s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "5"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 slap4_\markup { \center-align "S" } \tuplet 3/2 { ka16:32_\markup { \center-align "Α" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } } ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak \tuplet 3/2 { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak } s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "6"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ slap16_\markup { \center-align "S" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "7"
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ slap16_\markup { \center-align "S" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } slap8_\markup { \center-align "S" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "8"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "9"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+  >>
+}
+
+\markup {
+  \column {
+    \concat {
+      \hspace #2 \raise #1 { \bold "1" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellCircleThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellCircleThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "2" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #1.33333 ##f ##f "α~" \tubsCellSBFour #1.33333 ##f ##f "α" \tubsCellSBFour #1.33333 ##t ##t "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #1.33333 ##f ##f "k~" \tubsCellSBFour #1.33333 ##f ##f "k" \tubsCellSBFour #1.33333 ##t ##t "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellSBFour #1.33333 "4" \countCellSBFour #1.33333 "la" \countCellSBFour #1.33333 "li" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "3" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellSBFour #1.33333 ##f ##f "α~" \tubsCellSBFour #1.33333 ##f ##f "α" \tubsCellSBFour #1.33333 ##t ##t "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellSBFour #1.33333 ##f ##f "k~" \tubsCellSBFour #1.33333 ##f ##f "k" \tubsCellSBFour #1.33333 ##t ##t "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellSBFour #1.33333 "3" \countCellSBFour #1.33333 "la" \countCellSBFour #1.33333 "li" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "4" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #0.66667 ##f ##f "α~" \tubsCellSBFour #0.66667 ##f ##f "α" \tubsCellSBFour #0.66667 ##f ##f "δ" \tubsCellBFour "α" \tubsCellCircleThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #0.66667 ##f ##f "k~" \tubsCellSBFour #0.66667 ##f ##f "k" \tubsCellSBFour #0.66667 ##f ##f "t" \tubsCellBFour "k" \tubsCellCircleThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellSBFour #0.66667 "4" \countCellSBFour #0.66667 "la" \countCellSBFour #0.66667 "li" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellBFour "S" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #0.66667 ##f ##f "α~" \tubsCellSBFour #0.66667 ##f ##f "α" \tubsCellSBFour #0.66667 ##f ##f "δ" \tubsCellBFour "α" \tubsCellCircleThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellBFour "S" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " \tubsCellSBFour #0.66667 ##f ##f "k~" \tubsCellSBFour #0.66667 ##f ##f "k" \tubsCellSBFour #0.66667 ##f ##f "t" \tubsCellBFour "k" \tubsCellCircleThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellSBFour #0.66667 "4" \countCellSBFour #0.66667 "la" \countCellSBFour #0.66667 "li" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "6" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellCircleThickBFour "α" \tubsCellBFour "S" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellCircleThickBFour "k" \tubsCellBFour "S" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "δ" \tubsCellBFour "α" \tubsCellBFour " " \tubsCellCircleThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour "S" \tubsCellThickBFour " " \tubsCellBFour "t" \tubsCellBFour "k" \tubsCellBFour " " \tubsCellCircleThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+  }
+}
+}
+\bookpart {
   \tocItem \markup "Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
@@ -1319,17 +3162,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "5"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 4/8
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r8 r8 r8 r8
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }]
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1405,6 +3248,24 @@ drumPitchNames.slap = #'slap
       }
       { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "10"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/8
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r8 r8 r8 r8
+      }
+      { s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
   >>
 }
 
@@ -1442,6 +3303,15 @@ drumPitchNames.slap = #'slap
             \center-column {
         { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo "α" \tubsCellBTwo " " \tubsCellCircleThickBTwo "α" \tubsCellBTwo "Δ" \tubsCellThickBTwo " " } }
         { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo "k" \tubsCellBTwo " " \tubsCellCircleThickBTwo "k" \tubsCellBTwo "T" \tubsCellThickBTwo " " } }
+        \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "5" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo ">" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.660) \box \concat { \tubsCellBTwo "D" \tubsCellThickBTwo " " \tubsCellBTwo " " \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " \tubsCellBTwo "S" \tubsCellThickBTwo " " } }
         \concat { \countCellBTwo "1" \countCellBTwo "+" \countCellBTwo "2" \countCellBTwo "+" \countCellBTwo "3" \countCellBTwo "+" \countCellBTwo "4" \countCellBTwo "+" }
       }
     }
@@ -1568,17 +3438,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 2/4
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r4 r4
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ ka16:32_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }^>]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1640,6 +3510,24 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 2/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
       \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
@@ -1712,6 +3600,15 @@ drumPitchNames.slap = #'slap
         \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
       }
     }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "α~" \tubsCellCircleThickBFour "α" \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "Δ" \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "k~" \tubsCellCircleThickBFour "k" \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "T" \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
   }
 }
 }
@@ -1773,7 +3670,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } tek8_\markup { \center-align "Δ" }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } tek8_\markup { \center-align "Δ" }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1791,7 +3688,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1809,7 +3706,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1827,7 +3724,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1835,17 +3732,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "7"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 4/4
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r4 r4 r4 r4
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum8_\markup { \center-align ">" }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1853,17 +3750,17 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "8"
-      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
-      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
     <<
       \drummode {
-        \cadenzaOn
+        \cadenzaOn   % manual bar-line control via the tick voice below
         \time 4/4
         \stemUp
         \autoBeamOff
-        \override Rest.transparent = ##t
-        r4 r4 r4 r4
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
     >>
@@ -1907,6 +3804,42 @@ drumPitchNames.slap = #'slap
       \override StaffSymbol.line-count = #3
       drumStyleTable = #(alist->hash-table darbuka-style)
       instrumentName = "11"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "12"
+      \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
+      \override VerticalAxisGroup.staff-staff-spacing.padding = #2
+    }
+    <<
+      \drummode {
+        \cadenzaOn
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Rest.transparent = ##t
+        r4 r4 r4 r4
+      }
+      { s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "|" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "!" \noBreak s16 \bar "." }
+    >>
+    \new DrumStaff \with {
+      \override StaffSymbol.line-count = #3
+      drumStyleTable = #(alist->hash-table darbuka-style)
+      instrumentName = "13"
       \override VerticalAxisGroup.staff-staff-spacing.basic-distance = #14
       \override VerticalAxisGroup.staff-staff-spacing.padding = #2
     }
@@ -1976,6 +3909,24 @@ drumPitchNames.slap = #'slap
             \center-column {
         { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellCircleBFour "α" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour "α" \tubsCellBFour ">" \tubsCellCircleThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellCircleThickBFour "α" } }
         { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellCircleBFour "k" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour "k" \tubsCellBFour "D" \tubsCellCircleThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellCircleThickBFour "k" } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "7" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellBFour " " \tubsCellCircleBFour "α" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour "α" \tubsCellBFour ">" \tubsCellThickBFour " " \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellBFour " " \tubsCellCircleBFour "k" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour "k" \tubsCellBFour "D" \tubsCellThickBFour " " \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour " " \tubsCellThickBFour " " } }
+        \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
+      }
+    }
+    \vspace #0.5
+    \concat {
+      \hspace #2 \raise #1 { \bold "8" } \hspace #2
+            \center-column {
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "δ" \tubsCellCircleBFour "α" \tubsCellBFour "Δ" \tubsCellThickBFour " " \tubsCellBFour ">" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellThickBFour "α" \tubsCellBFour "Δ" \tubsCellBFour " " \tubsCellBFour "δ" \tubsCellCircleThickBFour "α" } }
+        { \override #'(box-padding . 0) \override #'(thickness . 0.330) \box \concat { \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "t" \tubsCellCircleBFour "k" \tubsCellBFour "T" \tubsCellThickBFour " " \tubsCellBFour "D" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellThickBFour "k" \tubsCellBFour "T" \tubsCellBFour " " \tubsCellBFour "t" \tubsCellCircleThickBFour "k" } }
         \concat { \countCellBFour "1" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "2" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "3" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" \countCellBFour "4" \countCellBFour "e" \countCellBFour "+" \countCellBFour "a" }
       }
     }

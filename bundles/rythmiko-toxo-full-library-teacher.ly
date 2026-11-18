@@ -26,6 +26,16 @@
   (ka default #f 1)
 ))
 
+% Scan style (18 Nov 2026): the whiteboard look. No staff lines; tek, ka
+% and slap share one upper level; the dum hangs low on a long stem so its
+% beam reaches up to the tek/ka beam height, as the teacher draws it.
+#(define darbuka-style-scan '(
+  (dum default #f -6)
+  (slap cross #f 1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
 drumPitchNames.dum = #'dum
 drumPitchNames.tek = #'tek
 drumPitchNames.ka = #'ka
@@ -233,6 +243,55 @@ drumPitchNames.slap = #'slap
          }
        } #}))
 
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBOne layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 3.8500))
+         (hw (/ w 2))
+         (thickness (if thick 3.300 1.320)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-1.9250 . 1.9250)
+                 \translate #'(0 . -1.3475)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-2 #text
+               \translate #(cons hw -1.9250)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 3.8500)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-1.9250 . 1.9250)
+                 \translate #'(0 . -1.3475)
+                 \halign #CENTER \fontsize #-2 #text
+               \translate #(cons hw -1.9250)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 3.8500)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBOne layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 3.8500))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-5 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 1.320)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
+
 
 % --- TUBS markup commands for boxes_per_beat = BTwo ---
 #(define-markup-command (tubsCellBTwo layout props text)
@@ -305,6 +364,55 @@ drumPitchNames.slap = #'slap
              \draw-line #'(0 . 0.8000)
          }
        } #}))
+
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBTwo layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 1.9250))
+         (hw (/ w 2))
+         (thickness (if thick 1.650 0.660)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.9625 . 0.9625)
+                 \translate #'(0 . -0.6738)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-4 #text
+               \translate #(cons hw -0.9625)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 1.9250)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.9625 . 0.9625)
+                 \translate #'(0 . -0.6738)
+                 \halign #CENTER \fontsize #-4 #text
+               \translate #(cons hw -0.9625)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 1.9250)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBTwo layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 1.9250))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-7 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 0.660)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
 
 
 % --- TUBS markup commands for boxes_per_beat = BFour ---
@@ -379,6 +487,55 @@ drumPitchNames.slap = #'slap
          }
        } #}))
 
+% Width-scaled variants for tuplet cells: `scale` is the cell's span in
+% grid cells (4/3 for one triplet note in a 4-per-beat grid). Same
+% height and text placement as the plain cells; only the X extent and
+% the divider position move.
+#(define-markup-command (tubsCellSBFour layout props scale thick circled text)
+  (number? boolean? boolean? string?)
+  (let* ((w (* scale 0.9625))
+         (hw (/ w 2))
+         (thickness (if thick 0.825 0.330)))
+    (interpret-markup layout props
+      (if circled
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.4813 . 0.4813)
+                 \translate #'(0 . -0.3369)
+                 \halign #CENTER \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle \fontsize #-6 #text
+               \translate #(cons hw -0.4813)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 0.9625)
+             }
+           } #}
+        #{ \markup {
+             \overlay {
+               \with-dimensions #(cons (- hw) hw) #'(-0.4813 . 0.4813)
+                 \translate #'(0 . -0.3369)
+                 \halign #CENTER \fontsize #-6 #text
+               \translate #(cons hw -0.4813)
+                 \override #(cons 'thickness thickness)
+                 \draw-line #'(0 . 0.9625)
+             }
+           } #}))))
+
+#(define-markup-command (countCellSBFour layout props scale label)
+  (number? string?)
+  (let* ((w (* scale 0.9625))
+         (hw (/ w 2)))
+    (interpret-markup layout props
+      #{ \markup {
+           \overlay {
+             \with-dimensions #(cons (- hw) hw) #'(-0.4000 . 0.4000)
+               \translate #'(0 . -0.2800)
+               \halign #CENTER \fontsize #-9 #label
+             \translate #(cons hw -0.4000)
+               \transparent
+               \override #'(thickness . 0.330)
+               \draw-line #'(0 . 0.8000)
+           }
+         } #})))
+
 \book {
   \markup { \vspace #2 \fill-line { \fontsize #6 \bold "Rythmiko Toxo — Full Library (Teacher)" } }
   \markup { \vspace #1 }
@@ -388,13 +545,14 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Απτάλικο"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Απτάλικο" }
-\markup { \vspace #3 }
+\markup { \vspace #0.7 \italic \fontsize #0 "Απτάλικο. Τραγούδι: «Μάνα μου τα γιορτοστόλια» (handwritten on the teacher's printout)." }
+\markup { \vspace #2 }
 
 \score {
   \new DrumStaff \with {
       \override StaffSymbol.line-count = #2
       drumStyleTable = #(alist->hash-table darbuka-style-teacher)
-      instrumentName = ""
+      instrumentName = "1"
       \override StaffSymbol.line-positions = #'(-1 1)
       \override StaffSymbol.stencil = ##f
       \override Clef.stencil = ##f
@@ -413,8 +571,43 @@ drumPitchNames.slap = #'slap
         \override Beam.positions = #'(4 . 4)
         dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
       }
-      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } r4
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\markup { \vspace #1.5 }
+\markup { \bold \fontsize #1 "Variation notes" }
+\markup {
+  \column {
+    \line { \bold "v2:" \hspace #0.6 \italic "From rt0.pdf p. 3, 15 Oct 2026" }
+  }
 }
 }
 \bookpart {
@@ -499,9 +692,605 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }^>[ tek16_\markup { \center-align "Δ" }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+}
+\bookpart {
+  \tocItem \markup "Αρμένικο (Curcuna)"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Αρμένικο (Curcuna)" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Αρμένικο — Curcuna (Τζούρτζουνα), 10/8 as 3+2+2+3. Mnemonic on the page: «καπτάνα μίρζα | μίρζα καπτάνα». Song: «Μέσα ψυχή μου» (Αρβανίτικα). Transcribed from the teacher's hand-written New Rhythms page (rt3.pdf p. 13), 15 Oct 2026." }
+\markup { \vspace #2 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4._\markup { \center-align ">" } tek4_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek4._\markup { \center-align "Δ" }
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ r8 ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ r8 ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }^> dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 10/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 \noBreak s8 }
+    >>
+}
+}
+\bookpart {
+  \tocItem \markup "Επτάσημος"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Επτάσημος" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Επτάσημος (7/8, 3+2+2). Transcribed from the teacher's printout (rt0.pdf p. 1), 15 Oct 2026." }
+\markup { \vspace #2 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" } r8 tek8_\markup { \center-align "Δ" } dum4_\markup { \center-align ">" } tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "6"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "7"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } slap4_\markup { \center-align "S" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "8"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } slap4_\markup { \center-align "S" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "9"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "10"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 7/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ ka8_\markup { \center-align "Α" }^>]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\markup { \vspace #1.5 }
+\markup { \bold \fontsize #1 "Variation notes" }
+\markup {
+  \column {
+    \line { \bold "v5:" \hspace #0.6 \italic "Printed identical to v4 on the scan" }
+  }
+}
+}
+\bookpart {
+  \tocItem \markup "Καρσιλαμάς"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Καρσιλαμάς" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Καρσιλαμάς (9/8, 2+2+2+3). Transcribed from the teacher's printout (rt0.pdf p. 2), 15 Oct 2026; the beats 1–4 are pencilled across the staves. Handwritten note beside v5: Θρακιώτικο (first word unclear)." }
+\markup { \vspace #2 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum4_\markup { \center-align ">" } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek8_\markup { \center-align "Δ" } ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "6"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 9/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
 }
@@ -795,6 +1584,600 @@ drumPitchNames.slap = #'slap
 }
 }
 \bookpart {
+  \tocItem \markup "Τεσσάρι"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Τεσσάρι" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Τεσσάρι: tek/kah hand exercises in 4/4, no dum. Transcribed from the teacher's printout (rt0.pdf pp. 4–5), 15 Oct 2026." }
+\markup { \vspace #2 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "6"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] r4 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "7"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "8"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "9"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] r8 ka8_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "10"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "11"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "12"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek4_\markup { \center-align "Δ" } tek8_\markup { \center-align "Δ" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "13"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" } tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "14"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align "Α" }] tek4_\markup { \center-align "Δ" }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+}
+\bookpart {
+  \tocItem \markup "Wahda"
+
+\markup { \vspace #0.5 \bold \fontsize #3 "Wahda" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Wahda (وحدة). Transcribed from the whiteboard, 14 Oct 2026." }
+\markup { \vspace #2 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "1"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "2"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 r4 \tuplet 3/2 { ka8:32_\markup { \center-align "Α" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] }
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak \tuplet 3/2 { s8 \noBreak s8 \noBreak s8 } }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "3"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 \tuplet 3/2 { ka8:32_\markup { \center-align "Α" }[ ka8_\markup { \center-align "Α" } ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] } tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak \tuplet 3/2 { s8 \noBreak s8 \noBreak s8 \noBreak } s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "4"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 r4 \tuplet 3/2 { ka16:32_\markup { \center-align "Α" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } } ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak \tuplet 3/2 { s16 \noBreak s16 \noBreak s16 \noBreak } s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ tek16_\markup { \center-align "Δ" }^>] r16 slap4_\markup { \center-align "S" } \tuplet 3/2 { ka16:32_\markup { \center-align "Α" }[ ka16_\markup { \center-align "Α" } tek16_\markup { \center-align "Δ" } } ka16_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak \tuplet 3/2 { s16 \noBreak s16 \noBreak s16 \noBreak } s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "6"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ slap16_\markup { \center-align "S" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] slap8_\markup { \center-align "S" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "7"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }[ slap16_\markup { \center-align "S" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } slap8_\markup { \center-align "S" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align "Α" } r16 ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\markup { \vspace #1.5 }
+\markup { \bold \fontsize #1 "Variation notes" }
+\markup {
+  \column {
+    \line { \bold "v2:" \hspace #0.6 \italic "Beat 4: triplet — τρίλια leading into ring-finger kah, then middle-finger kah" }
+    \line { \bold "v3:" \hspace #0.6 \italic "Beat 3: same triplet with τρίλια" }
+    \line { \bold "v4:" \hspace #0.6 \italic "Whiteboard 21 Oct 2026: beat 3 rest; beat 4 the τρίλια leading into Α Δ Α (Α) in 16ths, written as the 19 Oct convention has it: box, Α and the next stroke as a 16th triplet" }
+    \line { \bold "v5:" \hspace #0.6 \italic "Whiteboard 21 Oct 2026: as v4 with a slap on beat 3" }
+    \line { \bold "v6:" \hspace #0.6 \italic "Whiteboard 21 Oct 2026: v1 with slaps on 2 and 4, beat 4 slap then Δ Α" }
+    \line { \bold "v7:" \hspace #0.6 \italic "Whiteboard 21 Oct 2026: slap on 2, beat 3 Δ Α then a slap eighth, beat 4 as beat 3 of v1" }
+  }
+}
+}
+\bookpart {
   \tocItem \markup "Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Sofyan" }
@@ -909,12 +2292,40 @@ drumPitchNames.slap = #'slap
     >>
 }
 
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "5"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/8
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum4_\markup { \center-align ">" } slap8_\markup { \center-align "S" }[ slap8_\markup { \center-align "S" }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
 \markup { \vspace #1.5 }
 \markup { \bold \fontsize #1 "Variation notes" }
 \markup {
   \column {
     \line { \bold "v3:" \hspace #0.6 \italic "Συρτόμπαλος (συρτορούμπα)" }
     \line { \bold "v4:" \hspace #0.6 \italic "Μπάλος" }
+    \line { \bold "v5:" \hspace #0.6 \italic "Printed as no. 2 on the teacher's library printout (rt3.pdf p. 9)" }
   }
 }
 }
@@ -922,7 +2333,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Nim Sofyan"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Nim Sofyan" }
-\markup { \vspace #0.7 \italic \fontsize #0 "Nim Sofyan Osul. Kaşık Havası. Χασάπικο/Χασαποσέρβικο" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Nim Sofyan Osul. Kaşık Havası. Χασάπικο/Χασαποσέρβικο (γρήγορο). Τραγούδι: «Δίχως την καρδούλα σου»" }
 \markup { \vspace #2 }
 
 \score {
@@ -1086,12 +2497,48 @@ drumPitchNames.slap = #'slap
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
 }
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "7"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 2/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ ka16:32_\markup { \center-align "Α" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum8_\markup { \center-align ">" }[ tek8_\markup { \center-align "Δ" }^>]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\markup { \vspace #1.5 }
+\markup { \bold \fontsize #1 "Variation notes" }
+\markup {
+  \column {
+    \line { \bold "v3:" \hspace #0.6 \italic "ή Χασάπικο (circled on the teacher's printout)" }
+    \line { \bold "v7:" \hspace #0.6 \italic "Handwritten under the printout (rt3.pdf p. 10): τρίλια on the ring-finger kah, then middle-finger kah; reading uncertain" }
+  }
+}
 }
 \bookpart {
   \tocItem \markup "Duyek"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Duyek" }
-\markup { \vspace #0.7 \italic \fontsize #0 "Duyek Osul. Τσιφτετελοειδή" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Duyek Osul. Τσιφτετελοειδή. Τραγούδι: «Φεύγω»" }
 \markup { \vspace #2 }
 
 \score {
@@ -1169,7 +2616,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } tek8_\markup { \center-align "Δ" }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } tek8_\markup { \center-align "Δ" }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
@@ -1196,7 +2643,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
@@ -1223,7 +2670,7 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek4_\markup { \center-align "Δ" }^>
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
@@ -1250,7 +2697,61 @@ drumPitchNames.slap = #'slap
         \override Beam.damping = #0
         \override Beam.auto-knee-gap = #10000
         \override Beam.positions = #'(4 . 4)
-        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] r16 tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] r16 \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "7"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }[ ka8_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }] \once \set stemLeftBeamCount = #1 \once \set stemRightBeamCount = #1 dum16_\markup { \center-align ">" }[ ka16_\markup { \center-align "Α" } dum8_\markup { \center-align ">" }] tek4_\markup { \center-align "Δ" }^>
+      }
+      { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
+    >>
+}
+
+\score {
+  \new DrumStaff \with {
+      \override StaffSymbol.line-count = #2
+      drumStyleTable = #(alist->hash-table darbuka-style-teacher)
+      instrumentName = "8"
+      \override StaffSymbol.line-positions = #'(-1 1)
+      \override StaffSymbol.stencil = ##f
+      \override Clef.stencil = ##f
+      \override TextScript.staff-padding = #2.5
+      \override TextScript.outside-staff-priority = ##f
+      \override TextScript.self-alignment-X = #CENTER
+    }
+    <<
+      \drummode {
+        \cadenzaOn   % manual bar-line control via the tick voice below
+        \time 4/4
+        \stemUp
+        \autoBeamOff
+        \override Beam.damping = #0
+        \override Beam.auto-knee-gap = #10000
+        \override Beam.positions = #'(4 . 4)
+        dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek16_\markup { \center-align "Δ" }[ ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } } tek8_\markup { \center-align "Δ" }^>] dum8_\markup { \center-align ">" }[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align "Α" }] tek8_\markup { \center-align "Δ" }^>[ tek16_\markup { \center-align "Δ" } ka16_\markup { \center-align { \override #'(thickness . 1.6) \override #'(circle-padding . 0.35) \circle "Α" } }]
       }
       { s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 \noBreak s16 }
     >>
@@ -1262,6 +2763,9 @@ drumPitchNames.slap = #'slap
   \column {
     \line { \bold "v1:" \hspace #0.6 \italic "Βάση (oriental)" }
     \line { \bold "v3:" \hspace #0.6 \italic "Λόγιο" }
+    \line { \bold "v4:" \hspace #0.6 \italic "Οργανικό μέρος" }
+    \line { \bold "v7:" \hspace #0.6 \italic "Λόγιο (no. 5 on the teacher's printout, rt3.pdf p. 3)" }
+    \line { \bold "v8:" \hspace #0.6 \italic "Τραγουδιστικό μέρος (no. 7 on the teacher's printout)" }
   }
 }
 }
@@ -1492,7 +2996,7 @@ drumPitchNames.slap = #'slap
   \tocItem \markup "Türk aksağı"
 
 \markup { \vspace #0.5 \bold \fontsize #3 "Türk aksağı" }
-\markup { \vspace #0.7 \italic \fontsize #0 "Türk aksağı Osul" }
+\markup { \vspace #0.7 \italic \fontsize #0 "Türk aksağı Osul. At havası. Θρακιώτικα, Μπαϊντούσκα" }
 \markup { \vspace #2 }
 
 \score {
