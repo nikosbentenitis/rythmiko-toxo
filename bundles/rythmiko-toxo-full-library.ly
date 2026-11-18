@@ -30,7 +30,7 @@
 % and slap share one upper level; the dum hangs low on a long stem so its
 % beam reaches up to the tek/ka beam height, as the teacher draws it.
 #(define darbuka-style-scan '(
-  (dum default #f -6)
+  (dum default #f -2)
   (slap cross #f 1)
   (tek default #f 1)
   (ka default #f 1)
