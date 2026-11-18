@@ -416,6 +416,7 @@ PERCENT_SIGN = (
 def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
     bars = []
     prev_duration = "4"
+    in_beam = False       # inside a manual [ ... ] group
     for bar_str in rhythm_str.split("|"):
         bar_str = bar_str.strip()
         if not bar_str:
@@ -502,6 +503,20 @@ def parse_rhythm(rhythm_str: str, bpb: int, meter_den: int):
                 tok = re.sub(r"^([a-z]+\d+\.?)", rf"\g<1>:{trill}", tok, count=1)
             if beam:
                 tok += beam   # LilyPond manual-beam markers: `[` open, `]` close
+            # The dum never carries the sixteenth's second beam line, in
+            # any style (Nikos, 18 Nov 2026: "No need for the double line
+            # on the dum"). A beamed dum of 16 or shorter is drawn with one
+            # beam; a tek/ka next to it keeps its own short second-line
+            # stub, so its sixteenth value still reads.
+            short = duration.rstrip(".") in ("16", "32", "64")
+            in_group = beam == "[" or beam == "]" or in_beam
+            if drum == "dum" and short and in_group and tuplet is None:
+                tok = ("\\once \\set stemLeftBeamCount = #1 "
+                       "\\once \\set stemRightBeamCount = #1 " + tok)
+            if beam == "[":
+                in_beam = True
+            elif beam == "]":
+                in_beam = False
             drummode.append(tok)
 
             n = cells_for_duration(duration, bpb, meter_den)
@@ -636,6 +651,16 @@ PREAMBLE = r"""\version "2.24.0"
 #(define darbuka-style-teacher '(
   (dum default #f -1)
   (slap cross #f -1)
+  (tek default #f 1)
+  (ka default #f 1)
+))
+
+% Scan style (18 Nov 2026): the whiteboard look. No staff lines; tek, ka
+% and slap share one upper level; the dum hangs low on a long stem so its
+% beam reaches up to the tek/ka beam height, as the teacher draws it.
+#(define darbuka-style-scan '(
+  (dum default #f -6)
+  (slap cross #f 1)
   (tek default #f 1)
   (ka default #f 1)
 ))
@@ -1028,7 +1053,8 @@ def _tick_from_cells(cells, meter_den: int, bpb: int,
 
 
 def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
-                 no_interior_bars: bool = False, teacher_staff: bool = False) -> str:
+                 no_interior_bars: bool = False, teacher_staff: bool = False,
+                 scan_style: bool = False) -> str:
     """Return the `\\new DrumStaff` expression (not wrapped in \\score).
 
     Two parallel voices inside the DrumStaff:
@@ -1102,6 +1128,8 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
     var_label = _variation_label(var_id) if show_label else ""
     line_count = 2 if teacher_staff else 3
     style_table = "darbuka-style-teacher" if teacher_staff else "darbuka-style"
+    if scan_style:
+        style_table = "darbuka-style-scan"
     # Teacher staff: positions ±1 keep dum/slap and tek/ka close;
     # StaffSymbol.stencil = ##f hides the lines themselves AND removes
     # their X extent at the start of the staff. Clef.stencil = ##f
@@ -1116,6 +1144,17 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
         "\n      \\override TextScript.outside-staff-priority = ##f"
         "\n      \\override TextScript.self-alignment-X = #CENTER"
     )
+    scan_score = ("\n        \\override Score.SystemStartBar.stencil = ##f"
+                  if scan_style else "")
+    if scan_style:
+        # Whiteboard look: 4/4 written as numbers, no system-start bar,
+        # no bar lines at all (the scan draws none).
+        extra_overrides += (
+            "\n      \\numericTimeSignature"
+            "\n      \\override BarLine.stencil = ##f"
+            "\n      \\override TextScript.staff-padding = #4.5"
+            "\n      \\override LedgerLineSpanner.stencil = ##f"
+        )
 
     return f"""    \\new DrumStaff \\with {{
       \\override StaffSymbol.line-count = #{line_count}
@@ -1130,7 +1169,7 @@ def render_staff(slug: str, var_id: str, var: dict, show_label: bool = True,
         \\autoBeamOff
         \\override Beam.damping = #0
         \\override Beam.auto-knee-gap = #10000
-        \\override Beam.positions = #'(4 . 4)
+        \\override Beam.positions = #'(4 . 4){scan_score}
         {drummode_body}
       }}
       {{ {tick_voice} }}
@@ -1591,6 +1630,10 @@ def main() -> int:
                          "beat and sub-beat divisions). Only the end-of-bar "
                          "thick line remains; notehead style still conveys "
                          "duration on its own.")
+    ap.add_argument("--scan-style", dest="scan_style", action="store_true",
+                    help="whiteboard look: no staff lines, tek/ka/slap on one "
+                         "level, dum low on a long stem, numeric 4/4, no bar "
+                         "lines. Implies --teacher-staff --no-interior-bars.")
     ap.add_argument("--teacher-staff", dest="teacher_staff",
                     action="store_true",
                     help="2-line staff: dum + slap on the lower line, "
@@ -1607,6 +1650,9 @@ def main() -> int:
                           "segment after the last variation. Used by the "
                           "teacher edition."))
     args = ap.parse_args()
+    if getattr(args, "scan_style", False):
+        args.teacher_staff = True
+        args.no_interior_bars = True
 
     if args.validate:
         return cmd_validate(args.validate)
@@ -1730,7 +1776,8 @@ def main() -> int:
             geom = cell_geometry(bpb, layout)
             staves.append(render_staff(slug, var_id, var, show_label=show_var_label,
                                          no_interior_bars=args.no_interior_bars,
-                                         teacher_staff=args.teacher_staff))
+                                         teacher_staff=args.teacher_staff,
+                                         scan_style=args.scan_style))
             tubs_columns.append(
                 render_tubs(slug, var_id, var, geom, show_label=show_var_label)
             )
