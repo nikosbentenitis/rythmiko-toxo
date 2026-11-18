@@ -660,7 +660,7 @@ PREAMBLE = r"""\version "2.24.0"
 % beam reaches up to the tek/ka beam height, as the teacher draws it.
 #(define darbuka-style-scan '(
   (dum default #f -2)
-  (slap cross #f 1)
+  (slap cross #f -2)
   (tek default #f 1)
   (ka default #f 1)
 ))
