@@ -62,8 +62,12 @@ jobs:
       - name: Copy validator + bundles, push to master
         working-directory: bentenitis
         run: |
-          mkdir -p rhythms/bundles
-          cp ../rythmiko-toxo/web/index.html rhythms/index.html
+          mkdir -p rhythms/bundles rhythms/validator
+          # The validator lives at its own URL, rhythms/validator/index.html
+          # (moved off /rhythms 18 Nov 2026). The public rhythm index at
+          # rhythms/index.html is built separately and must NOT be overwritten
+          # here, or /rhythms reverts to showing the editor instead of the index.
+          cp ../rythmiko-toxo/web/index.html rhythms/validator/index.html
           cp ../rythmiko-toxo/bundles/*.pdf rhythms/bundles/
           if git diff --quiet -- rhythms/; then
             echo "rhythms tree is already in sync"
@@ -71,6 +75,6 @@ jobs:
           fi
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add rhythms/index.html rhythms/bundles/
+          git add rhythms/validator/index.html rhythms/bundles/
           git commit -m "rhythms: sync validator + bundles from rythmiko-toxo@${GITHUB_SHA::7}"
           git push origin master
