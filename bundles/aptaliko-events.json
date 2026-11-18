@@ -8,7 +8,7 @@
  "variations": [
   {
    "id": "v1",
-   "rhythm": ">4 Δ4> Δ4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
+   "rhythm": ">4 Δ4> Α4> >4 Δ8[ Α8] >4 Δ4> >4 r4",
    "comment": "",
    "bars": [
     {
@@ -26,7 +26,7 @@
       },
       {
        "t": 2.0,
-       "stroke": "tek",
+       "stroke": "ka",
        "accent": true
       },
       {
